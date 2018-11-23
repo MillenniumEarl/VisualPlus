@@ -7,7 +7,6 @@ using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
 using VisualPlus.Delegates;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
@@ -74,9 +73,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
             // Cannot select this control, only the child and does not generate a click event
             SetStyle(ControlStyles.Selectable | ControlStyles.StandardClick, false);
 
-            _borderButton = new BorderEdge { Visible = false };
+            _borderButton = new BorderEdge {Visible = false};
 
-            _borderImage = new BorderEdge { Visible = false };
+            _borderImage = new BorderEdge {Visible = false};
 
             _textWidth = GetTextBoxWidth();
             _border = new Border();
@@ -84,22 +83,22 @@ namespace VisualPlus.Toolkit.Controls.Editors
             ThemeManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
 
             _backColorState = new ColorState
-                    {
-                       Enabled = ThemeManager.Theme.ColorPalette.ControlEnabled 
-                    };
+            {
+                Enabled = ThemeManager.Theme.ColorPalette.ControlEnabled
+            };
 
             _textBox = new TextBoxExtended
-                {
-                    Size = new Size(125, 25),
-                    Location = new Point(_border.BorderCurve, _border.BorderCurve),
-                    Text = string.Empty,
-                    BorderStyle = BorderStyle.None,
-                    TextAlign = HorizontalAlignment.Left,
-                    Font = Font,
-                    ForeColor = ForeColor,
-                    BackColor = _backColorState.Enabled,
-                    Multiline = false
-                };
+            {
+                Size = new Size(125, 25),
+                Location = new Point(_border.BorderCurve, _border.BorderCurve),
+                Text = string.Empty,
+                BorderStyle = BorderStyle.None,
+                TextAlign = HorizontalAlignment.Left,
+                Font = Font,
+                ForeColor = ForeColor,
+                BackColor = _backColorState.Enabled,
+                Multiline = false
+            };
 
             _imageWidth = 35;
             _buttonFont = Font;
@@ -154,15 +153,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description("Occurs when the clipboard text is copied.")]
         public event ClipboardEventHandler ClipboardCopy
         {
-            add
-            {
-                _textBox.ClipboardCopy += value;
-            }
+            add { _textBox.ClipboardCopy += value; }
 
-            remove
-            {
-                _textBox.ClipboardCopy -= value;
-            }
+            remove { _textBox.ClipboardCopy -= value; }
         }
 
         [Browsable(true)]
@@ -170,15 +163,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description("Occurs when the clipboard text is cut.")]
         public event ClipboardEventHandler ClipboardCut
         {
-            add
-            {
-                _textBox.ClipboardCut += value;
-            }
+            add { _textBox.ClipboardCut += value; }
 
-            remove
-            {
-                _textBox.ClipboardCut -= value;
-            }
+            remove { _textBox.ClipboardCut -= value; }
         }
 
         [Browsable(true)]
@@ -186,15 +173,49 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description("Occurs when the clipboard text is pasted.")]
         public event ClipboardEventHandler ClipboardPaste
         {
-            add
-            {
-                _textBox.ClipboardPaste += value;
-            }
+            add { _textBox.ClipboardPaste += value; }
 
-            remove
-            {
-                _textBox.ClipboardPaste -= value;
-            }
+            remove { _textBox.ClipboardPaste -= value; }
+        }
+
+        [Browsable(true)]
+        [Description(EventDescription.PropertyEventChanged)]
+        [Category(EventCategory.PropertyChanged)]
+        public new event KeyEventHandler KeyDown
+        {
+            add { _textBox.KeyDown += value; }
+
+            remove { _textBox.KeyDown -= value; }
+        }
+
+        [Browsable(true)]
+        [Description(EventDescription.PropertyEventChanged)]
+        [Category(EventCategory.PropertyChanged)]
+        public new event KeyPressEventHandler KeyPress
+        {
+            add { _textBox.KeyPress += value; }
+
+            remove { _textBox.KeyPress -= value; }
+        }
+
+        [Browsable(true)]
+        [Description(EventDescription.PropertyEventChanged)]
+        [Category(EventCategory.PropertyChanged)]
+        public new event KeyEventHandler KeyUp
+        {
+            add { _textBox.KeyUp += value; }
+
+            remove { _textBox.KeyUp -= value; }
+        }
+
+        [Browsable(true)]
+        [Description(EventDescription.PropertyEventChanged)]
+        [Category(EventCategory.PropertyChanged)]
+        public new event PreviewKeyDownEventHandler PreviewKeyDown
+        {
+            add { _textBox.PreviewKeyDown += value; }
+
+            remove { _textBox.PreviewKeyDown -= value; }
         }
 
         [Browsable(true)]
@@ -202,15 +223,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Category(EventCategory.PropertyChanged)]
         public new event EventHandler TextChanged
         {
-            add
-            {
-                _textBox.TextChanged += value;
-            }
+            add { _textBox.TextChanged += value; }
 
-            remove
-            {
-                _textBox.TextChanged -= value;
-            }
+            remove { _textBox.TextChanged -= value; }
         }
 
         #endregion
@@ -226,15 +241,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.AutoCompleteCustomSource)]
         public AutoCompleteStringCollection AutoCompleteCustomSource
         {
-            get
-            {
-                return _textBox.AutoCompleteCustomSource;
-            }
+            get { return _textBox.AutoCompleteCustomSource; }
 
-            set
-            {
-                _textBox.AutoCompleteCustomSource = value;
-            }
+            set { _textBox.AutoCompleteCustomSource = value; }
         }
 
         [DefaultValue(typeof(AutoCompleteMode), "None")]
@@ -244,15 +253,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.AutoCompleteMode)]
         public AutoCompleteMode AutoCompleteMode
         {
-            get
-            {
-                return _textBox.AutoCompleteMode;
-            }
+            get { return _textBox.AutoCompleteMode; }
 
-            set
-            {
-                _textBox.AutoCompleteMode = value;
-            }
+            set { _textBox.AutoCompleteMode = value; }
         }
 
         [DefaultValue(typeof(AutoCompleteSource), "None")]
@@ -262,15 +265,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.AutoCompleteSource)]
         public AutoCompleteSource AutoCompleteSource
         {
-            get
-            {
-                return _textBox.AutoCompleteSource;
-            }
+            get { return _textBox.AutoCompleteSource; }
 
-            set
-            {
-                _textBox.AutoCompleteSource = value;
-            }
+            set { _textBox.AutoCompleteSource = value; }
         }
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
@@ -278,10 +275,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Category(PropertyCategory.Appearance)]
         public ColorState BackColorState
         {
-            get
-            {
-                return _backColorState;
-            }
+            get { return _backColorState; }
 
             set
             {
@@ -300,10 +294,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Category(PropertyCategory.Appearance)]
         public Border Border
         {
-            get
-            {
-                return _border;
-            }
+            get { return _border; }
 
             set
             {
@@ -317,10 +308,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Category(PropertyCategory.Appearance)]
         public Border ButtonBorder
         {
-            get
-            {
-                return _buttonBorder;
-            }
+            get { return _buttonBorder; }
 
             set
             {
@@ -334,10 +322,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Category(PropertyCategory.Appearance)]
         public ControlColorState ButtonColor
         {
-            get
-            {
-                return _buttonColorState;
-            }
+            get { return _buttonColorState; }
 
             set
             {
@@ -350,10 +335,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Category(PropertyCategory.Appearance)]
         public Font ButtonFont
         {
-            get
-            {
-                return _buttonFont;
-            }
+            get { return _buttonFont; }
 
             set
             {
@@ -366,10 +348,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Category(PropertyCategory.Layout)]
         public int ButtonIndent
         {
-            get
-            {
-                return _buttonIndent;
-            }
+            get { return _buttonIndent; }
 
             set
             {
@@ -382,10 +361,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Category(PropertyCategory.Appearance)]
         public string ButtonText
         {
-            get
-            {
-                return _buttontext;
-            }
+            get { return _buttontext; }
 
             set
             {
@@ -398,10 +374,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.Visible)]
         public bool ButtonVisible
         {
-            get
-            {
-                return _buttonVisible;
-            }
+            get { return _buttonVisible; }
 
             set
             {
@@ -426,23 +399,14 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description("Gets access to the contained control.")]
         public TextBoxExtended ContainedControl
         {
-            get
-            {
-                return _textBox;
-            }
+            get { return _textBox; }
 
-            set
-            {
-                _textBox = value;
-            }
+            set { _textBox = value; }
         }
 
         public new Font Font
         {
-            get
-            {
-                return base.Font;
-            }
+            get { return base.Font; }
 
             set
             {
@@ -453,10 +417,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         public new Color ForeColor
         {
-            get
-            {
-                return base.ForeColor;
-            }
+            get { return base.ForeColor; }
 
             set
             {
@@ -469,10 +430,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.Image)]
         public Image Image
         {
-            get
-            {
-                return _image;
-            }
+            get { return _image; }
 
             set
             {
@@ -485,10 +443,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.Size)]
         public Size ImageSize
         {
-            get
-            {
-                return _imageSize;
-            }
+            get { return _imageSize; }
 
             set
             {
@@ -501,10 +456,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.Image)]
         public bool ImageVisible
         {
-            get
-            {
-                return _imageVisible;
-            }
+            get { return _imageVisible; }
 
             set
             {
@@ -527,10 +479,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.Size)]
         public int ImageWidth
         {
-            get
-            {
-                return _imageWidth;
-            }
+            get { return _imageWidth; }
 
             set
             {
@@ -546,15 +495,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.MaxLength)]
         public int MaxLength
         {
-            get
-            {
-                return _textBox.MaxLength;
-            }
+            get { return _textBox.MaxLength; }
 
-            set
-            {
-                _textBox.MaxLength = value;
-            }
+            set { _textBox.MaxLength = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -567,10 +510,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [DefaultValue(false)]
         public virtual bool MultiLine
         {
-            get
-            {
-                return _textBox.Multiline;
-            }
+            get { return _textBox.Multiline; }
 
             set
             {
@@ -586,45 +526,27 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.PasswordChar)]
         public char PasswordChar
         {
-            get
-            {
-                return _textBox.PasswordChar;
-            }
+            get { return _textBox.PasswordChar; }
 
-            set
-            {
-                _textBox.PasswordChar = value;
-            }
+            set { _textBox.PasswordChar = value; }
         }
 
         [Category(PropertyCategory.Behavior)]
         [Description(PropertyDescription.ReadOnly)]
         public bool ReadOnly
         {
-            get
-            {
-                return _textBox.ReadOnly;
-            }
+            get { return _textBox.ReadOnly; }
 
-            set
-            {
-                _textBox.ReadOnly = value;
-            }
+            set { _textBox.ReadOnly = value; }
         }
 
         [Category(PropertyCategory.Behavior)]
         [Description(PropertyDescription.ScrollBars)]
         public ScrollBars ScrollBars
         {
-            get
-            {
-                return _textBox.ScrollBars;
-            }
+            get { return _textBox.ScrollBars; }
 
-            set
-            {
-                _textBox.ScrollBars = value;
-            }
+            set { _textBox.ScrollBars = value; }
         }
 
         [Bindable(true)]
@@ -637,10 +559,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Localizable(false)]
         public new string Text
         {
-            get
-            {
-                return _textBox.Text;
-            }
+            get { return _textBox.Text; }
 
             set
             {
@@ -679,25 +598,16 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.TextAlign)]
         public HorizontalAlignment TextAlign
         {
-            get
-            {
-                return _textBox.TextAlign;
-            }
+            get { return _textBox.TextAlign; }
 
-            set
-            {
-                _textBox.TextAlign = value;
-            }
+            set { _textBox.TextAlign = value; }
         }
 
         [Category(PropertyCategory.Layout)]
         [Description(PropertyDescription.Size)]
         public int TextBoxWidth
         {
-            get
-            {
-                return _textWidth;
-            }
+            get { return _textWidth; }
 
             set
             {
@@ -712,10 +622,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Browsable(false)]
         public int TextLength
         {
-            get
-            {
-                return _textBox.TextLength;
-            }
+            get { return _textBox.TextLength; }
         }
 
         [DefaultValue(false)]
@@ -725,15 +632,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.UseSystemPasswordChar)]
         public bool UseSystemPasswordChar
         {
-            get
-            {
-                return _textBox.UseSystemPasswordChar;
-            }
+            get { return _textBox.UseSystemPasswordChar; }
 
-            set
-            {
-                _textBox.UseSystemPasswordChar = value;
-            }
+            set { _textBox.UseSystemPasswordChar = value; }
         }
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
@@ -741,10 +642,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Category(PropertyCategory.Behavior)]
         public Watermark Watermark
         {
-            get
-            {
-                return _watermark;
-            }
+            get { return _watermark; }
 
             set
             {
@@ -757,10 +655,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         [Description(PropertyDescription.WordWrap)]
         public bool WordWrap
         {
-            get
-            {
-                return _textBox.WordWrap;
-            }
+            get { return _textBox.WordWrap; }
 
             set
             {
@@ -1142,18 +1037,18 @@ namespace VisualPlus.Toolkit.Controls.Editors
                 TextStyle.Disabled = theme.ColorPalette.TextDisabled;
 
                 _buttonColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.Disabled,
-                        Enabled = theme.ColorPalette.Enabled,
-                        Hover = theme.ColorPalette.Hover,
-                        Pressed = theme.ColorPalette.Pressed
-                    };
+                {
+                    Disabled = theme.ColorPalette.Disabled,
+                    Enabled = theme.ColorPalette.Enabled,
+                    Hover = theme.ColorPalette.Hover,
+                    Pressed = theme.ColorPalette.Pressed
+                };
 
                 _backColorState = new ColorState
-                    {
-                        Enabled = theme.ColorPalette.ControlEnabled,
-                        Disabled = theme.ColorPalette.ControlDisabled
-                    };
+                {
+                    Enabled = theme.ColorPalette.ControlEnabled,
+                    Disabled = theme.ColorPalette.ControlDisabled
+                };
 
                 _borderButton.BackColor = theme.ColorPalette.BorderNormal;
                 _borderImage.BackColor = theme.ColorPalette.BorderNormal;
@@ -1178,27 +1073,27 @@ namespace VisualPlus.Toolkit.Controls.Editors
                 switch (MouseState)
                 {
                     case MouseStates.Normal:
-                        {
-                            _buttonColor = _buttonColorState.Enabled;
-                            break;
-                        }
+                    {
+                        _buttonColor = _buttonColorState.Enabled;
+                        break;
+                    }
 
                     case MouseStates.Hover:
-                        {
-                            _buttonColor = _buttonColorState.Hover;
-                            break;
-                        }
+                    {
+                        _buttonColor = _buttonColorState.Hover;
+                        break;
+                    }
 
                     case MouseStates.Pressed:
-                        {
-                            _buttonColor = _buttonColorState.Pressed;
-                            break;
-                        }
+                    {
+                        _buttonColor = _buttonColorState.Pressed;
+                        break;
+                    }
 
                     default:
-                        {
-                            throw new ArgumentOutOfRangeException();
-                        }
+                    {
+                        throw new ArgumentOutOfRangeException();
+                    }
                 }
             }
             else

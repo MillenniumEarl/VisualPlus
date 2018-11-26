@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
-
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
@@ -30,7 +29,6 @@ namespace VisualPlus.Toolkit.Child
         private Color _tabNormal;
         private Color _tabSelected;
         private StringAlignment _textAlignment;
-
         private TextImageRelations _textImageRelation;
         private StringAlignment _textLineAlignment;
         private Color _textSelected;
@@ -41,6 +39,13 @@ namespace VisualPlus.Toolkit.Child
         #endregion
 
         #region Constructors
+
+        /// <summary>Initializes a new instance of the <see cref="VisualTabPage" /> class.</summary>
+        /// <param name="text">The text of the page.</param>
+        public VisualTabPage(string text) : this()
+        {
+            Text = text;
+        }
 
         /// <summary>Initializes a new instance of the <see cref="VisualTabPage" /> class.</summary>
         public VisualTabPage()
@@ -58,10 +63,10 @@ namespace VisualPlus.Toolkit.Child
             _textSelected = Color.FromArgb(217, 220, 227);
 
             _border = new Shape
-                {
-                    Visible = false,
-                    Type = ShapeTypes.Rectangle
-                };
+            {
+                Visible = false,
+                Type = ShapeTypes.Rectangle
+            };
 
             _textImageRelation = TextImageRelations.Text;
 
@@ -100,10 +105,7 @@ namespace VisualPlus.Toolkit.Child
         [Category(PropertyCategory.Appearance)]
         public Shape Border
         {
-            get
-            {
-                return _border;
-            }
+            get { return _border; }
 
             set
             {
@@ -117,25 +119,16 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Toggle)]
         public new bool Enabled
         {
-            get
-            {
-                return base.Enabled;
-            }
+            get { return base.Enabled; }
 
-            set
-            {
-                base.Enabled = value;
-            }
+            set { base.Enabled = value; }
         }
 
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Image)]
         public Image HeaderImage
         {
-            get
-            {
-                return _headerImage;
-            }
+            get { return _headerImage; }
 
             set
             {
@@ -148,10 +141,7 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Image)]
         public Image Image
         {
-            get
-            {
-                return _image;
-            }
+            get { return _image; }
 
             set
             {
@@ -164,10 +154,7 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Size)]
         public Size ImageSize
         {
-            get
-            {
-                return _imageSize;
-            }
+            get { return _imageSize; }
 
             set
             {
@@ -183,10 +170,7 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Color)]
         public Color TabHover
         {
-            get
-            {
-                return _tabHover;
-            }
+            get { return _tabHover; }
 
             set
             {
@@ -199,10 +183,7 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Color)]
         public Color TabNormal
         {
-            get
-            {
-                return _tabNormal;
-            }
+            get { return _tabNormal; }
 
             set
             {
@@ -215,10 +196,7 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Color)]
         public Color TabSelected
         {
-            get
-            {
-                return _tabSelected;
-            }
+            get { return _tabSelected; }
 
             set
             {
@@ -231,10 +209,7 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.VerticalAlignment)]
         public StringAlignment TextAlignment
         {
-            get
-            {
-                return _textAlignment;
-            }
+            get { return _textAlignment; }
 
             set
             {
@@ -247,10 +222,7 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.TextImageRelation)]
         public TextImageRelations TextImageRelation
         {
-            get
-            {
-                return _textImageRelation;
-            }
+            get { return _textImageRelation; }
 
             set
             {
@@ -263,10 +235,7 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Alignment)]
         public StringAlignment TextLineAlignment
         {
-            get
-            {
-                return _textLineAlignment;
-            }
+            get { return _textLineAlignment; }
 
             set
             {
@@ -279,10 +248,7 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Color)]
         public Color TextSelected
         {
-            get
-            {
-                return _textSelected;
-            }
+            get { return _textSelected; }
 
             set
             {

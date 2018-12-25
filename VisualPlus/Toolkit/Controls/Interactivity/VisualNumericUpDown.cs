@@ -598,6 +598,8 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #region Methods
 
+        /// <summary>Decrement the value by the specified amount.</summary>
+        /// <param name="value">The amount.</param>
         public void Decrement(int value)
         {
             _value -= value;
@@ -605,6 +607,8 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             Invalidate();
         }
 
+        /// <summary>Increment the value by the specified amount.</summary>
+        /// <param name="value">The amount.</param>
         public void Increment(int value)
         {
             _value += value;
@@ -648,7 +652,10 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             OnThemeChanged(new ThemeEventArgs(theme));
         }
 
-        private void DrawText(Graphics _graphics)
+
+        /// <summary>Draws the text on the graphics.</summary>
+        /// <param name="graphics">The graphics to draw on.</param>
+        private void DrawText(Graphics graphics)
         {
             Rectangle textBoxRectangle = new Rectangle(6, 0, Width - 1, Height - 1);
             StringFormat stringFormat = new StringFormat
@@ -656,7 +663,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                 // Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
             };
-            _graphics.DrawString(Convert.ToString(Value), Font, new SolidBrush(ForeColor), textBoxRectangle, stringFormat);
+            graphics.DrawString(Convert.ToString(Value), Font, new SolidBrush(ForeColor), textBoxRectangle, stringFormat);
         }
 
         #endregion

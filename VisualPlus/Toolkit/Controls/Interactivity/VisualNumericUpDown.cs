@@ -651,8 +651,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             Invalidate();
             OnThemeChanged(new ThemeEventArgs(theme));
         }
-
-
+        
         /// <summary>Draws the text on the graphics.</summary>
         /// <param name="graphics">The graphics to draw on.</param>
         private void DrawText(Graphics graphics)

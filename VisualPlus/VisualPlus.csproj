@@ -49,6 +49,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionList\VisualIPBoxActionList.cs" />
     <Compile Include="Attributes\Test.cs" />
     <Compile Include="Collections\CollectionsEditor\VisualListViewSubItemCollectionEditor.cs" />
     <Compile Include="Collections\CollectionsEditor\VisualListViewItemCollectionEditor.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Delegates\ControlBoxDelegate.cs" />
     <Compile Include="Delegates\StyleManagerDelegate.cs" />
     <Compile Include="ActionList\VisualListViewActionList.cs" />
+    <Compile Include="Designer\VisualIPBoxDesigner.cs" />
     <Compile Include="Designer\VisualTileDesigner.cs" />
     <Compile Include="Designer\VisualDateTimePickerDesigner.cs" />
     <Compile Include="Designer\VisualControlBoxButtonDesigner.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="Renders\VisualScrollBarRenderer.cs" />
     <Compile Include="Renders\VisualToggleRenderer.cs" />
     <Compile Include="Renders\VisualControlRenderer.cs" />
+    <Compile Include="Toolkit\Controls\Editors\VisualIPBox.cs" />
     <Compile Include="Toolkit\Dialogs\VisualExceptionDialog.cs">
       <SubType>Form</SubType>
     </Compile>

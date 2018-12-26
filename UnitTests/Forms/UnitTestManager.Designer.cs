@@ -163,7 +163,7 @@ namespace UnitTests.Forms
             this.tabController.SeparatorThickness = 2F;
             this.tabController.Size = new System.Drawing.Size(308, 219);
             this.tabController.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabController.State = VisualPlus.Enumerators.MouseStates.Hover;
+            this.tabController.State = VisualPlus.Enumerators.MouseStates.Normal;
             this.tabController.TabIndex = 5;
             this.tabController.TabMenu = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(61)))), ((int)(((byte)(73)))));
             this.tabController.TabSelector = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(249)))));

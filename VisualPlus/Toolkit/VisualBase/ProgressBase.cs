@@ -3,7 +3,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
 
@@ -11,10 +10,10 @@ using VisualPlus.Localization;
 
 namespace VisualPlus.Toolkit.VisualBase
 {
-    [ToolboxItem(false)]
     [DesignerCategory("code")]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     [ComVisible(true)]
+    [ToolboxItem(false)]
     public abstract class ProgressBase : VisualStyleBase
     {
         #region Variables
@@ -29,7 +28,6 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #region Constructors
 
-        /// <inheritdoc />
         /// <summary>Initializes a new instance of the <see cref="ProgressBase" /> class.</summary>
         protected ProgressBase()
         {
@@ -57,10 +55,7 @@ namespace VisualPlus.Toolkit.VisualBase
         [Description("Gets or sets a value to be added to or subtracted from the Value property when the scroll box is moved a large distance.")]
         public int LargeChange
         {
-            get
-            {
-                return _largeChange;
-            }
+            get { return _largeChange; }
 
             set
             {
@@ -78,10 +73,7 @@ namespace VisualPlus.Toolkit.VisualBase
         [Description("The upper bound of the range this ProgressBar is working on.")]
         public int Maximum
         {
-            get
-            {
-                return _maximum;
-            }
+            get { return _maximum; }
 
             set
             {
@@ -102,10 +94,7 @@ namespace VisualPlus.Toolkit.VisualBase
         [Description("The lower bound of the range this ProgressBar is working on.")]
         public int Minimum
         {
-            get
-            {
-                return _minimum;
-            }
+            get { return _minimum; }
 
             set
             {
@@ -126,16 +115,13 @@ namespace VisualPlus.Toolkit.VisualBase
         [Description("Gets or sets the value added to or subtracted from the Value property when the scroll box is moved a small distance.")]
         public int SmallChange
         {
-            get
-            {
-                return _smallChange;
-            }
+            get { return _smallChange; }
 
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(SmallChange.ToString(), "SmallChange cannot be less than zero.");
+                    throw new ArgumentOutOfRangeException(SmallChange.ToString(), @"SmallChange cannot be less than zero.");
                 }
 
                 _smallChange = value;
@@ -147,10 +133,7 @@ namespace VisualPlus.Toolkit.VisualBase
         [Description("The current value for the ProgressBar, in the range specified by the minimum and maximum properties.")]
         public int Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
 
             set
             {
@@ -158,7 +141,7 @@ namespace VisualPlus.Toolkit.VisualBase
                 {
                     if ((value < Minimum) || (value > Maximum))
                     {
-                        throw new ArgumentOutOfRangeException("Value", "Provided value is out of the Minimum to Maximum range of values.");
+                        throw new ArgumentOutOfRangeException(nameof(Value), @"Provided value is out of the Minimum to Maximum range of values.");
                     }
 
                     _value = value;

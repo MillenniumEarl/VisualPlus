@@ -232,6 +232,15 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #region Properties
 
+        /// <summary>Gets or sets the alpha numeric toggle, specifying whether to only accept numbers input.</summary>
+        [Description(PropertyDescription.Toggle)]
+        [Category(PropertyCategory.Behavior)]
+        public bool AlphaNumeric
+        {
+            get { return _textBox.AlphaNumeric; }
+            set { _textBox.AlphaNumeric = value; }
+        }
+
         [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [EditorBrowsable(EditorBrowsableState.Always)]

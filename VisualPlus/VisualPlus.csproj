@@ -242,7 +242,9 @@
     <Compile Include="Toolkit\VisualBase\VisualDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Toolkit\VisualBase\VisualInputField.cs" />
+    <Compile Include="Toolkit\VisualBase\VisualInputField.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TypeConverters\VisualListViewColumnConverter.cs" />
     <Compile Include="TypeConverters\VisualListViewSubItemConverter.cs" />
     <Compile Include="TypeConverters\VisualListViewItemConverter.cs" />

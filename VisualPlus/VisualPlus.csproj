@@ -49,6 +49,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionList\VisualInputFieldActionList.cs" />
     <Compile Include="ActionList\VisualIPBoxActionList.cs" />
     <Compile Include="Attributes\Test.cs" />
     <Compile Include="Collections\CollectionsEditor\VisualListViewSubItemCollectionEditor.cs" />
@@ -65,6 +66,8 @@
     <Compile Include="Delegates\ControlBoxDelegate.cs" />
     <Compile Include="Delegates\StyleManagerDelegate.cs" />
     <Compile Include="ActionList\VisualListViewActionList.cs" />
+    <Compile Include="Designer\VisualStyleBaseDesigner.cs" />
+    <Compile Include="Designer\VisualInputFieldDesigner.cs" />
     <Compile Include="Designer\VisualIPBoxDesigner.cs" />
     <Compile Include="Designer\VisualTileDesigner.cs" />
     <Compile Include="Designer\VisualDateTimePickerDesigner.cs" />

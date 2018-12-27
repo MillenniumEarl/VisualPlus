@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using VisualPlus.Designer;
 using VisualPlus.Localization;
-using VisualPlus.Toolkit.Controls.Interactivity;
 
 #endregion
 
@@ -14,10 +14,11 @@ namespace VisualPlus.Toolkit.VisualBase
     /// <summary>The <see cref="VisualInputField" /> control.</summary>
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     [ComVisible(true)]
-    [DefaultEvent("Click")]
+    [DefaultEvent("TextChanged")]
     [DefaultProperty("Text")]
     [Description("The Visual Input Field")]
-    [ToolboxBitmap(typeof(VisualButton), "VisualButton.bmp")]
+    [Designer(typeof(VisualInputFieldDesigner))]
+    [ToolboxBitmap(typeof(VisualInputField), "VisualInputField.bmp")]
     [ToolboxItem(true)]
     public class VisualInputField : TextBoxExtended
     {

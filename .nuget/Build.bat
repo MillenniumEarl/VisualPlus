@@ -6,5 +6,5 @@ echo This wizard will help you pack a nuget package.
 echo.
 
 echo Building...
-%nuget% pack nuget.nuspec
+%nuget% pack VisualPlus.nuspec
 pause

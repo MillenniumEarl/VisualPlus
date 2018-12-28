@@ -1,8 +1,8 @@
 @echo off
-Title VisualPlus Nuget Installer
+Title VisualPlus NuGet Installer
 color 17
 
-echo This wizard will help you setup nuget on your system.
+echo This wizard will help you setup NuGet on your system.
 echo.
 
 :: Copies the file to system directory
@@ -15,7 +15,7 @@ echo Update system environment variable path.
 setx nuget "%SystemRoot%\System32\nuget.exe" /M
 echo.
 
-:: Check nuget for updates
+:: Check NuGet for updates
 echo Updates check.
 %nuget% update -self
 

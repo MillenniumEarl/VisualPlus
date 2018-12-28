@@ -1,8 +1,8 @@
 @echo off
-Title VisualPlus Nuget Creator
+Title VisualPlus NuGet Creator
 color 17
 
-echo This wizard will help you create a nuget package.
+echo This wizard will help you create a NuGet package.
 echo.
 
 echo Creating...

@@ -1,8 +1,8 @@
 @echo off
-Title VisualPlus Nuget Packer
+Title VisualPlus NuGet Packer
 color 17
 
-echo This wizard will help you pack a nuget package.
+echo This wizard will help you pack a NuGet package.
 echo.
 
 echo Creating the package...

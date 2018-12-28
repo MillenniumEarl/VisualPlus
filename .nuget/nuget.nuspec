@@ -17,6 +17,6 @@
     <tags>UI Framework Development Toolbox Windows Forms VisualStudio Visual-Studio .NET Metro ModernUI MetroFramework MetroUI WinForms Controls Graphics Rendering Library Components Visual Plus Visual-Plus VB VB.NET User Interface User-Interface VPF</tags>
   </metadata>
   <files>
-  <file src="..\VisualPlus\bin\Release\VisualPlus.dll" target="NET4\VisualPlus.dll"></file>
+  <file src="..\VisualPlus\bin\Release\VisualPlus.dll" target="lib\NET4\VisualPlus.dll"></file>
   </files>
 </package>

@@ -1273,8 +1273,7 @@ namespace VisualPlus.Toolkit.Dialogs
             }
 
             // Convert to client position and pass to Form.MouseMove
-            Point _clientCursorLocation = PointToClient(e.Location);
-            OnMouseMove(new MouseEventArgs(MouseButtons.None, 0, _clientCursorLocation.X, _clientCursorLocation.Y, 0));
+            OnMouseMove(new MouseEventArgs(MouseButtons.None, 0, PointToClient(e.Location).X, PointToClient(e.Location).Y, 0));
         }
 
         /// <summary>Resize the form using the resize direction.</summary>

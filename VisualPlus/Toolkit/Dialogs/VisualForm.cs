@@ -9,7 +9,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
 using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Designer;
@@ -77,9 +76,11 @@ namespace VisualPlus.Toolkit.Dialogs
 
         /// <summary>Initializes a new instance of the <see cref="VisualForm" /> class.</summary>
         /// <param name="text">The text associated with this control.</param>
-        public VisualForm(string text) : this()
+        /// <param name="startPosition">The form start position.</param>
+        public VisualForm(string text, FormStartPosition startPosition = FormStartPosition.WindowsDefaultLocation) : this()
         {
             InitializeText(text);
+            StartPosition = startPosition;
         }
 
         /// <summary>Initializes a new instance of the <see cref="VisualForm" /> class.</summary>
@@ -89,34 +90,34 @@ namespace VisualPlus.Toolkit.Dialogs
 
             UpdateStyles();
 
-            _resizeCursors = new[] { Cursors.SizeNESW, Cursors.SizeWE, Cursors.SizeNWSE, Cursors.SizeWE, Cursors.SizeNS };
+            _resizeCursors = new[] {Cursors.SizeNESW, Cursors.SizeWE, Cursors.SizeNWSE, Cursors.SizeWE, Cursors.SizeNS};
 
             _resizedLocationsCommand = new Dictionary<int, int>
-                {
-                    { FormConstants.HTTOP, FormConstants.WMSZ_TOP },
-                    { FormConstants.HTTOPLEFT, FormConstants.WMSZ_TOPLEFT },
-                    { FormConstants.HTTOPRIGHT, FormConstants.WMSZ_TOPRIGHT },
-                    { FormConstants.HTLEFT, FormConstants.WMSZ_LEFT },
-                    { FormConstants.HTRIGHT, FormConstants.WMSZ_RIGHT },
-                    { FormConstants.HTBOTTOM, FormConstants.WMSZ_BOTTOM },
-                    { FormConstants.HTBOTTOMLEFT, FormConstants.WMSZ_BOTTOMLEFT },
-                    { FormConstants.HTBOTTOMRIGHT, FormConstants.WMSZ_BOTTOMRIGHT }
-                };
+            {
+                {FormConstants.HTTOP, FormConstants.WMSZ_TOP},
+                {FormConstants.HTTOPLEFT, FormConstants.WMSZ_TOPLEFT},
+                {FormConstants.HTTOPRIGHT, FormConstants.WMSZ_TOPRIGHT},
+                {FormConstants.HTLEFT, FormConstants.WMSZ_LEFT},
+                {FormConstants.HTRIGHT, FormConstants.WMSZ_RIGHT},
+                {FormConstants.HTBOTTOM, FormConstants.WMSZ_BOTTOM},
+                {FormConstants.HTBOTTOMLEFT, FormConstants.WMSZ_BOTTOMLEFT},
+                {FormConstants.HTBOTTOMRIGHT, FormConstants.WMSZ_BOTTOMRIGHT}
+            };
 
             _styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
 
             _border = new Border
-                {
-                    Thickness = 3,
-                    Type = ShapeTypes.Rectangle
-                };
+            {
+                Thickness = 3,
+                Type = ShapeTypes.Rectangle
+            };
 
             _textPaddingTop = 10;
 
             _dropShadow = true;
             _headerMouseDown = false;
             FormBorderStyle = FormBorderStyle.None;
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.WindowsDefaultLocation;
             _windowTitleBarVisible = true;
             _magnetic = false;
             _magneticRadius = 100;
@@ -130,9 +131,9 @@ namespace VisualPlus.Toolkit.Dialogs
             _windowTitleBarRectangle = new Rectangle(0, 0, Width, _windowBarHeight);
 
             _vsImage = new VisualBitmap(Resources.VisualPlus, new Size(16, 16))
-                    {
-                       Visible = true 
-                    };
+            {
+                Visible = true
+            };
 
             _vsImage.Point = new Point(5, (_windowBarHeight / 2) - (_vsImage.Size.Height / 2));
 
@@ -167,75 +168,45 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(EventDescription.PropertyEventChanged)]
         public event ControlBoxEventHandler CloseButtonClicked
         {
-            add
-            {
-                VisualControlBox.CloseClick += value;
-            }
+            add { VisualControlBox.CloseClick += value; }
 
-            remove
-            {
-                VisualControlBox.CloseClick -= value;
-            }
+            remove { VisualControlBox.CloseClick -= value; }
         }
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
         public new event ControlBoxEventHandler HelpButtonClicked
         {
-            add
-            {
-                VisualControlBox.HelpClick += value;
-            }
+            add { VisualControlBox.HelpClick += value; }
 
-            remove
-            {
-                VisualControlBox.HelpClick -= value;
-            }
+            remove { VisualControlBox.HelpClick -= value; }
         }
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
         public event ControlBoxEventHandler MaximizeButtonClicked
         {
-            add
-            {
-                VisualControlBox.MaximizeClick += value;
-            }
+            add { VisualControlBox.MaximizeClick += value; }
 
-            remove
-            {
-                VisualControlBox.MaximizeClick -= value;
-            }
+            remove { VisualControlBox.MaximizeClick -= value; }
         }
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
         public event ControlBoxEventHandler MinimizeButtonClicked
         {
-            add
-            {
-                VisualControlBox.MinimizeClick += value;
-            }
+            add { VisualControlBox.MinimizeClick += value; }
 
-            remove
-            {
-                VisualControlBox.MinimizeClick -= value;
-            }
+            remove { VisualControlBox.MinimizeClick -= value; }
         }
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
         public event ControlBoxEventHandler RestoredFormWindow
         {
-            add
-            {
-                VisualControlBox.RestoredFormWindow += value;
-            }
+            add { VisualControlBox.RestoredFormWindow += value; }
 
-            remove
-            {
-                VisualControlBox.RestoredFormWindow -= value;
-            }
+            remove { VisualControlBox.RestoredFormWindow -= value; }
         }
 
         [Category(EventCategory.PropertyChanged)]
@@ -345,10 +316,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Category(PropertyCategory.Appearance)]
         public Border Border
         {
-            get
-            {
-                return _border;
-            }
+            get { return _border; }
 
             set
             {
@@ -363,15 +331,9 @@ namespace VisualPlus.Toolkit.Dialogs
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public new ContextMenuStrip ContextMenuStrip
         {
-            get
-            {
-                return _contextMenuStrip;
-            }
+            get { return _contextMenuStrip; }
 
-            set
-            {
-                _contextMenuStrip = value;
-            }
+            set { _contextMenuStrip = value; }
         }
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
@@ -379,10 +341,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Category(PropertyCategory.Appearance)]
         public new VisualControlBox ControlBox
         {
-            get
-            {
-                return VisualControlBox;
-            }
+            get { return VisualControlBox; }
 
             set
             {
@@ -396,54 +355,33 @@ namespace VisualPlus.Toolkit.Dialogs
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool DefaultContextTitle
         {
-            get
-            {
-                return _defaultContextTitle;
-            }
+            get { return _defaultContextTitle; }
 
-            set
-            {
-                _defaultContextTitle = value;
-            }
+            set { _defaultContextTitle = value; }
         }
 
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Toggle)]
         public bool DropShadow
         {
-            get
-            {
-                return _dropShadow;
-            }
+            get { return _dropShadow; }
 
-            set
-            {
-                _dropShadow = value;
-            }
+            set { _dropShadow = value; }
         }
 
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Visible)]
         public new bool HelpButton
         {
-            get
-            {
-                return VisualControlBox.HelpButton.Visible;
-            }
+            get { return VisualControlBox.HelpButton.Visible; }
 
-            set
-            {
-                VisualControlBox.HelpButton.Visible = value;
-            }
+            set { VisualControlBox.HelpButton.Visible = value; }
         }
 
         [Browsable(true)]
         public new Icon Icon
         {
-            get
-            {
-                return base.Icon;
-            }
+            get { return base.Icon; }
 
             set
             {
@@ -457,10 +395,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Category(PropertyCategory.Appearance)]
         public VisualBitmap Image
         {
-            get
-            {
-                return _vsImage;
-            }
+            get { return _vsImage; }
 
             set
             {
@@ -474,15 +409,9 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description("Snap window snaps toggles snapping to screen edges.")]
         public bool Magnetic
         {
-            get
-            {
-                return _magnetic;
-            }
+            get { return _magnetic; }
 
-            set
-            {
-                _magnetic = value;
-            }
+            set { _magnetic = value; }
         }
 
         [DefaultValue(100)]
@@ -490,25 +419,16 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description("The snap radius determines the distance to trigger the snap.")]
         public int MagneticRadius
         {
-            get
-            {
-                return _magneticRadius;
-            }
+            get { return _magneticRadius; }
 
-            set
-            {
-                _magneticRadius = value;
-            }
+            set { _magneticRadius = value; }
         }
 
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Visible)]
         public new bool MaximizeBox
         {
-            get
-            {
-                return VisualControlBox.MaximizeButton.Visible;
-            }
+            get { return VisualControlBox.MaximizeButton.Visible; }
 
             set
             {
@@ -521,10 +441,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(PropertyDescription.Visible)]
         public new bool MinimizeBox
         {
-            get
-            {
-                return VisualControlBox.MinimizeButton.Visible;
-            }
+            get { return VisualControlBox.MinimizeButton.Visible; }
 
             set
             {
@@ -538,30 +455,18 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(PropertyDescription.Toggle)]
         public bool Moveable
         {
-            get
-            {
-                return _moveable;
-            }
+            get { return _moveable; }
 
-            set
-            {
-                _moveable = value;
-            }
+            set { _moveable = value; }
         }
 
         [Category(PropertyCategory.WindowStyle)]
         [Description(PropertyDescription.ShowIcon)]
         public new bool ShowIcon
         {
-            get
-            {
-                return _vsImage.Visible;
-            }
+            get { return _vsImage.Visible; }
 
-            set
-            {
-                _vsImage.Visible = value;
-            }
+            set { _vsImage.Visible = value; }
         }
 
         [Category(PropertyCategory.Behavior)]
@@ -572,10 +477,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(PropertyDescription.MouseState)]
         public MouseStates State
         {
-            get
-            {
-                return _mouseState;
-            }
+            get { return _mouseState; }
 
             set
             {
@@ -590,15 +492,9 @@ namespace VisualPlus.Toolkit.Dialogs
         [EditorBrowsable(EditorBrowsableState.Never)]
         public StyleManager StyleManager
         {
-            get
-            {
-                return _styleManager;
-            }
+            get { return _styleManager; }
 
-            set
-            {
-                _styleManager = value;
-            }
+            set { _styleManager = value; }
         }
 
         [Browsable(true)]
@@ -606,10 +502,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(PropertyDescription.Value)]
         public int TextPaddingTop
         {
-            get
-            {
-                return _textPaddingTop;
-            }
+            get { return _textPaddingTop; }
 
             set
             {
@@ -625,10 +518,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(PropertyDescription.Alignment)]
         public Alignment.TextAlignment TitleAlignment
         {
-            get
-            {
-                return _titleAlignment;
-            }
+            get { return _titleAlignment; }
 
             set
             {
@@ -641,10 +531,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(PropertyDescription.Color)]
         public Color TitleForeColor
         {
-            get
-            {
-                return _titleForeColor;
-            }
+            get { return _titleForeColor; }
 
             set
             {
@@ -657,15 +544,9 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(PropertyDescription.MaxLength)]
         public int TitleMaxLength
         {
-            get
-            {
-                return titleMaxLength;
-            }
+            get { return titleMaxLength; }
 
-            set
-            {
-                titleMaxLength = value;
-            }
+            set { titleMaxLength = value; }
         }
 
         [Browsable(false)]
@@ -677,10 +558,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(PropertyDescription.Color)]
         public Color WindowBarColor
         {
-            get
-            {
-                return _windowBarColor;
-            }
+            get { return _windowBarColor; }
 
             set
             {
@@ -693,10 +571,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [Description(PropertyDescription.Size)]
         public int WindowBarHeight
         {
-            get
-            {
-                return _windowBarHeight;
-            }
+            get { return _windowBarHeight; }
 
             set
             {
@@ -711,25 +586,16 @@ namespace VisualPlus.Toolkit.Dialogs
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public ContextMenuStrip WindowContextMenuStripTitle
         {
-            get
-            {
-                return _windowContextMenuStripTitle;
-            }
+            get { return _windowContextMenuStripTitle; }
 
-            set
-            {
-                _windowContextMenuStripTitle = value;
-            }
+            set { _windowContextMenuStripTitle = value; }
         }
 
         /// <summary>Retrieves the form window title bar rectangle.</summary>
         [Browsable(false)]
         public Rectangle WindowTitleBar
         {
-            get
-            {
-                return _windowTitleBarRectangle;
-            }
+            get { return _windowTitleBarRectangle; }
         }
 
         [Browsable(true)]
@@ -738,10 +604,7 @@ namespace VisualPlus.Toolkit.Dialogs
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool WindowTitleBarVisible
         {
-            get
-            {
-                return _windowTitleBarVisible;
-            }
+            get { return _windowTitleBarVisible; }
 
             set
             {
@@ -797,6 +660,13 @@ namespace VisualPlus.Toolkit.Dialogs
         {
             base.OnDeactivate(e);
             State = MouseStates.Normal;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            // Sets the Form location based on the StartPosition.
+            SetStartPosition();
+            base.OnLoad(e);
         }
 
         protected override void OnMouseDoubleClick(MouseEventArgs e)
@@ -1127,6 +997,49 @@ namespace VisualPlus.Toolkit.Dialogs
             return MemberwiseClone();
         }
 
+        /// <summary>Sets the current forms start position.</summary>
+        public void SetStartPosition()
+        {
+            // Determines the position mode to use.
+            switch (StartPosition)
+            {
+                // The position of the form is determined by the Location property.
+                case FormStartPosition.Manual:
+                {
+                    // Uses the default preset Location property value.
+                    break;
+                }
+                // The form is centered on the current display, and has the dimensions specified in the form’s size.
+                case FormStartPosition.CenterScreen:
+                {
+                    CenterToScreen();
+                    break;
+                }
+                // The form is positioned at the Windows default location and has the dimensions specified in the form’s size.
+                case FormStartPosition.WindowsDefaultLocation:
+                {
+                    Location = new Point(Screen.PrimaryScreen.WorkingArea.X, Screen.PrimaryScreen.WorkingArea.Y);
+                    break;
+                }
+                // The form is positioned at the Windows default location and has the bounds determined by Windows default.
+                case FormStartPosition.WindowsDefaultBounds:
+                {
+                    Location = new Point(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y);
+                    break;
+                }
+                // The form is centered within the bounds of its parent form.
+                case FormStartPosition.CenterParent:
+                {
+                    CenterToParent();
+                    break;
+                }
+                default:
+                {
+                    throw new ArgumentOutOfRangeException(nameof(StartPosition), StartPosition, null);
+                }
+            }
+        }
+
         public void UpdateTheme(Theme theme)
         {
             try
@@ -1179,35 +1092,35 @@ namespace VisualPlus.Toolkit.Dialogs
                 switch (_titleAlignment)
                 {
                     case Alignment.TextAlignment.Center:
-                        {
-                            _titleLocation = new Point((Width / 2) - (_textSize.Width / 2), _titleLocation.Y);
-                            break;
-                        }
+                    {
+                        _titleLocation = new Point((Width / 2) - (_textSize.Width / 2), _titleLocation.Y);
+                        break;
+                    }
 
                     case Alignment.TextAlignment.Left:
+                    {
+                        if (_vsImage.Visible)
                         {
-                            if (_vsImage.Visible)
-                            {
-                                _titleLocation = new Point(_vsImage.Point.X + _vsImage.Size.Width + 1, _titleLocation.Y);
-                            }
-                            else
-                            {
-                                _titleLocation = new Point(_vsImage.Point.X, _titleLocation.Y);
-                            }
-
-                            break;
+                            _titleLocation = new Point(_vsImage.Point.X + _vsImage.Size.Width + 1, _titleLocation.Y);
                         }
+                        else
+                        {
+                            _titleLocation = new Point(_vsImage.Point.X, _titleLocation.Y);
+                        }
+
+                        break;
+                    }
 
                     case Alignment.TextAlignment.Right:
-                        {
-                            _titleLocation = new Point(Width - _border.Thickness - _textSize.Width - VisualControlBox.Width - 1, _titleLocation.Y);
-                            break;
-                        }
+                    {
+                        _titleLocation = new Point(Width - _border.Thickness - _textSize.Width - VisualControlBox.Width - 1, _titleLocation.Y);
+                        break;
+                    }
 
                     default:
-                        {
-                            throw new ArgumentOutOfRangeException();
-                        }
+                    {
+                        throw new ArgumentOutOfRangeException();
+                    }
                 }
 
                 graphics.DrawString(Text, Font, new SolidBrush(_titleForeColor), _titleLocation);
@@ -1237,21 +1150,21 @@ namespace VisualPlus.Toolkit.Dialogs
             switch (_border.Type)
             {
                 case ShapeTypes.Rectangle:
-                    {
-                        _borderBounds = new Rectangle(1, 1, Width, Height);
-                        break;
-                    }
+                {
+                    _borderBounds = new Rectangle(1, 1, Width, Height);
+                    break;
+                }
 
                 case ShapeTypes.Rounded:
-                    {
-                        _borderBounds = new Rectangle(0, 0, Width - 1, Height - 1);
-                        break;
-                    }
+                {
+                    _borderBounds = new Rectangle(0, 0, Width - 1, Height - 1);
+                    break;
+                }
 
                 default:
-                    {
-                        throw new ArgumentOutOfRangeException();
-                    }
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
             }
 
             return _borderBounds;
@@ -1289,44 +1202,44 @@ namespace VisualPlus.Toolkit.Dialogs
             switch (direction)
             {
                 case ResizeDirection.BottomLeft:
-                    {
-                        _resizeDirection = FormConstants.HTBOTTOMLEFT;
-                        break;
-                    }
+                {
+                    _resizeDirection = FormConstants.HTBOTTOMLEFT;
+                    break;
+                }
 
                 case ResizeDirection.Left:
-                    {
-                        _resizeDirection = FormConstants.HTLEFT;
-                        break;
-                    }
+                {
+                    _resizeDirection = FormConstants.HTLEFT;
+                    break;
+                }
 
                 case ResizeDirection.Right:
-                    {
-                        _resizeDirection = FormConstants.HTRIGHT;
-                        break;
-                    }
+                {
+                    _resizeDirection = FormConstants.HTRIGHT;
+                    break;
+                }
 
                 case ResizeDirection.BottomRight:
-                    {
-                        _resizeDirection = FormConstants.HTBOTTOMRIGHT;
-                        break;
-                    }
+                {
+                    _resizeDirection = FormConstants.HTBOTTOMRIGHT;
+                    break;
+                }
 
                 case ResizeDirection.Bottom:
-                    {
-                        _resizeDirection = FormConstants.HTBOTTOM;
-                        break;
-                    }
+                {
+                    _resizeDirection = FormConstants.HTBOTTOM;
+                    break;
+                }
 
                 case ResizeDirection.None:
-                    {
-                        break;
-                    }
+                {
+                    break;
+                }
 
                 default:
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-                    }
+                {
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+                }
             }
 
             User32.ReleaseCapture();

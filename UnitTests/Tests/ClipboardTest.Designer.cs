@@ -36,6 +36,7 @@
             // 
             // textBox
             // 
+            this.textBox.AlphaNumeric = false;
             this.textBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox.BackColorState.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
@@ -285,6 +286,7 @@
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "ClipboardTest";
             this.Sizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Clipboard Test";
             this.ResumeLayout(false);
             this.PerformLayout();

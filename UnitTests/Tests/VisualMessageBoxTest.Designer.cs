@@ -86,6 +86,7 @@ namespace UnitTests.Tests
             // 
             // tbTitle
             // 
+            this.tbTitle.AlphaNumeric = false;
             this.tbTitle.BackColorState.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.tbTitle.BackColorState.Enabled = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(249)))));
             this.tbTitle.Border.Color = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
@@ -200,6 +201,7 @@ namespace UnitTests.Tests
             // 
             // tbMessage
             // 
+            this.tbMessage.AlphaNumeric = false;
             this.tbMessage.BackColorState.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.tbMessage.BackColorState.Enabled = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(249)))));
             this.tbMessage.Border.Color = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
@@ -832,6 +834,7 @@ namespace UnitTests.Tests
             this.Name = "VisualMessageBoxTest";
             this.ShowInTaskbar = false;
             this.Sizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "VisualMessageBox Test";
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);

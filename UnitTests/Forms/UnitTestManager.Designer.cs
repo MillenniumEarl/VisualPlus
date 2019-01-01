@@ -418,6 +418,7 @@ namespace UnitTests.Forms
             this.MinimizeBox = true;
             this.Name = "UnitTestManager";
             this.Sizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VisualPlus - Unit Test Manager";
             this.Load += new System.EventHandler(this.TestManager_Load);
             this.tabController.ResumeLayout(false);

@@ -140,11 +140,11 @@
     <Compile Include="Managers\TickManager.cs" />
     <Compile Include="Constants\ListViewConstants.cs" />
     <Compile Include="Managers\XMLManager.cs" />
-    <Compile Include="Native\Dwmapi.cs" />
-    <Compile Include="Native\Gdi32.cs" />
-    <Compile Include="Native\Shlwapi.cs" />
-    <Compile Include="Native\User32.cs" />
-    <Compile Include="Native\Uxtheme.cs" />
+    <Compile Include="Native\dwmapi.cs" />
+    <Compile Include="Native\gdi32.cs" />
+    <Compile Include="Native\shlwapi.cs" />
+    <Compile Include="Native\user32.cs" />
+    <Compile Include="Native\uxtheme.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

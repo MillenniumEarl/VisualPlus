@@ -1,7 +1,6 @@
 #region Namespace
 
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -13,7 +12,7 @@ using VisualPlus.Structure;
 namespace VisualPlus.Native
 {
     [SuppressUnmanagedCodeSecurity]
-    internal static class User32
+    public static class user32
     {
         #region Methods
 
@@ -114,27 +113,77 @@ namespace VisualPlus.Native
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern int DestroyWindow(IntPtr hwnd);
 
-        [Description("Retrieves the cursor position in screen coordinates.")]
+        /// <summary>Retrieves the position of the mouse cursor, in screen coordinates.</summary>
+        /// <param name="lpPoint">A pointer to a POINT structure that receives the screen coordinates of the cursor.</param>
+        /// <returns>Returns nonzero if successful or zero otherwise. To get extended error information, call GetLastError.</returns>
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool GetCursorPos(ref Point lpPoint);
 
-        [Description("Retrieves the monitor information.")]
+        /// <summary>The GetMonitorInfo function retrieves information about a display monitor.</summary>
+        /// <param name="hMonitor">A handle to the display monitor of interest.</param>
+        /// <param name="lpmi">
+        ///     A pointer to a MONITORINFO or MONITORINFOEX structure that receives information about the specified
+        ///     display monitor.
+        /// </param>
+        /// <returns>If the function succeeds, the return value is nonzero.</returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern bool GetMonitorInfo(HandleRef hmonitor, [In] [Out] MonitorManager info);
+        public static extern bool GetMonitorInfo(HandleRef hMonitor, [In] [Out] MonitorManager lpmi);
 
-        [Description("The GetScrollInfo function retrieves the parameters of a scroll bar.")]
+        /// <summary>
+        ///     The GetScrollInfo function retrieves the parameters of a scroll bar, including the minimum and maximum
+        ///     scrolling positions, the page size, and the position of the scroll box (thumb).
+        /// </summary>
+        /// <param name="hwnd">
+        ///     Handle to a scroll bar control or a window with a standard scroll bar, depending on the value of the
+        ///     fnBar parameter.
+        /// </param>
+        /// <param name="nBar">Specifies the type of scroll bar for which to retrieve parameters.</param>
+        /// <param name="lpsi">
+        ///     Pointer to a SCROLLINFO structure. Before calling GetScrollInfo, set the cbSize member to
+        ///     sizeof(SCROLLINFO), and set the fMask member to specify the scroll bar parameters to retrieve. Before returning,
+        ///     the function copies the specified parameters to the appropriate members of the structure.
+        /// </param>
+        /// <returns>If the function retrieved any values, the return value is nonzero.</returns>
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern int GetScrollInfo(IntPtr hWnd, int n, ref ScrollInfo lpScrollInfo);
+        public static extern int GetScrollInfo(IntPtr hwnd, int nBar, ref ScrollInfo lpsi);
 
-        [Description("Retrieves the system menu.")]
+        /// <summary>
+        ///     Enables the application to access the window menu (also known as the system menu or the control menu) for
+        ///     copying and modifying.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window that will own a copy of the window menu.</param>
+        /// <param name="bRevert">
+        ///     The action to be taken. If this parameter is FALSE, GetSystemMenu returns a handle to the copy of
+        ///     the window menu currently in use. The copy is initially identical to the window menu, but it can be modified. If
+        ///     this parameter is TRUE, GetSystemMenu resets the window menu back to the default state. The previous window menu,
+        ///     if any, is destroyed.
+        /// </param>
+        /// <returns>
+        ///     If the bRevert parameter is FALSE, the return value is a handle to a copy of the window menu. If the bRevert
+        ///     parameter is TRUE, the return value is NULL.
+        /// </returns>
         [DllImport("user32.dll")]
         public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 
-        [Description("Retrieves the monitor from a window handle.")]
+        /// <summary>
+        ///     The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of
+        ///     intersection with the bounding rectangle of a specified window.
+        /// </summary>
+        /// <param name="hwnd">A handle to the window of interest.</param>
+        /// <param name="dwFlags">Determines the function's return value if the window does not intersect any display monitor.</param>
+        /// <returns>
+        ///     If the window intersects one or more display monitor rectangles, the return value is an HMONITOR handle to the
+        ///     display monitor that has the largest area of intersection with the window.
+        /// </returns>
         [DllImport("user32.dll")]
         public static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
 
-        [Description("You can use the ReleaseCapture() function to provide drag functionality.")]
+        /// <summary>
+        ///     Releases the mouse capture from a window in the current thread and restores normal mouse input processing. A
+        ///     window that has captured the mouse receives all mouse input, regardless of the position of the cursor, except when
+        ///     a mouse button is clicked while the cursor hot spot is in the window of another thread.
+        /// </summary>
+        /// <returns>If the function succeeds, the return value is nonzero.</returns>
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
@@ -176,11 +225,43 @@ namespace VisualPlus.Native
         [DllImport("User32.dll", SetLastError = true)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
 
-        [Description("Displays a popup menu at a specified point. The function also tracks the menu, updating the selection highlight until the user either selects an item or otherwise closes the menu.")]
+        /// <summary>
+        ///     Displays a shortcut menu at the specified location and tracks the selection of items on the shortcut menu. The
+        ///     shortcut menu can appear anywhere on the screen.
+        /// </summary>
+        /// <param name="hmenu">
+        ///     A handle to the shortcut menu to be displayed. This handle can be obtained by calling the
+        ///     CreatePopupMenu function to create a new shortcut menu or by calling the GetSubMenu function to retrieve a handle
+        ///     to a submenu associated with an existing menu item.
+        /// </param>
+        /// <param name="fuFlags">Specifies function options.</param>
+        /// <param name="x">The horizontal location of the shortcut menu, in screen coordinates.</param>
+        /// <param name="y">The vertical location of the shortcut menu, in screen coordinates.</param>
+        /// <param name="hwnd">
+        ///     A handle to the window that owns the shortcut menu. This window receives all messages from the menu.
+        ///     The window does not receive a WM_COMMAND message from the menu until the function returns. If you specify
+        ///     TPM_NONOTIFY in the fuFlags parameter, the function does not send messages to the window identified by hwnd.
+        ///     However, you must still pass a window handle in hwnd. It can be any window handle from your application.
+        /// </param>
+        /// <param name="lptpm">
+        ///     A pointer to a TPMPARAMS structure that specifies an area of the screen the menu should not
+        ///     overlap. This parameter can be NULL.
+        /// </param>
+        /// <returns>
+        ///     If you specify TPM_RETURNCMD in the fuFlags parameter, the return value is the menu-item identifier of the
+        ///     item that the user selected. If the user cancels the menu without making a selection, or if an error occurs, the
+        ///     return value is zero.
+        /// </returns>
         [DllImport("user32.dll")]
         public static extern int TrackPopupMenuEx(IntPtr hmenu, uint fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
 
-        [Description("The WindowFromPoint function retrieves a handle to the window that contains the specified point.")]
+        /// <summary>Retrieves a handle to the window that contains the specified point.</summary>
+        /// <param name="point">The point to be checked.</param>
+        /// <returns>
+        ///     The return value is a handle to the window that contains the point. If no window exists at the given point,
+        ///     the return value is NULL. If the point is over a static text control, the return value is a handle to the window
+        ///     under the static text control.
+        /// </returns>
         [DllImport("user32.dll")]
         public static extern IntPtr WindowFromPoint(Point point);
 

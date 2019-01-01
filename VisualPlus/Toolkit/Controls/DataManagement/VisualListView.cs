@@ -1571,7 +1571,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
         {
             if (_theme != IntPtr.Zero)
             {
-                Uxtheme.CloseThemeData(_theme);
+                uxtheme.CloseThemeData(_theme);
             }
 
             if (disposing)
@@ -2585,9 +2585,9 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             // IntPtr hTheme = IntPtr.Zero;
             try
             {
-                if ((Uxtheme.IsThemeActive() == 1) && (_theme == IntPtr.Zero))
+                if ((uxtheme.IsThemeActive() == 1) && (_theme == IntPtr.Zero))
                 {
-                    _theme = Uxtheme.OpenThemeData(_theme, "HEADER");
+                    _theme = uxtheme.OpenThemeData(_theme, "HEADER");
 
                     return true;
                 }

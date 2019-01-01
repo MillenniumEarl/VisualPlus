@@ -72,7 +72,7 @@ namespace VisualPlus.Managers
                 {
                     IntPtr handleContextSource = _graphicsSource.GetHdc();
                     IntPtr handleContextDestination = _graphicsDestination.GetHdc();
-                    int _retrievedResult = Gdi32.BitBlt(handleContextDestination, 0, 0, 1, 1, handleContextSource, position.X, position.Y, (int)CopyPixelOperation.SourceCopy);
+                    int _retrievedResult = gdi32.BitBlt(handleContextDestination, 0, 0, 1, 1, handleContextSource, position.X, position.Y, (int)CopyPixelOperation.SourceCopy);
                     _graphicsDestination.ReleaseHdc();
                     _graphicsSource.ReleaseHdc();
                 }
@@ -132,7 +132,7 @@ namespace VisualPlus.Managers
         public static Color CursorPointerColor()
         {
             Point cursor = new Point();
-            User32.GetCursorPos(ref cursor);
+            user32.GetCursorPos(ref cursor);
             return ColorFromPosition(cursor);
         }
 

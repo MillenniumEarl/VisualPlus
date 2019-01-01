@@ -131,7 +131,7 @@ namespace UnitTests.Forms
             this.visualLabelTestsStats.ShadowOpacity = 100;
             this.visualLabelTestsStats.Size = new System.Drawing.Size(214, 38);
             this.visualLabelTestsStats.TabIndex = 4;
-            this.visualLabelTestsStats.Text = "Selected: 0\r\nTotal Tests: 0";
+            this.visualLabelTestsStats.Text = "Test Index: 0\r\nTotal Tests: 0";
             this.visualLabelTestsStats.TextAlignment = System.Drawing.StringAlignment.Near;
             this.visualLabelTestsStats.TextLineAlignment = System.Drawing.StringAlignment.Center;
             this.visualLabelTestsStats.TextStyle.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(131)))), ((int)(((byte)(129)))), ((int)(((byte)(129)))));

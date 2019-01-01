@@ -193,7 +193,7 @@ namespace UnitTests.Forms
         private string GenerateTestStatistics()
         {
             StringBuilder stats = new StringBuilder();
-            stats.AppendLine($@"Selected: {visualListBoxTests.SelectedIndex + 1}");
+            stats.AppendLine($@"Test Index: {visualListBoxTests.SelectedIndex}");
             stats.AppendLine($@"Total Tests: {visualListBoxTests.Items.Count}");
             return stats.ToString();
         }

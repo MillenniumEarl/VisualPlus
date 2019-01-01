@@ -132,6 +132,7 @@
     <Compile Include="Managers\FontManager.cs" />
     <Compile Include="Managers\FormManager.cs" />
     <Compile Include="Managers\ImageManager.cs" />
+    <Compile Include="Structure\MenuItemInfo.cs" />
     <Compile Include="Structure\MonitorManager.cs" />
     <Compile Include="Managers\RelationManager.cs" />
     <Compile Include="Managers\ResourcesManager.cs" />

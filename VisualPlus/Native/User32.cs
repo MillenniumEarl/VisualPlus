@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using System.Security;
 
 using VisualPlus.Structure;
-using VisualPlus.Toolkit.Dialogs;
 
 #endregion
 
@@ -210,7 +209,7 @@ namespace VisualPlus.Native
         /// <param name="lpmi">A pointer to a MENUITEMINFO structure that contains information about the new menu item.</param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern bool InsertMenuItem(IntPtr hmenu, uint item, bool fByPosition, [In] ref VisualForm.MENUITEMINFO lpmi);
+        public static extern bool InsertMenuItem(IntPtr hmenu, uint item, bool fByPosition, [In] ref MenuItemInfo lpmi);
 
         /// <summary>
         ///     The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of

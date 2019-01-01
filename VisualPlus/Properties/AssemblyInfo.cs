@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("VisualPlus")]
 [assembly: AssemblyProduct("VisualPlus")]
-[assembly: AssemblyCopyright("Copyright ©  2016 - 2018")]
+[assembly: AssemblyCopyright("Copyright ©  2016 - 2019")]
 [assembly: AssemblyTrademark("https://darkbyte7.github.io/VisualPlus/")]
 [assembly: AssemblyCulture("")]
 

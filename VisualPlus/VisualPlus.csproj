@@ -62,7 +62,6 @@
     <Compile Include="Constants\ControlBoxConstants.cs" />
     <Compile Include="Constants\FormConstants.cs" />
     <Compile Include="Constants\SettingConstants.cs" />
-    <Compile Include="Constants\ToolTipConstants.cs" />
     <Compile Include="Delegates\ClipboardDelegate.cs" />
     <Compile Include="Delegates\ControlBoxDelegate.cs" />
     <Compile Include="Delegates\StyleManagerDelegate.cs" />

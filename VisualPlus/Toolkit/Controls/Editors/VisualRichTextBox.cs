@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 
 using VisualPlus.Designer;
@@ -56,10 +57,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
             _border = new Border();
 
             ThemeManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
-            _backColorState = new ColorState
-                    {
-                       Enabled = ThemeManager.Theme.ColorPalette.ControlEnabled 
-                    };
+            _backColorState = new ColorState { Enabled = ThemeManager.Theme.ColorPalette.ControlEnabled };
 
             _richTextBox = new RichTextBox
                 {
@@ -634,11 +632,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
                 TextStyle.Disabled = theme.ColorPalette.TextDisabled;
 
                 // Font = theme.ColorPalette.Font;
-                _backColorState = new ColorState
-                    {
-                        Enabled = theme.ColorPalette.ControlEnabled,
-                        Disabled = theme.ColorPalette.ControlEnabled
-                    };
+                _backColorState = new ColorState { Enabled = theme.ColorPalette.ControlEnabled, Disabled = theme.ColorPalette.ControlEnabled };
             }
             catch (Exception e)
             {
@@ -647,6 +641,49 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
             Invalidate();
             OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        /// <summary>Write to output the message with the specified settings.</summary>
+        /// <param name="message">The message.</param>
+        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <param name="suffix">The suffix.</param>
+        public void WriteToOutput(string message, bool timeStamp = false, string prefix = "", string suffix = "")
+        {
+            // Safety checks
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            StringBuilder output = new StringBuilder();
+
+            // Determine if should add a default timestamp
+            if (timeStamp)
+            {
+                output.Append(DateTime.Now.ToLongTimeString() + " ");
+            }
+
+            // Determine if should add a default prefix
+            if (!string.IsNullOrEmpty(prefix))
+            {
+                output.Append(prefix);
+            }
+
+            // The main message
+            output.Append(message);
+
+            // Determine if should add a default suffix
+            if (!string.IsNullOrEmpty(suffix))
+            {
+                output.Append(suffix + Environment.NewLine);
+            }
+            else
+            {
+                output.Append(Environment.NewLine);
+            }
+
+            AppendText(output.ToString());
         }
 
         #endregion

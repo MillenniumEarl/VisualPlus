@@ -53,10 +53,10 @@
             this.tbSelectedColor = new VisualPlus.Toolkit.Controls.Editors.VisualTextBox();
             this.tabController = new VisualPlus.Toolkit.Controls.Navigation.VisualTabControl();
             this.visualTabPage1 = new VisualPlus.Toolkit.Child.VisualTabPage();
+            this.componentPanel = new VisualPlus.Toolkit.Controls.Layout.VisualPanel();
             this.visualLabel3 = new VisualPlus.Toolkit.Controls.Interactivity.VisualLabel();
             this.cbControls = new VisualPlus.Toolkit.Controls.Interactivity.VisualComboBox();
             this.visualTabPage2 = new VisualPlus.Toolkit.Child.VisualTabPage();
-            this.componentPanel = new VisualPlus.Toolkit.Controls.Layout.VisualPanel();
             this.mainMenuStrip.SuspendLayout();
             this.gpColorPalette.SuspendLayout();
             this.tabController.SuspendLayout();
@@ -100,6 +100,7 @@
             // 
             // tbName
             // 
+            this.tbName.AlphaNumeric = false;
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(249)))));
@@ -159,6 +160,7 @@
             // 
             // tbAuthor
             // 
+            this.tbAuthor.AlphaNumeric = false;
             this.tbAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAuthor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(249)))));
@@ -400,6 +402,7 @@
             // 
             // tbPath
             // 
+            this.tbPath.AlphaNumeric = false;
             this.tbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(249)))));
@@ -497,6 +500,7 @@
             // 
             // tbSelectedColor
             // 
+            this.tbSelectedColor.AlphaNumeric = false;
             this.tbSelectedColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSelectedColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(244)))), ((int)(((byte)(249)))));
@@ -605,6 +609,7 @@
             this.visualTabPage1.ImageSize = new System.Drawing.Size(16, 16);
             this.visualTabPage1.Location = new System.Drawing.Point(4, 29);
             this.visualTabPage1.Name = "visualTabPage1";
+            this.visualTabPage1.Rectangle = new System.Drawing.Rectangle(2, 2, 100, 25);
             this.visualTabPage1.Size = new System.Drawing.Size(427, 394);
             this.visualTabPage1.TabHover = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
             this.visualTabPage1.TabIndex = 0;
@@ -615,6 +620,36 @@
             this.visualTabPage1.TextImageRelation = VisualPlus.Toolkit.Child.VisualTabPage.TextImageRelations.Text;
             this.visualTabPage1.TextLineAlignment = System.Drawing.StringAlignment.Center;
             this.visualTabPage1.TextSelected = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
+            // 
+            // componentPanel
+            // 
+            this.componentPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.componentPanel.BackColorState.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.componentPanel.BackColorState.Enabled = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.componentPanel.Border.Color = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.componentPanel.Border.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(183)))), ((int)(((byte)(230)))));
+            this.componentPanel.Border.HoverVisible = true;
+            this.componentPanel.Border.Rounding = 6;
+            this.componentPanel.Border.Thickness = 1;
+            this.componentPanel.Border.Type = VisualPlus.Enumerators.ShapeTypes.Rounded;
+            this.componentPanel.Border.Visible = true;
+            this.componentPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.componentPanel.Location = new System.Drawing.Point(4, 130);
+            this.componentPanel.MouseState = VisualPlus.Enumerators.MouseStates.Normal;
+            this.componentPanel.Name = "componentPanel";
+            this.componentPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.componentPanel.Size = new System.Drawing.Size(420, 261);
+            this.componentPanel.TabIndex = 13;
+            this.componentPanel.Text = "visualPanel1";
+            this.componentPanel.TextStyle.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(131)))), ((int)(((byte)(129)))), ((int)(((byte)(129)))));
+            this.componentPanel.TextStyle.Enabled = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.componentPanel.TextStyle.Hover = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.componentPanel.TextStyle.Pressed = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.componentPanel.TextStyle.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.componentPanel.TextStyle.TextLineAlignment = System.Drawing.StringAlignment.Center;
+            this.componentPanel.TextStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             // 
             // visualLabel3
             // 
@@ -717,6 +752,7 @@
             this.visualTabPage2.ImageSize = new System.Drawing.Size(16, 16);
             this.visualTabPage2.Location = new System.Drawing.Point(4, 29);
             this.visualTabPage2.Name = "visualTabPage2";
+            this.visualTabPage2.Rectangle = new System.Drawing.Rectangle(102, 2, 100, 25);
             this.visualTabPage2.Size = new System.Drawing.Size(427, 394);
             this.visualTabPage2.TabHover = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
             this.visualTabPage2.TabIndex = 1;
@@ -727,36 +763,6 @@
             this.visualTabPage2.TextImageRelation = VisualPlus.Toolkit.Child.VisualTabPage.TextImageRelations.Text;
             this.visualTabPage2.TextLineAlignment = System.Drawing.StringAlignment.Center;
             this.visualTabPage2.TextSelected = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            // 
-            // visualPanel1
-            // 
-            this.componentPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.componentPanel.BackColorState.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.componentPanel.BackColorState.Enabled = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.componentPanel.Border.Color = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.componentPanel.Border.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(183)))), ((int)(((byte)(230)))));
-            this.componentPanel.Border.HoverVisible = true;
-            this.componentPanel.Border.Rounding = 6;
-            this.componentPanel.Border.Thickness = 1;
-            this.componentPanel.Border.Type = VisualPlus.Enumerators.ShapeTypes.Rounded;
-            this.componentPanel.Border.Visible = true;
-            this.componentPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.componentPanel.Location = new System.Drawing.Point(4, 130);
-            this.componentPanel.MouseState = VisualPlus.Enumerators.MouseStates.Normal;
-            this.componentPanel.Name = "componentPanel";
-            this.componentPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.componentPanel.Size = new System.Drawing.Size(420, 261);
-            this.componentPanel.TabIndex = 13;
-            this.componentPanel.Text = "visualPanel1";
-            this.componentPanel.TextStyle.Disabled = System.Drawing.Color.FromArgb(((int)(((byte)(131)))), ((int)(((byte)(129)))), ((int)(((byte)(129)))));
-            this.componentPanel.TextStyle.Enabled = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.componentPanel.TextStyle.Hover = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.componentPanel.TextStyle.Pressed = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.componentPanel.TextStyle.TextAlignment = System.Drawing.StringAlignment.Center;
-            this.componentPanel.TextStyle.TextLineAlignment = System.Drawing.StringAlignment.Center;
-            this.componentPanel.TextStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             // 
             // Main
             // 
@@ -890,6 +896,7 @@
             this.MinimizeBox = true;
             this.MinimumSize = new System.Drawing.Size(817, 500);
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visual Theme Builder";
             this.HelpButtonClicked += new VisualPlus.Delegates.ControlBoxEventHandler(this.Main_HelpButtonClicked);
             this.Load += new System.EventHandler(this.Main_Load);

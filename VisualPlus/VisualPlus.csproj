@@ -62,6 +62,7 @@
     <Compile Include="Constants\ControlBoxConstants.cs" />
     <Compile Include="Constants\FormConstants.cs" />
     <Compile Include="Constants\SettingConstants.cs" />
+    <Compile Include="Constants\ToolTipConstants.cs" />
     <Compile Include="Delegates\ClipboardDelegate.cs" />
     <Compile Include="Delegates\ControlBoxDelegate.cs" />
     <Compile Include="Delegates\StyleManagerDelegate.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Extensibility\ListExtension.cs" />
     <Compile Include="Extensibility\StringExtension.cs" />
     <Compile Include="Extensibility\XmlExtension.cs" />
+    <Compile Include="Interfaces\IToolTip.cs" />
     <Compile Include="Localization\EventCategory.cs" />
     <Compile Include="Localization\EventDescription.cs" />
     <Compile Include="Localization\GlobalStrings.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Renders\VisualScrollBarRenderer.cs" />
     <Compile Include="Renders\VisualToggleRenderer.cs" />
     <Compile Include="Renders\VisualControlRenderer.cs" />
+    <Compile Include="Structure\TipInfo.cs" />
     <Compile Include="Toolkit\Controls\Editors\VisualIPBox.cs" />
     <Compile Include="Toolkit\Dialogs\VisualExceptionDialog.cs">
       <SubType>Form</SubType>
@@ -175,9 +178,7 @@
     <Compile Include="Toolkit\Dialogs\VisualMessageBox.Designer.cs">
       <DependentUpon>VisualMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Toolkit\VisualBase\TextBoxExtended.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Toolkit\VisualBase\TextBoxExtended.cs" />
     <Compile Include="Toolkit\Dialogs\VisualColorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -412,7 +413,7 @@
     <EmbeddedResource Include="Toolkit\Controls\Interactivity\VisualLabel.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\VisualPlus.png" />
+    <EmbeddedResource Include="Resources\VisualPlus.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Themes\Visual.xml">

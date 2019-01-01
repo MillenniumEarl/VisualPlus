@@ -870,7 +870,7 @@ namespace VisualPlus.Toolkit.Dialogs
 
                     Size = _previousSize;
                     User32.ReleaseCapture();
-                    User32.SendMessage(Handle, FormConstants.WM_NCLBUTTONDOWN, FormConstants.HT_CAPTION, 0);
+                    User32.SendMessage(Handle, FormConstants.WM_NCLBUTTONDOWN, FormConstants.HT_CAPTION, new IntPtr(0));
                 }
             }
             else if ((m.Msg == FormConstants.WM_LBUTTONDOWN) && _windowTitleBarRectangle.Contains(PointToClient(Cursor.Position)))
@@ -883,7 +883,7 @@ namespace VisualPlus.Toolkit.Dialogs
                     if (_moveable)
                     {
                         User32.ReleaseCapture();
-                        User32.SendMessage(Handle, FormConstants.WM_NCLBUTTONDOWN, FormConstants.HT_CAPTION, 0);
+                        User32.SendMessage(Handle, FormConstants.WM_NCLBUTTONDOWN, FormConstants.HT_CAPTION, new IntPtr(0));
                     }
                 }
 
@@ -895,7 +895,7 @@ namespace VisualPlus.Toolkit.Dialogs
                 if (!_maximized)
                 {
                     User32.ReleaseCapture();
-                    User32.SendMessage(Handle, FormConstants.WM_NCLBUTTONDOWN, FormConstants.HT_CAPTION, 0);
+                    User32.SendMessage(Handle, FormConstants.WM_NCLBUTTONDOWN, FormConstants.HT_CAPTION, new IntPtr(0));
                 }
 
                 // Show the window title bar menu strip.
@@ -947,7 +947,7 @@ namespace VisualPlus.Toolkit.Dialogs
 
                 if (bFlag != 0)
                 {
-                    User32.SendMessage(Handle, FormConstants.WM_SYSCOMMAND, 0xF000 | bFlag, (int)m.LParam);
+                    User32.SendMessage(Handle, FormConstants.WM_SYSCOMMAND, 0xF000 | bFlag, m.LParam);
                 }
             }
             else if (m.Msg == FormConstants.WM_NCLBUTTONDOWN)
@@ -969,7 +969,7 @@ namespace VisualPlus.Toolkit.Dialogs
 
                 if (bFlag != 0)
                 {
-                    User32.SendMessage(Handle, FormConstants.WM_SYSCOMMAND, 0xF000 | bFlag, (int)m.LParam);
+                    User32.SendMessage(Handle, FormConstants.WM_SYSCOMMAND, 0xF000 | bFlag, m.LParam);
                 }
             }
             else if (m.Msg == FormConstants.WM_LBUTTONUP)
@@ -1245,7 +1245,7 @@ namespace VisualPlus.Toolkit.Dialogs
             User32.ReleaseCapture();
             if (_resizeDirection != -1)
             {
-                User32.SendMessage(Handle, FormConstants.WM_NCLBUTTONDOWN, _resizeDirection, 0);
+                User32.SendMessage(Handle, FormConstants.WM_NCLBUTTONDOWN, _resizeDirection, new IntPtr(0));
             }
         }
 

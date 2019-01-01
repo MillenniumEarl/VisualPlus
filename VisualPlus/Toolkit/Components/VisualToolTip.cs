@@ -1,5 +1,7 @@
 ﻿#region Namespace
 
+using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -8,8 +10,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using VisualPlus.Designer;
+using VisualPlus.Interfaces;
 using VisualPlus.Localization;
-using VisualPlus.Properties;
 using VisualPlus.Structure;
 using VisualPlus.TypeConverters;
 
@@ -25,7 +27,8 @@ namespace VisualPlus.Toolkit.Components
     [Designer(typeof(VisualToolTipDesigner))]
     [ToolboxBitmap(typeof(VisualToolTip), "VisualToolTip.bmp")]
     [ToolboxItem(true)]
-    public class VisualToolTip : ToolTip
+    [ToolboxItemFilter("System.Windows.Forms")]
+    public class VisualToolTip : ToolTip, IToolTip
     {
         #region Variables
 
@@ -33,8 +36,6 @@ namespace VisualPlus.Toolkit.Components
         private Color _background;
         private Border _border;
         private Font _font;
-        private Color _foreColor;
-        private Image _icon;
         private bool _iconBorder;
         private GraphicsPath _iconGraphicsPath;
         private Point _iconPoint;
@@ -45,18 +46,16 @@ namespace VisualPlus.Toolkit.Components
         private Rectangle _separator;
         private int _separatorThickness;
         private int _spacing;
-        private string _text;
         private Point _textPoint;
         private TextRenderingHint _textRendererHint;
         private bool _textShadow;
-        private string _title;
+        private TipInfo _tipInfo;
+        private Point _tipSize;
         private Color _titleColor;
         private Font _titleFont;
         private Point _titlePoint;
         private Size _toolTipSize;
-        private ToolTipType _toolTipType;
-        private int _xWidth;
-        private int _yHeight;
+        private Hashtable _toolTipTexts;
 
         #endregion
 
@@ -65,48 +64,48 @@ namespace VisualPlus.Toolkit.Components
         /// <summary>Initializes a new instance of the <see cref="VisualToolTip" /> class.</summary>
         public VisualToolTip()
         {
-            StyleManager styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
-            _iconPoint = new Point(0, 0);
-            _iconSize = new Size(24, 24);
-            _padding = new Padding(4, 4, 4, 4);
-            _separatorThickness = 1;
-            _titleColor = Color.Gray;
-            _toolTipSize = new Size(100, 40);
-            _toolTipType = ToolTipType.Default;
-            _spacing = 2;
-            _title = "Title";
-            _textRendererHint = Settings.DefaultValue.TextRenderingHint;
-            _text = "Enter your custom text here.";
-            _icon = Resources.VisualPlus;
-            _background = styleManager.Theme.ColorPalette.Enabled;
-            _font = SystemFonts.DefaultFont;
-            _autoSize = true;
-            _foreColor = styleManager.Theme.ColorPalette.TextEnabled;
-            _lineColor = styleManager.Theme.ColorPalette.BorderNormal;
-            _titleFont = SystemFonts.DefaultFont;
+            try
+            {
+                StyleManager styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
 
-            _border = new Border();
+                _toolTipTexts = new Hashtable();
+                _iconPoint = new Point(0, 0);
+                _iconSize = new Size(16, 16);
+                _padding = new Padding(4, 4, 4, 4);
+                _separatorThickness = 1;
+                _titleColor = Color.Gray;
+                _toolTipSize = new Size(100, 40);
+                _tipSize = new Point();
 
-            IsBalloon = false;
-            OwnerDraw = true;
-            Popup += VisualToolTip_Popup;
-            Draw += VisualToolTip_Draw;
+                _tipInfo = new TipInfo { Caption = "Title", Text = "Enter your custom text here." };
+
+                _spacing = 2;
+                _textRendererHint = Settings.DefaultValue.TextRenderingHint;
+                _background = styleManager.Theme.ColorPalette.Enabled;
+                _font = SystemFonts.DefaultFont;
+                _autoSize = true;
+                ForeColor = styleManager.Theme.ColorPalette.TextEnabled;
+                _lineColor = styleManager.Theme.ColorPalette.BorderNormal;
+                _titleFont = SystemFonts.DefaultFont;
+
+                _border = new Border();
+
+                ShowAlways = true;
+                IsBalloon = false;
+                OwnerDraw = true;
+                Popup += VisualToolTip_Popup;
+                Draw += VisualToolTip_Draw;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
-        #endregion
-
-        #region Enumerators
-
-        public enum ToolTipType
+        /// <summary>Finalizes an instance of the <see cref="VisualToolTip" /> class.</summary>
+        ~VisualToolTip()
         {
-            /// <summary>The default.</summary>
-            Default = 0,
-
-            /// <summary>The image.</summary>
-            Image = 1,
-
-            /// <summary>The text.</summary>
-            Text = 2
+            Dispose(false);
         }
 
         #endregion
@@ -174,35 +173,6 @@ namespace VisualPlus.Toolkit.Components
             }
         }
 
-        public new Color ForeColor
-        {
-            get
-            {
-                return _foreColor;
-            }
-
-            set
-            {
-                base.ForeColor = value;
-                _foreColor = value;
-            }
-        }
-
-        [Category(PropertyCategory.Appearance)]
-        [Description(PropertyDescription.Image)]
-        public Image Icon
-        {
-            get
-            {
-                return _icon;
-            }
-
-            set
-            {
-                _icon = value;
-            }
-        }
-
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Visible)]
         public bool IconBorder
@@ -230,6 +200,21 @@ namespace VisualPlus.Toolkit.Components
             set
             {
                 _iconSize = value;
+            }
+        }
+
+        [Category(PropertyCategory.Appearance)]
+        [Description(PropertyDescription.Image)]
+        public Image Image
+        {
+            get
+            {
+                return _tipInfo.Image;
+            }
+
+            set
+            {
+                _tipInfo.Image = value;
             }
         }
 
@@ -299,12 +284,12 @@ namespace VisualPlus.Toolkit.Components
         {
             get
             {
-                return _text;
+                return _tipInfo.Text;
             }
 
             set
             {
-                _text = value;
+                _tipInfo.Text = value;
             }
         }
 
@@ -338,33 +323,32 @@ namespace VisualPlus.Toolkit.Components
             }
         }
 
-        [Category(PropertyCategory.Appearance)]
-        [Description(PropertyDescription.Type)]
-        public ToolTipType TipType
+        [Browsable(false)]
+        public TipInfo TipInfo
         {
             get
             {
-                return _toolTipType;
+                return _tipInfo;
             }
 
             set
             {
-                _toolTipType = value;
+                _tipInfo = value;
             }
         }
 
         [Category(PropertyCategory.Appearance)]
-        [Description(PropertyDescription.Text)]
-        public string Title
+        [Description(PropertyDescription.Type)]
+        public TipInfo.ToolTipType TipType
         {
             get
             {
-                return _title;
+                return _tipInfo.Type;
             }
 
             set
             {
-                _title = value;
+                _tipInfo.Type = value;
             }
         }
 
@@ -398,6 +382,20 @@ namespace VisualPlus.Toolkit.Components
             }
         }
 
+        [Browsable(false)]
+        public Control ToolTipControl
+        {
+            get
+            {
+                return _tipInfo.Control;
+            }
+
+            set
+            {
+                _tipInfo.Control = value;
+            }
+        }
+
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Size)]
         public Size ToolTipSize
@@ -413,9 +411,105 @@ namespace VisualPlus.Toolkit.Components
             }
         }
 
+        [Category(PropertyCategory.Appearance)]
+        [Description(PropertyDescription.Text)]
+        public new string ToolTipTitle
+        {
+            get
+            {
+                return _tipInfo.Caption;
+            }
+
+            set
+            {
+                _tipInfo.Caption = value;
+            }
+        }
+
+        #endregion
+
+        #region Overrides
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _toolTipTexts.Clear();
+                _toolTipTexts = null;
+            }
+
+            base.Dispose(disposing);
+        }
+
         #endregion
 
         #region Methods
+
+        public new string GetToolTip(Control control)
+        {
+            // Safety checks
+            if (control == null)
+            {
+                return string.Empty;
+            }
+
+            return base.GetToolTip(control);
+        }
+
+        public new void SetToolTip(Control control, string caption)
+        {
+            // Safety checks
+            if (control == null)
+            {
+                return;
+            }
+
+            if (caption == null)
+            {
+                caption = string.Empty;
+            }
+
+            // Checks whether the tool text has been cleared, remove the control from the list.
+            if (string.IsNullOrEmpty(caption))
+            {
+                _toolTipTexts.Remove(control);
+                _tipInfo.Control = control;
+            }
+            else
+            {
+                _tipInfo.Control = control;
+                _tipInfo.Position = control.ClientRectangle.Location;
+                _tipInfo.Size = control.ClientRectangle.Size;
+                _tipInfo.Caption = caption;
+
+                if (_toolTipTexts.Contains(control))
+                {
+                    _toolTipTexts[control] = caption;
+                }
+                else
+                {
+                    _toolTipTexts.Add(control, caption);
+                    base.SetToolTip(control, caption);
+                }
+            }
+        }
+
+        public new void Show(string text, IWin32Window window)
+        {
+            if (window == null)
+            {
+                throw new ArgumentException(nameof(window));
+            }
+
+            _tipInfo.Control = window as Control;
+            SetToolTip(_tipInfo.Control, text);
+        }
+
+        public new void Show(string text, IWin32Window window, int duration)
+        {
+            AutoPopDelay = duration;
+            Show(text, window);
+        }
 
         /// <summary>Input the text height to compare it to the icon height.</summary>
         /// <param name="textHeight">The text height.</param>
@@ -441,36 +535,37 @@ namespace VisualPlus.Toolkit.Components
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = SmoothingMode.HighQuality;
             graphics.TextRenderingHint = _textRendererHint;
-            graphics.FillRectangle(new SolidBrush(_background), e.Bounds);
+
+            graphics.FillRectangle(new SolidBrush(_background), new Rectangle(_tipInfo.Position, _tipInfo.Size));
 
             if (_border.Visible)
             {
-                Rectangle boxRectangle = new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width - 1, e.Bounds.Height - 1);
+                Rectangle boxRectangle = new Rectangle(_tipInfo.Position.X, _tipInfo.Position.Y, _tipInfo.Size.Width - 1, _tipInfo.Size.Height - 1);
                 GraphicsPath borderPath = new GraphicsPath();
                 borderPath.AddRectangle(boxRectangle);
                 graphics.DrawPath(new Pen(_border.Color, _border.Thickness), borderPath);
             }
 
-            if ((_textShadow && (_toolTipType == ToolTipType.Text)) || (_textShadow && (_toolTipType == ToolTipType.Default)))
+            if ((_textShadow && (_tipInfo.Type == TipInfo.ToolTipType.Text)) || (_textShadow && (_tipInfo.Type == TipInfo.ToolTipType.Default)))
             {
                 // Draw shadow text
-                graphics.DrawString(_text, new Font(Font, FontStyle.Regular), Brushes.Silver, new PointF(_textPoint.X + 1, _textPoint.Y + 1));
+                graphics.DrawString(_tipInfo.Text, new Font(Font, FontStyle.Regular), Brushes.Silver, new PointF(_textPoint.X + 1, _textPoint.Y + 1));
             }
 
-            switch (_toolTipType)
+            switch (_tipInfo.Type)
             {
-                case ToolTipType.Default:
+                case TipInfo.ToolTipType.Default:
                     {
                         // Draw the title
-                        graphics.DrawString(_title, _titleFont, new SolidBrush(_titleColor), new PointF(_titlePoint.X, _titlePoint.Y));
+                        graphics.DrawString(_tipInfo.Caption, _titleFont, new SolidBrush(_titleColor), new PointF(_titlePoint.X, _titlePoint.Y));
 
                         // Draw the separator
                         graphics.DrawLine(new Pen(_lineColor), _separator.X, _separator.Y, _separator.Width, _separator.Y);
 
                         // Draw the text
-                        graphics.DrawString(_text, Font, new SolidBrush(_foreColor), new PointF(_textPoint.X, _textPoint.Y));
+                        graphics.DrawString(_tipInfo.Text, Font, new SolidBrush(ForeColor), new PointF(_textPoint.X, _textPoint.Y));
 
-                        if (Icon != null)
+                        if (_tipInfo.Image != null)
                         {
                             // Update point
                             _iconRectangle.Location = _iconPoint;
@@ -482,15 +577,15 @@ namespace VisualPlus.Toolkit.Components
                             }
 
                             // Draw icon
-                            graphics.DrawImage(Icon, _iconRectangle);
+                            graphics.DrawImage(Image, _iconRectangle);
                         }
 
                         break;
                     }
 
-                case ToolTipType.Image:
+                case TipInfo.ToolTipType.Image:
                     {
-                        if (Icon != null)
+                        if (_tipInfo.Image != null)
                         {
                             // Update point
                             _iconRectangle.Location = _iconPoint;
@@ -502,43 +597,46 @@ namespace VisualPlus.Toolkit.Components
                             }
 
                             // Draw icon
-                            graphics.DrawImage(Icon, _iconRectangle);
+                            graphics.DrawImage(Image, _iconRectangle);
                         }
 
                         break;
                     }
 
-                case ToolTipType.Text:
+                case TipInfo.ToolTipType.Text:
                     {
                         // Draw the text
-                        graphics.DrawString(_text, Font, new SolidBrush(_foreColor), new PointF(_textPoint.X, _textPoint.Y));
+                        graphics.DrawString(_tipInfo.Text, Font, new SolidBrush(ForeColor), new PointF(_textPoint.X, _textPoint.Y));
                         break;
                     }
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
         private void VisualToolTip_Popup(object sender, PopupEventArgs e)
         {
-            switch (_toolTipType)
+            switch (_tipInfo.Type)
             {
-                case ToolTipType.Default:
+                case TipInfo.ToolTipType.Default:
                     {
                         if (!_autoSize)
                         {
-                            _xWidth = _toolTipSize.Width;
-                            _yHeight = _toolTipSize.Height;
+                            _tipSize.X = _toolTipSize.Width;
+                            _tipSize.Y = _toolTipSize.Height;
                         }
                         else
                         {
-                            _xWidth = GetTipWidth(TextRenderer.MeasureText(_title, Font).Width, TextRenderer.MeasureText(_text, Font).Width);
-                            _yHeight = TextRenderer.MeasureText(_title, Font).Height + SeparatorThickness + GetTipHeight(TextRenderer.MeasureText(_text, Font).Height);
+                            _tipSize.X = GetTipWidth(TextRenderer.MeasureText(_tipInfo.Caption, Font).Width, TextRenderer.MeasureText(_tipInfo.Text, Font).Width);
+                            _tipSize.Y = TextRenderer.MeasureText(_tipInfo.Caption, Font).Height + SeparatorThickness + GetTipHeight(TextRenderer.MeasureText(_tipInfo.Text, Font).Height);
                         }
 
                         _titlePoint.X = _padding.Left;
                         _titlePoint.Y = _padding.Top;
 
-                        Point separatorPoint = new Point(_padding.Left + Spacing, TextRenderer.MeasureText(_title, Font).Height + 5);
-                        Size separatorSize = new Size(_xWidth, SeparatorThickness);
+                        Point separatorPoint = new Point(_padding.Left + Spacing, TextRenderer.MeasureText(_tipInfo.Caption, Font).Height + 5);
+                        Size separatorSize = new Size(_tipSize.X, SeparatorThickness);
                         _separator = new Rectangle(separatorPoint, separatorSize);
 
                         _textPoint.X = _padding.Left + _iconSize.Width + Spacing;
@@ -548,21 +646,24 @@ namespace VisualPlus.Toolkit.Components
                         break;
                     }
 
-                case ToolTipType.Image:
+                case TipInfo.ToolTipType.Image:
                     {
                         _iconPoint = new Point(_padding.Left, _padding.Top);
-                        _xWidth = _iconSize.Width + 1;
-                        _yHeight = _iconSize.Height + 1;
+                        _tipSize.X = _iconSize.Width + 1;
+                        _tipSize.Y = _iconSize.Height + 1;
                         break;
                     }
 
-                case ToolTipType.Text:
+                case TipInfo.ToolTipType.Text:
                     {
                         _textPoint = new Point(_padding.Left, _padding.Top);
-                        _xWidth = TextRenderer.MeasureText(_text, Font).Width;
-                        _yHeight = TextRenderer.MeasureText(_text, Font).Height;
+                        _tipSize.X = TextRenderer.MeasureText(_tipInfo.Text, Font).Width;
+                        _tipSize.Y = TextRenderer.MeasureText(_tipInfo.Text, Font).Height;
                         break;
                     }
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             // Create icon rectangle
@@ -574,7 +675,7 @@ namespace VisualPlus.Toolkit.Components
             _iconGraphicsPath.CloseAllFigures();
 
             // Initialize new size
-            e.ToolTipSize = new Size(_padding.Left + _xWidth + _padding.Right, _padding.Top + _yHeight + _padding.Bottom);
+            e.ToolTipSize = new Size(_padding.Left + _tipSize.X + _padding.Right, _padding.Top + _tipSize.Y + _padding.Bottom);
         }
 
         #endregion

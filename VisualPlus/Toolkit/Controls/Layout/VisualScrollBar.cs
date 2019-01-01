@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
 using VisualPlus.Delegates;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
@@ -164,10 +163,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ColorState BackColorState
         {
-            get
-            {
-                return _backColorState;
-            }
+            get { return _backColorState; }
 
             set
             {
@@ -186,10 +182,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Category(PropertyCategory.Appearance)]
         public Border Border
         {
-            get
-            {
-                return _border;
-            }
+            get { return _border; }
 
             set
             {
@@ -203,10 +196,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Category(PropertyCategory.Appearance)]
         public Border ButtonBorder
         {
-            get
-            {
-                return _buttonBorder;
-            }
+            get { return _buttonBorder; }
 
             set
             {
@@ -219,10 +209,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Description(PropertyDescription.MouseState)]
         public MouseStates ButtonBottomMouseState
         {
-            get
-            {
-                return _buttonBottomState;
-            }
+            get { return _buttonBottomState; }
 
             set
             {
@@ -235,10 +222,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ControlColorState ButtonColorState
         {
-            get
-            {
-                return _buttonColorState;
-            }
+            get { return _buttonColorState; }
 
             set
             {
@@ -256,10 +240,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Description(PropertyDescription.MouseState)]
         public MouseStates ButtonTopMouseState
         {
-            get
-            {
-                return _buttonTopState;
-            }
+            get { return _buttonTopState; }
 
             set
             {
@@ -273,10 +254,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(typeof(double), "1")]
         public double ContextMenuOpacity
         {
-            get
-            {
-                return _contextMenu.Opacity;
-            }
+            get { return _contextMenu.Opacity; }
 
             set
             {
@@ -295,10 +273,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(10)]
         public int LargeChange
         {
-            get
-            {
-                return _largeChange;
-            }
+            get { return _largeChange; }
 
             set
             {
@@ -328,10 +303,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(100)]
         public int Maximum
         {
-            get
-            {
-                return _maximum;
-            }
+            get { return _maximum; }
 
             set
             {
@@ -371,10 +343,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(0)]
         public int Minimum
         {
-            get
-            {
-                return _minimum;
-            }
+            get { return _minimum; }
 
             set
             {
@@ -420,10 +389,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(Orientation.Vertical)]
         public Orientation Orientation
         {
-            get
-            {
-                return _orientation;
-            }
+            get { return _orientation; }
 
             set
             {
@@ -457,10 +423,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(1)]
         public int SmallChange
         {
-            get
-            {
-                return _smallChange;
-            }
+            get { return _smallChange; }
 
             set
             {
@@ -481,10 +444,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Category(PropertyCategory.Appearance)]
         public Border ThumbBorder
         {
-            get
-            {
-                return _thumbBorder;
-            }
+            get { return _thumbBorder; }
 
             set
             {
@@ -497,10 +457,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ControlColorState ThumbColorState
         {
-            get
-            {
-                return _thumbColorState;
-            }
+            get { return _thumbColorState; }
 
             set
             {
@@ -518,10 +475,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Category(PropertyCategory.Appearance)]
         public bool ThumbGripVisible
         {
-            get
-            {
-                return _thumbGripVisible;
-            }
+            get { return _thumbGripVisible; }
 
             set
             {
@@ -534,10 +488,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Description(PropertyDescription.MouseState)]
         public MouseStates ThumbMouseState
         {
-            get
-            {
-                return _thumbState;
-            }
+            get { return _thumbState; }
 
             set
             {
@@ -550,10 +501,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Description(PropertyDescription.Color)]
         public Color TrackPressed
         {
-            get
-            {
-                return _trackPressed;
-            }
+            get { return _trackPressed; }
 
             set
             {
@@ -567,10 +515,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(0)]
         public int Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
 
             set
             {
@@ -1012,14 +957,14 @@ namespace VisualPlus.Toolkit.Controls.Layout
         /// <summary>Prevents the drawing of the control until <see cref="EndUpdate" /> is called.</summary>
         public void BeginUpdate()
         {
-            User32.SendMessage(Handle, WM_SETREDRAW, false, 0);
+            User32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(false), new IntPtr(0));
             _inUpdate = true;
         }
 
         /// <summary>Ends the updating process and the control can draw itself again.</summary>
         public void EndUpdate()
         {
-            User32.SendMessage(Handle, WM_SETREDRAW, true, 0);
+            User32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(true), new IntPtr(0));
             _inUpdate = false;
             ConfigureScrollBar();
             Refresh();
@@ -1331,18 +1276,18 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
             // contextMenu
             _contextMenu.Items.AddRange(new ToolStripItem[]
-                {
-                    _tsmiScrollHere,
-                    _toolStripSeparator1,
-                    _tsmiTop,
-                    _tsmiBottom,
-                    _toolStripSeparator2,
-                    _tsmiLargeUp,
-                    _tsmiLargeDown,
-                    _toolStripSeparator3,
-                    _tsmiSmallUp,
-                    _tsmiSmallDown
-                });
+            {
+                _tsmiScrollHere,
+                _toolStripSeparator1,
+                _tsmiTop,
+                _tsmiBottom,
+                _toolStripSeparator2,
+                _tsmiLargeUp,
+                _tsmiLargeDown,
+                _toolStripSeparator3,
+                _tsmiSmallUp,
+                _tsmiSmallDown
+            });
             _contextMenu.Name = "_contextMenu";
             _contextMenu.Size = new Size(151, 176);
 

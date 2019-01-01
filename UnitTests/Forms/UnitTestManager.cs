@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+
 using UnitTests.Tests;
+
 using VisualPlus.Attributes;
 using VisualPlus.Constants;
 using VisualPlus.Events;
@@ -115,74 +117,74 @@ namespace UnitTests.Forms
             switch (_unitTest)
             {
                 case UnitTests.VisualForm:
-                {
-                    _formToOpen = new VisualForm($@"{nameof(VisualForm)} Test", FormStartPosition.CenterParent);
-                    _formToOpen.ShowDialog();
-                    break;
-                }
+                    {
+                        _formToOpen = new VisualForm($@"{nameof(VisualForm)} Test", FormStartPosition.CenterParent);
+                        _formToOpen.ShowDialog();
+                        break;
+                    }
 
                 case UnitTests.VisualControlBox:
-                {
-                    _formToOpen = new VisualControlBoxTest();
-                    _formToOpen.ShowDialog();
-                    break;
-                }
+                    {
+                        _formToOpen = new VisualControlBoxTest();
+                        _formToOpen.ShowDialog();
+                        break;
+                    }
 
                 case UnitTests.VisualListView:
-                {
-                    _formToOpen = new VisualListViewTest();
-                    _formToOpen.ShowDialog();
-                    break;
-                }
+                    {
+                        _formToOpen = new VisualListViewTest();
+                        _formToOpen.ShowDialog();
+                        break;
+                    }
 
                 case UnitTests.VisualMessageBox:
-                {
-                    _formToOpen = new VisualMessageBoxTest();
-                    _formToOpen.ShowDialog();
-                    break;
-                }
+                    {
+                        _formToOpen = new VisualMessageBoxTest();
+                        _formToOpen.ShowDialog();
+                        break;
+                    }
 
                 case UnitTests.VisualInputDialog:
-                {
-                    VisualInputDialog inputDialog = new VisualInputDialog(@"Input Dialog Test");
-
-                    if (inputDialog.ShowDialog() == DialogResult.OK)
                     {
-                        ConsoleEx.WriteDebug(inputDialog.InputResult);
-                    }
+                        VisualInputDialog inputDialog = new VisualInputDialog(@"Input Dialog Test");
 
-                    break;
-                }
+                        if (inputDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            ConsoleEx.WriteDebug(inputDialog.InputResult);
+                        }
+
+                        break;
+                    }
 
                 case UnitTests.VisualExceptionDialog:
-                {
-                    VisualExceptionDialog.Show(new Exception("Your custom exception message."));
-                    break;
-                }
-
-                case UnitTests.VisualColorDialog:
-                {
-                    VisualColorDialog colorDialog = new VisualColorDialog();
-
-                    if (colorDialog.ShowDialog() == DialogResult.OK)
                     {
-                        ConsoleEx.WriteDebug(colorDialog.Color);
+                        VisualExceptionDialog.Show(new Exception("Your custom exception message."));
+                        break;
                     }
 
-                    break;
-                }
+                case UnitTests.VisualColorDialog:
+                    {
+                        VisualColorDialog colorDialog = new VisualColorDialog();
+
+                        if (colorDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            ConsoleEx.WriteDebug(colorDialog.Color);
+                        }
+
+                        break;
+                    }
 
                 case UnitTests.ClipboardTest:
-                {
-                    _formToOpen = new ClipboardTest();
-                    _formToOpen.ShowDialog();
-                    break;
-                }
+                    {
+                        _formToOpen = new ClipboardTest();
+                        _formToOpen.ShowDialog();
+                        break;
+                    }
 
                 default:
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
+                    {
+                        throw new ArgumentOutOfRangeException();
+                    }
             }
         }
 

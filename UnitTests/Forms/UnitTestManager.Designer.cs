@@ -152,7 +152,7 @@ namespace UnitTests.Forms
             this.tabController.Location = new System.Drawing.Point(12, 78);
             this.tabController.MinimumSize = new System.Drawing.Size(144, 85);
             this.tabController.Name = "tabController";
-            this.tabController.SelectedIndex = 1;
+            this.tabController.SelectedIndex = 0;
             this.tabController.SelectorAlignment = System.Windows.Forms.TabAlignment.Bottom;
             this.tabController.SelectorSpacing = 10;
             this.tabController.SelectorThickness = 5;

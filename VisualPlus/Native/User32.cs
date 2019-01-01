@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 
 using VisualPlus.Structure;
+using VisualPlus.Toolkit.Dialogs;
 
 #endregion
 
@@ -113,6 +114,15 @@ namespace VisualPlus.Native
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern int DestroyWindow(IntPtr hwnd);
 
+        /// <summary>
+        ///     Redraws the menu bar of the specified window. If the menu bar changes after the system has created the window,
+        ///     this function must be called to draw the changed menu bar.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window whose menu bar is to be redrawn.</param>
+        /// <returns>If the function succeeds, the return value is nonzero.</returns>
+        [DllImport("user32.dll")]
+        public static extern bool DrawMenuBar(IntPtr hWnd);
+
         /// <summary>Retrieves the position of the mouse cursor, in screen coordinates.</summary>
         /// <param name="lpPoint">A pointer to a POINT structure that receives the screen coordinates of the cursor.</param>
         /// <returns>Returns nonzero if successful or zero otherwise. To get extended error information, call GetLastError.</returns>
@@ -164,6 +174,43 @@ namespace VisualPlus.Native
         /// </returns>
         [DllImport("user32.dll")]
         public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+
+        /// <summary>Inserts a new menu item into a menu, moving other items down the menu.</summary>
+        /// <param name="hMenu">A handle to the menu to be changed.</param>
+        /// <param name="uPosition">
+        ///     The menu item before which the new menu item is to be inserted, as determined by the uFlags
+        ///     parameter.
+        /// </param>
+        /// <param name="uFlags">
+        ///     Controls the interpretation of the uPosition parameter and the content, appearance, and behavior
+        ///     of the new menu item.
+        /// </param>
+        /// <param name="uIDNewItem">
+        ///     The identifier of the new menu item or, if the uFlags parameter has the MF_POPUP flag set, a
+        ///     handle to the drop-down menu or submenu.
+        /// </param>
+        /// <param name="lpNewItem">
+        ///     The content of the new menu item. The interpretation of lpNewItem depends on whether the uFlags
+        ///     parameter includes the MF_BITMAP, MF_OWNERDRAW, or MF_STRING flag, as follows.
+        /// </param>
+        /// <returns>If the function succeeds, the return value is nonzero.</returns>
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool InsertMenu(IntPtr hMenu, uint uPosition, uint uFlags, uint uIDNewItem, string lpNewItem);
+
+        /// <summary>Inserts a new menu item at the specified position in a menu.</summary>
+        /// <param name="hmenu">A handle to the menu in which the new menu item is inserted.</param>
+        /// <param name="item">
+        ///     The identifier or position of the menu item before which to insert the new item. The meaning of this
+        ///     parameter depends on the value of fByPosition.
+        /// </param>
+        /// <param name="fByPosition">
+        ///     Controls the meaning of uItem. If this parameter is FALSE, uItem is a menu item identifier.
+        ///     Otherwise, it is a menu item position.
+        /// </param>
+        /// <param name="lpmi">A pointer to a MENUITEMINFO structure that contains information about the new menu item.</param>
+        /// <returns>If the function succeeds, the return value is nonzero.</returns>
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool InsertMenuItem(IntPtr hmenu, uint item, bool fByPosition, [In] ref VisualForm.MENUITEMINFO lpmi);
 
         /// <summary>
         ///     The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of

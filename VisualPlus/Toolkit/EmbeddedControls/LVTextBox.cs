@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 
+using VisualPlus.Interfaces;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Controls.DataManagement;
 

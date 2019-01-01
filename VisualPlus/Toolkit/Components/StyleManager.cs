@@ -17,6 +17,7 @@ using VisualPlus.Delegates;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
 using VisualPlus.Extensibility;
+using VisualPlus.Interfaces;
 using VisualPlus.Managers;
 using VisualPlus.Structure;
 using VisualPlus.TypeConverters;

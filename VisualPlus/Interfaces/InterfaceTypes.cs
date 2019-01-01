@@ -1,10 +1,8 @@
 #region Namespace
 
-using System.ComponentModel;
 using System.Drawing;
 
 using VisualPlus.Enumerators;
-using VisualPlus.Localization;
 using VisualPlus.Structure;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Components;
@@ -12,7 +10,7 @@ using VisualPlus.Toolkit.Controls.DataManagement;
 
 #endregion
 
-namespace VisualPlus
+namespace VisualPlus.Interfaces
 {
     /// <summary>The IListViewEmbeddedControl interface.</summary>
     public interface ILVEmbeddedControl
@@ -46,38 +44,12 @@ namespace VisualPlus
         #endregion
     }
 
-    /// <summary>The IControlBox.</summary>
-    public interface IControlBox
-    {
-        #region Properties
-
-        [Category(PropertyCategory.Behavior)]
-        [Description(PropertyDescription.Toggle)]
-        bool CloseBox { get; set; }
-
-        [Category(PropertyCategory.Behavior)]
-        [Description(PropertyDescription.Toggle)]
-        bool HelpButton { get; set; }
-
-        [Category(PropertyCategory.Behavior)]
-        [Description(PropertyDescription.Toggle)]
-        bool MaximizeBox { get; set; }
-
-        [Category(PropertyCategory.Behavior)]
-        [Description(PropertyDescription.Toggle)]
-        bool MinimizeBox { get; set; }
-
-        #endregion
-    }
-
     /// <summary>The IThemeManager.</summary>
     public interface IThemeManager
     {
         #region Properties
 
         /// <summary>The style manager.</summary>
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         StyleManager ThemeManager { get; set; }
 
         #endregion
@@ -138,9 +110,7 @@ namespace VisualPlus
     {
         #region Properties
 
-        [DefaultValue(Settings.DefaultValue.Animation)]
-        [Category(PropertyCategory.Behavior)]
-        [Description(PropertyDescription.Animation)]
+        /// <summary>Gets or sets the animation state.</summary>
         bool Animation { get; set; }
 
         #endregion
@@ -164,20 +134,16 @@ namespace VisualPlus
     {
         #region Properties
 
-        [Category(PropertyCategory.Appearance)]
-        [Description(PropertyDescription.Color)]
+        /// <summary>Gets or sets the Disabled state <see cref="Color" />.</summary>
         Color Disabled { get; set; }
 
-        [Category(PropertyCategory.Appearance)]
-        [Description(PropertyDescription.Color)]
+        /// <summary>Gets or sets the Enabled state <see cref="Color" />.</summary>
         Color Enabled { get; set; }
 
-        [Category(PropertyCategory.Appearance)]
-        [Description(PropertyDescription.Color)]
+        /// <summary>Gets or sets the Hover state <see cref="Color" />.</summary>
         Color Hover { get; set; }
 
-        [Category(PropertyCategory.Appearance)]
-        [Description(PropertyDescription.Color)]
+        /// <summary>Gets or sets the Pressed state <see cref="Color" />.</summary>
         Color Pressed { get; set; }
 
         #endregion

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Text;
 
 using VisualPlus.Enumerators;
+using VisualPlus.Interfaces;
 using VisualPlus.Localization;
 using VisualPlus.TypeConverters;
 

@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Xml.Linq;
 
 using VisualPlus.Enumerators;
+using VisualPlus.Interfaces;
 using VisualPlus.Managers;
 using VisualPlus.TypeConverters;
 

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 using VisualPlus.Designer;
 using VisualPlus.Events;
+using VisualPlus.Interfaces;
 using VisualPlus.Structure;
 using VisualPlus.Toolkit.VisualBase;
 

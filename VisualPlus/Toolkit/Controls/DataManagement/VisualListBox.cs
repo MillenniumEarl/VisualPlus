@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using VisualPlus.Designer;
 using VisualPlus.Events;
+using VisualPlus.Interfaces;
 using VisualPlus.Localization;
 using VisualPlus.Managers;
 using VisualPlus.Renders;

@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
 using VisualPlus.Extensibility;
+using VisualPlus.Interfaces;
 using VisualPlus.Localization;
 using VisualPlus.Managers;
 using VisualPlus.Renders;

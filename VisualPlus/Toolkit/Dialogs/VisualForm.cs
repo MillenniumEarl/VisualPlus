@@ -14,6 +14,7 @@ using VisualPlus.Delegates;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
+using VisualPlus.Interfaces;
 using VisualPlus.Localization;
 using VisualPlus.Managers;
 using VisualPlus.Native;

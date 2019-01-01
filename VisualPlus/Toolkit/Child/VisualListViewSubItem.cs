@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using VisualPlus.Delegates;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
+using VisualPlus.Interfaces;
 using VisualPlus.Localization;
 using VisualPlus.Toolkit.Controls.DataManagement;
 using VisualPlus.TypeConverters;

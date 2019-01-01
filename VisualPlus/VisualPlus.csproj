@@ -337,7 +337,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Enumerators\Alignment.cs" />
-    <Compile Include="InterfaceTypes.cs" />
+    <Compile Include="Interfaces\InterfaceTypes.cs" />
     <Compile Include="Managers\ControlManager.cs" />
     <Compile Include="Structure\CheckStyle.cs" />
     <Compile Include="TypeConverters\VisualColorConverter.cs" />

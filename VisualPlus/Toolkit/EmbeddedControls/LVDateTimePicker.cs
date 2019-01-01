@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 
+using VisualPlus.Interfaces;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Controls.DataManagement;
 

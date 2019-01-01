@@ -20,6 +20,7 @@ using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
 using VisualPlus.Extensibility;
+using VisualPlus.Interfaces;
 using VisualPlus.Localization;
 using VisualPlus.Native;
 using VisualPlus.Renders;

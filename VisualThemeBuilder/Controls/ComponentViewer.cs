@@ -10,6 +10,7 @@ using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Events;
 using VisualPlus.Extensibility;
+using VisualPlus.Interfaces;
 using VisualPlus.Managers;
 using VisualPlus.Structure;
 using VisualPlus.Toolkit.Child;

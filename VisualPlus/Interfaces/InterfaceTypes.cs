@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 01/01/2019 - 5:31 AM
-// Last Modified: 01/01/2019 - 11:42 PM
+// Last Modified: 02/01/2019 - 1:28 AM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.

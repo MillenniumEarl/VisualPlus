@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 01/01/2019 - 11:05 PM
+// Last Modified: 02/01/2019 - 1:22 AM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -79,6 +79,7 @@ namespace VisualPlus.ActionList
 
         // FIX: Editor is causing drop-down error. Removing it prevents the columns from being filled with default data.
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+
         // [Editor(typeof(VisualListViewColumnCollectionEditor), typeof(UITypeEditor))]
         [Localizable(true)]
         [MergableProperty(false)]
@@ -92,6 +93,7 @@ namespace VisualPlus.ActionList
 
         // FIX: Editor is causing drop-down error. Removing it prevents the columns from being filled with default data.
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+
         // [Editor(typeof(VisualListViewItemCollectionEditor), typeof(UITypeEditor))]
         [Localizable(true)]
         [MergableProperty(false)]

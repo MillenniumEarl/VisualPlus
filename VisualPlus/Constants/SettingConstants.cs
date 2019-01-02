@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 01/01/2019 - 11:20 PM
+// Last Modified: 02/01/2019 - 1:23 AM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -76,6 +76,7 @@ namespace VisualPlus.Constants
         public static readonly string ProjectURL = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).LegalTrademarks;
         public static readonly string TemplatesFolder = Environment.GetFolderPath(Environment.SpecialFolder.Templates) + @"\VisualPlus Themes\";
         public static readonly string TemplatesFilePath = TemplatesFolder + @"DefaultTheme.xml";
+
         public static readonly string ThemeAuthor = "Unknown";
         public static readonly string ThemeExtensionSupportedFileFilter = "Theme|*.xml";
         public static readonly string ThemeName = "Unnamed";

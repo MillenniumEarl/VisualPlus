@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: Main.cs
+// VisualThemeBuilder - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 01/01/2019 - 10:57 PM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -7,12 +48,14 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+
 using VisualPlus;
 using VisualPlus.Constants;
 using VisualPlus.Events;
 using VisualPlus.Managers;
 using VisualPlus.Structure;
 using VisualPlus.Toolkit.Dialogs;
+
 using VisualThemeBuilder.Controls;
 
 #endregion
@@ -22,7 +65,7 @@ namespace VisualThemeBuilder.Forms
     /// <summary>The main.</summary>
     public partial class Main : VisualForm
     {
-        #region Variables
+        #region Fields
 
         private readonly Theme theme;
         private ComponentViewer componentViewer;
@@ -30,7 +73,7 @@ namespace VisualThemeBuilder.Forms
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="Main" /> class.</summary>
         public Main()
@@ -42,11 +85,7 @@ namespace VisualThemeBuilder.Forms
                 cbControls.Items.Add(controlType.FullName);
             }
 
-            componentViewer = new ComponentViewer
-            {
-                BackColor = componentPanel.BackColor,
-                Dock = DockStyle.Fill
-            };
+            componentViewer = new ComponentViewer { BackColor = componentPanel.BackColor, Dock = DockStyle.Fill };
 
             theme = new Theme(Settings.DefaultValue.DefaultStyle);
             LoadTheme(theme);
@@ -66,7 +105,7 @@ namespace VisualThemeBuilder.Forms
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>Retrieves the selected property color.</summary>
         [Browsable(false)]
@@ -138,14 +177,7 @@ namespace VisualThemeBuilder.Forms
         {
             tbPath.Text = string.Empty;
 
-            Theme newTheme = new Theme(Settings.DefaultValue.DefaultStyle)
-            {
-                Information =
-                {
-                    Author = "Unknown",
-                    Name = "UnnamedTheme"
-                }
-            };
+            Theme newTheme = new Theme(Settings.DefaultValue.DefaultStyle) { Information = { Author = "Unknown", Name = "UnnamedTheme" } };
 
             LoadTheme(newTheme);
             saved = false;
@@ -340,11 +372,7 @@ namespace VisualThemeBuilder.Forms
         /// <summary>Update the theme contents.</summary>
         private void UpdateThemeContents()
         {
-            ThemeInformation themeInformation = new ThemeInformation
-            {
-                Author = tbAuthor.Text,
-                Name = tbName.Text
-            };
+            ThemeInformation themeInformation = new ThemeInformation { Author = tbAuthor.Text, Name = tbName.Text };
 
             rawText.Text = new Theme(themeInformation, theme.ColorPalette).RawTheme;
             saved = false;

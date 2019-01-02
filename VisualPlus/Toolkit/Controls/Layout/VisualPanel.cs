@@ -74,8 +74,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #region Constructors and Destructors
 
-        /// <inheritdoc />
-        /// <summary>Initializes a new instance of the <see cref="T:VisualPlus.Toolkit.Controls.Layout.VisualPanel" /> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="VisualPanel" /> class.</summary>
         public VisualPanel()
         {
             Size = new Size(187, 117);

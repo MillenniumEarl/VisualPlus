@@ -32,7 +32,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
     [ToolboxItem(true)]
     public class VisualButton : VisualStyleBase, IAnimationSupport, IButtonControl, IThemeSupport
     {
-        #region Variables
+        #region Fields
 
         private bool _animation;
         private ControlColorState _backColorState;
@@ -45,7 +45,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualButton" /> class.</summary>
         public VisualButton()
@@ -61,9 +61,15 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             UpdateTheme(ThemeManager.Theme);
         }
 
+        /// <summary>Finalizes an instance of the <see cref="VisualButton" /> class.</summary>
+        ~VisualButton()
+        {
+            Dispose(false);
+        }
+
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [DefaultValue(Settings.DefaultValue.Animation)]
         [Category(PropertyCategory.Behavior)]
@@ -208,7 +214,97 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
         }
 
+        #endregion
+
+        #region Properties
+
         private bool IsDefault { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public void ConfigureAnimation(double[] effectIncrement, EffectType[] effectType)
+        {
+            _effectsManager = new VFXManager(false) { Increment = effectIncrement[0], EffectType = effectType[0] };
+
+            _hoverEffectsManager = new VFXManager { Increment = effectIncrement[1], EffectType = effectType[1] };
+
+            _hoverEffectsManager.OnAnimationProgress += sender => Invalidate();
+            _effectsManager.OnAnimationProgress += sender => Invalidate();
+        }
+
+        public void DrawAnimation(Graphics graphics)
+        {
+            if (!_effectsManager.IsAnimating() || !_animation)
+            {
+                return;
+            }
+
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            for (var i = 0; i < _effectsManager.GetAnimationCount(); i++)
+            {
+                double _value = _effectsManager.GetProgress(i);
+                Point _source = _effectsManager.GetSource(i);
+
+                using (Brush _rippleBrush = new SolidBrush(Color.FromArgb((int)(101 - (_value * 100)), Color.Black)))
+                {
+                    var _rippleSize = (int)(_value * Width * 2);
+                    graphics.SetClip(ControlGraphicsPath);
+                    graphics.FillEllipse(_rippleBrush, new Rectangle(_source.X - (_rippleSize / 2), _source.Y - (_rippleSize / 2), _rippleSize, _rippleSize));
+                }
+            }
+
+            graphics.SmoothingMode = SmoothingMode.None;
+        }
+
+        /// <summary>
+        ///     Notify s a control that this is the default button so that its appearance and behavior is adjusted
+        ///     accordingly.
+        /// </summary>
+        /// <param name="value">If the control should behave as a default button.</param>
+        public void NotifyDefault(bool value)
+        {
+            if (IsDefault != value)
+            {
+                IsDefault = value;
+            }
+        }
+
+        /// <summary>Generates a click event for the control.</summary>
+        public void PerformClick()
+        {
+            if (CanSelect)
+            {
+                OnClick(EventArgs.Empty);
+            }
+        }
+
+        public void UpdateTheme(Theme theme)
+        {
+            try
+            {
+                _border.Color = theme.ColorPalette.BorderNormal;
+                _border.HoverColor = theme.ColorPalette.BorderHover;
+
+                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
+                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
+                TextStyle.Hover = theme.ColorPalette.TextHover;
+                TextStyle.Pressed = theme.ColorPalette.TextPressed;
+
+                _backColorState.Enabled = theme.ColorPalette.Enabled;
+                _backColorState.Disabled = theme.ColorPalette.Disabled;
+                _backColorState.Hover = theme.ColorPalette.Hover;
+                _backColorState.Pressed = theme.ColorPalette.Pressed;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteDebug(e);
+            }
+
+            Invalidate();
+            OnThemeChanged(new ThemeEventArgs(theme));
+        }
 
         #endregion
 
@@ -323,100 +419,6 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             {
                 ConsoleEx.WriteDebug(exception);
             }
-        }
-
-        #endregion
-
-        #region Methods
-
-        public void ConfigureAnimation(double[] effectIncrement, EffectType[] effectType)
-        {
-            _effectsManager = new VFXManager(false)
-                {
-                    Increment = effectIncrement[0],
-                    EffectType = effectType[0]
-                };
-
-            _hoverEffectsManager = new VFXManager
-                {
-                    Increment = effectIncrement[1],
-                    EffectType = effectType[1]
-                };
-
-            _hoverEffectsManager.OnAnimationProgress += sender => Invalidate();
-            _effectsManager.OnAnimationProgress += sender => Invalidate();
-        }
-
-        public void DrawAnimation(Graphics graphics)
-        {
-            if (!_effectsManager.IsAnimating() || !_animation)
-            {
-                return;
-            }
-
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            for (var i = 0; i < _effectsManager.GetAnimationCount(); i++)
-            {
-                double _value = _effectsManager.GetProgress(i);
-                Point _source = _effectsManager.GetSource(i);
-
-                using (Brush _rippleBrush = new SolidBrush(Color.FromArgb((int)(101 - (_value * 100)), Color.Black)))
-                {
-                    var _rippleSize = (int)(_value * Width * 2);
-                    graphics.SetClip(ControlGraphicsPath);
-                    graphics.FillEllipse(_rippleBrush, new Rectangle(_source.X - (_rippleSize / 2), _source.Y - (_rippleSize / 2), _rippleSize, _rippleSize));
-                }
-            }
-
-            graphics.SmoothingMode = SmoothingMode.None;
-        }
-
-        /// <summary>
-        ///     Notify s a control that this is the default button so that its appearance and behavior is adjusted
-        ///     accordingly.
-        /// </summary>
-        /// <param name="value">If the control should behave as a default button.</param>
-        public void NotifyDefault(bool value)
-        {
-            if (IsDefault != value)
-            {
-                IsDefault = value;
-            }
-        }
-
-        /// <summary>Generates a click event for the control.</summary>
-        public void PerformClick()
-        {
-            if (CanSelect)
-            {
-                OnClick(EventArgs.Empty);
-            }
-        }
-
-        public void UpdateTheme(Theme theme)
-        {
-            try
-            {
-                _border.Color = theme.ColorPalette.BorderNormal;
-                _border.HoverColor = theme.ColorPalette.BorderHover;
-
-                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
-                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
-                TextStyle.Hover = theme.ColorPalette.TextHover;
-                TextStyle.Pressed = theme.ColorPalette.TextPressed;
-
-                _backColorState.Enabled = theme.ColorPalette.Enabled;
-                _backColorState.Disabled = theme.ColorPalette.Disabled;
-                _backColorState.Hover = theme.ColorPalette.Hover;
-                _backColorState.Pressed = theme.ColorPalette.Pressed;
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteDebug(e);
-            }
-
-            Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
         }
 
         #endregion

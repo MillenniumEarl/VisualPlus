@@ -325,11 +325,11 @@
 	<s:Boolean x:Key="/Default/CodeStyle/EncapsulateField/UpdateExternalUsagesOnly/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeStyle/EncapsulateField/UseAutoProperty/@EntryValue">False</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderRegionName/@EntryValue">License</s:String>
-	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">/******************************************************************************************************\ &#xD;
-&#xD;
-File Name: $FILENAME$&#xD;
+	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">-----------------------------------------------------------------------------------------------------------&#xD;
 &#xD;
 Project: $PROJECT$&#xD;
+File Name: $FILENAME$&#xD;
+&#xD;
 Description: The VisualPlus Framework (VPF) for WinForms .NET development.&#xD;
 &#xD;
 Created: $CREATED_DAY$/$CREATED_MONTH$/$CREATED_YEAR$ - $CREATED_TIME$&#xD;
@@ -338,7 +338,7 @@ Last Modified: $CURRENT_DAY$/$CURRENT_MONTH$/$CURRENT_YEAR$ - $CURRENT_TIME$&#xD
 Copyright (c) 2016-2019 $SOLUTION$ (https://darkbyte7.github.io/VisualPlus/)&#xD;
 All Rights Reserved.&#xD;
 &#xD;
-*******************************************************************************************************&#xD;
+-----------------------------------------------------------------------------------------------------------&#xD;
 &#xD;
 GNU General Public License v3.0 (GPL-3.0)&#xD;
 &#xD;
@@ -362,4 +362,4 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.&#xD;
 This file is subject to the terms and conditions defined in the file &#xD;
 'LICENSE.md', which should be in the root directory of the source code package.&#xD;
 &#xD;
-\******************************************************************************************************/</s:String></wpf:ResourceDictionary>
+-----------------------------------------------------------------------------------------------------------</s:String></wpf:ResourceDictionary>

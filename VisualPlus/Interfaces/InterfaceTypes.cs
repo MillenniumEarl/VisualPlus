@@ -1,3 +1,44 @@
+#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: InterfaceTypes.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 01/01/2019 - 5:31 AM
+// Last Modified: 01/01/2019 - 11:42 PM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
 #region Namespace
 
 using System.Drawing;
@@ -15,7 +56,7 @@ namespace VisualPlus.Interfaces
     /// <summary>The IListViewEmbeddedControl interface.</summary>
     public interface ILVEmbeddedControl
     {
-        #region Properties
+        #region Public Properties
 
         VisualListViewItem Item { get; set; }
 
@@ -25,7 +66,7 @@ namespace VisualPlus.Interfaces
 
         #endregion
 
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Populate the control with settings.</summary>
         /// <param name="item">The item.</param>
@@ -47,7 +88,7 @@ namespace VisualPlus.Interfaces
     /// <summary>The IThemeManager.</summary>
     public interface IThemeManager
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>The style manager.</summary>
         StyleManager ThemeManager { get; set; }
@@ -58,7 +99,7 @@ namespace VisualPlus.Interfaces
     /// <summary>The ITheme supported control.</summary>
     public interface IThemeSupport
     {
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Update the control theme.</summary>
         /// <param name="theme">The theme to update with.</param>
@@ -69,7 +110,7 @@ namespace VisualPlus.Interfaces
 
     public interface IInputMethods
     {
-        #region Methods
+        #region Public Methods and Operators
 
         void AppendText(string text);
 
@@ -108,14 +149,14 @@ namespace VisualPlus.Interfaces
 
     public interface IAnimationSupport
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>Gets or sets the animation state.</summary>
         bool Animation { get; set; }
 
         #endregion
 
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Configures the animation settings.</summary>
         /// <param name="effectIncrement">The effect Increment.</param>
@@ -132,7 +173,7 @@ namespace VisualPlus.Interfaces
     /// <summary>The ITextColor.</summary>
     public interface ITextColor
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>Gets or sets the Disabled state <see cref="Color" />.</summary>
         Color Disabled { get; set; }

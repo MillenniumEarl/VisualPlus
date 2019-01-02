@@ -1,10 +1,52 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualScrollBar.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:10 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+
 using VisualPlus.Delegates;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
@@ -31,7 +73,13 @@ namespace VisualPlus.Toolkit.Controls.Layout
     [ToolboxItem(true)]
     public class VisualScrollBar : VisualStyleBase, IThemeSupport
     {
-        #region Variables
+        #region Constants
+
+        private const int WM_SETREDRAW = 11;
+
+        #endregion
+
+        #region Fields
 
         private int _arrowHeight;
         private int _arrowWidth;
@@ -88,7 +136,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualScrollBar" /> class.</summary>
         public VisualScrollBar()
@@ -138,7 +186,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.Behavior)]
         [Description(EventDescription.PropertyEventChanged)]
@@ -158,13 +206,16 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ColorState BackColorState
         {
-            get { return _backColorState; }
+            get
+            {
+                return _backColorState;
+            }
 
             set
             {
@@ -183,7 +234,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Category(PropertyCategory.Appearance)]
         public Border Border
         {
-            get { return _border; }
+            get
+            {
+                return _border;
+            }
 
             set
             {
@@ -197,7 +251,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Category(PropertyCategory.Appearance)]
         public Border ButtonBorder
         {
-            get { return _buttonBorder; }
+            get
+            {
+                return _buttonBorder;
+            }
 
             set
             {
@@ -210,7 +267,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Description(PropertyDescription.MouseState)]
         public MouseStates ButtonBottomMouseState
         {
-            get { return _buttonBottomState; }
+            get
+            {
+                return _buttonBottomState;
+            }
 
             set
             {
@@ -223,7 +283,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ControlColorState ButtonColorState
         {
-            get { return _buttonColorState; }
+            get
+            {
+                return _buttonColorState;
+            }
 
             set
             {
@@ -241,7 +304,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Description(PropertyDescription.MouseState)]
         public MouseStates ButtonTopMouseState
         {
-            get { return _buttonTopState; }
+            get
+            {
+                return _buttonTopState;
+            }
 
             set
             {
@@ -255,7 +321,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(typeof(double), "1")]
         public double ContextMenuOpacity
         {
-            get { return _contextMenu.Opacity; }
+            get
+            {
+                return _contextMenu.Opacity;
+            }
 
             set
             {
@@ -274,7 +343,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(10)]
         public int LargeChange
         {
-            get { return _largeChange; }
+            get
+            {
+                return _largeChange;
+            }
 
             set
             {
@@ -304,7 +376,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(100)]
         public int Maximum
         {
-            get { return _maximum; }
+            get
+            {
+                return _maximum;
+            }
 
             set
             {
@@ -344,7 +419,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(0)]
         public int Minimum
         {
-            get { return _minimum; }
+            get
+            {
+                return _minimum;
+            }
 
             set
             {
@@ -390,7 +468,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(Orientation.Vertical)]
         public Orientation Orientation
         {
-            get { return _orientation; }
+            get
+            {
+                return _orientation;
+            }
 
             set
             {
@@ -424,7 +505,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(1)]
         public int SmallChange
         {
-            get { return _smallChange; }
+            get
+            {
+                return _smallChange;
+            }
 
             set
             {
@@ -445,7 +529,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Category(PropertyCategory.Appearance)]
         public Border ThumbBorder
         {
-            get { return _thumbBorder; }
+            get
+            {
+                return _thumbBorder;
+            }
 
             set
             {
@@ -458,7 +545,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ControlColorState ThumbColorState
         {
-            get { return _thumbColorState; }
+            get
+            {
+                return _thumbColorState;
+            }
 
             set
             {
@@ -476,7 +566,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Category(PropertyCategory.Appearance)]
         public bool ThumbGripVisible
         {
-            get { return _thumbGripVisible; }
+            get
+            {
+                return _thumbGripVisible;
+            }
 
             set
             {
@@ -489,7 +582,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Description(PropertyDescription.MouseState)]
         public MouseStates ThumbMouseState
         {
-            get { return _thumbState; }
+            get
+            {
+                return _thumbState;
+            }
 
             set
             {
@@ -502,7 +598,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [Description(PropertyDescription.Color)]
         public Color TrackPressed
         {
-            get { return _trackPressed; }
+            get
+            {
+                return _trackPressed;
+            }
 
             set
             {
@@ -516,7 +615,10 @@ namespace VisualPlus.Toolkit.Controls.Layout
         [DefaultValue(0)]
         public int Value
         {
-            get { return _value; }
+            get
+            {
+                return _value;
+            }
 
             set
             {
@@ -540,12 +642,79 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        /// <summary>Prevents the drawing of the control until <see cref="EndUpdate" /> is called.</summary>
+        public void BeginUpdate()
+        {
+            user32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(false), new IntPtr(0));
+            _inUpdate = true;
+        }
+
+        /// <summary>Ends the updating process and the control can draw itself again.</summary>
+        public void EndUpdate()
+        {
+            user32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(true), new IntPtr(0));
+            _inUpdate = false;
+            ConfigureScrollBar();
+            Refresh();
+        }
+
+        public void UpdateTheme(Theme theme)
+        {
+            try
+            {
+                _border.Color = theme.ColorPalette.BorderNormal;
+                _border.HoverColor = theme.ColorPalette.BorderHover;
+
+                _buttonBorder.Color = theme.ColorPalette.BorderNormal;
+                _buttonBorder.HoverColor = theme.ColorPalette.BorderHover;
+
+                _thumbBorder.Color = theme.ColorPalette.BorderNormal;
+                _thumbBorder.HoverColor = theme.ColorPalette.BorderHover;
+
+                _backColorState.Disabled = theme.ColorPalette.ScrollBarDisabled;
+                _backColorState.Enabled = theme.ColorPalette.ScrollBarEnabled;
+
+                _thumbColorState.Disabled = theme.ColorPalette.ScrollThumbEnabled;
+                _thumbColorState.Enabled = theme.ColorPalette.ScrollThumbDisabled;
+                _thumbColorState.Hover = theme.ColorPalette.ScrollThumbHover;
+                _thumbColorState.Pressed = theme.ColorPalette.ScrollThumbPressed;
+
+                _buttonColorState.Disabled = theme.ColorPalette.ScrollButtonEnabled;
+                _buttonColorState.Enabled = theme.ColorPalette.ScrollButtonDisabled;
+                _buttonColorState.Hover = theme.ColorPalette.ScrollButtonHover;
+                _buttonColorState.Pressed = theme.ColorPalette.ScrollButtonPressed;
+
+                _trackPressed = Color.FromArgb(10, 0, 0, 0);
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteDebug(e);
+            }
+
+            Invalidate();
+            OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override void CreateHandle()
         {
             base.CreateHandle();
             ContextMenuStrip = _contextMenu;
+        }
+
+        protected virtual void OnButtonBottomClicked(EventArgs e)
+        {
+            ButtonBottomClicked?.Invoke(e);
+        }
+
+        protected virtual void OnButtonTopClicked(EventArgs e)
+        {
+            ButtonTopClicked?.Invoke(e);
         }
 
         protected override void OnEnabledChanged(EventArgs e)
@@ -825,10 +994,22 @@ namespace VisualPlus.Toolkit.Controls.Layout
             }
         }
 
+        /// <summary>Raises the <see cref="Scroll" /> event.</summary>
+        /// <param name="e">The <see cref="ScrollEventArgs" /> that contains the event data.</param>
+        protected virtual void OnScroll(ScrollEventArgs e)
+        {
+            Scroll?.Invoke(this, e);
+        }
+
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
             ConfigureScrollBar();
+        }
+
+        protected virtual void OnThumbClicked(EventArgs e)
+        {
+            ThumbClicked?.Invoke(e);
         }
 
         protected override bool ProcessDialogKey(Keys keyData)
@@ -928,87 +1109,6 @@ namespace VisualPlus.Toolkit.Controls.Layout
                 ConfigureScrollBar();
             }
         }
-
-        protected virtual void OnButtonBottomClicked(EventArgs e)
-        {
-            ButtonBottomClicked?.Invoke(e);
-        }
-
-        protected virtual void OnButtonTopClicked(EventArgs e)
-        {
-            ButtonTopClicked?.Invoke(e);
-        }
-
-        /// <summary>Raises the <see cref="Scroll" /> event.</summary>
-        /// <param name="e">The <see cref="ScrollEventArgs" /> that contains the event data.</param>
-        protected virtual void OnScroll(ScrollEventArgs e)
-        {
-            Scroll?.Invoke(this, e);
-        }
-
-        protected virtual void OnThumbClicked(EventArgs e)
-        {
-            ThumbClicked?.Invoke(e);
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>Prevents the drawing of the control until <see cref="EndUpdate" /> is called.</summary>
-        public void BeginUpdate()
-        {
-            user32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(false), new IntPtr(0));
-            _inUpdate = true;
-        }
-
-        /// <summary>Ends the updating process and the control can draw itself again.</summary>
-        public void EndUpdate()
-        {
-            user32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(true), new IntPtr(0));
-            _inUpdate = false;
-            ConfigureScrollBar();
-            Refresh();
-        }
-
-        public void UpdateTheme(Theme theme)
-        {
-            try
-            {
-                _border.Color = theme.ColorPalette.BorderNormal;
-                _border.HoverColor = theme.ColorPalette.BorderHover;
-
-                _buttonBorder.Color = theme.ColorPalette.BorderNormal;
-                _buttonBorder.HoverColor = theme.ColorPalette.BorderHover;
-
-                _thumbBorder.Color = theme.ColorPalette.BorderNormal;
-                _thumbBorder.HoverColor = theme.ColorPalette.BorderHover;
-
-                _backColorState.Disabled = theme.ColorPalette.ScrollBarDisabled;
-                _backColorState.Enabled = theme.ColorPalette.ScrollBarEnabled;
-
-                _thumbColorState.Disabled = theme.ColorPalette.ScrollThumbEnabled;
-                _thumbColorState.Enabled = theme.ColorPalette.ScrollThumbDisabled;
-                _thumbColorState.Hover = theme.ColorPalette.ScrollThumbHover;
-                _thumbColorState.Pressed = theme.ColorPalette.ScrollThumbPressed;
-
-                _buttonColorState.Disabled = theme.ColorPalette.ScrollButtonEnabled;
-                _buttonColorState.Enabled = theme.ColorPalette.ScrollButtonDisabled;
-                _buttonColorState.Hover = theme.ColorPalette.ScrollButtonHover;
-                _buttonColorState.Pressed = theme.ColorPalette.ScrollButtonPressed;
-
-                _trackPressed = Color.FromArgb(10, 0, 0, 0);
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteDebug(e);
-            }
-
-            Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
-        }
-
-        private const int WM_SETREDRAW = 11;
 
         /// <summary>Context menu handler.</summary>
         /// <param name="sender">The sender.</param>
@@ -1276,19 +1376,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
             SuspendLayout();
 
             // contextMenu
-            _contextMenu.Items.AddRange(new ToolStripItem[]
-            {
-                _tsmiScrollHere,
-                _toolStripSeparator1,
-                _tsmiTop,
-                _tsmiBottom,
-                _toolStripSeparator2,
-                _tsmiLargeUp,
-                _tsmiLargeDown,
-                _toolStripSeparator3,
-                _tsmiSmallUp,
-                _tsmiSmallDown
-            });
+            _contextMenu.Items.AddRange(new ToolStripItem[] { _tsmiScrollHere, _toolStripSeparator1, _tsmiTop, _tsmiBottom, _toolStripSeparator2, _tsmiLargeUp, _tsmiLargeDown, _toolStripSeparator3, _tsmiSmallUp, _tsmiSmallDown });
             _contextMenu.Name = "_contextMenu";
             _contextMenu.Size = new Size(151, 176);
 

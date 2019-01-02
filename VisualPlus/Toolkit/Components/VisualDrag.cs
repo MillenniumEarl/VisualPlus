@@ -19,16 +19,14 @@
     [Description("The VisualDrag component enables controls to be draggable.")]
     public class VisualDrag : Component, ICloneable
     {
-        #region Variables
+     
 
         private Control _control;
         private Cursor _cursorMove;
         private DragDirection _direction;
         private Point _lastPosition;
 
-        #endregion
-
-        #region Constructors
+   
 
         /// <summary>Initializes a new instance of the <see cref="VisualDrag" /> class.</summary>
         /// <param name="container">The container.</param>
@@ -108,9 +106,7 @@
             None
         }
 
-        #endregion
-
-        #region Properties
+   
 
         [NotifyParentProperty(true)]
         [RefreshProperties(RefreshProperties.Repaint)]
@@ -201,9 +197,7 @@
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public bool IsDragging { get; private set; }
 
-        #endregion
-
-        #region Events
+    
 
         /// <summary>Hooks the drag events to the control.</summary>
         public void AttachEvents()
@@ -318,6 +312,6 @@
             }
         }
 
-        #endregion
+       
     }
 }

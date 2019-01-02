@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualGroupBox.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:10 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -27,7 +68,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
     [Description("The Visual GroupBox")]
     public class VisualGroupBox : NestedControlsBase, IThemeSupport
     {
-        #region Variables
+        #region Fields
 
         private Border _border;
         private BorderEdge _borderEdge;
@@ -41,7 +82,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualGroupBox" /> class.</summary>
         public VisualGroupBox()
@@ -62,7 +103,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         public enum GroupBoxStyle
         {
@@ -75,7 +116,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -234,7 +275,37 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        public void UpdateTheme(Theme theme)
+        {
+            try
+            {
+                _border.Color = theme.ColorPalette.BorderNormal;
+                _border.HoverColor = theme.ColorPalette.BorderHover;
+
+                ForeColor = theme.ColorPalette.TextEnabled;
+                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
+                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
+
+                // Font = theme.ColorPalette.Font;
+                _borderEdge.BackColor = theme.ColorPalette.BorderNormal;
+
+                BackColorState.Enabled = theme.ColorPalette.Enabled;
+                BackColorState.Disabled = theme.ColorPalette.Disabled;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteDebug(e);
+            }
+
+            Invalidate();
+            OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -290,11 +361,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
                 }
                 else
                 {
-                    StringFormat _stringFormat = new StringFormat
-                        {
-                            Alignment = _textAlignment,
-                            LineAlignment = _textLineAlignment
-                        };
+                    StringFormat _stringFormat = new StringFormat { Alignment = _textAlignment, LineAlignment = _textLineAlignment };
 
                     VisualTextRenderer.RenderText(e.Graphics, _titleBoxRectangle, Text, Font, ForeColor, _stringFormat);
                 }
@@ -303,36 +370,6 @@ namespace VisualPlus.Toolkit.Controls.Layout
             {
                 ConsoleEx.WriteDebug(exception);
             }
-        }
-
-        #endregion
-
-        #region Methods
-
-        public void UpdateTheme(Theme theme)
-        {
-            try
-            {
-                _border.Color = theme.ColorPalette.BorderNormal;
-                _border.HoverColor = theme.ColorPalette.BorderHover;
-
-                ForeColor = theme.ColorPalette.TextEnabled;
-                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
-                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
-
-                // Font = theme.ColorPalette.Font;
-                _borderEdge.BackColor = theme.ColorPalette.BorderNormal;
-
-                BackColorState.Enabled = theme.ColorPalette.Enabled;
-                BackColorState.Disabled = theme.ColorPalette.Disabled;
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteDebug(e);
-            }
-
-            Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
         }
 
         private Rectangle ConfigureStyleBox(Size textArea)

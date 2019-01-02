@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualDateTimePicker.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:05 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -34,7 +75,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
     [ToolboxItem(true)]
     public class VisualDateTimePicker : DateTimePicker, IThemeSupport
     {
-        #region Variables
+        #region Fields
 
         private Color _arrowColor;
         private Color _arrowDisabledColor;
@@ -51,7 +92,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualDateTimePicker" /> class.</summary>
         public VisualDateTimePicker()
@@ -75,7 +116,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.Mouse)]
         [Description("Occours when the MouseState of the control has changed.")]
@@ -87,7 +128,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Color)]
@@ -368,7 +409,52 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        public override Size GetPreferredSize(Size proposedSize)
+        {
+            Size preferredSize;
+            base.GetPreferredSize(proposedSize);
+
+            using (Graphics graphics = CreateGraphics())
+            {
+                string measureText = Text.Length > 0 ? Text : "MeasureText";
+                proposedSize = new Size(int.MaxValue, int.MaxValue);
+                preferredSize = TextRenderer.MeasureText(graphics, measureText, Font, proposedSize, TextFormatFlags.Left | TextFormatFlags.LeftAndRightPadding | TextFormatFlags.VerticalCenter);
+                preferredSize.Height += 10;
+            }
+
+            return preferredSize;
+        }
+
+        public void UpdateTheme(Theme theme)
+        {
+            try
+            {
+                _border.Color = theme.ColorPalette.BorderNormal;
+                _border.HoverColor = theme.ColorPalette.BorderHover;
+
+                _backColor.Enabled = theme.ColorPalette.Enabled;
+                _backColor.Disabled = theme.ColorPalette.Disabled;
+
+                ForeColor = theme.ColorPalette.TextEnabled;
+
+                // Font = theme.ColorPalette.Font;
+                _arrowColor = theme.ColorPalette.ElementEnabled;
+                _arrowDisabledColor = theme.ColorPalette.ElementDisabled;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteDebug(e);
+            }
+
+            Invalidate();
+            OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override void OnEnter(EventArgs e)
         {
@@ -455,6 +541,14 @@ namespace VisualPlus.Toolkit.Controls.Editors
             base.OnMouseLeave(e);
         }
 
+        /// <summary>Invokes the mouse state changed event.</summary>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnMouseStateChanged(MouseStateEventArgs e)
+        {
+            Invalidate();
+            MouseStateChanged?.Invoke(e);
+        }
+
         protected override void OnMouseUp(MouseEventArgs e)
         {
             _mouseState = MouseStates.Hover;
@@ -525,20 +619,6 @@ namespace VisualPlus.Toolkit.Controls.Editors
             }
         }
 
-        protected override void OnValueChanged(EventArgs e)
-        {
-            base.OnValueChanged(e);
-            Invalidate();
-        }
-
-        /// <summary>Invokes the mouse state changed event.</summary>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnMouseStateChanged(MouseStateEventArgs e)
-        {
-            Invalidate();
-            MouseStateChanged?.Invoke(e);
-        }
-
         /// <summary>Invokes the theme changed event.</summary>
         /// <param name="e">The event args.</param>
         protected virtual void OnThemeChanged(ThemeEventArgs e)
@@ -547,49 +627,10 @@ namespace VisualPlus.Toolkit.Controls.Editors
             Invalidate();
         }
 
-        public override Size GetPreferredSize(Size proposedSize)
+        protected override void OnValueChanged(EventArgs e)
         {
-            Size preferredSize;
-            base.GetPreferredSize(proposedSize);
-
-            using (Graphics graphics = CreateGraphics())
-            {
-                string measureText = Text.Length > 0 ? Text : "MeasureText";
-                proposedSize = new Size(int.MaxValue, int.MaxValue);
-                preferredSize = TextRenderer.MeasureText(graphics, measureText, Font, proposedSize, TextFormatFlags.Left | TextFormatFlags.LeftAndRightPadding | TextFormatFlags.VerticalCenter);
-                preferredSize.Height += 10;
-            }
-
-            return preferredSize;
-        }
-
-        #endregion
-
-        #region Methods
-
-        public void UpdateTheme(Theme theme)
-        {
-            try
-            {
-                _border.Color = theme.ColorPalette.BorderNormal;
-                _border.HoverColor = theme.ColorPalette.BorderHover;
-
-                _backColor.Enabled = theme.ColorPalette.Enabled;
-                _backColor.Disabled = theme.ColorPalette.Disabled;
-
-                ForeColor = theme.ColorPalette.TextEnabled;
-
-                // Font = theme.ColorPalette.Font;
-                _arrowColor = theme.ColorPalette.ElementEnabled;
-                _arrowDisabledColor = theme.ColorPalette.ElementDisabled;
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteDebug(e);
-            }
-
+            base.OnValueChanged(e);
             Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
         }
 
         #endregion

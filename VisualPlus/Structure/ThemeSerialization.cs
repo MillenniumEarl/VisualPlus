@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: ThemeSerialization.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:09 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.Collections.Generic;
@@ -21,7 +62,7 @@ namespace VisualPlus.Structure
 {
     public class ThemeSerialization
     {
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Deserialize the theme contents.</summary>
         /// <param name="themeDocument">The theme document.</param>
@@ -246,11 +287,7 @@ namespace VisualPlus.Structure
                     xmlWriter.WriteStartElement(Header);
 
                     // Write theme information header.
-                    var themeDataDictionary = new Dictionary<string, string>
-                        {
-                            { "Name", themeInformation.Name },
-                            { "Author", themeInformation.Author }
-                        };
+                    var themeDataDictionary = new Dictionary<string, string> { { "Name", themeInformation.Name }, { "Author", themeInformation.Author } };
 
                     XMLManager.WriteElementGroup(xmlWriter, Information, themeDataDictionary);
 
@@ -260,35 +297,19 @@ namespace VisualPlus.Structure
                     // Write theme shared.
                     xmlWriter.WriteStartElement(Shared);
 
-                    var borderDictionary = new Dictionary<string, Color>
-                        {
-                            { "Normal", colorPalette.BorderNormal },
-                            { "Hover", colorPalette.BorderHover }
-                        };
+                    var borderDictionary = new Dictionary<string, Color> { { "Normal", colorPalette.BorderNormal }, { "Hover", colorPalette.BorderHover } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "Border", borderDictionary);
 
-                    var columnHeaderDictionary = new Dictionary<string, Color>
-                        {
-                            { "Header", colorPalette.ColumnHeader },
-                            { "Text", colorPalette.ColumnText }
-                        };
+                    var columnHeaderDictionary = new Dictionary<string, Color> { { "Header", colorPalette.ColumnHeader }, { "Text", colorPalette.ColumnText } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "ColumnHeader", columnHeaderDictionary);
 
-                    var controlDictionary = new Dictionary<string, Color>
-                        {
-                            { "Enabled", colorPalette.ControlEnabled },
-                            { "Disabled", colorPalette.ControlDisabled }
-                        };
+                    var controlDictionary = new Dictionary<string, Color> { { "Enabled", colorPalette.ControlEnabled }, { "Disabled", colorPalette.ControlDisabled } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "Control", controlDictionary);
 
-                    var flatControlDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.ElementDisabled },
-                            { "Enabled", colorPalette.ElementEnabled }
-                        };
+                    var flatControlDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.ElementDisabled }, { "Enabled", colorPalette.ElementEnabled } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "Element", flatControlDictionary);
 
@@ -306,48 +327,23 @@ namespace VisualPlus.Structure
 
                     XMLManager.WriteElementGroup(xmlWriter, "Text", textDictionary);
 
-                    var listItemDictionary = new Dictionary<string, Color>
-                        {
-                            { "Normal", colorPalette.Item },
-                            { "Hover", colorPalette.ItemHover },
-                            { "Selected", colorPalette.ItemSelected },
-                            { "Alternate", colorPalette.ItemAlternate }
-                        };
+                    var listItemDictionary = new Dictionary<string, Color> { { "Normal", colorPalette.Item }, { "Hover", colorPalette.ItemHover }, { "Selected", colorPalette.ItemSelected }, { "Alternate", colorPalette.ItemAlternate } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "ListItem", listItemDictionary);
 
-                    var hatchDictionary = new Dictionary<string, Color>
-                        {
-                            { "BackColor", colorPalette.HatchBackColor },
-                            { "ForeColor", colorPalette.HatchForeColor }
-                        };
+                    var hatchDictionary = new Dictionary<string, Color> { { "BackColor", colorPalette.HatchBackColor }, { "ForeColor", colorPalette.HatchForeColor } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "Hatch", hatchDictionary);
 
-                    var progressDictionary = new Dictionary<string, Color>
-                        {
-                            { "Background", colorPalette.ProgressBackground },
-                            { "Working", colorPalette.Progress },
-                            { "Disabled", colorPalette.ProgressDisabled }
-                        };
+                    var progressDictionary = new Dictionary<string, Color> { { "Background", colorPalette.ProgressBackground }, { "Working", colorPalette.Progress }, { "Disabled", colorPalette.ProgressDisabled } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "ProgressBar", progressDictionary);
 
-                    var tabPageDictionary = new Dictionary<string, Color>
-                        {
-                            { "Enabled", colorPalette.TabPageEnabled },
-                            { "Disabled", colorPalette.TabPageDisabled },
-                            { "Selected", colorPalette.TabPageSelected },
-                            { "Hover", colorPalette.TabPageHover }
-                        };
+                    var tabPageDictionary = new Dictionary<string, Color> { { "Enabled", colorPalette.TabPageEnabled }, { "Disabled", colorPalette.TabPageDisabled }, { "Selected", colorPalette.TabPageSelected }, { "Hover", colorPalette.TabPageHover } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "TabPage", tabPageDictionary);
 
-                    var watermarkDictionary = new Dictionary<string, Color>
-                        {
-                            { "Active", colorPalette.WatermarkActive },
-                            { "Inactive", colorPalette.WatermarkInactive }
-                        };
+                    var watermarkDictionary = new Dictionary<string, Color> { { "Active", colorPalette.WatermarkActive }, { "Inactive", colorPalette.WatermarkInactive } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "Watermark", watermarkDictionary);
 
@@ -357,21 +353,11 @@ namespace VisualPlus.Structure
                     // Write theme toolkit.
                     xmlWriter.WriteStartElement(Toolkit);
 
-                    var visualButton = new Dictionary<string, Color>
-                        {
-                            { "Enabled", colorPalette.Enabled },
-                            { "Disabled", colorPalette.Disabled },
-                            { "Hover", colorPalette.Hover },
-                            { "Pressed", colorPalette.Pressed }
-                        };
+                    var visualButton = new Dictionary<string, Color> { { "Enabled", colorPalette.Enabled }, { "Disabled", colorPalette.Disabled }, { "Hover", colorPalette.Hover }, { "Pressed", colorPalette.Pressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "VisualButton", visualButton);
 
-                    var visualComboBox = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.VisualComboBoxDisabled },
-                            { "Enabled", colorPalette.VisualComboBoxEnabled }
-                        };
+                    var visualComboBox = new Dictionary<string, Color> { { "Disabled", colorPalette.VisualComboBoxDisabled }, { "Enabled", colorPalette.VisualComboBoxEnabled } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "VisualComboBox", visualComboBox);
 
@@ -379,23 +365,11 @@ namespace VisualPlus.Structure
 
                     xmlWriter.WriteStartElement("HelpButton");
 
-                    var helpBackDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.HelpButtonBackDisabled },
-                            { "Enabled", colorPalette.HelpButtonBackEnabled },
-                            { "Hover", colorPalette.HelpButtonBackHover },
-                            { "Pressed", colorPalette.HelpButtonBackPressed }
-                        };
+                    var helpBackDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.HelpButtonBackDisabled }, { "Enabled", colorPalette.HelpButtonBackEnabled }, { "Hover", colorPalette.HelpButtonBackHover }, { "Pressed", colorPalette.HelpButtonBackPressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "BackColorState", helpBackDictionary);
 
-                    var helpForeDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.HelpButtonForeDisabled },
-                            { "Enabled", colorPalette.HelpButtonForeEnabled },
-                            { "Hover", colorPalette.HelpButtonForeHover },
-                            { "Pressed", colorPalette.HelpButtonForePressed }
-                        };
+                    var helpForeDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.HelpButtonForeDisabled }, { "Enabled", colorPalette.HelpButtonForeEnabled }, { "Hover", colorPalette.HelpButtonForeHover }, { "Pressed", colorPalette.HelpButtonForePressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "ForeColorState", helpForeDictionary);
 
@@ -404,23 +378,11 @@ namespace VisualPlus.Structure
 
                     xmlWriter.WriteStartElement("MinimizeButton");
 
-                    var minBackDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.MinimizeButtonBackDisabled },
-                            { "Enabled", colorPalette.MinimizeButtonBackEnabled },
-                            { "Hover", colorPalette.MinimizeButtonBackHover },
-                            { "Pressed", colorPalette.MinimizeButtonBackPressed }
-                        };
+                    var minBackDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.MinimizeButtonBackDisabled }, { "Enabled", colorPalette.MinimizeButtonBackEnabled }, { "Hover", colorPalette.MinimizeButtonBackHover }, { "Pressed", colorPalette.MinimizeButtonBackPressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "BackColorState", minBackDictionary);
 
-                    var minForeDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.MinimizeButtonForeDisabled },
-                            { "Enabled", colorPalette.MinimizeButtonForeEnabled },
-                            { "Hover", colorPalette.MinimizeButtonForeHover },
-                            { "Pressed", colorPalette.MinimizeButtonForePressed }
-                        };
+                    var minForeDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.MinimizeButtonForeDisabled }, { "Enabled", colorPalette.MinimizeButtonForeEnabled }, { "Hover", colorPalette.MinimizeButtonForeHover }, { "Pressed", colorPalette.MinimizeButtonForePressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "ForeColorState", minForeDictionary);
 
@@ -429,23 +391,11 @@ namespace VisualPlus.Structure
 
                     xmlWriter.WriteStartElement("MaximizeButton");
 
-                    var maxBackDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.MaximizeButtonBackDisabled },
-                            { "Enabled", colorPalette.MaximizeButtonBackEnabled },
-                            { "Hover", colorPalette.MaximizeButtonBackHover },
-                            { "Pressed", colorPalette.MaximizeButtonBackPressed }
-                        };
+                    var maxBackDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.MaximizeButtonBackDisabled }, { "Enabled", colorPalette.MaximizeButtonBackEnabled }, { "Hover", colorPalette.MaximizeButtonBackHover }, { "Pressed", colorPalette.MaximizeButtonBackPressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "BackColorState", maxBackDictionary);
 
-                    var maxForeDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.MaximizeButtonForeDisabled },
-                            { "Enabled", colorPalette.MaximizeButtonForeEnabled },
-                            { "Hover", colorPalette.MaximizeButtonForeHover },
-                            { "Pressed", colorPalette.MaximizeButtonForePressed }
-                        };
+                    var maxForeDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.MaximizeButtonForeDisabled }, { "Enabled", colorPalette.MaximizeButtonForeEnabled }, { "Hover", colorPalette.MaximizeButtonForeHover }, { "Pressed", colorPalette.MaximizeButtonForePressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "ForeColorState", maxForeDictionary);
 
@@ -454,23 +404,11 @@ namespace VisualPlus.Structure
 
                     xmlWriter.WriteStartElement("CloseButton");
 
-                    var closeBackDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.CloseButtonBackDisabled },
-                            { "Enabled", colorPalette.CloseButtonBackEnabled },
-                            { "Hover", colorPalette.CloseButtonBackHover },
-                            { "Pressed", colorPalette.CloseButtonBackPressed }
-                        };
+                    var closeBackDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.CloseButtonBackDisabled }, { "Enabled", colorPalette.CloseButtonBackEnabled }, { "Hover", colorPalette.CloseButtonBackHover }, { "Pressed", colorPalette.CloseButtonBackPressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "BackColorState", closeBackDictionary);
 
-                    var closeForeDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.CloseButtonForeDisabled },
-                            { "Enabled", colorPalette.CloseButtonForeEnabled },
-                            { "Hover", colorPalette.CloseButtonForeHover },
-                            { "Pressed", colorPalette.CloseButtonForePressed }
-                        };
+                    var closeForeDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.CloseButtonForeDisabled }, { "Enabled", colorPalette.CloseButtonForeEnabled }, { "Hover", colorPalette.CloseButtonForeHover }, { "Pressed", colorPalette.CloseButtonForePressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "ForeColorState", closeForeDictionary);
 
@@ -480,70 +418,36 @@ namespace VisualPlus.Structure
                     // End VisualControlBox
                     xmlWriter.WriteEndElement();
 
-                    var formDictionary = new Dictionary<string, Color>
-                        {
-                            { "Background", colorPalette.FormBackground },
-                            { "WindowBar", colorPalette.FormWindowBar }
-                        };
+                    var formDictionary = new Dictionary<string, Color> { { "Background", colorPalette.FormBackground }, { "WindowBar", colorPalette.FormWindowBar } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "VisualForm", formDictionary);
 
-                    var radialDictionary = new Dictionary<string, Color>
-                        {
-                            { "BackCircle", colorPalette.BackCircle },
-                            { "ForeCircle", colorPalette.ForeCircle }
-                        };
+                    var radialDictionary = new Dictionary<string, Color> { { "BackCircle", colorPalette.BackCircle }, { "ForeCircle", colorPalette.ForeCircle } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "VisualRadialProgress", radialDictionary);
 
                     xmlWriter.WriteStartElement("VisualScrollBar");
 
-                    var barDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.ScrollBarDisabled },
-                            { "Enabled", colorPalette.ScrollBarEnabled }
-                        };
+                    var barDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.ScrollBarDisabled }, { "Enabled", colorPalette.ScrollBarEnabled } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "Bar", barDictionary);
 
-                    var scrollButtonDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.ScrollButtonDisabled },
-                            { "Enabled", colorPalette.ScrollButtonEnabled },
-                            { "Hover", colorPalette.ScrollButtonHover },
-                            { "Pressed", colorPalette.ScrollButtonPressed }
-                        };
+                    var scrollButtonDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.ScrollButtonDisabled }, { "Enabled", colorPalette.ScrollButtonEnabled }, { "Hover", colorPalette.ScrollButtonHover }, { "Pressed", colorPalette.ScrollButtonPressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "Button", scrollButtonDictionary);
 
-                    var scrollThumbDictionary = new Dictionary<string, Color>
-                        {
-                            { "Disabled", colorPalette.ScrollThumbDisabled },
-                            { "Enabled", colorPalette.ScrollThumbEnabled },
-                            { "Hover", colorPalette.ScrollThumbHover },
-                            { "Pressed", colorPalette.ScrollThumbPressed }
-                        };
+                    var scrollThumbDictionary = new Dictionary<string, Color> { { "Disabled", colorPalette.ScrollThumbDisabled }, { "Enabled", colorPalette.ScrollThumbEnabled }, { "Hover", colorPalette.ScrollThumbHover }, { "Pressed", colorPalette.ScrollThumbPressed } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "Thumb", scrollThumbDictionary);
 
                     // End visual scrollbar.
                     xmlWriter.WriteEndElement();
 
-                    var visualRating = new Dictionary<string, Color>
-                        {
-                            { "Star", colorPalette.Star },
-                            { "Border", colorPalette.StarBorder },
-                            { "Dull", colorPalette.StarDull },
-                            { "DullBorder", colorPalette.StarDullBorder }
-                        };
+                    var visualRating = new Dictionary<string, Color> { { "Star", colorPalette.Star }, { "Border", colorPalette.StarBorder }, { "Dull", colorPalette.StarDull }, { "DullBorder", colorPalette.StarDullBorder } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "VisualRating", visualRating);
 
-                    var visualSeparator = new Dictionary<string, Color>
-                        {
-                            { "Line", colorPalette.VisualSeparatorLine },
-                            { "Shadow", colorPalette.VisualSeparatorShadow }
-                        };
+                    var visualSeparator = new Dictionary<string, Color> { { "Line", colorPalette.VisualSeparatorLine }, { "Shadow", colorPalette.VisualSeparatorShadow } };
 
                     XMLManager.WriteElementGroup(xmlWriter, "VisualSeparator", visualSeparator);
 

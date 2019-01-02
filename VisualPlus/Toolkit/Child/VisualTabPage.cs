@@ -1,10 +1,52 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualTabPage.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:28 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
+
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
@@ -19,7 +61,7 @@ namespace VisualPlus.Toolkit.Child
     [ToolboxItem(false)]
     public class VisualTabPage : TabPage
     {
-        #region Variables
+        #region Fields
 
         private Shape _border;
         private Image _headerImage;
@@ -38,7 +80,7 @@ namespace VisualPlus.Toolkit.Child
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualTabPage" /> class.</summary>
         /// <param name="text">The text of the page.</param>
@@ -62,11 +104,7 @@ namespace VisualPlus.Toolkit.Child
             ForeColor = Color.FromArgb(174, 181, 187);
             _textSelected = Color.FromArgb(217, 220, 227);
 
-            _border = new Shape
-            {
-                Visible = false,
-                Type = ShapeTypes.Rectangle
-            };
+            _border = new Shape { Visible = false, Type = ShapeTypes.Rectangle };
 
             _textImageRelation = TextImageRelations.Text;
 
@@ -82,7 +120,7 @@ namespace VisualPlus.Toolkit.Child
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         public enum TextImageRelations
         {
@@ -98,14 +136,17 @@ namespace VisualPlus.Toolkit.Child
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Category(PropertyCategory.Appearance)]
         public Shape Border
         {
-            get { return _border; }
+            get
+            {
+                return _border;
+            }
 
             set
             {
@@ -119,16 +160,25 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Toggle)]
         public new bool Enabled
         {
-            get { return base.Enabled; }
+            get
+            {
+                return base.Enabled;
+            }
 
-            set { base.Enabled = value; }
+            set
+            {
+                base.Enabled = value;
+            }
         }
 
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Image)]
         public Image HeaderImage
         {
-            get { return _headerImage; }
+            get
+            {
+                return _headerImage;
+            }
 
             set
             {
@@ -141,7 +191,10 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Image)]
         public Image Image
         {
-            get { return _image; }
+            get
+            {
+                return _image;
+            }
 
             set
             {
@@ -154,7 +207,10 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Size)]
         public Size ImageSize
         {
-            get { return _imageSize; }
+            get
+            {
+                return _imageSize;
+            }
 
             set
             {
@@ -170,7 +226,10 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Color)]
         public Color TabHover
         {
-            get { return _tabHover; }
+            get
+            {
+                return _tabHover;
+            }
 
             set
             {
@@ -183,7 +242,10 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Color)]
         public Color TabNormal
         {
-            get { return _tabNormal; }
+            get
+            {
+                return _tabNormal;
+            }
 
             set
             {
@@ -196,7 +258,10 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Color)]
         public Color TabSelected
         {
-            get { return _tabSelected; }
+            get
+            {
+                return _tabSelected;
+            }
 
             set
             {
@@ -209,7 +274,10 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.VerticalAlignment)]
         public StringAlignment TextAlignment
         {
-            get { return _textAlignment; }
+            get
+            {
+                return _textAlignment;
+            }
 
             set
             {
@@ -222,7 +290,10 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.TextImageRelation)]
         public TextImageRelations TextImageRelation
         {
-            get { return _textImageRelation; }
+            get
+            {
+                return _textImageRelation;
+            }
 
             set
             {
@@ -235,7 +306,10 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Alignment)]
         public StringAlignment TextLineAlignment
         {
-            get { return _textLineAlignment; }
+            get
+            {
+                return _textLineAlignment;
+            }
 
             set
             {
@@ -248,7 +322,10 @@ namespace VisualPlus.Toolkit.Child
         [Description(PropertyDescription.Color)]
         public Color TextSelected
         {
-            get { return _textSelected; }
+            get
+            {
+                return _textSelected;
+            }
 
             set
             {
@@ -259,7 +336,24 @@ namespace VisualPlus.Toolkit.Child
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        /// <summary>Updates the properties after an Invalidate.</summary>
+        public void UpdateProperties()
+        {
+            try
+            {
+                Invalidate();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.StackTrace);
+            }
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override ControlCollection CreateControlsInstance()
         {
@@ -294,23 +388,6 @@ namespace VisualPlus.Toolkit.Child
             if (BackgroundImage != null)
             {
                 _graphics.DrawImage(BackgroundImage, new Rectangle(new Point(0, 0), Size));
-            }
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>Updates the properties after an Invalidate.</summary>
-        public void UpdateProperties()
-        {
-            try
-            {
-                Invalidate();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.StackTrace);
             }
         }
 

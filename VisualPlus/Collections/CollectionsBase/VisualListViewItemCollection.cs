@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualListViewItemCollection.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 01/01/2019 - 11:13 PM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.Collections;
@@ -22,14 +63,14 @@ namespace VisualPlus.Collections.CollectionsBase
 {
     public class VisualListViewItemCollection : CollectionBase, ICloneable, IList
     {
-        #region Variables
+        #region Fields
 
         private VisualListView _listView;
         private bool _suspendEvents;
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualListViewItemCollection" /> class.</summary>
         /// <param name="listView">The new Parent.</param>
@@ -40,7 +81,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
@@ -48,7 +89,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [Browsable(false)]
         [Description(PropertyDescription.Parent)]
@@ -135,7 +176,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Indexers
+        #region Public Indexers
 
         /// <summary>Gets or sets the item at the specified index within the collection.</summary>
         /// <param name="index">The index of the item in the collection to get or set.</param>
@@ -172,27 +213,14 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Overrides
-
-        /// <summary>The item collection has been cleared event.</summary>
-        protected override void OnClear()
-        {
-            ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ItemCollectionChanged, null, null, null));
-        }
-
-        #endregion
-
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Creates an item with the specified text and adds it to the collection.</summary>
         /// <param name="text">The text to display for the item.</param>
         /// <returns>The <see cref="VisualListViewItem" />.</returns>
         public virtual VisualListViewItem Add(string text)
         {
-            VisualListViewItem _item = new VisualListViewItem(text)
-                    {
-                       ListView = _listView 
-                    };
+            VisualListViewItem _item = new VisualListViewItem(text) { ListView = _listView };
 
             Add(_item);
             return _item;
@@ -229,78 +257,10 @@ namespace VisualPlus.Collections.CollectionsBase
         /// <returns>The <see cref="VisualListViewItem" />.</returns>
         public virtual VisualListViewItem Add(string key, string text, int imageIndex)
         {
-            VisualListViewItem _item = new VisualListViewItem(text, imageIndex)
-                    {
-                       Name = key 
-                    };
+            VisualListViewItem _item = new VisualListViewItem(text, imageIndex) { Name = key };
 
             Add(_item);
             return _item;
-        }
-
-        /// <summary>Retrieves the index of the item with the specified key.</summary>
-        /// <param name="key">The name of the item to find in the collection.</param>
-        /// <returns>The <see cref="int" />.</returns>
-        public virtual int IndexOfKey(string key)
-        {
-            for (var index = 0; index < List.Count; index++)
-            {
-                VisualListViewItem _item = (VisualListViewItem)List[index];
-                if (key == _item.Name)
-                {
-                    return index;
-                }
-            }
-
-            return -1;
-        }
-
-        /// <summary>Creates a new item and inserts it into the collection at the specified index.</summary>
-        /// <param name="index">The zero-based index location where the item is inserted.</param>
-        /// <param name="key">The name of the item.</param>
-        /// <param name="text">The text to display for the item.</param>
-        /// <param name="imageIndex">The index of the image to display for the item.</param>
-        /// <returns>The <see cref="VisualListViewItem" />.</returns>
-        public virtual VisualListViewItem Insert(int index, string key, string text, int imageIndex)
-        {
-            VisualListViewItem _item = new VisualListViewItem
-                {
-                    Name = key,
-                    Text = text,
-                    ImageIndex = imageIndex
-                };
-
-            return Insert(index, _item);
-        }
-
-        /// <summary>Removes the specified item from the collection.</summary>
-        /// <param name="item">The <see cref="VisualListViewItem" /> representing the item to remove from the collection.</param>
-        public virtual void Remove(VisualListViewItem item)
-        {
-            List.Remove(item);
-            ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ItemCollectionChanged, null, null, null));
-        }
-
-        /// <summary>Removes the item at the specified index within the collection.</summary>
-        /// <param name="index">The zero-based index of the item to remove.</param>
-        public new virtual void RemoveAt(int index)
-        {
-            if (List.IsValidIndex(index))
-            {
-                List.RemoveAt(index);
-                ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ItemCollectionChanged, null, null, null));
-            }
-        }
-
-        /// <summary>Removes the item with the specified key from the collection.</summary>
-        /// <param name="key">The name of the item to remove from the collection.</param>
-        public virtual void RemoveByKey(string key)
-        {
-            int _index = IndexOfKey(key);
-            if (List.IsValidIndex(_index))
-            {
-                RemoveAt(_index);
-            }
         }
 
         /// <summary>Adds an array of <see cref="VisualListViewItem" /> objects to the collection.</summary>
@@ -515,16 +475,43 @@ namespace VisualPlus.Collections.CollectionsBase
             return List.IndexOf(item);
         }
 
+        /// <summary>Retrieves the index of the item with the specified key.</summary>
+        /// <param name="key">The name of the item to find in the collection.</param>
+        /// <returns>The <see cref="int" />.</returns>
+        public virtual int IndexOfKey(string key)
+        {
+            for (var index = 0; index < List.Count; index++)
+            {
+                VisualListViewItem _item = (VisualListViewItem)List[index];
+                if (key == _item.Name)
+                {
+                    return index;
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>Creates a new item and inserts it into the collection at the specified index.</summary>
+        /// <param name="index">The zero-based index location where the item is inserted.</param>
+        /// <param name="key">The name of the item.</param>
+        /// <param name="text">The text to display for the item.</param>
+        /// <param name="imageIndex">The index of the image to display for the item.</param>
+        /// <returns>The <see cref="VisualListViewItem" />.</returns>
+        public virtual VisualListViewItem Insert(int index, string key, string text, int imageIndex)
+        {
+            VisualListViewItem _item = new VisualListViewItem { Name = key, Text = text, ImageIndex = imageIndex };
+
+            return Insert(index, _item);
+        }
+
         /// <summary>Creates a new item and inserts it into the collection at the specified index.</summary>
         /// <param name="index">The zero-based index location where the item is inserted.</param>
         /// <param name="text">The text to display for the item.</param>
         /// <returns>The <see cref="VisualListViewItem" />.</returns>
         public VisualListViewItem Insert(int index, string text)
         {
-            VisualListViewItem _item = new VisualListViewItem
-                    {
-                       Text = text 
-                    };
+            VisualListViewItem _item = new VisualListViewItem { Text = text };
 
             return Insert(index, _item);
         }
@@ -536,11 +523,7 @@ namespace VisualPlus.Collections.CollectionsBase
         /// <returns>The <see cref="VisualListViewItem" />.</returns>
         public VisualListViewItem Insert(int index, string text, int imageIndex)
         {
-            VisualListViewItem _item = new VisualListViewItem
-                {
-                    Text = text,
-                    ImageIndex = imageIndex
-                };
+            VisualListViewItem _item = new VisualListViewItem { Text = text, ImageIndex = imageIndex };
 
             return Insert(index, _item);
         }
@@ -581,6 +564,46 @@ namespace VisualPlus.Collections.CollectionsBase
             {
                 ChangedEvent(source, e);
             }
+        }
+
+        /// <summary>Removes the specified item from the collection.</summary>
+        /// <param name="item">The <see cref="VisualListViewItem" /> representing the item to remove from the collection.</param>
+        public virtual void Remove(VisualListViewItem item)
+        {
+            List.Remove(item);
+            ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ItemCollectionChanged, null, null, null));
+        }
+
+        /// <summary>Removes the item at the specified index within the collection.</summary>
+        /// <param name="index">The zero-based index of the item to remove.</param>
+        public new virtual void RemoveAt(int index)
+        {
+            if (List.IsValidIndex(index))
+            {
+                List.RemoveAt(index);
+                ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ItemCollectionChanged, null, null, null));
+            }
+        }
+
+        /// <summary>Removes the item with the specified key from the collection.</summary>
+        /// <param name="key">The name of the item to remove from the collection.</param>
+        public virtual void RemoveByKey(string key)
+        {
+            int _index = IndexOfKey(key);
+            if (List.IsValidIndex(_index))
+            {
+                RemoveAt(_index);
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>The item collection has been cleared event.</summary>
+        protected override void OnClear()
+        {
+            ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ItemCollectionChanged, null, null, null));
         }
 
         /// <summary>Searches for controls by their name property, builds an array list.</summary>

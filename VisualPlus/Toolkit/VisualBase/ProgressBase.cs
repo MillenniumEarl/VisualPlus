@@ -1,8 +1,50 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: ProgressBase.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:55 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
 
@@ -16,7 +58,7 @@ namespace VisualPlus.Toolkit.VisualBase
     [ToolboxItem(false)]
     public abstract class ProgressBase : VisualStyleBase
     {
-        #region Variables
+        #region Fields
 
         private int _largeChange;
         private int _maximum;
@@ -26,7 +68,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="ProgressBase" /> class.</summary>
         protected ProgressBase()
@@ -40,7 +82,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.Action)]
         [Description("Occurs when the value of the Value property changes.")]
@@ -48,14 +90,17 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [Bindable(true)]
         [Category(PropertyCategory.Behavior)]
         [Description("Gets or sets a value to be added to or subtracted from the Value property when the scroll box is moved a large distance.")]
         public int LargeChange
         {
-            get { return _largeChange; }
+            get
+            {
+                return _largeChange;
+            }
 
             set
             {
@@ -73,7 +118,10 @@ namespace VisualPlus.Toolkit.VisualBase
         [Description("The upper bound of the range this ProgressBar is working on.")]
         public int Maximum
         {
-            get { return _maximum; }
+            get
+            {
+                return _maximum;
+            }
 
             set
             {
@@ -94,7 +142,10 @@ namespace VisualPlus.Toolkit.VisualBase
         [Description("The lower bound of the range this ProgressBar is working on.")]
         public int Minimum
         {
-            get { return _minimum; }
+            get
+            {
+                return _minimum;
+            }
 
             set
             {
@@ -115,7 +166,10 @@ namespace VisualPlus.Toolkit.VisualBase
         [Description("Gets or sets the value added to or subtracted from the Value property when the scroll box is moved a small distance.")]
         public int SmallChange
         {
-            get { return _smallChange; }
+            get
+            {
+                return _smallChange;
+            }
 
             set
             {
@@ -133,7 +187,10 @@ namespace VisualPlus.Toolkit.VisualBase
         [Description("The current value for the ProgressBar, in the range specified by the minimum and maximum properties.")]
         public int Value
         {
-            get { return _value; }
+            get
+            {
+                return _value;
+            }
 
             set
             {
@@ -152,30 +209,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #endregion
 
-        #region Overrides
-
-        protected override void OnMouseEnter(EventArgs e)
-        {
-            base.OnMouseEnter(e);
-            MouseState = MouseStates.Hover;
-            Invalidate();
-        }
-
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            base.OnMouseLeave(e);
-            MouseState = MouseStates.Normal;
-            Invalidate();
-        }
-
-        protected virtual void OnValueChanged(EventArgs e)
-        {
-            ValueChanged?.Invoke(this, e);
-        }
-
-        #endregion
-
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Decrement from the value.</summary>
         /// <param name="value">Amount of value to decrement.</param>
@@ -248,6 +282,29 @@ namespace VisualPlus.Toolkit.VisualBase
                     OnValueChanged(EventArgs.Empty);
                 }
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            base.OnMouseEnter(e);
+            MouseState = MouseStates.Hover;
+            Invalidate();
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            MouseState = MouseStates.Normal;
+            Invalidate();
+        }
+
+        protected virtual void OnValueChanged(EventArgs e)
+        {
+            ValueChanged?.Invoke(this, e);
         }
 
         #endregion

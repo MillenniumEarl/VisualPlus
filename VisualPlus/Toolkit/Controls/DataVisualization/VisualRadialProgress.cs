@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualRadialProgress.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:01 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -29,7 +70,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
     [ToolboxItem(true)]
     public class VisualRadialProgress : ProgressBase, IThemeSupport
     {
-        #region Variables
+        #region Fields
 
         private Color _backCircleColor;
         private bool _backCircleVisible;
@@ -53,7 +94,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualRadialProgress" /> class.</summary>
         public VisualRadialProgress()
@@ -78,7 +119,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Color)]
@@ -392,29 +433,39 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
 
-        protected override void OnPaint(PaintEventArgs e)
+        public void UpdateTheme(Theme theme)
         {
-            base.OnPaint(e);
-            Graphics graphics = e.Graphics;
-            graphics.SmoothingMode = SmoothingMode.HighQuality;
-            DrawCircles(graphics);
-            DrawImage(graphics);
-            DrawText(graphics);
+            try
+            {
+                ForeColor = theme.ColorPalette.TextEnabled;
+                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
+                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
+
+                // Font = theme.ColorPalette.Font; // TODO: 16F - Bold
+                _subscriptFont = SystemFonts.DefaultFont; // TODO: - Bold
+                _superscriptFont = SystemFonts.DefaultFont; // TODO: - Bold
+
+                _superscriptColor = theme.ColorPalette.SuperscriptColor;
+                _subscriptColor = theme.ColorPalette.SubscriptColor;
+
+                _backCircleColor = theme.ColorPalette.BackCircle;
+                _foreCircleColor = theme.ColorPalette.ForeCircle;
+                _progressColor = theme.ColorPalette.Progress;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteDebug(e);
+            }
+
+            Invalidate();
+            OnThemeChanged(new ThemeEventArgs(theme));
         }
 
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-            UpdateSize();
-        }
+        #endregion
 
-        protected override void OnSizeChanged(EventArgs e)
-        {
-            base.OnSizeChanged(e);
-            UpdateSize();
-        }
+        #region Methods
 
         protected void DrawCircles(Graphics graphics)
         {
@@ -464,11 +515,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
 
             Size _textSize = TextManager.MeasureText(_textVisible ? Text : Value.ToString("0"), Font, graphics);
             Point _textPoint = new Point((Width / 2) - (_textSize.Width / 2), (Height / 2) - (_textSize.Height / 2));
-            StringFormat _stringFormat = new StringFormat(RightToLeft == RightToLeft.Yes ? StringFormatFlags.DirectionRightToLeft : 0)
-                {
-                    Alignment = StringAlignment.Center,
-                    LineAlignment = StringAlignment.Near
-                };
+            StringFormat _stringFormat = new StringFormat(RightToLeft == RightToLeft.Yes ? StringFormatFlags.DirectionRightToLeft : 0) { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Near };
 
             if ((_subscriptText != string.Empty) || (_superscriptText != string.Empty))
             {
@@ -486,36 +533,26 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
             graphics.DrawString(_value, Font, new SolidBrush(ForeColor), _textPoint);
         }
 
-        #endregion
-
-        #region Methods
-
-        public void UpdateTheme(Theme theme)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            try
-            {
-                ForeColor = theme.ColorPalette.TextEnabled;
-                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
-                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
+            base.OnPaint(e);
+            Graphics graphics = e.Graphics;
+            graphics.SmoothingMode = SmoothingMode.HighQuality;
+            DrawCircles(graphics);
+            DrawImage(graphics);
+            DrawText(graphics);
+        }
 
-                // Font = theme.ColorPalette.Font; // TODO: 16F - Bold
-                _subscriptFont = SystemFonts.DefaultFont; // TODO: - Bold
-                _superscriptFont = SystemFonts.DefaultFont; // TODO: - Bold
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            UpdateSize();
+        }
 
-                _superscriptColor = theme.ColorPalette.SuperscriptColor;
-                _subscriptColor = theme.ColorPalette.SubscriptColor;
-
-                _backCircleColor = theme.ColorPalette.BackCircle;
-                _foreCircleColor = theme.ColorPalette.ForeCircle;
-                _progressColor = theme.ColorPalette.Progress;
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteDebug(e);
-            }
-
-            Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            UpdateSize();
         }
 
         private void UpdateSize()

@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualBadge.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:39 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -20,7 +61,7 @@ namespace VisualPlus.Toolkit.Components
     [Description("The VisualPlus badge component enables controls to have a badge with text displayed.")]
     public class VisualBadge : Component
     {
-        #region Variables
+        #region Fields
 
         private Color _background;
         private Action<Control> _clickEvent;
@@ -30,7 +71,7 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualBadge" /> class.</summary>
         /// <param name="control">The control to attach.</param>
@@ -175,8 +216,6 @@ namespace VisualPlus.Toolkit.Components
         /// <summary>Prevents a default instance of the <see cref="VisualBadge" /> class from being created.</summary>
         private VisualBadge()
         {
-            StyleManager styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
-
             _background = Color.FromArgb(120, 183, 230);
             _clickEvent = null;
 
@@ -198,7 +237,7 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [DefaultValue(typeof(Color), "Blue")]
         [Description(PropertyDescription.Color)]
@@ -380,7 +419,7 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Sets the click action for the <see cref="VisualBadge" />.</summary>
         /// <param name="action">The click action to set.</param>
@@ -391,6 +430,10 @@ namespace VisualPlus.Toolkit.Components
                 _clickEvent = action;
             }
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>Attach the <see cref="VisualBadge" /> to the control.</summary>
         private void Attach()

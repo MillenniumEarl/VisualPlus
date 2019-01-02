@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualNumericUpDown.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:18 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -33,7 +74,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
     [ToolboxItem(true)]
     public class VisualNumericUpDown : VisualStyleBase, IThemeSupport
     {
-        #region Variables
+        #region Fields
 
         private Border _border;
         private BorderEdge _borderButtons;
@@ -58,7 +99,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualNumericUpDown" /> class.</summary>
         public VisualNumericUpDown()
@@ -87,7 +128,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
@@ -95,7 +136,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -320,7 +361,61 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        /// <summary>Decrement the value by the specified amount.</summary>
+        /// <param name="value">The amount.</param>
+        public void Decrement(int value)
+        {
+            _value -= value;
+            OnValueChanged(new ValueChangedEventArgs(_value));
+            Invalidate();
+        }
+
+        /// <summary>Increment the value by the specified amount.</summary>
+        /// <param name="value">The amount.</param>
+        public void Increment(int value)
+        {
+            _value += value;
+            OnValueChanged(new ValueChangedEventArgs(_value));
+            Invalidate();
+        }
+
+        public void UpdateTheme(Theme theme)
+        {
+            try
+            {
+                _border.Color = theme.ColorPalette.BorderNormal;
+                _border.HoverColor = theme.ColorPalette.BorderHover;
+
+                ForeColor = theme.ColorPalette.TextEnabled;
+                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
+                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
+
+                // Font = theme.ColorPalette.Font;
+                _borderEdge.BackColor = theme.ColorPalette.BorderNormal;
+                _borderButtons.BackColor = theme.ColorPalette.BorderNormal;
+
+                _buttonForeColor = theme.ColorPalette.TextLight;
+
+                // _buttonFont = new Font(theme.ColorPalette.Font.FontFamily, 14, FontStyle.Bold);
+                _buttonFont = new Font(SystemFonts.DefaultFont.FontFamily, 14, FontStyle.Bold);
+                _buttonColor = theme.ColorPalette.ControlEnabled;
+
+                _colorState = new ColorState { Enabled = theme.ColorPalette.ControlEnabled, Disabled = theme.ColorPalette.ControlDisabled };
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteDebug(e);
+            }
+
+            Invalidate();
+            OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
@@ -595,74 +690,16 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             ValueChanged?.Invoke(e);
         }
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>Decrement the value by the specified amount.</summary>
-        /// <param name="value">The amount.</param>
-        public void Decrement(int value)
-        {
-            _value -= value;
-            OnValueChanged(new ValueChangedEventArgs(_value));
-            Invalidate();
-        }
-
-        /// <summary>Increment the value by the specified amount.</summary>
-        /// <param name="value">The amount.</param>
-        public void Increment(int value)
-        {
-            _value += value;
-            OnValueChanged(new ValueChangedEventArgs(_value));
-            Invalidate();
-        }
-
-        public void UpdateTheme(Theme theme)
-        {
-            try
-            {
-                _border.Color = theme.ColorPalette.BorderNormal;
-                _border.HoverColor = theme.ColorPalette.BorderHover;
-
-                ForeColor = theme.ColorPalette.TextEnabled;
-                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
-                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
-
-                // Font = theme.ColorPalette.Font;
-                _borderEdge.BackColor = theme.ColorPalette.BorderNormal;
-                _borderButtons.BackColor = theme.ColorPalette.BorderNormal;
-
-                _buttonForeColor = theme.ColorPalette.TextLight;
-
-                // _buttonFont = new Font(theme.ColorPalette.Font.FontFamily, 14, FontStyle.Bold);
-                _buttonFont = new Font(SystemFonts.DefaultFont.FontFamily, 14, FontStyle.Bold);
-                _buttonColor = theme.ColorPalette.ControlEnabled;
-
-                _colorState = new ColorState
-                {
-                    Enabled = theme.ColorPalette.ControlEnabled,
-                    Disabled = theme.ColorPalette.ControlDisabled
-                };
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteDebug(e);
-            }
-
-            Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
-        }
-        
         /// <summary>Draws the text on the graphics.</summary>
         /// <param name="graphics">The graphics to draw on.</param>
         private void DrawText(Graphics graphics)
         {
             Rectangle textBoxRectangle = new Rectangle(6, 0, Width - 1, Height - 1);
             StringFormat stringFormat = new StringFormat
-            {
-                // Alignment = StringAlignment.Center,
-                LineAlignment = StringAlignment.Center
-            };
+                {
+                    // Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center
+                };
             graphics.DrawString(Convert.ToString(Value), Font, new SolidBrush(ForeColor), textBoxRectangle, stringFormat);
         }
 

@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualTabControl.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:07 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -31,7 +72,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
     [Designer(typeof(VisualTabControlDesigner))]
     public class VisualTabControl : TabControl
     {
-        #region Variables
+        #region Fields
 
         private TabAlignment _alignment;
         private Border _border;
@@ -54,7 +95,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualTabControl" /> class.</summary>
         public VisualTabControl()
@@ -69,10 +110,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
 
             _styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
 
-            _border = new Border
-                    {
-                       Type = ShapeTypes.Rectangle 
-                    };
+            _border = new Border { Type = ShapeTypes.Rectangle };
 
             _alignment = TabAlignment.Top;
             _selectorVisible = true;
@@ -97,7 +135,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         public enum SelectorTypes
         {
@@ -110,7 +148,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Alignment)]
@@ -402,7 +440,28 @@ namespace VisualPlus.Toolkit.Controls.Navigation
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        /// <summary>Swaps the tab pages.</summary>
+        /// <param name="tabPage1">The tab page.</param>
+        /// <param name="tabPage2">The other tab page.</param>
+        public void SwapTabPages(TabPage tabPage1, TabPage tabPage2)
+        {
+            if (!TabPages.Contains(tabPage1) || !TabPages.Contains(tabPage2))
+            {
+                throw new ArgumentException(@"TabPages must be in the TabControls TabPageCollection.");
+            }
+
+            int _index1 = TabPages.IndexOf(tabPage1);
+            int _index2 = TabPages.IndexOf(tabPage2);
+
+            TabPages[_index1] = tabPage2;
+            TabPages[_index2] = tabPage1;
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override void CreateHandle()
         {
@@ -470,27 +529,6 @@ namespace VisualPlus.Toolkit.Controls.Navigation
             DrawSelector(_graphics, _selectorTypes);
         }
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>Swaps the tab pages.</summary>
-        /// <param name="tabPage1">The tab page.</param>
-        /// <param name="tabPage2">The other tab page.</param>
-        public void SwapTabPages(TabPage tabPage1, TabPage tabPage2)
-        {
-            if (!TabPages.Contains(tabPage1) || !TabPages.Contains(tabPage2))
-            {
-                throw new ArgumentException(@"TabPages must be in the TabControls TabPageCollection.");
-            }
-
-            int _index1 = TabPages.IndexOf(tabPage1);
-            int _index2 = TabPages.IndexOf(tabPage2);
-
-            TabPages[_index1] = tabPage2;
-            TabPages[_index2] = tabPage1;
-        }
-
         /// <summary>Draws the header background.</summary>
         /// <param name="graphics">The specified graphics to draw on.</param>
         /// <param name="tabPage">The tab page.</param>
@@ -532,11 +570,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
             Rectangle _imageRectangle = new Rectangle(tabPage.Rectangle.X + tabPage.Border.Thickness + 1, (tabPage.Rectangle.Y + (tabPage.Rectangle.Height / 2)) - (tabPage.ImageSize.Height / 2), tabPage.ImageSize.Width, tabPage.ImageSize.Height);
             Rectangle _imageCenterRectangle = new Rectangle((tabPage.Rectangle.X + (tabPage.Rectangle.Width / 2)) - (tabPage.ImageSize.Width / 2), (tabPage.Rectangle.Y + (tabPage.Rectangle.Height / 2)) - (tabPage.ImageSize.Height / 2), tabPage.ImageSize.Width, tabPage.ImageSize.Height);
 
-            StringFormat _tabStringFormat = new StringFormat
-                {
-                    Alignment = tabPage.TextAlignment,
-                    LineAlignment = tabPage.TextLineAlignment
-                };
+            StringFormat _tabStringFormat = new StringFormat { Alignment = tabPage.TextAlignment, LineAlignment = tabPage.TextLineAlignment };
 
             Size _textSize = TextManager.MeasureText(tabPage.Text, tabPage.Font, graphics);
             Color _foreColor = selected ? tabPage.TextSelected : tabPage.ForeColor;

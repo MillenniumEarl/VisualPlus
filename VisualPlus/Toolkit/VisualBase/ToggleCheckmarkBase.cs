@@ -1,3 +1,44 @@
+#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: ToggleCheckmarkBase.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:55 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
 #region Namespace
 
 using System;
@@ -29,7 +70,7 @@ namespace VisualPlus.Toolkit.VisualBase
     [ComVisible(true)]
     public abstract class ToggleCheckmarkBase : ToggleBase, IAnimationSupport
     {
-        #region Variables
+        #region Fields
 
         private bool _animation;
         private Border _border;
@@ -43,7 +84,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="ToggleCheckmarkBase" /> class.</summary>
         protected ToggleCheckmarkBase()
@@ -59,7 +100,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [DefaultValue(Settings.DefaultValue.Animation)]
         [Category(PropertyCategory.Behavior)]
@@ -232,7 +273,90 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        /// <summary>Gets the first or default control.</summary>
+        /// <param name="container">The container control.</param>
+        /// <returns>The <see cref="ToggleCheckmarkBase" />.</returns>
+        public static ToggleCheckmarkBase GetSelectedControl(Control container)
+        {
+            if (container == null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
+            if (container.Controls.Count == 0)
+            {
+                return null;
+            }
+
+            return container.Controls.OfType<ToggleCheckmarkBase>().FirstOrDefault(r => r.Toggle);
+        }
+
+        /// <summary>Gets the toggled controls from the container.</summary>
+        /// <param name="container">The container control.</param>
+        /// <returns>The <see cref="ToggleCheckmarkBase" /> list.</returns>
+        public static List<ToggleCheckmarkBase> GetToggled(Control container)
+        {
+            if (container == null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
+            if (container.Controls.Count == 0)
+            {
+                return null;
+            }
+
+            var toggledControlsList = new List<ToggleCheckmarkBase>();
+            foreach (object control in container.Controls)
+            {
+                if (control is ToggleCheckmarkBase toggledControl && toggledControl.Toggle)
+                {
+                    toggledControlsList.Add(toggledControl);
+                }
+            }
+
+            return toggledControlsList;
+        }
+
+        public void ConfigureAnimation(double[] effectIncrement, EffectType[] effectType)
+        {
+            VFXManager effectsManager = new VFXManager { Increment = effectIncrement[0], EffectType = effectType[0] };
+
+            _rippleEffectsManager = new VFXManager(false) { Increment = effectIncrement[1], SecondaryIncrement = effectIncrement[2], EffectType = effectType[1] };
+
+            effectsManager.OnAnimationProgress += sender => Invalidate();
+            _rippleEffectsManager.OnAnimationProgress += sender => Invalidate();
+            effectsManager.StartNewAnimation(Toggle ? AnimationDirection.In : AnimationDirection.Out);
+        }
+
+        public void DrawAnimation(Graphics graphics)
+        {
+            if (_animation && _rippleEffectsManager.IsAnimating())
+            {
+                for (var i = 0; i < _rippleEffectsManager.GetAnimationCount(); i++)
+                {
+                    double animationValue = _rippleEffectsManager.GetProgress(i);
+
+                    Point animationSource = new Point(_box.X + (_box.Width / 2), _box.Y + (_box.Height / 2));
+                    SolidBrush animationBrush = new SolidBrush(Color.FromArgb((int)(animationValue * 40), (bool)_rippleEffectsManager.GetData(i)[0] ? Color.Black : _checkStyle.CheckColor));
+
+                    int height = _box.Height;
+                    int size = _rippleEffectsManager.GetDirection(i) == AnimationDirection.InOutIn ? (int)(height * (0.8d + (0.2d * animationValue))) : height;
+
+                    Rectangle _animationBox = new Rectangle(animationSource.X - (size / 2), animationSource.Y - (size / 2), size, size);
+                    GraphicsPath _path = VisualBorderRenderer.CreateBorderTypePath(_animationBox, _border);
+
+                    graphics.FillPath(animationBrush, _path);
+                    animationBrush.Dispose();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override void OnCreateControl()
         {
@@ -338,98 +462,6 @@ namespace VisualPlus.Toolkit.VisualBase
             VisualToggleRenderer.DrawCheckBox(_graphics, Border, _checkStyle, _box, Checked, Enabled, _backColor, BackgroundImage, MouseState, Text, Font, _textColor, _textLocation);
             DrawAnimation(_graphics);
             e.Graphics.ResetClip();
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>Gets the first or default control.</summary>
-        /// <param name="container">The container control.</param>
-        /// <returns>The <see cref="ToggleCheckmarkBase" />.</returns>
-        public static ToggleCheckmarkBase GetSelectedControl(Control container)
-        {
-            if (container == null)
-            {
-                throw new ArgumentNullException(nameof(container));
-            }
-
-            if (container.Controls.Count == 0)
-            {
-                return null;
-            }
-
-            return container.Controls.OfType<ToggleCheckmarkBase>().FirstOrDefault(r => r.Toggle);
-        }
-
-        /// <summary>Gets the toggled controls from the container.</summary>
-        /// <param name="container">The container control.</param>
-        /// <returns>The <see cref="ToggleCheckmarkBase" /> list.</returns>
-        public static List<ToggleCheckmarkBase> GetToggled(Control container)
-        {
-            if (container == null)
-            {
-                throw new ArgumentNullException(nameof(container));
-            }
-
-            if (container.Controls.Count == 0)
-            {
-                return null;
-            }
-
-            var toggledControlsList = new List<ToggleCheckmarkBase>();
-            foreach (object control in container.Controls)
-            {
-                if (control is ToggleCheckmarkBase toggledControl && toggledControl.Toggle)
-                {
-                    toggledControlsList.Add(toggledControl);
-                }
-            }
-
-            return toggledControlsList;
-        }
-
-        public void ConfigureAnimation(double[] effectIncrement, EffectType[] effectType)
-        {
-            VFXManager effectsManager = new VFXManager
-                {
-                    Increment = effectIncrement[0],
-                    EffectType = effectType[0]
-                };
-
-            _rippleEffectsManager = new VFXManager(false)
-                {
-                    Increment = effectIncrement[1],
-                    SecondaryIncrement = effectIncrement[2],
-                    EffectType = effectType[1]
-                };
-
-            effectsManager.OnAnimationProgress += sender => Invalidate();
-            _rippleEffectsManager.OnAnimationProgress += sender => Invalidate();
-            effectsManager.StartNewAnimation(Toggle ? AnimationDirection.In : AnimationDirection.Out);
-        }
-
-        public void DrawAnimation(Graphics graphics)
-        {
-            if (_animation && _rippleEffectsManager.IsAnimating())
-            {
-                for (var i = 0; i < _rippleEffectsManager.GetAnimationCount(); i++)
-                {
-                    double animationValue = _rippleEffectsManager.GetProgress(i);
-
-                    Point animationSource = new Point(_box.X + (_box.Width / 2), _box.Y + (_box.Height / 2));
-                    SolidBrush animationBrush = new SolidBrush(Color.FromArgb((int)(animationValue * 40), (bool)_rippleEffectsManager.GetData(i)[0] ? Color.Black : _checkStyle.CheckColor));
-
-                    int height = _box.Height;
-                    int size = _rippleEffectsManager.GetDirection(i) == AnimationDirection.InOutIn ? (int)(height * (0.8d + (0.2d * animationValue))) : height;
-
-                    Rectangle _animationBox = new Rectangle(animationSource.X - (size / 2), animationSource.Y - (size / 2), size, size);
-                    GraphicsPath _path = VisualBorderRenderer.CreateBorderTypePath(_animationBox, _border);
-
-                    graphics.FillPath(animationBrush, _path);
-                    animationBrush.Dispose();
-                }
-            }
         }
 
         /// <summary>Auto fit to the text size.</summary>

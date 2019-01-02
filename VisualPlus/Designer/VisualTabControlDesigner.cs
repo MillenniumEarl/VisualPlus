@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualTabControlDesigner.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 01/01/2019 - 11:27 PM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.Collections;
@@ -19,7 +60,7 @@ namespace VisualPlus.Designer
 {
     internal class VisualTabControlDesigner : ParentControlDesigner
     {
-        #region Variables
+        #region Fields
 
         private IDesignerHost _designerHost;
         private DesignerVerbCollection _designerVerbCollection;
@@ -27,7 +68,7 @@ namespace VisualPlus.Designer
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         public VisualTabControlDesigner()
         {
@@ -47,7 +88,7 @@ namespace VisualPlus.Designer
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         private enum TabControlHitTest
         {
@@ -59,7 +100,7 @@ namespace VisualPlus.Designer
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         public IDesignerHost DesignerHost
         {
@@ -128,23 +169,33 @@ namespace VisualPlus.Designer
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        public override void InitializeNewComponent(IDictionary defaultValues)
+        {
+            base.InitializeNewComponent(defaultValues);
+
+            VisualTabPage _tabPage1 = (VisualTabPage)DesignerHost.CreateComponent(typeof(VisualTabPage));
+            VisualTabPage _tabPage2 = (VisualTabPage)DesignerHost.CreateComponent(typeof(VisualTabPage));
+
+            _tabPage1.Text = _tabPage1.Name;
+            _tabPage2.Text = _tabPage2.Name;
+
+            Control.Controls.Add(_tabPage1);
+            Control.Controls.Add(_tabPage2);
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override bool GetHitTest(Point point)
         {
             if (SelectionService.PrimarySelection == Control)
             {
-                TCHITTESTINFO _tabControlHitTestInfo = new TCHITTESTINFO
-                    {
-                        Point = Control.PointToClient(point),
-                        Flags = 0
-                    };
+                TCHITTESTINFO _tabControlHitTestInfo = new TCHITTESTINFO { Point = Control.PointToClient(point), Flags = 0 };
 
-                Message _message = new Message
-                    {
-                        HWnd = Control.Handle,
-                        Msg = 0x130D
-                    };
+                Message _message = new Message { HWnd = Control.Handle, Msg = 0x130D };
 
                 IntPtr _longIntParameter = Marshal.AllocHGlobal(Marshal.SizeOf(_tabControlHitTestInfo));
                 Marshal.StructureToPtr(_tabControlHitTestInfo, _longIntParameter, false);
@@ -192,24 +243,6 @@ namespace VisualPlus.Designer
                 }
             }
         }
-
-        public override void InitializeNewComponent(IDictionary defaultValues)
-        {
-            base.InitializeNewComponent(defaultValues);
-
-            VisualTabPage _tabPage1 = (VisualTabPage)DesignerHost.CreateComponent(typeof(VisualTabPage));
-            VisualTabPage _tabPage2 = (VisualTabPage)DesignerHost.CreateComponent(typeof(VisualTabPage));
-
-            _tabPage1.Text = _tabPage1.Name;
-            _tabPage2.Text = _tabPage2.Name;
-
-            Control.Controls.Add(_tabPage1);
-            Control.Controls.Add(_tabPage2);
-        }
-
-        #endregion
-
-        #region Methods
 
         private void OnAddPage(object sender, EventArgs e)
         {
@@ -313,13 +346,16 @@ namespace VisualPlus.Designer
             }
         }
 
+        #endregion
+
         private struct TCHITTESTINFO
         {
-            public Point Point;
+            #region Fields
 
             public TabControlHitTest Flags;
-        }
+            public Point Point;
 
-        #endregion
+            #endregion
+        }
     }
 }

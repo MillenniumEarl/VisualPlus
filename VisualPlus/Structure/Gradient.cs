@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: Gradient.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:09 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -26,7 +67,7 @@ namespace VisualPlus.Structure
     [Description("The Gradient structure.")]
     public class Gradient
     {
-        #region Variables
+        #region Fields
 
         private float _angle;
         private Color[] _colors;
@@ -35,7 +76,7 @@ namespace VisualPlus.Structure
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="Gradient" /> class.</summary>
         /// <param name="colors">The colors.</param>
@@ -68,7 +109,7 @@ namespace VisualPlus.Structure
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
@@ -88,7 +129,7 @@ namespace VisualPlus.Structure
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [NotifyParentProperty(true)]
         [RefreshProperties(RefreshProperties.Repaint)]
@@ -190,35 +231,7 @@ namespace VisualPlus.Structure
 
         #endregion
 
-        #region Overrides
-
-        protected virtual void OnAngleChanged()
-        {
-            InitializeGradient(_angle, _colors, SortPositions(_locations), _rectangle);
-            AngleChanged?.Invoke();
-        }
-
-        protected virtual void OnColorsChanged()
-        {
-            InitializeGradient(_angle, _colors, SortPositions(_locations), _rectangle);
-            ColorsChanged?.Invoke();
-        }
-
-        protected virtual void OnPositionsChanged()
-        {
-            InitializeGradient(_angle, _colors, SortPositions(_locations), _rectangle);
-            PositionsChanged?.Invoke();
-        }
-
-        protected virtual void OnRectangleChanged()
-        {
-            InitializeGradient(_angle, _colors, SortPositions(_locations), _rectangle);
-            RectangleChanged?.Invoke();
-        }
-
-        #endregion
-
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Creates a gradient brush.</summary>
         /// <param name="gradient">The gradient.</param>
@@ -239,11 +252,7 @@ namespace VisualPlus.Structure
             var _points = new[] { new Point { X = rectangle.Width, Y = 0 }, new Point { X = rectangle.Width, Y = rectangle.Height } };
             LinearGradientBrush _linearGradientBrush = new LinearGradientBrush(_points[0], _points[1], Color.Black, Color.Black);
 
-            ColorBlend _colorBlend = new ColorBlend
-                {
-                    Positions = positions,
-                    Colors = colors
-                };
+            ColorBlend _colorBlend = new ColorBlend { Positions = positions, Colors = colors };
 
             _linearGradientBrush.InterpolationColors = _colorBlend;
             _linearGradientBrush.RotateTransform(angle);
@@ -289,6 +298,34 @@ namespace VisualPlus.Structure
 
             Array.Sort(customOffsets);
             return customOffsets;
+        }
+
+        #endregion
+
+        #region Methods
+
+        protected virtual void OnAngleChanged()
+        {
+            InitializeGradient(_angle, _colors, SortPositions(_locations), _rectangle);
+            AngleChanged?.Invoke();
+        }
+
+        protected virtual void OnColorsChanged()
+        {
+            InitializeGradient(_angle, _colors, SortPositions(_locations), _rectangle);
+            ColorsChanged?.Invoke();
+        }
+
+        protected virtual void OnPositionsChanged()
+        {
+            InitializeGradient(_angle, _colors, SortPositions(_locations), _rectangle);
+            PositionsChanged?.Invoke();
+        }
+
+        protected virtual void OnRectangleChanged()
+        {
+            InitializeGradient(_angle, _colors, SortPositions(_locations), _rectangle);
+            RectangleChanged?.Invoke();
         }
 
         /// <summary>Initializes a new instance of the <see cref="Gradient" /> component.</summary>

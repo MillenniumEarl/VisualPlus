@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualColorPicker.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:05 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.Collections.Generic;
@@ -32,7 +73,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
     [ToolboxItem(true)]
     public class VisualColorPicker : VisualStyleBase
     {
-        #region Variables
+        #region Static Fields
 
         private static readonly object EventColorChanged = new object();
         private static readonly object EventColorStepChanged = new object();
@@ -40,6 +81,11 @@ namespace VisualPlus.Toolkit.Controls.Editors
         private static readonly object EventLargeChangeChanged = new object();
         private static readonly object EventSelectionSizeChanged = new object();
         private static readonly object EventSmallChangeChanged = new object();
+
+        #endregion
+
+        #region Fields
+
         private readonly Color _buttonColor;
         private LinearGradientBrush _blackBottomGradient;
         private Border _border;
@@ -66,7 +112,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualColorPicker" /> class.</summary>
         public VisualColorPicker()
@@ -97,7 +143,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category("Property Changed")]
         public event EventHandler ColorChanged
@@ -129,7 +175,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         public enum PickerType
         {
@@ -142,7 +188,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -379,6 +425,10 @@ namespace VisualPlus.Toolkit.Controls.Editors
             }
         }
 
+        #endregion
+
+        #region Properties
+
         private Color[] Colors { get; set; }
 
         private bool LockUpdates { get; set; }
@@ -389,7 +439,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
         #endregion
 
-        #region Overrides
+        #region Methods
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -584,10 +634,6 @@ namespace VisualPlus.Toolkit.Controls.Editors
             UpdateGraphicsBuffer();
         }
 
-        #endregion
-
-        #region Methods
-
         /// <summary>Calculates wheel attributes.</summary>
         private void CalculateWheel()
         {
@@ -625,12 +671,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
             if ((Points.Length != 0) && (Points.Length == Colors.Length))
             {
-                result = new PathGradientBrush(Points, WrapMode.Clamp)
-                    {
-                        CenterPoint = _centerPoint,
-                        CenterColor = Color.White,
-                        SurroundColors = Colors
-                    };
+                result = new PathGradientBrush(Points, WrapMode.Clamp) { CenterPoint = _centerPoint, CenterColor = Color.White, SurroundColors = Colors };
             }
             else
             {
@@ -649,13 +690,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
             using (Graphics g = Graphics.FromImage(image))
             {
-                var diamondOuter = new[]
-                    {
-                        new Point(halfSize, 0),
-                        new Point(SelectionSize, halfSize),
-                        new Point(halfSize, SelectionSize),
-                        new Point(0, halfSize)
-                    };
+                var diamondOuter = new[] { new Point(halfSize, 0), new Point(SelectionSize, halfSize), new Point(halfSize, SelectionSize), new Point(0, halfSize) };
 
                 g.FillPolygon(SystemBrushes.Control, diamondOuter);
                 g.DrawPolygon(SystemPens.ControlDark, diamondOuter);
@@ -885,11 +920,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
             // Update spectrum gradient
             _spectrumGradient = new LinearGradientBrush(Point.Empty, new Point(Width, 0), Color.White, Color.White);
 
-            ColorBlend _colorBlend = new ColorBlend
-                {
-                    Positions = new[] { 0, 1 / 7f, 2 / 7f, 3 / 7f, 4 / 7f, 5 / 7f, 6 / 7f, 1 },
-                    Colors = new[] { Color.Gray, Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet }
-                };
+            ColorBlend _colorBlend = new ColorBlend { Positions = new[] { 0, 1 / 7f, 2 / 7f, 3 / 7f, 4 / 7f, 5 / 7f, 6 / 7f, 1 }, Colors = new[] { Color.Gray, Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet } };
 
             _spectrumGradient.InterpolationColors = _colorBlend;
 
@@ -900,10 +931,18 @@ namespace VisualPlus.Toolkit.Controls.Editors
             _whiteTopGradient = new LinearGradientBrush(_rectangleF, Color.White, Color.Transparent, 90f);
         }
 
+        #endregion
+
         [Serializable]
         public struct HSLManager
         {
+            #region Static Fields
+
             public static readonly HSLManager Empty;
+
+            #endregion
+
+            #region Fields
 
             private int alpha;
             private double hue;
@@ -911,12 +950,13 @@ namespace VisualPlus.Toolkit.Controls.Editors
             private double lightness;
             private double saturation;
 
+            #endregion
+
+            #region Constructors and Destructors
+
             static HSLManager()
             {
-                Empty = new HSLManager
-                        {
-                           IsEmpty = true 
-                        };
+                Empty = new HSLManager { IsEmpty = true };
             }
 
             public HSLManager(double hue, double saturation, double lightness)
@@ -942,25 +982,9 @@ namespace VisualPlus.Toolkit.Controls.Editors
                 isEmpty = false;
             }
 
-            public static bool operator ==(HSLManager a, HSLManager b)
-            {
-                return (a.H == b.H) && (a.L == b.L) && (a.S == b.S) && (a.A == b.A);
-            }
+            #endregion
 
-            public static implicit operator HSLManager(Color color)
-            {
-                return new HSLManager(color);
-            }
-
-            public static implicit operator Color(HSLManager _manager)
-            {
-                return _manager.ToRgbColor();
-            }
-
-            public static bool operator !=(HSLManager a, HSLManager b)
-            {
-                return !(a == b);
-            }
+            #region Public Properties
 
             public int A
             {
@@ -1037,6 +1061,30 @@ namespace VisualPlus.Toolkit.Controls.Editors
                 }
             }
 
+            #endregion
+
+            #region Public Methods and Operators
+
+            public static bool operator ==(HSLManager a, HSLManager b)
+            {
+                return (a.H == b.H) && (a.L == b.L) && (a.S == b.S) && (a.A == b.A);
+            }
+
+            public static implicit operator HSLManager(Color color)
+            {
+                return new HSLManager(color);
+            }
+
+            public static implicit operator Color(HSLManager _manager)
+            {
+                return _manager.ToRgbColor();
+            }
+
+            public static bool operator !=(HSLManager a, HSLManager b)
+            {
+                return !(a == b);
+            }
+
             public override bool Equals(object obj)
             {
                 bool result;
@@ -1080,18 +1128,8 @@ namespace VisualPlus.Toolkit.Controls.Editors
                 double hk = H / 360;
 
                 // R, G, B colors
-                double[] tc =
-                    {
-                        hk + (1d / 3d),
-                        hk,
-                        hk - (1d / 3d)
-                    };
-                double[] colors =
-                    {
-                        0.0,
-                        0.0,
-                        0.0
-                    };
+                double[] tc = { hk + (1d / 3d), hk, hk - (1d / 3d) };
+                double[] colors = { 0.0, 0.0, 0.0 };
 
                 for (var color = 0; color < colors.Length; color++)
                 {
@@ -1143,8 +1181,8 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
                 return builder.ToString();
             }
-        }
 
-        #endregion
+            #endregion
+        }
     }
 }

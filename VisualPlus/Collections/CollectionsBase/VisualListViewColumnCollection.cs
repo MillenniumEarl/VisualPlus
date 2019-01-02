@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualListViewColumnCollection.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 01/01/2019 - 11:11 PM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.Collections;
@@ -21,13 +62,13 @@ namespace VisualPlus.Collections.CollectionsBase
 {
     public class VisualListViewColumnCollection : CollectionBase, ICloneable, IList
     {
-        #region Variables
+        #region Fields
 
         private VisualListView _listView;
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualListViewColumnCollection" /> class.</summary>
         /// <param name="owner">The <see cref="VisualListView" /> parent control.</param>
@@ -38,7 +79,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
@@ -46,7 +87,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [Browsable(false)]
         [Description(PropertyDescription.Parent)]
@@ -74,7 +115,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Indexers
+        #region Public Indexers
 
         /// <summary>Gets the column at the specified index within the collection.</summary>
         /// <param name="index">The index.</param>
@@ -110,17 +151,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Overrides
-
-        /// <summary>The columns header collection has been cleared event.</summary>
-        protected override void OnClear()
-        {
-            ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ColumnCollectionChanged, null, null, null));
-        }
-
-        #endregion
-
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Adds an existing <see cref="VisualListViewColumn" /> to the collection.</summary>
         /// <param name="column">The <see cref="VisualListViewColumn" /> to add to the collection.</param>
@@ -297,60 +328,6 @@ namespace VisualPlus.Collections.CollectionsBase
             }
         }
 
-        /// <summary>Return the index, within the collection, of the specified column header.</summary>
-        /// <param name="value">A <see cref="VisualListViewColumn" /> representing the column header to locate in the collection.</param>
-        /// <returns>The <see cref="int" />.</returns>
-        public virtual int IndexOf(VisualListViewColumn value)
-        {
-            return List.IndexOf(value);
-        }
-
-        /// <summary>Determines the index for a column with the specified key.</summary>
-        /// <param name="key">The name of the column to retrieve the index for.</param>
-        /// <returns>The <see cref="int" />.</returns>
-        public virtual int IndexOfKey(string key)
-        {
-            for (var index = 0; index < List.Count; index++)
-            {
-                VisualListViewColumn _column = (VisualListViewColumn)List[index];
-                if (key == _column.Name)
-                {
-                    return index;
-                }
-            }
-
-            return -1;
-        }
-
-        /// <summary>Removes the specified column header from the collection.</summary>
-        /// <param name="column">A <see cref="VisualListViewColumn" /> representing the item to remove from the collection.</param>
-        public virtual void Remove(VisualListViewColumn column)
-        {
-            RemoveByKey(column.Name);
-        }
-
-        /// <summary>Removes the item at the specified index within the collection.</summary>
-        /// <param name="index">The zero-based index of the item to remove.</param>
-        public new virtual void RemoveAt(int index)
-        {
-            if (List.IsValidIndex(index))
-            {
-                List.RemoveAt(index);
-                ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ColumnCollectionChanged, null, null, null));
-            }
-        }
-
-        /// <summary>Removes the column with the specified key from the collection.</summary>
-        /// <param name="key">The name of the column to remove from the collection.</param>
-        public virtual void RemoveByKey(string key)
-        {
-            int _index = IndexOfKey(key);
-            if (List.IsValidIndex(_index))
-            {
-                RemoveAt(_index);
-            }
-        }
-
         /// <summary>Creates a shallow copy of the current object.</summary>
         /// <returns>The <see cref="object" />.</returns>
         public object Clone()
@@ -412,6 +389,31 @@ namespace VisualPlus.Collections.CollectionsBase
             }
 
             return _spanSize;
+        }
+
+        /// <summary>Return the index, within the collection, of the specified column header.</summary>
+        /// <param name="value">A <see cref="VisualListViewColumn" /> representing the column header to locate in the collection.</param>
+        /// <returns>The <see cref="int" />.</returns>
+        public virtual int IndexOf(VisualListViewColumn value)
+        {
+            return List.IndexOf(value);
+        }
+
+        /// <summary>Determines the index for a column with the specified key.</summary>
+        /// <param name="key">The name of the column to retrieve the index for.</param>
+        /// <returns>The <see cref="int" />.</returns>
+        public virtual int IndexOfKey(string key)
+        {
+            for (var index = 0; index < List.Count; index++)
+            {
+                VisualListViewColumn _column = (VisualListViewColumn)List[index];
+                if (key == _column.Name)
+                {
+                    return index;
+                }
+            }
+
+            return -1;
         }
 
         /// <summary>Inserts an existing column header into the collection at the specified index.</summary>
@@ -565,6 +567,45 @@ namespace VisualPlus.Collections.CollectionsBase
                 };
 
             Insert(index, _column);
+        }
+
+        /// <summary>Removes the specified column header from the collection.</summary>
+        /// <param name="column">A <see cref="VisualListViewColumn" /> representing the item to remove from the collection.</param>
+        public virtual void Remove(VisualListViewColumn column)
+        {
+            RemoveByKey(column.Name);
+        }
+
+        /// <summary>Removes the item at the specified index within the collection.</summary>
+        /// <param name="index">The zero-based index of the item to remove.</param>
+        public new virtual void RemoveAt(int index)
+        {
+            if (List.IsValidIndex(index))
+            {
+                List.RemoveAt(index);
+                ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ColumnCollectionChanged, null, null, null));
+            }
+        }
+
+        /// <summary>Removes the column with the specified key from the collection.</summary>
+        /// <param name="key">The name of the column to remove from the collection.</param>
+        public virtual void RemoveByKey(string key)
+        {
+            int _index = IndexOfKey(key);
+            if (List.IsValidIndex(_index))
+            {
+                RemoveAt(_index);
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>The columns header collection has been cleared event.</summary>
+        protected override void OnClear()
+        {
+            ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ColumnCollectionChanged, null, null, null));
         }
 
         #endregion

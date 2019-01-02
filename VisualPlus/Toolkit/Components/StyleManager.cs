@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: StyleManager.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:39 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.Collections.Generic;
@@ -36,7 +77,7 @@ namespace VisualPlus.Toolkit.Components
     [ToolboxBitmap(typeof(StyleManager), "StyleManager.bmp")]
     public class StyleManager : Component, ICloneable
     {
-        #region Variables
+        #region Fields
 
         private string _customThemePath;
         private List<Form> _formCollection;
@@ -45,7 +86,7 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="StyleManager" /> class.</summary>
         /// <param name="container">The container.</param>
@@ -126,13 +167,13 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         public event ThemeChangedEventHandler ThemeChanged;
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -263,31 +304,7 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Overrides
-
-        /// <summary>The theme changed event.</summary>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnThemeChanged(ThemeEventArgs e)
-        {
-            ThemeChanged?.Invoke(e);
-        }
-
-        public override string ToString()
-        {
-            StringBuilder _stringBuilder = new StringBuilder();
-            _stringBuilder.AppendLine("Theme name: " + _theme.Information.Name);
-            _stringBuilder.AppendLine("Theme author: " + _theme.Information.Author);
-            _stringBuilder.Append(Environment.NewLine);
-            _stringBuilder.AppendLine("Total forms: " + Forms.Count);
-            _stringBuilder.AppendLine("Total controls: " + Controls.Count);
-            _stringBuilder.AppendLine("Supported controls: " + SupportedControls.Count);
-            _stringBuilder.AppendLine("Unsupported controls: " + UnsupportedControls.Count);
-            return _stringBuilder.ToString();
-        }
-
-        #endregion
-
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Creates a default theme file in the templates folder.</summary>
         /// <param name="force">Forcefully overwrite any default theme with a new one.</param>
@@ -382,6 +399,19 @@ namespace VisualPlus.Toolkit.Components
             _theme.Save(filePath);
         }
 
+        public override string ToString()
+        {
+            StringBuilder _stringBuilder = new StringBuilder();
+            _stringBuilder.AppendLine("Theme name: " + _theme.Information.Name);
+            _stringBuilder.AppendLine("Theme author: " + _theme.Information.Author);
+            _stringBuilder.Append(Environment.NewLine);
+            _stringBuilder.AppendLine("Total forms: " + Forms.Count);
+            _stringBuilder.AppendLine("Total controls: " + Controls.Count);
+            _stringBuilder.AppendLine("Supported controls: " + SupportedControls.Count);
+            _stringBuilder.AppendLine("Unsupported controls: " + UnsupportedControls.Count);
+            return _stringBuilder.ToString();
+        }
+
         /// <summary>Updates all the <see cref="Control" />/s and <see cref="Form" />/s.</summary>
         public void Update()
         {
@@ -467,6 +497,17 @@ namespace VisualPlus.Toolkit.Components
             {
                 // The component not supported.
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>The theme changed event.</summary>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnThemeChanged(ThemeEventArgs e)
+        {
+            ThemeChanged?.Invoke(e);
         }
 
         /// <summary>Creates the default theme file.</summary>

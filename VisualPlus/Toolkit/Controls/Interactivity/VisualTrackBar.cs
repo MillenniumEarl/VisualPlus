@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualTrackBar.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:19 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -34,14 +75,9 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
     [ToolboxItem(true)]
     public class VisualTrackBar : TrackBar, IThemeSupport
     {
-        #region Variables
+        #region Fields
 
         protected Orientation _orientation;
-
-        #endregion
-
-        #region Variables
-
         private int _barThickness;
         private int _barTickSpacing;
         private ControlColorState _buttonControlColorState;
@@ -88,13 +124,9 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
-        /// <inheritdoc />
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="T:VisualPlus.Toolkit.Controls.Interactivity.VisualTrackBar" />
-        ///     class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="VisualTrackBar"/> class.</summary>
         public VisualTrackBar()
         {
             SetStyle(
@@ -138,7 +170,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.PropertyChanged)]
         [Description("Occours when the theme of the control has changed.")]
@@ -146,7 +178,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         public enum ValueDivisor
         {
@@ -165,7 +197,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -722,7 +754,130 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        /// <summary>Call the Decrement() method to decrease the value displayed by an integer you specify.</summary>
+        /// <param name="value">The value to decrement.</param>
+        public void Decrement(int value)
+        {
+            if (Value > Minimum)
+            {
+                Value -= value;
+                if (Value < Minimum)
+                {
+                    Value = Minimum;
+                }
+            }
+            else
+            {
+                Value = Minimum;
+            }
+
+            Invalidate();
+        }
+
+        /// <summary>Get's the formatted progress value.</summary>
+        /// <returns>Formatted progress value.</returns>
+        public string GetFormattedProgressValue()
+        {
+            var value = (float)(Value / (double)_dividedValue);
+            string formattedString = $"{Prefix}{value}{Suffix}";
+
+            return formattedString;
+        }
+
+        /// <summary>Call the Increment() method to increase the value displayed by an integer you specify.</summary>
+        /// <param name="value">The value to increment.</param>
+        public void Increment(int value)
+        {
+            if (Value < Maximum)
+            {
+                Value += value;
+                if (Value > Maximum)
+                {
+                    Value = Maximum;
+                }
+            }
+            else
+            {
+                Value = Maximum;
+            }
+
+            Invalidate();
+        }
+
+        /// <summary>Sets a new range value.</summary>
+        /// <param name="minimumValue">The minimum.</param>
+        /// <param name="maximumValue">The maximum.</param>
+        public new void SetRange(int minimumValue, int maximumValue)
+        {
+            Minimum = minimumValue;
+
+            if (Minimum > Value)
+            {
+                Value = Minimum;
+            }
+
+            Maximum = maximumValue;
+
+            if (Maximum < Value)
+            {
+                Value = Maximum;
+            }
+
+            if (Maximum < Minimum)
+            {
+                Minimum = Maximum;
+            }
+
+            Invalidate();
+        }
+
+        public void UpdateTheme(Theme theme)
+        {
+            try
+            {
+                _trackerTextColor = theme.ColorPalette.TextEnabled;
+                _textDisabledColor = theme.ColorPalette.TextDisabled;
+                _progressColor = theme.ColorPalette.Progress;
+
+                _buttonControlColorState = new ControlColorState { Enabled = theme.ColorPalette.Enabled, Disabled = theme.ColorPalette.Disabled, Hover = theme.ColorPalette.Hover, Pressed = theme.ColorPalette.Pressed };
+
+                _trackBarColor = new ColorState { Enabled = theme.ColorPalette.ProgressBackground, Disabled = theme.ColorPalette.ProgressDisabled };
+
+                _hatch.BackColor = Color.FromArgb(0, theme.ColorPalette.HatchBackColor);
+                _hatch.ForeColor = Color.FromArgb(40, _hatch.BackColor);
+
+                _tickColor = theme.ColorPalette.BorderNormal;
+
+                _trackerBorder.Color = theme.ColorPalette.BorderNormal;
+                _trackerBorder.HoverColor = theme.ColorPalette.BorderHover;
+
+                _trackBarBorder.Color = theme.ColorPalette.BorderNormal;
+                _trackBarBorder.HoverColor = theme.ColorPalette.BorderHover;
+
+                ForeColor = theme.ColorPalette.TextEnabled;
+                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
+                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
+
+                _textFont = SystemFonts.DefaultFont;
+                _trackerFont = SystemFonts.DefaultFont;
+
+                BackColorState.Enabled = theme.ColorPalette.Enabled;
+                BackColorState.Disabled = theme.ColorPalette.Disabled;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteDebug(e);
+            }
+
+            Invalidate();
+            OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -952,6 +1107,14 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             Invalidate();
         }
 
+        /// <summary>Invokes the theme changed event.</summary>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnThemeChanged(ThemeEventArgs e)
+        {
+            ThemeChanged?.Invoke(e);
+            Invalidate();
+        }
+
         protected override void OnValueChanged(EventArgs e)
         {
             Invalidate();
@@ -1018,147 +1181,6 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
 
             return result;
-        }
-
-        /// <summary>Invokes the theme changed event.</summary>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnThemeChanged(ThemeEventArgs e)
-        {
-            ThemeChanged?.Invoke(e);
-            Invalidate();
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>Call the Decrement() method to decrease the value displayed by an integer you specify.</summary>
-        /// <param name="value">The value to decrement.</param>
-        public void Decrement(int value)
-        {
-            if (Value > Minimum)
-            {
-                Value -= value;
-                if (Value < Minimum)
-                {
-                    Value = Minimum;
-                }
-            }
-            else
-            {
-                Value = Minimum;
-            }
-
-            Invalidate();
-        }
-
-        /// <summary>Get's the formatted progress value.</summary>
-        /// <returns>Formatted progress value.</returns>
-        public string GetFormattedProgressValue()
-        {
-            var value = (float)(Value / (double)_dividedValue);
-            string formattedString = $"{Prefix}{value}{Suffix}";
-
-            return formattedString;
-        }
-
-        /// <summary>Call the Increment() method to increase the value displayed by an integer you specify.</summary>
-        /// <param name="value">The value to increment.</param>
-        public void Increment(int value)
-        {
-            if (Value < Maximum)
-            {
-                Value += value;
-                if (Value > Maximum)
-                {
-                    Value = Maximum;
-                }
-            }
-            else
-            {
-                Value = Maximum;
-            }
-
-            Invalidate();
-        }
-
-        /// <summary>Sets a new range value.</summary>
-        /// <param name="minimumValue">The minimum.</param>
-        /// <param name="maximumValue">The maximum.</param>
-        public new void SetRange(int minimumValue, int maximumValue)
-        {
-            Minimum = minimumValue;
-
-            if (Minimum > Value)
-            {
-                Value = Minimum;
-            }
-
-            Maximum = maximumValue;
-
-            if (Maximum < Value)
-            {
-                Value = Maximum;
-            }
-
-            if (Maximum < Minimum)
-            {
-                Minimum = Maximum;
-            }
-
-            Invalidate();
-        }
-
-        public void UpdateTheme(Theme theme)
-        {
-            try
-            {
-                _trackerTextColor = theme.ColorPalette.TextEnabled;
-                _textDisabledColor = theme.ColorPalette.TextDisabled;
-                _progressColor = theme.ColorPalette.Progress;
-
-                _buttonControlColorState = new ControlColorState
-                    {
-                        Enabled = theme.ColorPalette.Enabled,
-                        Disabled = theme.ColorPalette.Disabled,
-                        Hover = theme.ColorPalette.Hover,
-                        Pressed = theme.ColorPalette.Pressed
-                    };
-
-                _trackBarColor = new ColorState
-                    {
-                        Enabled = theme.ColorPalette.ProgressBackground,
-                        Disabled = theme.ColorPalette.ProgressDisabled
-                    };
-
-                _hatch.BackColor = Color.FromArgb(0, theme.ColorPalette.HatchBackColor);
-                _hatch.ForeColor = Color.FromArgb(40, _hatch.BackColor);
-
-                _tickColor = theme.ColorPalette.BorderNormal;
-
-                _trackerBorder.Color = theme.ColorPalette.BorderNormal;
-                _trackerBorder.HoverColor = theme.ColorPalette.BorderHover;
-
-                _trackBarBorder.Color = theme.ColorPalette.BorderNormal;
-                _trackBarBorder.HoverColor = theme.ColorPalette.BorderHover;
-
-                ForeColor = theme.ColorPalette.TextEnabled;
-                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
-                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
-
-                _textFont = SystemFonts.DefaultFont;
-                _trackerFont = SystemFonts.DefaultFont;
-
-                BackColorState.Enabled = theme.ColorPalette.Enabled;
-                BackColorState.Disabled = theme.ColorPalette.Disabled;
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteDebug(e);
-            }
-
-            Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
         }
 
         /// <summary>Configures the tick style.</summary>

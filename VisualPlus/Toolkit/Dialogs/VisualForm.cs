@@ -1,3 +1,44 @@
+#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualForm.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:44 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
 #region Namespace
 
 using System;
@@ -44,7 +85,7 @@ namespace VisualPlus.Toolkit.Dialogs
     [ToolboxItem(false)]
     public class VisualForm : Form, ICloneable, IThemeSupport
     {
-        #region Variables
+        #region Fields
 
         private readonly Cursor[] _resizeCursors;
         private readonly Dictionary<int, int> _resizedLocationsCommand;
@@ -74,7 +115,7 @@ namespace VisualPlus.Toolkit.Dialogs
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualForm" /> class.</summary>
         /// <param name="text">The text associated with this control.</param>
@@ -157,7 +198,7 @@ namespace VisualPlus.Toolkit.Dialogs
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
@@ -248,7 +289,7 @@ namespace VisualPlus.Toolkit.Dialogs
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         /// <summary>The supported control box icons.</summary>
         public enum ControlBoxIcons
@@ -292,7 +333,7 @@ namespace VisualPlus.Toolkit.Dialogs
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>Retrieves the <see cref="VisualForm" /> full body.</summary>
         [Browsable(false)]
@@ -749,6 +790,10 @@ namespace VisualPlus.Toolkit.Dialogs
             }
         }
 
+        #endregion
+
+        #region Properties
+
         protected override CreateParams CreateParams
         {
             get
@@ -775,7 +820,90 @@ namespace VisualPlus.Toolkit.Dialogs
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        /// <summary>Creates a copy of the current object.</summary>
+        /// <returns>The <see cref="object" />.</returns>
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
+
+        /// <summary>Sets the current forms start position.</summary>
+        public void SetStartPosition()
+        {
+            // Determines the position mode to use.
+            switch (StartPosition)
+            {
+                // The position of the form is determined by the Location property.
+                case FormStartPosition.Manual:
+                    {
+                        // Uses the default preset Location property value.
+                        break;
+                    }
+
+                // The form is centered on the current display, and has the dimensions specified in the form’s size.
+                case FormStartPosition.CenterScreen:
+                    {
+                        CenterToScreen();
+                        break;
+                    }
+
+                // The form is positioned at the Windows default location and has the dimensions specified in the form’s size.
+                case FormStartPosition.WindowsDefaultLocation:
+                    {
+                        Location = new Point(Screen.PrimaryScreen.WorkingArea.X, Screen.PrimaryScreen.WorkingArea.Y);
+                        break;
+                    }
+
+                // The form is positioned at the Windows default location and has the bounds determined by Windows default.
+                case FormStartPosition.WindowsDefaultBounds:
+                    {
+                        Location = new Point(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y);
+                        break;
+                    }
+
+                // The form is centered within the bounds of its parent form.
+                case FormStartPosition.CenterParent:
+                    {
+                        CenterToParent();
+                        break;
+                    }
+
+                default:
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(StartPosition), StartPosition, null);
+                    }
+            }
+        }
+
+        public void UpdateTheme(Theme theme)
+        {
+            try
+            {
+                _styleManager = new StyleManager(theme);
+
+                BackColor = theme.ColorPalette.FormBackground;
+                _border.Color = theme.ColorPalette.BorderNormal;
+                _border.HoverColor = theme.ColorPalette.BorderHover;
+                ForeColor = theme.ColorPalette.TextEnabled;
+                _titleForeColor = theme.ColorPalette.TextEnabled;
+                _windowBarColor = theme.ColorPalette.FormWindowBar;
+
+                // Update internal controls.
+                ControlBox.UpdateTheme(theme);
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteDebug(e);
+            }
+
+            OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override void CreateHandle()
         {
@@ -974,6 +1102,14 @@ namespace VisualPlus.Toolkit.Dialogs
             Invalidate();
         }
 
+        /// <summary>Invokes the theme changed event.</summary>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnThemeChanged(ThemeEventArgs e)
+        {
+            Invalidate();
+            ThemeChanged?.Invoke(e);
+        }
+
         protected override void WndProc(ref Message m)
         {
             // FIX: Refactor to decrease complexity.
@@ -1109,97 +1245,6 @@ namespace VisualPlus.Toolkit.Dialogs
             {
                 _headerMouseDown = false;
             }
-        }
-
-        /// <summary>Invokes the theme changed event.</summary>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnThemeChanged(ThemeEventArgs e)
-        {
-            Invalidate();
-            ThemeChanged?.Invoke(e);
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>Creates a copy of the current object.</summary>
-        /// <returns>The <see cref="object" />.</returns>
-        public object Clone()
-        {
-            return MemberwiseClone();
-        }
-
-        /// <summary>Sets the current forms start position.</summary>
-        public void SetStartPosition()
-        {
-            // Determines the position mode to use.
-            switch (StartPosition)
-            {
-                // The position of the form is determined by the Location property.
-                case FormStartPosition.Manual:
-                    {
-                        // Uses the default preset Location property value.
-                        break;
-                    }
-
-                // The form is centered on the current display, and has the dimensions specified in the form’s size.
-                case FormStartPosition.CenterScreen:
-                    {
-                        CenterToScreen();
-                        break;
-                    }
-
-                // The form is positioned at the Windows default location and has the dimensions specified in the form’s size.
-                case FormStartPosition.WindowsDefaultLocation:
-                    {
-                        Location = new Point(Screen.PrimaryScreen.WorkingArea.X, Screen.PrimaryScreen.WorkingArea.Y);
-                        break;
-                    }
-
-                // The form is positioned at the Windows default location and has the bounds determined by Windows default.
-                case FormStartPosition.WindowsDefaultBounds:
-                    {
-                        Location = new Point(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y);
-                        break;
-                    }
-
-                // The form is centered within the bounds of its parent form.
-                case FormStartPosition.CenterParent:
-                    {
-                        CenterToParent();
-                        break;
-                    }
-
-                default:
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(StartPosition), StartPosition, null);
-                    }
-            }
-        }
-
-        public void UpdateTheme(Theme theme)
-        {
-            try
-            {
-                _styleManager = new StyleManager(theme);
-
-                BackColor = theme.ColorPalette.FormBackground;
-                _border.Color = theme.ColorPalette.BorderNormal;
-                _border.HoverColor = theme.ColorPalette.BorderHover;
-                ForeColor = theme.ColorPalette.TextEnabled;
-                _titleForeColor = theme.ColorPalette.TextEnabled;
-                _windowBarColor = theme.ColorPalette.FormWindowBar;
-
-                // Update internal controls.
-                ControlBox.UpdateTheme(theme);
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteDebug(e);
-            }
-
-            OnThemeChanged(new ThemeEventArgs(theme));
         }
 
         /// <summary>Snap the position to edge.</summary>
@@ -1400,15 +1445,17 @@ namespace VisualPlus.Toolkit.Dialogs
             _windowContextMenuStripTitle = _defaultWindowContextMenuTitle;
         }
 
+        #endregion
+
         private class MouseMessageFilter : IMessageFilter
         {
-            #region Events
+            #region Public Events
 
             public static event MouseEventHandler MouseMove;
 
             #endregion
 
-            #region Methods
+            #region Public Methods and Operators
 
             public bool PreFilterMessage(ref Message m)
             {
@@ -1423,7 +1470,5 @@ namespace VisualPlus.Toolkit.Dialogs
 
             #endregion
         }
-
-        #endregion
     }
 }

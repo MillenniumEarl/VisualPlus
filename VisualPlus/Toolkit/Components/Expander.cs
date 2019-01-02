@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: Expander.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:39 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +59,13 @@ namespace VisualPlus.Toolkit.Components
     [Description("The VisualPlus expander component enables controls to be expandable.")]
     public class Expander : Label
     {
-        #region Properties
+        #region Static Fields
+
+        private static List<Control> controlsList = new List<Control>();
+
+        #endregion
+
+        #region Public Properties
 
         [DefaultValue(typeof(Color), "Black")]
         [Category(PropertyCategory.Appearance)]
@@ -38,24 +85,7 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Overrides
-
-        protected override void OnClick(EventArgs e)
-        {
-            base.OnClick(e);
-
-            ConfigureState(Parent, this, State);
-            Invalidate();
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            Draw(e.Graphics, new Rectangle(0, 0, Width, Height), Color, State);
-        }
-
-        #endregion
-
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Add a expander control to the control, with the specified settings.</summary>
         /// <param name="control">The control to draw the expander on.</param>
@@ -304,6 +334,23 @@ namespace VisualPlus.Toolkit.Components
             }
         }
 
+        #endregion
+
+        #region Methods
+
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+
+            ConfigureState(Parent, this, State);
+            Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Draw(e.Graphics, new Rectangle(0, 0, Width, Height), Color, State);
+        }
+
         /// <summary>Attach the expander control.</summary>
         /// <param name="control">The control.</param>
         /// <param name="expander">The expander.</param>
@@ -364,8 +411,6 @@ namespace VisualPlus.Toolkit.Components
             Attach(control, _expander);
             SetPosition(control, rectangle.Location);
         }
-
-        private static List<Control> controlsList = new List<Control>();
 
         #endregion
     }

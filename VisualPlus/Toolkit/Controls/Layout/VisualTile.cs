@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualTile.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:10 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -33,7 +74,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
     [ToolboxItem(true)]
     public class VisualTile : VisualStyleBase, IThemeSupport
     {
-        #region Variables
+        #region Fields
 
         private ControlColorState backColorState;
         private BackgroundLayout backgroundLayout;
@@ -43,7 +84,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualTile" /> class.</summary>
         /// <param name="text">The text to display.</param>
@@ -69,7 +110,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         public enum TileType
         {
@@ -82,7 +123,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         public new Color BackColor
         {
@@ -223,7 +264,31 @@ namespace VisualPlus.Toolkit.Controls.Layout
 
         #endregion
 
-        #region Overrides
+        #region Public Methods and Operators
+
+        public void UpdateTheme(Theme theme)
+        {
+            try
+            {
+                backColorState = new ControlColorState { Disabled = theme.ColorPalette.ControlDisabled, Enabled = theme.ColorPalette.ControlEnabled, Hover = theme.ColorPalette.ItemHover, Pressed = theme.ColorPalette.Pressed };
+
+                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
+                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
+                TextStyle.Hover = theme.ColorPalette.TextHover;
+                TextStyle.Pressed = theme.ColorPalette.TextPressed;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteDebug(e);
+            }
+
+            Invalidate();
+            OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        #endregion
+
+        #region Methods
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -284,36 +349,6 @@ namespace VisualPlus.Toolkit.Controls.Layout
             }
 
             base.OnPaint(e);
-        }
-
-        #endregion
-
-        #region Methods
-
-        public void UpdateTheme(Theme theme)
-        {
-            try
-            {
-                backColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.ControlDisabled,
-                        Enabled = theme.ColorPalette.ControlEnabled,
-                        Hover = theme.ColorPalette.ItemHover,
-                        Pressed = theme.ColorPalette.Pressed
-                    };
-
-                TextStyle.Enabled = theme.ColorPalette.TextEnabled;
-                TextStyle.Disabled = theme.ColorPalette.TextDisabled;
-                TextStyle.Hover = theme.ColorPalette.TextHover;
-                TextStyle.Pressed = theme.ColorPalette.TextPressed;
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteDebug(e);
-            }
-
-            Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
         }
 
         #endregion

@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualControlBox.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:18 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -32,23 +73,19 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
     [TypeConverter(typeof(VisualSettingsTypeConverter))]
     public class VisualControlBox : VisualStyleBase, IThemeSupport
     {
-        #region Variables
+        #region Fields
 
         protected ControlBoxButton _closeButton;
         protected ControlBoxButton _helpButton;
         protected ControlBoxButton _maximizeButton;
         protected ControlBoxButton _minimizeButton;
 
-        #endregion
-
-        #region Variables
-
         private Size _buttonSize;
         private bool _initialized;
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualControlBox" /> class.</summary>
         public VisualControlBox()
@@ -66,7 +103,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
@@ -94,7 +131,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -170,65 +207,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Overrides
-
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-
-            if (_initialized)
-            {
-                Size = GetAdjustedSize();
-            }
-            else
-            {
-                Size = new Size(100, 25);
-            }
-        }
-
-        /// <summary>The close button click.</summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnCloseClick(object sender, EventArgs e)
-        {
-            CloseForm(ParentForm);
-        }
-
-        /// <summary>The help button click.</summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnHelpClick(object sender, EventArgs e)
-        {
-            HelpClick?.Invoke(new ControlBoxEventArgs(ParentForm));
-        }
-
-        /// <summary>The maximize button click.</summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnMaximizeClick(object sender, EventArgs e)
-        {
-            MaximizeClick?.Invoke(new ControlBoxEventArgs(ParentForm));
-            ToggleWindowState(null);
-        }
-
-        /// <summary>Occurs when the form is maximized.</summary>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnMaximizedClick(ControlBoxEventArgs e)
-        {
-            MaximizedClick?.Invoke(e);
-        }
-
-        /// <summary>The minimize button click.</summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnMinimizeClick(object sender, EventArgs e)
-        {
-            MinimizeForm(ParentForm);
-        }
-
-        #endregion
-
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Toggles the form window state.</summary>
         /// <param name="windowState">The form window state.</param>
@@ -380,69 +359,21 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         {
             try
             {
-                _closeButton.BackColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.CloseButtonBackDisabled,
-                        Enabled = theme.ColorPalette.CloseButtonBackEnabled,
-                        Hover = theme.ColorPalette.CloseButtonBackHover,
-                        Pressed = theme.ColorPalette.CloseButtonBackPressed
-                    };
+                _closeButton.BackColorState = new ControlColorState { Disabled = theme.ColorPalette.CloseButtonBackDisabled, Enabled = theme.ColorPalette.CloseButtonBackEnabled, Hover = theme.ColorPalette.CloseButtonBackHover, Pressed = theme.ColorPalette.CloseButtonBackPressed };
 
-                _closeButton.ForeColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.CloseButtonForeDisabled,
-                        Enabled = theme.ColorPalette.CloseButtonForeEnabled,
-                        Hover = theme.ColorPalette.CloseButtonForeHover,
-                        Pressed = theme.ColorPalette.CloseButtonForePressed
-                    };
+                _closeButton.ForeColorState = new ControlColorState { Disabled = theme.ColorPalette.CloseButtonForeDisabled, Enabled = theme.ColorPalette.CloseButtonForeEnabled, Hover = theme.ColorPalette.CloseButtonForeHover, Pressed = theme.ColorPalette.CloseButtonForePressed };
 
-                _maximizeButton.BackColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.MaximizeButtonBackDisabled,
-                        Enabled = theme.ColorPalette.MaximizeButtonBackEnabled,
-                        Hover = theme.ColorPalette.MaximizeButtonBackHover,
-                        Pressed = theme.ColorPalette.MaximizeButtonBackPressed
-                    };
+                _maximizeButton.BackColorState = new ControlColorState { Disabled = theme.ColorPalette.MaximizeButtonBackDisabled, Enabled = theme.ColorPalette.MaximizeButtonBackEnabled, Hover = theme.ColorPalette.MaximizeButtonBackHover, Pressed = theme.ColorPalette.MaximizeButtonBackPressed };
 
-                _maximizeButton.ForeColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.MaximizeButtonForeDisabled,
-                        Enabled = theme.ColorPalette.MaximizeButtonForeEnabled,
-                        Hover = theme.ColorPalette.MaximizeButtonForeHover,
-                        Pressed = theme.ColorPalette.MaximizeButtonForePressed
-                    };
+                _maximizeButton.ForeColorState = new ControlColorState { Disabled = theme.ColorPalette.MaximizeButtonForeDisabled, Enabled = theme.ColorPalette.MaximizeButtonForeEnabled, Hover = theme.ColorPalette.MaximizeButtonForeHover, Pressed = theme.ColorPalette.MaximizeButtonForePressed };
 
-                _minimizeButton.BackColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.MinimizeButtonBackDisabled,
-                        Enabled = theme.ColorPalette.MinimizeButtonBackEnabled,
-                        Hover = theme.ColorPalette.MinimizeButtonBackHover,
-                        Pressed = theme.ColorPalette.MinimizeButtonBackPressed
-                    };
+                _minimizeButton.BackColorState = new ControlColorState { Disabled = theme.ColorPalette.MinimizeButtonBackDisabled, Enabled = theme.ColorPalette.MinimizeButtonBackEnabled, Hover = theme.ColorPalette.MinimizeButtonBackHover, Pressed = theme.ColorPalette.MinimizeButtonBackPressed };
 
-                _minimizeButton.ForeColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.MinimizeButtonForeDisabled,
-                        Enabled = theme.ColorPalette.MinimizeButtonForeEnabled,
-                        Hover = theme.ColorPalette.MinimizeButtonForeHover,
-                        Pressed = theme.ColorPalette.MinimizeButtonForePressed
-                    };
+                _minimizeButton.ForeColorState = new ControlColorState { Disabled = theme.ColorPalette.MinimizeButtonForeDisabled, Enabled = theme.ColorPalette.MinimizeButtonForeEnabled, Hover = theme.ColorPalette.MinimizeButtonForeHover, Pressed = theme.ColorPalette.MinimizeButtonForePressed };
 
-                _helpButton.BackColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.HelpButtonBackDisabled,
-                        Enabled = theme.ColorPalette.HelpButtonBackEnabled,
-                        Hover = theme.ColorPalette.HelpButtonBackHover,
-                        Pressed = theme.ColorPalette.HelpButtonBackPressed
-                    };
+                _helpButton.BackColorState = new ControlColorState { Disabled = theme.ColorPalette.HelpButtonBackDisabled, Enabled = theme.ColorPalette.HelpButtonBackEnabled, Hover = theme.ColorPalette.HelpButtonBackHover, Pressed = theme.ColorPalette.HelpButtonBackPressed };
 
-                _helpButton.ForeColorState = new ControlColorState
-                    {
-                        Disabled = theme.ColorPalette.HelpButtonForeDisabled,
-                        Enabled = theme.ColorPalette.HelpButtonForeEnabled,
-                        Hover = theme.ColorPalette.HelpButtonForeHover,
-                        Pressed = theme.ColorPalette.HelpButtonForePressed
-                    };
+                _helpButton.ForeColorState = new ControlColorState { Disabled = theme.ColorPalette.HelpButtonForeDisabled, Enabled = theme.ColorPalette.HelpButtonForeEnabled, Hover = theme.ColorPalette.HelpButtonForeHover, Pressed = theme.ColorPalette.HelpButtonForePressed };
             }
             catch (Exception e)
             {
@@ -451,6 +382,64 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
             Invalidate();
             OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>The close button click.</summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnCloseClick(object sender, EventArgs e)
+        {
+            CloseForm(ParentForm);
+        }
+
+        /// <summary>The help button click.</summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnHelpClick(object sender, EventArgs e)
+        {
+            HelpClick?.Invoke(new ControlBoxEventArgs(ParentForm));
+        }
+
+        /// <summary>The maximize button click.</summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnMaximizeClick(object sender, EventArgs e)
+        {
+            MaximizeClick?.Invoke(new ControlBoxEventArgs(ParentForm));
+            ToggleWindowState(null);
+        }
+
+        /// <summary>Occurs when the form is maximized.</summary>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnMaximizedClick(ControlBoxEventArgs e)
+        {
+            MaximizedClick?.Invoke(e);
+        }
+
+        /// <summary>The minimize button click.</summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnMinimizeClick(object sender, EventArgs e)
+        {
+            MinimizeForm(ParentForm);
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+
+            if (_initialized)
+            {
+                Size = GetAdjustedSize();
+            }
+            else
+            {
+                Size = new Size(100, 25);
+            }
         }
 
         private void Button_VisibleChanged(object sender, EventArgs e)
@@ -561,46 +550,22 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
             _buttonSize = new Size(24, Height);
 
-            _helpButton = new ControlBoxButton
-                {
-                    Location = new Point(0, 0),
-                    Size = _buttonSize,
-                    Text = ControlBoxConstants.HelpText,
-                    OffsetLocation = new Point(0, 1)
-                };
+            _helpButton = new ControlBoxButton { Location = new Point(0, 0), Size = _buttonSize, Text = ControlBoxConstants.HelpText, OffsetLocation = new Point(0, 1) };
 
             _helpButton.Click += OnHelpClick;
             _helpButton.VisibleChanged += Button_VisibleChanged;
 
-            _minimizeButton = new ControlBoxButton
-                {
-                    Location = new Point(_buttonSize.Width, 0),
-                    Size = _buttonSize,
-                    Text = ControlBoxConstants.MinimizeText,
-                    OffsetLocation = new Point(2, 0)
-                };
+            _minimizeButton = new ControlBoxButton { Location = new Point(_buttonSize.Width, 0), Size = _buttonSize, Text = ControlBoxConstants.MinimizeText, OffsetLocation = new Point(2, 0) };
 
             _minimizeButton.Click += OnMinimizeClick;
             _minimizeButton.VisibleChanged += Button_VisibleChanged;
 
-            _maximizeButton = new ControlBoxButton
-                {
-                    Location = new Point(_buttonSize.Width * 2, 0),
-                    Size = _buttonSize,
-                    Text = ControlBoxConstants.MaximizeText,
-                    OffsetLocation = new Point(1, 1)
-                };
+            _maximizeButton = new ControlBoxButton { Location = new Point(_buttonSize.Width * 2, 0), Size = _buttonSize, Text = ControlBoxConstants.MaximizeText, OffsetLocation = new Point(1, 1) };
 
             _maximizeButton.Click += OnMaximizeClick;
             _maximizeButton.VisibleChanged += Button_VisibleChanged;
 
-            _closeButton = new ControlBoxButton
-                {
-                    Location = new Point(_buttonSize.Width * 3, 0),
-                    Size = _buttonSize,
-                    Text = ControlBoxConstants.CloseText,
-                    OffsetLocation = new Point(1, 2)
-                };
+            _closeButton = new ControlBoxButton { Location = new Point(_buttonSize.Width * 3, 0), Size = _buttonSize, Text = ControlBoxConstants.CloseText, OffsetLocation = new Point(1, 2) };
 
             _closeButton.Click += OnCloseClick;
             _closeButton.VisibleChanged += Button_VisibleChanged;

@@ -1,3 +1,44 @@
+#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualProgressBar.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:01 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
 #region Namespace
 
 using System;
@@ -29,7 +70,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
     [ToolboxItem(true)]
     public class VisualProgressBar : ProgressBase
     {
-        #region Variables
+        #region Fields
 
         private Border _border;
         private ColorState _colorState;
@@ -48,7 +89,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualProgressBar" /> class.</summary>
         public VisualProgressBar()
@@ -68,7 +109,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -266,42 +307,13 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
 
         #endregion
 
-        #region Overrides
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            Graphics _graphics = e.Graphics;
-            _graphics.SmoothingMode = SmoothingMode.HighQuality;
-            _graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            _graphics.TextRenderingHint = TextStyle.TextRenderingHint;
-            Rectangle _clientRectangle = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
-
-            ControlGraphicsPath = VisualBorderRenderer.CreateBorderTypePath(_clientRectangle, _border);
-
-            _graphics.SetClip(ControlGraphicsPath);
-
-            Color _backColor = Enabled ? BackColorState.Enabled : BackColorState.Disabled;
-            VisualBackgroundRenderer.DrawBackground(_graphics, _backColor, BackgroundImage, MouseState, _clientRectangle, _border);
-
-            DrawProgress(_orientation, _graphics);
-            VisualBorderRenderer.DrawBorderStyle(e.Graphics, _border, ControlGraphicsPath, MouseState);
-            e.Graphics.ResetClip();
-        }
-
-        #endregion
-
-        #region Methods
+        #region Public Methods and Operators
 
         public void UpdateTheme(Theme theme)
         {
             try
             {
-                _colorState = new ColorState
-                    {
-                        Enabled = theme.ColorPalette.ProgressBackground,
-                        Disabled = theme.ColorPalette.ProgressDisabled
-                    };
+                _colorState = new ColorState { Enabled = theme.ColorPalette.ProgressBackground, Disabled = theme.ColorPalette.ProgressDisabled };
 
                 _hatch.BackColor = Color.FromArgb(0, theme.ColorPalette.HatchBackColor);
                 _hatch.ForeColor = Color.FromArgb(20, theme.ColorPalette.HatchForeColor);
@@ -326,6 +338,31 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
 
             Invalidate();
             OnThemeChanged(new ThemeEventArgs(theme));
+        }
+
+        #endregion
+
+        #region Methods
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            Graphics _graphics = e.Graphics;
+            _graphics.SmoothingMode = SmoothingMode.HighQuality;
+            _graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            _graphics.TextRenderingHint = TextStyle.TextRenderingHint;
+            Rectangle _clientRectangle = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
+
+            ControlGraphicsPath = VisualBorderRenderer.CreateBorderTypePath(_clientRectangle, _border);
+
+            _graphics.SetClip(ControlGraphicsPath);
+
+            Color _backColor = Enabled ? BackColorState.Enabled : BackColorState.Disabled;
+            VisualBackgroundRenderer.DrawBackground(_graphics, _backColor, BackgroundImage, MouseState, _clientRectangle, _border);
+
+            DrawProgress(_orientation, _graphics);
+            VisualBorderRenderer.DrawBorderStyle(e.Graphics, _border, ControlGraphicsPath, MouseState);
+            e.Graphics.ResetClip();
         }
 
         private void DrawProgress(Orientation orientation, Graphics graphics)
@@ -442,11 +479,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
             // Toggle percentage
             if (_percentageVisible)
             {
-                StringFormat stringFormat = new StringFormat
-                    {
-                        Alignment = _valueAlignment,
-                        LineAlignment = StringAlignment.Center
-                    };
+                StringFormat stringFormat = new StringFormat { Alignment = _valueAlignment, LineAlignment = StringAlignment.Center };
 
                 graphics.DrawString(
                     percentValue,

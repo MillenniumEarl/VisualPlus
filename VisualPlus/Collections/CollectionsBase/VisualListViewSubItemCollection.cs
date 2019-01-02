@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualListViewSubItemCollection.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 01/01/2019 - 11:15 PM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.Collections;
@@ -22,7 +63,7 @@ namespace VisualPlus.Collections.CollectionsBase
 {
     public class VisualListViewSubItemCollection : CollectionBase, ICloneable, IList
     {
-        #region Variables
+        #region Fields
 
         private int _lastAccessedIndex;
         private VisualListView _listView;
@@ -30,7 +71,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualListViewSubItemCollection" /> class.</summary>
         public VisualListViewSubItemCollection()
@@ -62,13 +103,13 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         public event ListViewChangedEventHandler ChangedEvent;
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>Gets the index of the currently checked items in the control.</summary>
         [Browsable(false)]
@@ -178,7 +219,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Indexers
+        #region Public Indexers
 
         /// <summary>Gets or sets the subitem at the specified index within the collection.</summary>
         /// <param name="index">The index of the item in the collection to retrieve.</param>
@@ -238,80 +279,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
         #endregion
 
-        #region Overrides
-
-        /// <summary>Items have been cleared event.</summary>
-        protected override void OnClear()
-        {
-            ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ItemCollectionChanged, null, null, null));
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>Retrieves the index of the item with the specified key.</summary>
-        /// <param name="key">The name of the item to find in the collection.</param>
-        /// <returns>The <see cref="int" />.</returns>
-        public virtual int IndexOfKey(string key)
-        {
-            // Step 0 - Argument validation.
-            if (string.IsNullOrEmpty(key))
-            {
-                return -1;
-            }
-
-            // Step 1 - Check the last cached item.
-            if (List.IsValidIndex(_lastAccessedIndex))
-            {
-                if (TextManager.SafeCompareStrings(this[_lastAccessedIndex].Name, key, true))
-                {
-                    return _lastAccessedIndex;
-                }
-            }
-
-            // Step 2 - Search for the item.
-            for (var i = 0; i < List.Count; i++)
-            {
-                if (TextManager.SafeCompareStrings(this[i].Name, key, true))
-                {
-                    _lastAccessedIndex = i;
-                    return i;
-                }
-            }
-
-            _lastAccessedIndex = -1;
-            return -1;
-        }
-
-        /// <summary>Removes the specified item from the collection.</summary>
-        /// <param name="item">The <see cref="VisualListViewSubItem" /> representing the item to remove from the collection.</param>
-        public virtual void Remove(VisualListViewSubItem item)
-        {
-            RemoveByKey(item.Name);
-        }
-
-        /// <summary>Removes the item at the specified index within the collection.</summary>
-        /// <param name="index">The zero-based index of the item to remove.</param>
-        public new virtual void RemoveAt(int index)
-        {
-            if (List.IsValidIndex(index))
-            {
-                List.RemoveAt(index);
-                ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.SubItemCollectionChanged, null, null, null));
-            }
-        }
-
-        /// <summary>Removes the item with the specified key from the collection.</summary>
-        /// <param name="key">The name of the item to remove from the collection.</param>
-        public virtual void RemoveByKey(string key)
-        {
-            int _index = IndexOfKey(key);
-            if (List.IsValidIndex(_index))
-            {
-                RemoveAt(_index);
-            }
-        }
+        #region Public Methods and Operators
 
         /// <summary>Adds a subitem to the collection with the specified text.</summary>
         /// <param name="text">The text to display.</param>
@@ -485,16 +453,47 @@ namespace VisualPlus.Collections.CollectionsBase
             return -1;
         }
 
+        /// <summary>Retrieves the index of the item with the specified key.</summary>
+        /// <param name="key">The name of the item to find in the collection.</param>
+        /// <returns>The <see cref="int" />.</returns>
+        public virtual int IndexOfKey(string key)
+        {
+            // Step 0 - Argument validation.
+            if (string.IsNullOrEmpty(key))
+            {
+                return -1;
+            }
+
+            // Step 1 - Check the last cached item.
+            if (List.IsValidIndex(_lastAccessedIndex))
+            {
+                if (TextManager.SafeCompareStrings(this[_lastAccessedIndex].Name, key, true))
+                {
+                    return _lastAccessedIndex;
+                }
+            }
+
+            // Step 2 - Search for the item.
+            for (var i = 0; i < List.Count; i++)
+            {
+                if (TextManager.SafeCompareStrings(this[i].Name, key, true))
+                {
+                    _lastAccessedIndex = i;
+                    return i;
+                }
+            }
+
+            _lastAccessedIndex = -1;
+            return -1;
+        }
+
         /// <summary>Creates a new item and inserts it into the collection at the specified index.</summary>
         /// <param name="index">The zero-based index location where the item is inserted.</param>
         /// <param name="text">The text to display for the item.</param>
         /// <returns>The <see cref="VisualListViewSubItem" />.</returns>
         public VisualListViewSubItem Insert(int index, string text)
         {
-            VisualListViewSubItem _item = new VisualListViewSubItem
-                    {
-                       Text = text 
-                    };
+            VisualListViewSubItem _item = new VisualListViewSubItem { Text = text };
 
             return Insert(index, _item);
         }
@@ -521,12 +520,51 @@ namespace VisualPlus.Collections.CollectionsBase
             return item;
         }
 
+        /// <summary>Removes the specified item from the collection.</summary>
+        /// <param name="item">The <see cref="VisualListViewSubItem" /> representing the item to remove from the collection.</param>
+        public virtual void Remove(VisualListViewSubItem item)
+        {
+            RemoveByKey(item.Name);
+        }
+
+        /// <summary>Removes the item at the specified index within the collection.</summary>
+        /// <param name="index">The zero-based index of the item to remove.</param>
+        public new virtual void RemoveAt(int index)
+        {
+            if (List.IsValidIndex(index))
+            {
+                List.RemoveAt(index);
+                ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.SubItemCollectionChanged, null, null, null));
+            }
+        }
+
+        /// <summary>Removes the item with the specified key from the collection.</summary>
+        /// <param name="key">The name of the item to remove from the collection.</param>
+        public virtual void RemoveByKey(string key)
+        {
+            int _index = IndexOfKey(key);
+            if (List.IsValidIndex(_index))
+            {
+                RemoveAt(_index);
+            }
+        }
+
         /// <summary>The sub item has changed.</summary>
         /// <param name="source">The source.</param>
         /// <param name="e">The event args.</param>
         public void SubItem_Changed(object source, ListViewChangedEventArgs e)
         {
             ChangedEvent?.Invoke(source, e);
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>Items have been cleared event.</summary>
+        protected override void OnClear()
+        {
+            ChangedEvent?.Invoke(this, new ListViewChangedEventArgs(ListViewChangedTypes.ItemCollectionChanged, null, null, null));
         }
 
         #endregion

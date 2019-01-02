@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualExceptionDialog.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:44 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -25,13 +66,13 @@ namespace VisualPlus.Toolkit.Dialogs
     [ToolboxItem(false)]
     public partial class VisualExceptionDialog : VisualDialog
     {
-        #region Variables
+        #region Fields
 
         private readonly Exception _exception;
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualExceptionDialog" /> class.</summary>
         /// <param name="e">The exception.</param>
@@ -62,7 +103,7 @@ namespace VisualPlus.Toolkit.Dialogs
 
         #endregion
 
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Show the exception dialog.</summary>
         /// <param name="exception">The exception.</param>
@@ -88,6 +129,10 @@ namespace VisualPlus.Toolkit.Dialogs
             File.WriteAllText(filePath, ConsoleEx.Generate(_exception));
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>Display the <see cref="VisualExceptionDialog" />.</summary>
         /// <param name="exception">The exception.</param>
         /// <param name="caption">The caption.</param>
@@ -95,10 +140,7 @@ namespace VisualPlus.Toolkit.Dialogs
         /// <returns>The <see cref="DoWorkEventHandler" />.</returns>
         private static DoWorkEventHandler BackgroundWorker_DoShowWork(Exception exception, string caption, bool dialogWindow)
         {
-            VisualExceptionDialog _exceptionDialog = new VisualExceptionDialog(exception)
-                    {
-                       Text = caption 
-                    };
+            VisualExceptionDialog _exceptionDialog = new VisualExceptionDialog(exception) { Text = caption };
 
             if (dialogWindow)
             {
@@ -125,11 +167,7 @@ namespace VisualPlus.Toolkit.Dialogs
         /// <param name="e">The event.</param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog _saveFileDialog = new SaveFileDialog
-                {
-                    Title = @"Save exception log...",
-                    Filter = @"Text Files|*.log;*.txt|All Files|*.*"
-                };
+            SaveFileDialog _saveFileDialog = new SaveFileDialog { Title = @"Save exception log...", Filter = @"Text Files|*.log;*.txt|All Files|*.*" };
 
             if (_saveFileDialog.ShowDialog() == DialogResult.OK)
             {

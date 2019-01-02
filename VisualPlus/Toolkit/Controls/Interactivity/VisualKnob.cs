@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualKnob.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 1:18 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -26,7 +67,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
     [Description("The Visual Knob")]
     public class VisualKnob : UserControl
     {
-        #region Variables
+        #region Fields
 
         private int _buttonDivisions;
         private Container _components;
@@ -65,13 +106,12 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         private int _smallChange;
         private float _startAngle;
         private Color _tickColor;
-
         private int _value;
         private bool _valueVisible;
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualKnob" /> class.</summary>
         public VisualKnob()
@@ -136,13 +176,13 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         public event ValueChangedEventHandler ValueChanged;
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         public enum PointerStyle
         {
@@ -155,7 +195,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         // [Description("Set the number of intervals between minimum and maximum")]
         // [Category(Localize.Category.Behavior)]
@@ -664,7 +704,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #endregion
 
-        #region Overrides
+        #region Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -850,10 +890,6 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         {
             // Empty To avoid flickering due do background Drawing.
         }
-
-        #endregion
-
-        #region Methods
 
         private void ConfigureDimensions()
         {
@@ -1202,11 +1238,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             float degree = (_deltaAngle * Value) / (_maximum - _minimum);
             degree = MathManager.DegreeToRadians(degree + _startAngle);
 
-            Point Pos = new Point(0, 0)
-                {
-                    X = (int)(cx + ((radius - (KnobDistance * _drawRatio)) * Math.Cos(degree))),
-                    Y = (int)(cy + ((radius - (KnobDistance * _drawRatio)) * Math.Sin(degree)))
-                };
+            Point Pos = new Point(0, 0) { X = (int)(cx + ((radius - (KnobDistance * _drawRatio)) * Math.Cos(degree))), Y = (int)(cy + ((radius - (KnobDistance * _drawRatio)) * Math.Sin(degree))) };
 
             return Pos;
         }
@@ -1258,23 +1290,11 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         {
             float[] gradientPosition = { 0, 1 };
 
-            Color[] knobColor =
-                {
-                    Color.LightGray,
-                    Color.White
-                };
+            Color[] knobColor = { Color.LightGray, Color.White };
 
-            Color[] knobTopColor =
-                {
-                    Color.White,
-                    Color.LightGray
-                };
+            Color[] knobTopColor = { Color.White, Color.LightGray };
 
-            Color[] scaleColor =
-                {
-                    Color.LightGray,
-                    Color.White
-                };
+            Color[] scaleColor = { Color.LightGray, Color.White };
 
             _knob = new Gradient(180, knobColor, gradientPosition, ClientRectangle);
             _knobTop = new Gradient(knobTopColor, gradientPosition, ClientRectangle);

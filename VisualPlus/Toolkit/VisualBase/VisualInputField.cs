@@ -1,9 +1,51 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: VisualInputField.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 25/12/2018 - 2:28 AM
+// Last Modified: 02/01/2019 - 12:55 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+
 using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Designer;
@@ -25,13 +67,13 @@ namespace VisualPlus.Toolkit.VisualBase
     [ToolboxItem(true)]
     public class VisualInputField : TextBox
     {
-        #region Variables
+        #region Fields
 
         private bool alphaNumericToggle;
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualInputField" /> class.</summary>
         public VisualInputField()
@@ -41,7 +83,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         public event ClipboardEventHandler ClipboardCopy;
 
@@ -51,20 +93,48 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>Gets or sets the alpha numeric toggle, specifying whether to only accept numbers input.</summary>
         [Description(PropertyDescription.Toggle)]
         [Category(PropertyCategory.Behavior)]
         public bool AlphaNumeric
         {
-            get { return alphaNumericToggle; }
-            set { alphaNumericToggle = value; }
+            get
+            {
+                return alphaNumericToggle;
+            }
+
+            set
+            {
+                alphaNumericToggle = value;
+            }
         }
 
         #endregion
 
-        #region Overrides
+        #region Methods
+
+        /// <summary>Occurs when the clipboard copy event fires.</summary>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnClipboardCopy(ClipboardEventArgs e)
+        {
+            ClipboardCopy?.Invoke(this, e);
+        }
+
+        /// <summary>Occurs when the clipboard cut event fires.</summary>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnClipboardCut(ClipboardEventArgs e)
+        {
+            ClipboardCut?.Invoke(this, e);
+        }
+
+        /// <summary>Occurs when the clipboard paste event fires.</summary>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnClipboardPaste(ClipboardEventArgs e)
+        {
+            ClipboardPaste?.Invoke(this, e);
+        }
 
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
@@ -72,6 +142,7 @@ namespace VisualPlus.Toolkit.VisualBase
             if (alphaNumericToggle)
             {
                 const char DECIMAL_POINT = '.';
+
                 // const char NEGATIVE_VALUE = '-'; // TODO: Check for '-' to allow negative values
 
                 // Check key char input
@@ -106,27 +177,6 @@ namespace VisualPlus.Toolkit.VisualBase
             }
 
             base.WndProc(ref m);
-        }
-
-        /// <summary>Occurs when the clipboard copy event fires.</summary>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnClipboardCopy(ClipboardEventArgs e)
-        {
-            ClipboardCopy?.Invoke(this, e);
-        }
-
-        /// <summary>Occurs when the clipboard cut event fires.</summary>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnClipboardCut(ClipboardEventArgs e)
-        {
-            ClipboardCut?.Invoke(this, e);
-        }
-
-        /// <summary>Occurs when the clipboard paste event fires.</summary>
-        /// <param name="e">The event args.</param>
-        protected virtual void OnClipboardPaste(ClipboardEventArgs e)
-        {
-            ClipboardPaste?.Invoke(this, e);
         }
 
         #endregion

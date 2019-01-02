@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: ProgressDialog.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:39 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.Runtime.InteropServices;
@@ -9,7 +50,7 @@ namespace VisualPlus.Toolkit.Components
 {
     public class ProgressDialog
     {
-        #region Variables
+        #region Fields
 
         private readonly IntPtr _parentHandle;
 
@@ -31,8 +72,10 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
+        /// <summary>Initializes a new instance of the <see cref="ProgressDialog" /> class.</summary>
+        /// <param name="parentHandle">The parent handle.</param>
         public ProgressDialog(IntPtr parentHandle)
         {
             _parentHandle = parentHandle;
@@ -40,7 +83,7 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Enumerators
+        #region Enums
 
         /// <summary>Flags that indicate the action to be taken by the ProgressDialog.SetTime() method.</summary>
         public enum ProgressDialogAction : uint
@@ -89,7 +132,124 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Properties
+        #region Interfaces
+
+        [ComImport]
+        [Guid("EBBC7C04-315E-11d2-B62F-006097DF5BD4")]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        public interface IProgressDialog
+        {
+            #region Public Methods and Operators
+
+            /// <summary>Checks whether the user has canceled the operation.</summary>
+            /// <returns>TRUE if the user has cancelled the operation; otherwise, FALSE.</returns>
+            /// <remarks>
+            ///     The system does not send a message to the application when the user clicks the Cancel button.
+            ///     You must periodically use this function to poll the progress dialog box object to determine
+            ///     whether the operation has been canceled.
+            /// </remarks>
+            [PreserveSig]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            bool HasUserCanceled();
+
+            /// <summary>
+            ///     Specifies an Audio-Video Interleaved (AVI) clip that runs in the dialog box. Note: Note  This method is not
+            ///     supported in Windows Vista or later versions.
+            /// </summary>
+            /// <param name="hInstAnimation">An instance handle to the module from which the AVI resource should be loaded.</param>
+            /// <param name="idAnimation">
+            ///     An AVI resource identifier. To create this value, use the MAKEINTRESOURCE macro. The control
+            ///     loads the AVI resource from the module specified by hInstAnimation.
+            /// </param>
+            void SetAnimation(IntPtr hInstAnimation, ushort idAnimation);
+
+            /// <summary>Sets a message to be displayed if the user cancels the operation.</summary>
+            /// <param name="pwzCancelMsg">A pointer to a null-terminated Unicode string that contains the message to be displayed.</param>
+            /// <param name="pvReserved">Reserved. Set to NULL.</param>
+            /// <remarks>
+            ///     Even though the user clicks Cancel, the application cannot immediately call
+            ///     IProgressDialog::StopProgressDialog to close the dialog box. The application must wait until the
+            ///     next time it calls IProgressDialog::HasUserCancelled to discover that the user has canceled the
+            ///     operation. Since this delay might be significant, the progress dialog box provides the user with
+            ///     immediate feedback by clearing text lines 1 and 2 and displaying the cancel message on line 3.
+            ///     The message is intended to let the user know that the delay is normal and that the progress dialog
+            ///     box will be closed shortly.
+            ///     It is typically is set to something like "Please wait while ...".
+            /// </remarks>
+            void SetCancelMsg([MarshalAs(UnmanagedType.LPWStr)] string pwzCancelMsg, object pvReserved);
+
+            /// <summary>Displays a message in the progress dialog.</summary>
+            /// <param name="dwLineNum">
+            ///     The line number on which the text is to be displayed. Currently there are three lines—1, 2, and
+            ///     3. If the PROGDLG_AUTOTIME flag was included in the dwFlags parameter when IProgressDialog::StartProgressDialog was
+            ///     called, only lines 1 and 2 can be used. The estimated time will be displayed on line 3.
+            /// </param>
+            /// <param name="pwzString">A null-terminated Unicode string that contains the text.</param>
+            /// <param name="fCompactPath">
+            ///     TRUE to have path strings compacted if they are too large to fit on a line. The paths are
+            ///     compacted with PathCompactPath.
+            /// </param>
+            /// <param name="pvReserved"> Reserved. Set to IntPtr.Zero.</param>
+            /// <remarks>
+            ///     This function is typically used to display a message such as "Item XXX is now being processed." typically,
+            ///     messages are displayed on lines 1 and 2, with line 3 reserved for the estimated time.
+            /// </remarks>
+            void SetLine(uint dwLineNum, [MarshalAs(UnmanagedType.LPWStr)] string pwzString, [MarshalAs(UnmanagedType.VariantBool)] bool fCompactPath, IntPtr pvReserved);
+
+            /// <summary>Updates the progress dialog box with the current state of the operation.</summary>
+            /// <param name="dwCompleted">
+            ///     An application-defined value that indicates what proportion of the operation has been
+            ///     completed at the time the method was called.
+            /// </param>
+            /// <param name="dwTotal">
+            ///     An application-defined value that specifies what value dwCompleted will have when the operation
+            ///     is complete.
+            /// </param>
+            void SetProgress(uint dwCompleted, uint dwTotal);
+
+            /// <summary>Updates the progress dialog box with the current state of the operation.</summary>
+            /// <param name="ullCompleted">
+            ///     An application-defined value that indicates what proportion of the operation has been
+            ///     completed at the time the method was called.
+            /// </param>
+            /// <param name="ullTotal">
+            ///     An application-defined value that specifies what value ullCompleted will have when the operation
+            ///     is complete.
+            /// </param>
+            void SetProgress64(ulong ullCompleted, ulong ullTotal);
+
+            /// <summary>Sets the title of the progress dialog box.</summary>
+            /// <param name="pwzTitle">A pointer to a null-terminated Unicode string that contains the dialog box title.</param>
+            void SetTitle([MarshalAs(UnmanagedType.LPWStr)] string pwzTitle);
+
+            /// <summary>Starts the progress dialog box.</summary>
+            /// <param name="hwndParent">A handle to the dialog box's parent window.</param>
+            /// <param name="punkEnableModless">Reserved. Set to null.</param>
+            /// <param name="dwFlags">Flags that control the operation of the progress dialog box. </param>
+            /// <param name="pvReserved">Reserved. Set to IntPtr.Zero</param>
+            void StartProgressDialog(IntPtr hwndParent, [MarshalAs(UnmanagedType.IUnknown)] object punkEnableModless, ProgressDialogBehavior dwFlags, IntPtr pvReserved);
+
+            /// <summary>Stops the progress dialog box and removes it from the screen.</summary>
+            void StopProgressDialog();
+
+            /// <summary>Resets the progress dialog box timer to zero.</summary>
+            /// <param name="dwDialogAction">Flags that indicate the action to be taken by the timer.</param>
+            /// <param name="pvReserved">Reserved. Set to NULL.</param>
+            /// <remarks>
+            ///     The timer is used to estimate the remaining time. It is started when your application
+            ///     calls IProgressDialog::StartProgressDialog. Unless your application will start immediately,
+            ///     it should call Timer just before starting the operation.
+            ///     This practice ensures that the time estimates will be as accurate as possible. This method
+            ///     should not be called after the first call to IProgressDialog::SetProgress.
+            /// </remarks>
+            void Timer(ProgressDialogAction dwDialogAction, object pvReserved);
+
+            #endregion
+        }
+
+        #endregion
+
+        #region Public Properties
 
         public string CancelMessage
         {
@@ -193,7 +353,7 @@ namespace VisualPlus.Toolkit.Components
 
         #endregion
 
-        #region Methods
+        #region Public Methods and Operators
 
         public void CloseDialog()
         {
@@ -236,121 +396,12 @@ namespace VisualPlus.Toolkit.Components
             _progressDialog.StartProgressDialog(_parentHandle, null, dialogFlags, IntPtr.Zero);
         }
 
+        #endregion
+
         [ComImport]
         [Guid("F8383852-FCD3-11d1-A6B9-006097DF5BD4")]
         public class Win32ProgressDialog
         {
         }
-
-        [ComImport]
-        [Guid("EBBC7C04-315E-11d2-B62F-006097DF5BD4")]
-        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        public interface IProgressDialog
-        {
-            /// <summary>Starts the progress dialog box.</summary>
-            /// <param name="hwndParent">A handle to the dialog box's parent window.</param>
-            /// <param name="punkEnableModless">Reserved. Set to null.</param>
-            /// <param name="dwFlags">Flags that control the operation of the progress dialog box. </param>
-            /// <param name="pvReserved">Reserved. Set to IntPtr.Zero</param>
-            void StartProgressDialog(IntPtr hwndParent, [MarshalAs(UnmanagedType.IUnknown)] object punkEnableModless, ProgressDialogBehavior dwFlags, IntPtr pvReserved);
-
-            /// <summary>Stops the progress dialog box and removes it from the screen.</summary>
-            void StopProgressDialog();
-
-            /// <summary>Sets the title of the progress dialog box.</summary>
-            /// <param name="pwzTitle">A pointer to a null-terminated Unicode string that contains the dialog box title.</param>
-            void SetTitle([MarshalAs(UnmanagedType.LPWStr)] string pwzTitle);
-
-            /// <summary>
-            ///     Specifies an Audio-Video Interleaved (AVI) clip that runs in the dialog box. Note: Note  This method is not
-            ///     supported in Windows Vista or later versions.
-            /// </summary>
-            /// <param name="hInstAnimation">An instance handle to the module from which the AVI resource should be loaded.</param>
-            /// <param name="idAnimation">
-            ///     An AVI resource identifier. To create this value, use the MAKEINTRESOURCE macro. The control
-            ///     loads the AVI resource from the module specified by hInstAnimation.
-            /// </param>
-            void SetAnimation(IntPtr hInstAnimation, ushort idAnimation);
-
-            /// <summary>Checks whether the user has canceled the operation.</summary>
-            /// <returns>TRUE if the user has cancelled the operation; otherwise, FALSE.</returns>
-            /// <remarks>
-            ///     The system does not send a message to the application when the user clicks the Cancel button.
-            ///     You must periodically use this function to poll the progress dialog box object to determine
-            ///     whether the operation has been canceled.
-            /// </remarks>
-            [PreserveSig]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool HasUserCanceled();
-
-            /// <summary>Updates the progress dialog box with the current state of the operation.</summary>
-            /// <param name="dwCompleted">
-            ///     An application-defined value that indicates what proportion of the operation has been
-            ///     completed at the time the method was called.
-            /// </param>
-            /// <param name="dwTotal">
-            ///     An application-defined value that specifies what value dwCompleted will have when the operation
-            ///     is complete.
-            /// </param>
-            void SetProgress(uint dwCompleted, uint dwTotal);
-
-            /// <summary>Updates the progress dialog box with the current state of the operation.</summary>
-            /// <param name="ullCompleted">
-            ///     An application-defined value that indicates what proportion of the operation has been
-            ///     completed at the time the method was called.
-            /// </param>
-            /// <param name="ullTotal">
-            ///     An application-defined value that specifies what value ullCompleted will have when the operation
-            ///     is complete.
-            /// </param>
-            void SetProgress64(ulong ullCompleted, ulong ullTotal);
-
-            /// <summary>Displays a message in the progress dialog.</summary>
-            /// <param name="dwLineNum">
-            ///     The line number on which the text is to be displayed. Currently there are three lines—1, 2, and
-            ///     3. If the PROGDLG_AUTOTIME flag was included in the dwFlags parameter when IProgressDialog::StartProgressDialog was
-            ///     called, only lines 1 and 2 can be used. The estimated time will be displayed on line 3.
-            /// </param>
-            /// <param name="pwzString">A null-terminated Unicode string that contains the text.</param>
-            /// <param name="fCompactPath">
-            ///     TRUE to have path strings compacted if they are too large to fit on a line. The paths are
-            ///     compacted with PathCompactPath.
-            /// </param>
-            /// <param name="pvReserved"> Reserved. Set to IntPtr.Zero.</param>
-            /// <remarks>
-            ///     This function is typically used to display a message such as "Item XXX is now being processed." typically,
-            ///     messages are displayed on lines 1 and 2, with line 3 reserved for the estimated time.
-            /// </remarks>
-            void SetLine(uint dwLineNum, [MarshalAs(UnmanagedType.LPWStr)] string pwzString, [MarshalAs(UnmanagedType.VariantBool)] bool fCompactPath, IntPtr pvReserved);
-
-            /// <summary>Sets a message to be displayed if the user cancels the operation.</summary>
-            /// <param name="pwzCancelMsg">A pointer to a null-terminated Unicode string that contains the message to be displayed.</param>
-            /// <param name="pvReserved">Reserved. Set to NULL.</param>
-            /// <remarks>
-            ///     Even though the user clicks Cancel, the application cannot immediately call
-            ///     IProgressDialog::StopProgressDialog to close the dialog box. The application must wait until the
-            ///     next time it calls IProgressDialog::HasUserCancelled to discover that the user has canceled the
-            ///     operation. Since this delay might be significant, the progress dialog box provides the user with
-            ///     immediate feedback by clearing text lines 1 and 2 and displaying the cancel message on line 3.
-            ///     The message is intended to let the user know that the delay is normal and that the progress dialog
-            ///     box will be closed shortly.
-            ///     It is typically is set to something like "Please wait while ...".
-            /// </remarks>
-            void SetCancelMsg([MarshalAs(UnmanagedType.LPWStr)] string pwzCancelMsg, object pvReserved);
-
-            /// <summary>Resets the progress dialog box timer to zero.</summary>
-            /// <param name="dwDialogAction">Flags that indicate the action to be taken by the timer.</param>
-            /// <param name="pvReserved">Reserved. Set to NULL.</param>
-            /// <remarks>
-            ///     The timer is used to estimate the remaining time. It is started when your application
-            ///     calls IProgressDialog::StartProgressDialog. Unless your application will start immediately,
-            ///     it should call Timer just before starting the operation.
-            ///     This practice ensures that the time estimates will be as accurate as possible. This method
-            ///     should not be called after the first call to IProgressDialog::SetProgress.
-            /// </remarks>
-            void Timer(ProgressDialogAction dwDialogAction, object pvReserved);
-        }
-
-        #endregion
     }
 }

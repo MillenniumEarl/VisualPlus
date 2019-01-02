@@ -1,4 +1,45 @@
-﻿#region Namespace
+﻿#region License
+
+// -----------------------------------------------------------------------------------------------------------
+// 
+// Name: Theme.cs
+// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// 
+// Created: 10/12/2018 - 11:45 PM
+// Last Modified: 02/01/2019 - 12:09 AM
+// 
+// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// All Rights Reserved.
+// 
+// -----------------------------------------------------------------------------------------------------------
+// 
+// GNU General Public License v3.0 (GPL-3.0)
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//  
+// This file is subject to the terms and conditions defined in the file 
+// 'LICENSE.md', which should be in the root directory of the source code package.
+// 
+// -----------------------------------------------------------------------------------------------------------
+
+#endregion
+
+#region Namespace
 
 using System;
 using System.ComponentModel;
@@ -24,7 +65,7 @@ namespace VisualPlus.Structure
     [TypeConverter(typeof(ThemeTypeConverter))]
     public class Theme
     {
-        #region Variables
+        #region Fields
 
         private ColorPalette _colorPalette;
         private ThemeInformation _information;
@@ -32,7 +73,7 @@ namespace VisualPlus.Structure
 
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="Theme" /> class.</summary>
         /// <param name="themeInformation">The theme information.</param>
@@ -83,7 +124,7 @@ namespace VisualPlus.Structure
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [TypeConverter(typeof(VisualSettingsTypeConverter))]
@@ -146,16 +187,7 @@ namespace VisualPlus.Structure
 
         #endregion
 
-        #region Overrides
-
-        public override string ToString()
-        {
-            return _rawTheme;
-        }
-
-        #endregion
-
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>Invoke the theme update to the supported component.</summary>
         /// <param name="component">The component.</param>
@@ -236,6 +268,11 @@ namespace VisualPlus.Structure
             _theme.Save(filePath);
         }
 
+        public override string ToString()
+        {
+            return _rawTheme;
+        }
+
         /// <summary>Update the theme contents.</summary>
         /// <param name="themeInformation">The theme Information.</param>
         /// <param name="colorPalette">The color Palette.</param>
@@ -246,6 +283,10 @@ namespace VisualPlus.Structure
 
             _rawTheme = ThemeSerialization.Serialize(this);
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>Loads a <see cref="Theme" /> from resources.</summary>
         /// <param name="themes">The theme.</param>

@@ -6,7 +6,7 @@
 // UnitTests - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 01/01/2019 - 10:43 PM
+// Last Modified: 01/01/2019 - 10:49 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -66,17 +66,11 @@ namespace UnitTests.Forms
     {
         #region Fields
 
-        #region Variables
-
         private UnitTests _unitTest;
 
         #endregion
 
-        #endregion
-
         #region Constructors and Destructors
-
-        #region Constructors
 
         /// <summary>Initializes a new instance of the <see cref="UnitTestManager" /> class.</summary>
         public UnitTestManager()
@@ -88,11 +82,7 @@ namespace UnitTests.Forms
 
         #endregion
 
-        #endregion
-
         #region Enums
-
-        #region Enumerators
 
         /// <summary>The different kind of unit tests.</summary>
         private enum UnitTests
@@ -121,8 +111,6 @@ namespace UnitTests.Forms
             /// <summary>The clipboard test.</summary>
             ClipboardTest = 7
         }
-
-        #endregion
 
         #endregion
 

@@ -157,7 +157,7 @@ namespace VisualThemeBuilder.Forms
         /// <param name="e">The event args.</param>
         private void Main_HelpButtonClicked(ControlBoxEventArgs e)
         {
-            DialogResult dialogResult = VisualMessageBox.Show(@"Would you like to visit the website?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = VisualMessageBox.Show(@"Would you like to visit the VisualPlus website?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dialogResult == DialogResult.Yes)
             {

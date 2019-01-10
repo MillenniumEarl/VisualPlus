@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:24 AM
+// Last Modified: 06/01/2019 - 9:00 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -169,6 +169,27 @@ namespace VisualPlus.Native
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool GetCursorPos(ref Point lpPoint);
 
+        /// <summary>
+        ///     This function retrieves a handle to a display device context (DC) for the client area of a specified window or
+        ///     for the entire screen. You can use the returned handle in subsequent graphics display interface (GDI) functions to
+        ///     draw in the device context.
+        /// </summary>
+        /// <param name="hWnd">
+        ///     Handle to the window whose device context is to be retrieved. If this value is NULL, GetDCEx
+        ///     retrieves the device context for the entire screen.
+        /// </param>
+        /// <param name="hrgnClip">Specifies a clipping region that may be combined with the visible region of the device context.</param>
+        /// <param name="flags">
+        ///     Specifies how the device context is created. This parameter can be a combination of the following
+        ///     values.
+        /// </param>
+        /// <returns>
+        ///     The handle of the device context for the specified window indicates success. NULL indicates failure. An
+        ///     invalid value for the hWnd parameter causes the function to fail.
+        /// </returns>
+        [DllImport("user32.dll", ExactSpelling = true)]
+        public static extern IntPtr GetDCEx(IntPtr hWnd, IntPtr hrgnClip, int flags);
+
         /// <summary>The GetMonitorInfo function retrieves information about a display monitor.</summary>
         /// <param name="hMonitor">A handle to the display monitor of interest.</param>
         /// <param name="lpmi">
@@ -214,6 +235,36 @@ namespace VisualPlus.Native
         /// </returns>
         [DllImport("user32.dll")]
         public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+
+        /// <summary>
+        ///     The GetWindowDC function retrieves the device context (DC) for the entire window, including title bar, menus,
+        ///     and scroll bars. A window device context permits painting anywhere in a window, because the origin of the device
+        ///     context is the upper-left corner of the window instead of the client area.
+        /// </summary>
+        /// <param name="hWnd">
+        ///     A handle to the window with a device context that is to be retrieved. If this value is NULL,
+        ///     GetWindowDC retrieves the device context for the entire screen.
+        /// </param>
+        /// <returns>
+        ///     If the function succeeds, the return value is a handle to a device context for the specified window. If the
+        ///     function fails, the return value is NULL, indicating an error or an invalid hWnd parameter.
+        /// </returns>
+        [DllImport("user32.dll", ExactSpelling = true)]
+        public static extern IntPtr GetWindowDC(IntPtr hWnd);
+
+        /// <summary>
+        ///     Retrieves the dimensions of the bounding rectangle of the specified window. The dimensions are given in screen
+        ///     coordinates that are relative to the upper-left corner of the screen.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window.</param>
+        /// <param name="lpRect">
+        ///     A pointer to a <see cref="RECT" /> structure that receives the screen coordinates of the
+        ///     upper-left and lower-right corners of the window.
+        /// </param>
+        /// <returns>If the function succeeds, the return value is nonzero.</returns>
+        [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
         /// <summary>Inserts a new menu item into a menu, moving other items down the menu.</summary>
         /// <param name="hMenu">A handle to the menu to be changed.</param>

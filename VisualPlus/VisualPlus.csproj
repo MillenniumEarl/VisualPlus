@@ -83,6 +83,7 @@
     <Compile Include="Enumerators\ListViewChangedTypes.cs" />
     <Compile Include="Enumerators\CompareDirection.cs" />
     <Compile Include="Enumerators\ListViewHoverTypes.cs" />
+    <Compile Include="Enumerators\SetWindowPosFlags.cs" />
     <Compile Include="Enumerators\SortDirections.cs" />
     <Compile Include="Events\ClipboardEventArgs.cs" />
     <Compile Include="Events\ListViewHoverEventArgs.cs" />
@@ -158,7 +159,9 @@
     <Compile Include="Renders\VisualScrollBarRenderer.cs" />
     <Compile Include="Renders\VisualToggleRenderer.cs" />
     <Compile Include="Renders\VisualControlRenderer.cs" />
+    <Compile Include="Structure\NCCALCSIZE_PARAMS.cs" />
     <Compile Include="Structure\TipInfo.cs" />
+    <Compile Include="Structure\WINDOWPOS.cs" />
     <Compile Include="Toolkit\Controls\Editors\VisualIPBox.cs" />
     <Compile Include="Toolkit\Dialogs\VisualExceptionDialog.cs">
       <SubType>Form</SubType>

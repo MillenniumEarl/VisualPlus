@@ -43,6 +43,26 @@ namespace VisualPlus.Constants
 {
     public class FormConstants
     {
+        public const int DCX_CACHE = 0x00000002;
+        public const int DCX_CLIPCHILDREN = 0x00000008;
+        public const int DCX_CLIPSIBLINGS = 0x00000010;
+        public const int DCX_EXCLUDERGN = 0x00000040;
+        public const int DCX_INTERSECTRGN = 0x00000080;
+        public const int DCX_INTERSECTUPDATE = 0x00000200;
+        public const int DCX_LOCKWINDOWUPDATE = 0x00000400;
+        public const int DCX_NORESETATTRS = 0x00000004;
+        public const int DCX_PARENTCLIP = 0x00000020;
+        public const int DCX_VALIDATE = 0x00200000;
+
+        // GetDCEx Flags
+        public const int DCX_WINDOW = 0x00000001;
+
+        public const uint WM_NCCALCSIZE = 0x83;
+        public const uint WM_NCHITTEST = 0x84;
+
+        // Window Messages
+        public const uint WM_NCPAINT = 0x85;
+
         #region Constants
 
         public const int HT_CAPTION = 0x2;

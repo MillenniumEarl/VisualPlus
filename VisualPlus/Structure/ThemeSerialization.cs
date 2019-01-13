@@ -78,7 +78,7 @@ namespace VisualPlus.Structure
             ThemeInformation themeInformation = new ThemeInformation();
             ColorPalette colorPalette = new ColorPalette();
 
-            // TODO: Simplify to decompose body.
+            // TODO: Method body is too complex to properly analyze, consider decomposing it.
             try
             {
                 themeInformation.Author = XMLManager.ReadElement(themeDocument, Information + "Author");

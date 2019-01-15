@@ -69,6 +69,7 @@ namespace VisualPlus.Designer
             properties.Remove("BackgroundImageLayout");
             properties.Remove("UseVisualStyleBackColor");
             properties.Remove("RightToLeft");
+            properties.Remove("Text");
 
             base.PreFilterProperties(properties);
         }

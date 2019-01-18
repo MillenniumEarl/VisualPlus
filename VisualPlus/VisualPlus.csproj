@@ -108,6 +108,7 @@
     <Compile Include="Extensibility\StringExtension.cs" />
     <Compile Include="Extensibility\XmlExtension.cs" />
     <Compile Include="Interfaces\IToolTip.cs" />
+    <Compile Include="Library.cs" />
     <Compile Include="Localization\EventCategory.cs" />
     <Compile Include="Localization\EventDescription.cs" />
     <Compile Include="Localization\GlobalStrings.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Structure\TipInfo.cs" />
     <Compile Include="Structure\WINDOWPOS.cs" />
     <Compile Include="Toolkit\Controls\Editors\VisualIPBox.cs" />
+    <Compile Include="Toolkit\Controls\Navigation\VisualSuperTabControl.cs" />
     <Compile Include="Toolkit\Dialogs\VisualExceptionDialog.cs">
       <SubType>Form</SubType>
     </Compile>

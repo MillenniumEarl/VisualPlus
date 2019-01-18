@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Last Modified: 17/01/2019 - 7:12 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -54,28 +54,29 @@ namespace VisualPlus.Designer
 
         protected override void PreFilterProperties(IDictionary properties)
         {
-            properties.Remove("ImeMode");
-            properties.Remove("Padding");
+            properties.Remove("AutoEllipsis");
+            properties.Remove("BackColor");
+            properties.Remove("BackgroundImage");
+            properties.Remove("BackgroundImageLayout");
+            properties.Remove("ComponentFont");
             properties.Remove("FlatAppearance");
             properties.Remove("FlatStyle");
-            properties.Remove("AutoEllipsis");
-            properties.Remove("UseCompatibleTextRendering");
+            properties.Remove("ForeColor");
+            properties.Remove("ForeColorDisabled");
             properties.Remove("Image");
             properties.Remove("ImageAlign");
             properties.Remove("ImageIndex");
             properties.Remove("ImageKey");
             properties.Remove("ImageList");
-            properties.Remove("TextImageRelation");
-            properties.Remove("BackColor");
-            properties.Remove("BackgroundImage");
-            properties.Remove("BackgroundImageLayout");
-            properties.Remove("UseVisualStyleBackColor");
-            properties.Remove("ComponentFont");
-            properties.Remove("ForeColor");
-            properties.Remove("ForeColorDisabled");
-            properties.Remove("StyleManager");
-            properties.Remove("TextRenderingHint");
+            properties.Remove("ImeMode");
+            properties.Remove("Padding");
             properties.Remove("RightToLeft");
+            properties.Remove("StyleManager");
+            properties.Remove("Text");
+            properties.Remove("TextImageRelation");
+            properties.Remove("TextRenderingHint");
+            properties.Remove("UseCompatibleTextRendering");
+            properties.Remove("UseVisualStyleBackColor");
 
             base.PreFilterProperties(properties);
         }

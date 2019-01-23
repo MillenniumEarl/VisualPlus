@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -47,30 +47,43 @@ using System.Drawing;
 
 namespace VisualPlus.Extensibility
 {
+    /// <summary>The <see cref="Bitmap" /> extensions collection.</summary>
     public static class BitmapExtension
     {
         #region Public Methods and Operators
 
-        /// <summary>Filter the bitmap with GrayScale.</summary>
-        /// <param name="bitmap">The bitmap.</param>
+        /// <summary>Filters the <see cref="Bitmap" /> using GrayScale.</summary>
+        /// <param name="bitmap">The bitmap image.</param>
         /// <returns>The <see cref="Bitmap" />.</returns>
         public static Bitmap FilterGrayScale(this Bitmap bitmap)
         {
-            Bitmap grayScale = new Bitmap(bitmap.Width, bitmap.Height);
+            // Constants
+            const double RED_THRESHOLD = 0.3;
+            const double GREEN_THRESHOLD = 0.59;
+            const double BLUE_THRESHOLD = 0.11;
 
-            for (var y = 0; y < grayScale.Height; y++)
+            // Create new gray-scaled bitmap image to work with using the original pixel size
+            using (Bitmap filteredGrayScaleImage = new Bitmap(bitmap.Width, bitmap.Height))
             {
-                for (var x = 0; x < grayScale.Width; x++)
+                // Loop thru the Y coordinates
+                for (var y = 0; y < filteredGrayScaleImage.Height; y++)
                 {
-                    Color c = bitmap.GetPixel(x, y);
+                    // Loop thru the X coordinates
+                    for (var x = 0; x < filteredGrayScaleImage.Width; x++)
+                    {
+                        // Retrieve the color from the input bitmap pixels
+                        Color pixelColor = bitmap.GetPixel(x, y);
 
-                    var gs = (int)((c.R * 0.3) + (c.G * 0.59) + (c.B * 0.11));
+                        // Calculate gray-scale value of the selected pixel
+                        var pixelColorGrayScaleValue = (int)((pixelColor.R * RED_THRESHOLD) + (pixelColor.G * GREEN_THRESHOLD) + (pixelColor.B * BLUE_THRESHOLD));
 
-                    grayScale.SetPixel(x, y, Color.FromArgb(gs, gs, gs));
+                        // Update the color of the specified pixel in the bitmap
+                        filteredGrayScaleImage.SetPixel(x, y, Color.FromArgb(pixelColorGrayScaleValue, pixelColorGrayScaleValue, pixelColorGrayScaleValue));
+                    }
                 }
-            }
 
-            return grayScale;
+                return filteredGrayScaleImage;
+            }
         }
 
         #endregion

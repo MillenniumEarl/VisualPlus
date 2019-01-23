@@ -2,11 +2,11 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: ExceptionMessenger.cs
+// Name: Extensions.cs
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Created: 22/01/2019 - 11:45 PM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -42,53 +42,41 @@
 #region Namespace
 
 using System;
-using System.Text;
+using System.ComponentModel;
+using System.Globalization;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.TypeConverters
 {
-    public class ExceptionMessenger
+    public class CustomNumberTypeConverter : TypeConverter
     {
         #region Public Methods and Operators
 
-        /// <summary>Create file not found string.</summary>
-        /// <param name="path">The package path.</param>
-        /// <returns>
-        ///     <see cref="string" />
-        /// </returns>
-        public static string FileNotFound(string path)
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            StringBuilder _fileNotFound = new StringBuilder();
-            _fileNotFound.AppendLine("Unable to locate the file using the following path. " + path);
-            return _fileNotFound.ToString();
+            return sourceType == typeof(string);
         }
 
-        /// <summary>Create is null or empty string.</summary>
-        /// <param name="value">The value.</param>
-        /// <returns>
-        ///     <see cref="string" />
-        /// </returns>
-        public static string IsNull(object value)
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            StringBuilder _isNullOrEmpty = new StringBuilder();
-            _isNullOrEmpty.AppendLine("The object is null.");
-            _isNullOrEmpty.Append(Environment.NewLine);
-            _isNullOrEmpty.AppendLine("Object: " + nameof(value));
-            _isNullOrEmpty.AppendLine("Type: " + value.GetType());
-            return _isNullOrEmpty.ToString();
+            if (value is string)
+            {
+                var s = (string)value;
+                return int.Parse(s, NumberStyles.AllowThousands, culture);
+            }
+
+            return base.ConvertFrom(context, culture, value);
         }
 
-        /// <summary>Create is null or empty string.</summary>
-        /// <param name="text">The text.</param>
-        /// <returns>
-        ///     <see cref="string" />
-        /// </returns>
-        public static string IsNullOrEmpty(string text)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            StringBuilder _isNullOrEmpty = new StringBuilder();
-            _isNullOrEmpty.AppendLine("The string is null or empty. " + nameof(text));
-            return _isNullOrEmpty.ToString();
+            if (destinationType == typeof(string))
+            {
+                return ((int)value).ToString("N0", culture);
+            }
+
+            return base.ConvertTo(context, culture, value, destinationType);
         }
 
         #endregion

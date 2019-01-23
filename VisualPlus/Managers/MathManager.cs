@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:24 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -42,7 +42,6 @@
 #region Namespace
 
 using System;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 
@@ -50,7 +49,7 @@ using System.Linq;
 
 namespace VisualPlus.Managers
 {
-    [Description("The math manager.")]
+    /// <summary>The class for managing mathematical equations.</summary>
     public sealed class MathManager
     {
         #region Public Methods and Operators
@@ -64,10 +63,19 @@ namespace VisualPlus.Managers
         }
 
         /// <summary>Retrieves the number closest from the value collection.</summary>
-        /// <param name="value">The intial value to compare with.</param>
+        /// <param name="value">The initial value to compare with.</param>
         /// <param name="valueCollection">The value collection to search.</param>
         /// <returns>The <see cref="int" />.</returns>
-        public static int FindClosestValue(int value, int[] valueCollection)
+        public static double FindClosestValue(double value, double[] valueCollection)
+        {
+            return valueCollection.Aggregate((x, y) => Math.Abs(x - value) < Math.Abs(y - value) ? x : y);
+        }
+
+        /// <summary>Retrieves the number closest from the value collection.</summary>
+        /// <param name="value">The initial value to compare with.</param>
+        /// <param name="valueCollection">The value collection to search.</param>
+        /// <returns>The <see cref="int" />.</returns>
+        public static long FindClosestValue(long value, long[] valueCollection)
         {
             return valueCollection.Aggregate((x, y) => Math.Abs(x - value) < Math.Abs(y - value) ? x : y);
         }

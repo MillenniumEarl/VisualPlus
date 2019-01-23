@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -51,7 +51,7 @@ namespace VisualPlus.Extensibility
     {
         #region Public Methods and Operators
 
-        /// <summary>Aligns the rectangle to the bottom.</summary>
+        /// <summary>Aligns the <see cref="Rectangle"/> to the bottom.</summary>
         /// <param name="rectangle">The rectangle.</param>
         /// <param name="outerBounds">The outside rectangle.</param>
         /// <param name="spacing">The spacing.</param>
@@ -61,7 +61,7 @@ namespace VisualPlus.Extensibility
             return new Rectangle(rectangle.X, outerBounds.Height - spacing - rectangle.Height, rectangle.Width, rectangle.Height);
         }
 
-        /// <summary>Aligns the rectangle to the center.</summary>
+        /// <summary>Aligns the <see cref="Rectangle"/> to the center.</summary>
         /// <param name="rectangle">The rectangle.</param>
         /// <param name="outerBounds">The outside rectangle.</param>
         /// <returns>The <see cref="Rectangle" />.</returns>
@@ -70,7 +70,7 @@ namespace VisualPlus.Extensibility
             return new Rectangle((outerBounds.Width / 2) - (rectangle.Width / 2), rectangle.Y, rectangle.Width, rectangle.Height);
         }
 
-        /// <summary>Aligns the rectangle to the center height.</summary>
+        /// <summary>Aligns the <see cref="Rectangle"/> to the center height.</summary>
         /// <param name="rectangle">The rectangle.</param>
         /// <param name="outerBounds">The outside rectangle.</param>
         /// <returns>The <see cref="Rectangle" />.</returns>
@@ -79,7 +79,7 @@ namespace VisualPlus.Extensibility
             return new Rectangle(rectangle.X, (outerBounds.Height / 2) - (rectangle.Height / 2), rectangle.Width, rectangle.Height);
         }
 
-        /// <summary>Aligns the rectangle to the left.</summary>
+        /// <summary>Aligns the <see cref="Rectangle"/> to the left.</summary>
         /// <param name="rectangle">The rectangle.</param>
         /// <param name="outerBounds">The outside rectangle.</param>
         /// <param name="spacing">The spacing.</param>
@@ -89,7 +89,7 @@ namespace VisualPlus.Extensibility
             return new Rectangle(outerBounds.X + spacing, rectangle.Y, rectangle.Width, rectangle.Height);
         }
 
-        /// <summary>Aligns the rectangle to the right.</summary>
+        /// <summary>Aligns the <see cref="Rectangle"/> to the right.</summary>
         /// <param name="rectangle">The rectangle.</param>
         /// <param name="outerBounds">The outside rectangle.</param>
         /// <param name="spacing">The spacing.</param>
@@ -99,7 +99,7 @@ namespace VisualPlus.Extensibility
             return new Rectangle(outerBounds.Width - spacing - rectangle.Width, rectangle.Y, rectangle.Width, rectangle.Height);
         }
 
-        /// <summary>Aligns the rectangle to the top.</summary>
+        /// <summary>Aligns the <see cref="Rectangle"/> to the top.</summary>
         /// <param name="rectangle">The rectangle.</param>
         /// <param name="outerBounds">The outside rectangle.</param>
         /// <param name="spacing">The spacing.</param>
@@ -109,7 +109,7 @@ namespace VisualPlus.Extensibility
             return new Rectangle(rectangle.X, outerBounds.Y + spacing, rectangle.Width, rectangle.Height);
         }
 
-        /// <summary>Rounds a RectangleF to a Rectangle.</summary>
+        /// <summary>Rounds a <see cref="RectangleF"/> to a <see cref="Rectangle"/>.</summary>
         /// <param name="rectangleF">The rectangleF.</param>
         /// <returns>The <see cref="Rectangle" />.</returns>
         public static Rectangle ToRectangle(this RectangleF rectangleF)

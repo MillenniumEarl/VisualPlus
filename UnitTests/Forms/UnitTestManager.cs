@@ -6,7 +6,7 @@
 // UnitTests - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:28 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -49,8 +49,8 @@ using System.Windows.Forms;
 
 using UnitTests.Tests;
 
+using VisualPlus;
 using VisualPlus.Attributes;
-using VisualPlus.Constants;
 using VisualPlus.Events;
 using VisualPlus.Managers;
 using VisualPlus.Structure;
@@ -247,7 +247,7 @@ namespace UnitTests.Forms
 
             if (dialogResult == DialogResult.Yes)
             {
-                Process.Start(SettingConstants.ProjectURL);
+                Process.Start(Library.ProjectURL);
             }
         }
 
@@ -268,12 +268,12 @@ namespace UnitTests.Forms
 
             lvFlaggedTests.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
-            var constructors = ReflectionManager.LoadConstructors(AssemblyManager.VisualPlus(), typeof(Test));
-            var events = ReflectionManager.LoadEvents(AssemblyManager.VisualPlus(), typeof(Test));
-            var fields = ReflectionManager.LoadFields(AssemblyManager.VisualPlus(), typeof(Test));
-            var members = ReflectionManager.LoadMembers(AssemblyManager.VisualPlus(), typeof(Test));
-            var methods = ReflectionManager.LoadMethods(AssemblyManager.VisualPlus(), typeof(Test));
-            var properties = ReflectionManager.LoadProperties(AssemblyManager.VisualPlus(), typeof(Test));
+            var constructors = ReflectionManager.LoadConstructors(Library.VisualPlus, typeof(Test));
+            var events = ReflectionManager.LoadEvents(Library.VisualPlus, typeof(Test));
+            var fields = ReflectionManager.LoadFields(Library.VisualPlus, typeof(Test));
+            var members = ReflectionManager.LoadMembers(Library.VisualPlus, typeof(Test));
+            var methods = ReflectionManager.LoadMethods(Library.VisualPlus, typeof(Test));
+            var properties = ReflectionManager.LoadProperties(Library.VisualPlus, typeof(Test));
 
             foreach (ConstructorInfo data in constructors)
             {

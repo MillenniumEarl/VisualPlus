@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -57,7 +57,7 @@ namespace VisualPlus.Extensibility
     {
         #region Public Methods and Operators
 
-        /// <summary>The between text.</summary>
+        /// <summary>The text between the <see cref="string"/>/s.</summary>
         /// <param name="text">The text.</param>
         /// <param name="first">The first.</param>
         /// <param name="last">The last.</param>
@@ -103,7 +103,7 @@ namespace VisualPlus.Extensibility
             return text.IndexOf(value, comparison) >= 0;
         }
 
-        /// <summary>Converts the string HTML to a color.</summary>
+        /// <summary>Converts the <see cref="string"/> HTML to a <see cref="Color"/>.</summary>
         /// <param name="withoutHash">The HTML color. (Don't include hash '#')</param>
         /// <returns>The <see cref="Color" />.</returns>
         public static Color FromHtml(this string withoutHash)
@@ -148,7 +148,7 @@ namespace VisualPlus.Extensibility
             return length < text.Length ? text.Substring(0, length) : text;
         }
 
-        /// <summary>The amount of lines in the string.</summary>
+        /// <summary>The amount of lines in the <see cref="string"/>.</summary>
         /// <param name="text">The text.</param>
         /// <returns>The <see cref="int" />.</returns>
         public static int LineCount(this string text)
@@ -166,7 +166,7 @@ namespace VisualPlus.Extensibility
             return text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
         }
 
-        /// <summary>Provides the size, in pixels, of the specified text when drawn with the specified font.</summary>
+        /// <summary>Provides the <see cref="Size"/>, in pixels, of the specified text when drawn with the specified font.</summary>
         /// <param name="text">The text to measure.</param>
         /// <param name="font">The font to apply to the measured text.</param>
         /// <returns>The <see cref="Size" />.</returns>
@@ -176,7 +176,7 @@ namespace VisualPlus.Extensibility
         }
 
         /// <summary>Parses the quote <see cref="string" />.</summary>
-        /// <param name="text">TThe text.</param>
+        /// <param name="text">The text.</param>
         /// <returns>The <see cref="string" />.</returns>
         public static string ParseQuoteString(this string text)
         {

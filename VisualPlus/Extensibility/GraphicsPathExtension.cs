@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -55,7 +55,7 @@ namespace VisualPlus.Extensibility
     {
         #region Public Methods and Operators
 
-        /// <summary>Converts the GraphicsPath to a border path.</summary>
+        /// <summary>Converts the <see cref="GraphicsPath" /> to a border path.</summary>
         /// <param name="borderPath">The border path.</param>
         /// <param name="border">The border.</param>
         /// <returns>The <see cref="GraphicsPath" />.</returns>
@@ -64,7 +64,7 @@ namespace VisualPlus.Extensibility
             return VisualBorderRenderer.CreateBorderTypePath(borderPath.GetBounds().ToRectangle(), border);
         }
 
-        /// <summary>Converts the Rectangle to a GraphicsPath.</summary>
+        /// <summary>Converts the <see cref="Rectangle" /> to a <see cref="GraphicsPath" />.</summary>
         /// <param name="rectangle">The rectangle.</param>
         /// <returns>The <see cref="GraphicsPath" />.</returns>
         public static GraphicsPath ToGraphicsPath(this Rectangle rectangle)

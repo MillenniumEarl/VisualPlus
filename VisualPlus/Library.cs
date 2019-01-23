@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 17/01/2019 - 7:15 PM
-// Last Modified: 17/01/2019 - 7:15 PM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -41,40 +41,146 @@
 
 #region Namespace
 
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+
+using VisualPlus.Managers;
 
 #endregion
 
 namespace VisualPlus
 {
-    /// <summary>A collection of the <see cref="VisualPlus" /> API information.</summary>
-    public class Library
+    /// <summary>A collection of retrievable <see cref="VisualPlus " /> framework information.</summary>
+    public static partial class Library
     {
-        #region Static Fields
+        #region Constants
 
-        public static string Name = "VisualPlus";
-        public static string ProjectUrl = "https://github.com/DarkByte7/VisualPlus";
+        /// <summary>Returns the <c>Assembly File</c> extension of the <see cref="VisualPlus " /> framework.</summary>
+        public const string DefaultAssemblyExtension = ".dll";
+
+        /// <summary>Returns the <c>Assembly Name</c> of the <see cref="VisualPlus " /> framework.</summary>
+        public const string DefaultAssemblyName = "VisualPlus";
+
+        /// <summary>Returns the <c>Assembly Long Description</c> of the <see cref="VisualPlus " /> framework.</summary>
+        public const string DescriptionLong = "The VisualPlus Framework (VPF) for WinForms allows you to rapidly deploy professional .NET applications with customizable components and controls.";
 
         #endregion
 
         #region Public Properties
 
-        /// <summary>Returns the <c>AssemblyVersion</c> of this Library.</summary>
-        public static string Version
+        /// <summary>Returns the <c>Description</c> of the <see cref="VisualPlus " /> framework.</summary>
+        public static string Description
         {
             get
             {
                 try
                 {
-                    Assembly assembly = Assembly.GetExecutingAssembly();
-                    AssemblyName assemblyName = assembly.GetName();
+                    // Retrieve default assembly description attributes  
+                    AssemblyDescriptionAttribute descriptionAttribute = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false).OfType<AssemblyDescriptionAttribute>().FirstOrDefault();
 
-                    return assemblyName.Version.ToString();
+                    // Check if the description attribute is null then display default message
+                    return descriptionAttribute != null ? descriptionAttribute.Description : DescriptionLong;
                 }
                 catch
                 {
-                    return "0.0.0.0";
+                    return DescriptionLong;
                 }
+            }
+        }
+
+        /// <summary>Returns the full <see cref="Directory " /> path of the <see cref="VisualPlus " /> framework.</summary>
+        public static string Directory
+        {
+            get
+            {
+                return DirectoryInfo.FullName;
+            }
+        }
+
+        /// <summary>Returns the <see cref="DirectoryInfo " /> for the <see cref="VisualPlus " /> framework.</summary>
+        public static DirectoryInfo DirectoryInfo
+        {
+            get
+            {
+                return new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            }
+        }
+
+        /// <summary>Returns the <c>File Name</c> of the <see cref="VisualPlus " /> framework.</summary>
+        public static string FileName
+        {
+            get
+            {
+                return Name + DefaultAssemblyExtension;
+            }
+        }
+
+        /// <summary>Returns the full <see cref="File " /> path of the <see cref="VisualPlus " /> framework.</summary>
+        public static string Location
+        {
+            get
+            {
+                return Path.Combine(Directory, FileName);
+            }
+        }
+
+        /// <summary>Returns the <c>Name</c> of the <see cref="VisualPlus " /> framework.</summary>
+        public static string Name
+        {
+            get
+            {
+                try
+                {
+                    return Assembly.GetExecutingAssembly().GetName().Name;
+                }
+                catch
+                {
+                    return DefaultAssemblyName;
+                }
+            }
+        }
+
+        /// <summary>Returns the <c>Project URL</c> of the <see cref="VisualPlus " /> framework.</summary>
+        public static string ProjectURL
+        {
+            get
+            {
+                return FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).LegalTrademarks;
+            }
+        }
+
+        /// <summary>Returns the <c>Version</c> of the <see cref="VisualPlus " /> framework.</summary>
+        public static Version Version
+        {
+            get
+            {
+                try
+                {
+                    return Assembly.GetExecutingAssembly().GetName().Version;
+                }
+                catch
+                {
+                    return new Version(0, 0, 0, 0);
+                }
+            }
+        }
+
+        /// <summary>Returns the <c>Assembly</c> of the <see cref="VisualPlus " /> framework.</summary>
+        public static Assembly VisualPlus
+        {
+            get
+            {
+                // Get directory
+                string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+                // Retrieve the path of the framework
+                string filePath = Path.Combine(baseDirectory, FileName);
+
+                // Returns the assembly
+                return AssemblyManager.LoadAssembly(filePath);
             }
         }
 

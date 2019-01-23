@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -41,17 +41,22 @@
 
 #region Namespace
 
+using System;
 using System.Drawing;
+
+using VisualPlus.Managers;
+using VisualPlus.Structure;
 
 #endregion
 
 namespace VisualPlus.Extensibility
 {
+    /// <summary>A collection of <see cref="Color" /> extensions.</summary>
     public static class ColorExtension
     {
         #region Public Methods and Operators
 
-        /// <summary>Converts the string HTML to a <see cref="Color" />.</summary>
+        /// <summary>Converts the string from an HTML code to a <see cref="Color" />.</summary>
         /// <param name="color">The color.</param>
         /// <param name="withoutHash">The HTML color. (Don't include hash '#')</param>
         /// <returns>The <see cref="Color" />.</returns>
@@ -60,23 +65,40 @@ namespace VisualPlus.Extensibility
             return ColorTranslator.FromHtml("#" + withoutHash);
         }
 
-        /// <summary>Converts the color mix to a color.</summary>
+        /// <summary>Converts the <see cref="Color" /> mixture to a new <see cref="Color" />.</summary>
         /// <param name="colors">The colors.</param>
         /// <returns>The <see cref="Color" />.</returns>
         public static Color MixColors(this Color[] colors)
         {
-            int r = default(int);
-            int g = default(int);
-            int b = default(int);
+            // Variables
+            int red = default(int);
+            int green = default(int);
+            int blue = default(int);
 
-            foreach (Color _color in colors)
+            // Loop thru each color
+            foreach (Color color in colors)
             {
-                r += _color.R;
-                g += _color.B;
-                b += _color.B;
+                red += color.R;
+                green += color.B;
+                blue += color.B;
             }
 
-            return Color.FromArgb(r / colors.Length, g / colors.Length, b / colors.Length);
+            return Color.FromArgb(red / colors.Length, green / colors.Length, blue / colors.Length);
+        }
+
+        /// <summary>Applies the alpha transparency value to the <see cref="Color" />.</summary>
+        /// <param name="color">The color.</param>
+        /// <param name="alpha">The alpha value.</param>
+        /// <returns>The <see cref="Color" />.</returns>
+        public static Color SetTransparency(this Color color, int alpha = 255)
+        {
+            // Safety Check
+            if (ExceptionsHandler.ArgumentOutOfRangeException(new ValuePairRange(alpha, byte.MinValue, byte.MaxValue)))
+            {
+                throw new ArgumentOutOfRangeException("The " + nameof(alpha) + " value must be inside the range of (0-255).");
+            }
+
+            return Color.FromArgb(alpha, color.R, color.G, color.B);
         }
 
         /// <summary>Converts the <see cref="Color" /> to an ARGB <see cref="string" />.</summary>
@@ -87,11 +109,12 @@ namespace VisualPlus.Extensibility
             return $"ARGB:({color.A}, {color.R}, {color.G}, {color.B})";
         }
 
-        /// <summary>Converts the <see cref="Color" /> to HTML string.</summary>
-        /// <param name="color">The color to convert to HTML.</param>
+        /// <summary>Converts the <see cref="Color" /> to an HTML string.</summary>
+        /// <param name="color">The color to convert to HTML code.</param>
         /// <returns>The <see cref="string" />.</returns>
         public static string ToHTML(this Color color)
         {
+            // Check if color is transparent
             if (color == Color.Transparent)
             {
                 return "#00FFFFFF";
@@ -108,7 +131,7 @@ namespace VisualPlus.Extensibility
         /// <returns>The <see cref="Pen" />.</returns>
         public static Pen ToPen(this Color color, float size = 1)
         {
-            return new Pen(color, size);
+            return new Pen(ToSolidBrush(color), size);
         }
 
         /// <summary>Converts the <see cref="Color" /> to an RGB <see cref="string" />.</summary>

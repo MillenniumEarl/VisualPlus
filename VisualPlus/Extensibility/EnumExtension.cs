@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -51,11 +51,12 @@ using System.Reflection;
 
 namespace VisualPlus.Extensibility
 {
+    /// <summary>The <see cref="Enum"/> extensions collection.</summary>
     public static class EnumExtension
     {
         #region Public Methods and Operators
 
-        /// <summary>Returns the count length.</summary>
+        /// <summary>Returns the <see cref="Enum"/> member count.</summary>
         /// <param name="enumerator">The enumerator.</param>
         /// <returns>The <see cref="int" />.</returns>
         public static int Count(this Enum enumerator)
@@ -88,7 +89,7 @@ namespace VisualPlus.Extensibility
             return Array.IndexOf(_values, enumerator);
         }
 
-        /// <summary>Gets the enumerator index from the value.</summary>
+        /// <summary>Gets the <see cref="Enum"/> index by the value.</summary>
         /// <param name="enumerator">The enumerator.</param>
         /// <param name="value">Value to search.</param>
         /// <returns>The <see cref="int" />.</returns>
@@ -106,7 +107,7 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Gets the enumerator value from the index.</summary>
+        /// <summary>Gets the <see cref="Enum"/> value by the index.</summary>
         /// <typeparam name="T">Type parameter.</typeparam>
         /// <param name="enumerator">The enumerator.</param>
         /// <param name="index">The index to search.</param>
@@ -125,7 +126,7 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Returns the string as an enumerator.</summary>
+        /// <summary>Returns the <see cref="string"/> as an <see cref="Enum"/>.</summary>
         /// <typeparam name="T">Type parameter.</typeparam>
         /// <param name="enumeratorString">The string.</param>
         /// <returns>The <see cref="Enum" />.</returns>
@@ -145,7 +146,7 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Converts enumerator to a list type.</summary>
+        /// <summary>Converts the <see cref="Enum"/> to a <see cref="List{T}"/> type.</summary>
         /// <typeparam name="T">Type parameter.</typeparam>
         /// <param name="enumerator">The enumerator.</param>
         /// <returns>The <see cref="List{T}" />.</returns>

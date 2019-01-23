@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:26 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -318,7 +318,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                     return;
                 }
 
-                shadowOpacity = ExceptionManager.ArgumentOutOfRangeException(value, SettingConstants.MinimumAlpha, SettingConstants.MaximumAlpha, true);
+                shadowOpacity = (int)ExceptionsInvoker.ArgumentOutOfRangeException(new ValuePairRange(value, SettingConstants.MinimumAlpha, SettingConstants.MaximumAlpha), true);
                 Invalidate();
             }
         }

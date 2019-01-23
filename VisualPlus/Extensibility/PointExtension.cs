@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -51,7 +51,7 @@ namespace VisualPlus.Extensibility
     {
         #region Public Methods and Operators
 
-        /// <summary>Returns the center point of the rectangle.</summary>
+        /// <summary>Returns the center <see cref="Point"/> of the <see cref="Rectangle"/>.</summary>
         /// <param name="rectangle">This rectangle.</param>
         /// <returns>The <see cref="Point" />.</returns>
         public static Point Center(this Rectangle rectangle)

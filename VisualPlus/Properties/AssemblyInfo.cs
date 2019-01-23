@@ -50,7 +50,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("VisualPlus")]
-[assembly: AssemblyDescription("Windows Forms .NET UI Development Library.")]
+[assembly: AssemblyDescription("The VisualPlus Framework (VPF) for WinForms .NET UI development.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("VisualPlus")]
 [assembly: AssemblyProduct("VisualPlus")]

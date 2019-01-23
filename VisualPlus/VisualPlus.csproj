@@ -103,10 +103,13 @@
     <Compile Include="Events\ToggleEventArgs.cs" />
     <Compile Include="Extensibility\ColorExtension.cs" />
     <Compile Include="Extensibility\ControlExtension.cs" />
+    <Compile Include="TypeConverters\CustomNumberTypeConverter.cs" />
     <Compile Include="Extensibility\ImageExtensions.cs" />
     <Compile Include="Extensibility\ListExtension.cs" />
     <Compile Include="Extensibility\StringExtension.cs" />
     <Compile Include="Extensibility\XmlExtension.cs" />
+    <Compile Include="Interfaces\IValuePairRange.cs" />
+    <Compile Include="Managers\ExceptionsHandler.cs" />
     <Compile Include="Interfaces\IToolTip.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Localization\EventCategory.cs" />
@@ -130,7 +133,7 @@
     <Compile Include="Renders\VisualTileRenderer.cs" />
     <Compile Include="Renders\VisualWatermarkRenderer.cs" />
     <Compile Include="Structure\ConsoleEx.cs" />
-    <Compile Include="Managers\ExceptionMessenger.cs" />
+    <Compile Include="Localization\ExceptionsMessages.cs" />
     <Compile Include="Managers\FontManager.cs" />
     <Compile Include="Managers\FormManager.cs" />
     <Compile Include="Managers\ImageManager.cs" />
@@ -162,6 +165,8 @@
     <Compile Include="Renders\VisualControlRenderer.cs" />
     <Compile Include="Structure\NCCALCSIZE_PARAMS.cs" />
     <Compile Include="Structure\TipInfo.cs" />
+    <Compile Include="Structure\ValuePairRangeF.cs" />
+    <Compile Include="Structure\ValuePairRange.cs" />
     <Compile Include="Structure\WINDOWPOS.cs" />
     <Compile Include="Toolkit\Controls\Editors\VisualIPBox.cs" />
     <Compile Include="Toolkit\Controls\Navigation\VisualSuperTabControl.cs" />
@@ -349,7 +354,7 @@
     <EmbeddedResource Include="Toolkit\Components\VisualDrag.cs">
       <SubType>Component</SubType>
     </EmbeddedResource>
-    <Compile Include="Managers\ExceptionManager.cs" />
+    <Compile Include="Managers\ExceptionsInvoker.cs" />
     <Compile Include="Managers\ColorManager.cs" />
     <Compile Include="Extensibility\Extensions.cs" />
     <Compile Include="Structure\Gradient.cs" />

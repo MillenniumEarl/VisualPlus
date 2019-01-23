@@ -6,7 +6,7 @@
 // VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
+// Last Modified: 22/01/2019 - 11:55 PM
 // 
 // Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -43,8 +43,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -157,39 +155,6 @@ namespace VisualPlus.Extensibility
         public static uint SizeOf<T>(this T value) where T : struct
         {
             return (uint)Marshal.SizeOf(typeof(T));
-        }
-
-        #endregion
-    }
-
-    public class CustomNumberTypeConverter : TypeConverter
-    {
-        #region Public Methods and Operators
-
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return sourceType == typeof(string);
-        }
-
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
-            if (value is string)
-            {
-                var s = (string)value;
-                return int.Parse(s, NumberStyles.AllowThousands, culture);
-            }
-
-            return base.ConvertFrom(context, culture, value);
-        }
-
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            if (destinationType == typeof(string))
-            {
-                return ((int)value).ToString("N0", culture);
-            }
-
-            return base.ConvertTo(context, culture, value, destinationType);
         }
 
         #endregion

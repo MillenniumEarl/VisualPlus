@@ -2,8 +2,8 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: AssemblyManager.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// Name: IValuePairRange.cs
+// UnitTests - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
 // Created: 10/12/2018 - 11:45 PM
 // Last Modified: 22/01/2019 - 11:55 PM
@@ -39,40 +39,26 @@
 
 #endregion
 
-#region Namespace
-
-using System.Data;
-using System.IO;
-using System.Reflection;
-
-using VisualPlus.Localization;
-using VisualPlus.Structure;
-
-#endregion
-
-namespace VisualPlus.Managers
+namespace VisualPlus.Interfaces
 {
-    public class AssemblyManager
+    /// <summary>The <see cref="IValuePairRange" /> interface.</summary>
+    public interface IValuePairRange
     {
+        #region Public Properties
+
+        /// <summary>
+        ///     Determines whether the <see cref="Value" /> is inside the <see cref="Minimum" /> and <see cref="Maximum" />
+        ///     range.
+        /// </summary>
+        bool IsInsideRange { get; }
+
+        #endregion
+
         #region Public Methods and Operators
 
-        /// <summary>Loads the <see cref="Assembly" /> from a file.</summary>
-        /// <param name="filePath">The file path.</param>
-        /// <returns>The <see cref="Assembly" />.</returns>
-        public static Assembly LoadAssembly(string filePath)
-        {
-            if (string.IsNullOrEmpty(filePath))
-            {
-                ConsoleEx.WriteDebug(new NoNullAllowedException(ExceptionsMessages.IsNullOrEmpty(filePath)));
-            }
-
-            if (!File.Exists(filePath))
-            {
-                ConsoleEx.WriteDebug(new NoNullAllowedException(ExceptionsMessages.FileNotFound(filePath)));
-            }
-
-            return Assembly.LoadFile(filePath);
-        }
+        /// <summary>Returns the fully qualified type name of this instance.</summary>
+        /// <returns>The <see cref="string" />.</returns>
+        string ToString();
 
         #endregion
     }

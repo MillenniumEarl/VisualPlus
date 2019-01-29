@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: Test.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:22 AM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -42,52 +38,175 @@
 #region Namespace
 
 using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+
+using VisualPlus.Constants;
+using VisualPlus.Enumerators;
+using VisualPlus.Utilities.Debugging;
 
 #endregion
 
 namespace VisualPlus.Attributes
 {
-    /// <summary>Marks the program elements that need to be tested further.</summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Delegate | AttributeTargets.Enum | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Interface | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Struct, AllowMultiple = true)]
+    /// <summary>Represents the <see cref="Test" /> class for attributes.</summary>
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComVisible(true)]
+    [DebuggerDisplay(DefaultConstants.DefaultDebuggerDisplay)]
     [Serializable]
-    public class Test : Attribute
+    public class Test : VisualAttribute
     {
-        #region Fields
+        #region Static Fields
 
-        private string text;
+        /// <summary>
+        ///     Specifies the default value for the <see cref="Test" />, that represents the current object. This
+        ///     <see langword="static" /> field is read-only.
+        /// </summary>
+        public static readonly Test Default = new Test();
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="Test" /> class.</summary>
-        /// <param name="text">The text.</param>
-        public Test(string text)
+        /// <param name="description">The description text.</param>
+        /// <param name="author">The author.</param>
+        public Test(string description, string author = "") : this(null, description, author, 0)
         {
-            Text = text;
         }
 
         /// <summary>Initializes a new instance of the <see cref="Test" /> class.</summary>
-        public Test()
+        public Test() : this(null, string.Empty, string.Empty, 0, false, null, new Labels[0])
         {
-            text = string.Empty;
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="Test" /> class with a description.</summary>
+        /// <param name="target">The target <see cref="Type" />.</param>
+        /// <param name="expectedResult">The expected result.</param>
+        public Test(Type target, object expectedResult) : this(target, string.Empty, string.Empty, 0, false, expectedResult)
+        {
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="Test" /> class with a description.</summary>
+        /// <param name="target">The target <see cref="Type" />.</param>
+        /// <param name="description">The description text.</param>
+        /// <param name="author">The author.</param>
+        public Test(Type target, string description, string author) : this(target, description, author, 0)
+        {
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="Test" /> class with a description.</summary>
+        /// <param name="target">The target <see cref="Type" />.</param>
+        /// <param name="description">The description text.</param>
+        public Test(Type target, string description) : this(target, description, string.Empty)
+        {
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="Test" /> class.</summary>
+        /// <param name="target">The target <see cref="Type" />.</param>
+        /// <param name="description">The description text.</param>
+        /// <param name="author">The test author.</param>
+        /// <param name="errorCode">The error Code.</param>
+        /// <param name="explicitRun">The explicit Run.</param>
+        /// <param name="expectedResult">The expected Result.</param>
+        /// <param name="collection">The collection.</param>
+        private Test(Type target = null, string description = "", string author = "", int errorCode = 0, bool explicitRun = false, object expectedResult = null, Labels[] collection = null) : base(target, description)
+        {
+            Author = author;
+            ErrorCode = errorCode;
+            Explicit = explicitRun;
+            ExpectedResult = expectedResult;
+            Labels = collection;
         }
 
         #endregion
 
         #region Public Properties
 
-        /// <summary>The text of the attribute.</summary>
-        public string Text
+        /// <summary>Gets or sets the author of the <see cref="Test" />.</summary>
+        /// <returns>The <see cref="string" />.</returns>
+        public virtual string Author { get; set; }
+
+        /// <summary>Gets or sets the error code value of the <see cref="Test" />.</summary>
+        /// <returns>The <see cref="int" />.</returns>
+        public virtual int ErrorCode { get; set; }
+
+        /// <summary>Gets or sets the author of the <see cref="Test" />.</summary>
+        /// <returns>The <see cref="string" />.</returns>
+        public virtual object ExpectedResult { get; set; }
+
+        /// <summary>Gets or sets the whether the <see cref="Test" /> can be run explicitly.</summary>
+        /// <returns>The <see cref="string" />.</returns>
+        public virtual bool Explicit { get; set; }
+
+        /// <summary>Gets or sets the labels <see cref="Array" /> of the <see cref="Test" />.</summary>
+        /// <returns>The <see cref="Labels" />.</returns>
+        public virtual Labels[] Labels { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public override bool Equals(object obj)
         {
-            get
+            if (obj == this)
             {
-                return text;
+                return true;
             }
 
-            set
+            switch (obj)
             {
-                text = value;
+                case Test testAttribute:
+                    {
+                        bool equal;
+
+                        // Validate the property's
+                        if ((testAttribute.DescriptionValue == DescriptionValue) &&
+                            (testAttribute.Description == Description) &&
+                            (testAttribute.Target == Target) &&
+                            (testAttribute.ErrorCode == ErrorCode) &&
+                            (testAttribute.Author == Author) &&
+                            (testAttribute.Explicit == Explicit) &&
+                            (testAttribute.ExpectedResult == ExpectedResult) &&
+                            (testAttribute.Labels == Labels))
+                        {
+                            equal = true;
+                        }
+                        else
+                        {
+                            equal = false;
+                        }
+
+                        return equal;
+                    }
+
+                default:
+                    {
+                        return false;
+                    }
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return DescriptionValue.GetHashCode();
+        }
+
+        public override bool IsDefaultAttribute()
+        {
+            return Equals(Default);
+        }
+
+        public override string ToString()
+        {
+            if (Debugger.IsAttached)
+            {
+                return this.ToDebug("TargetName");
+            }
+            else
+            {
+                return base.ToString();
             }
         }
 

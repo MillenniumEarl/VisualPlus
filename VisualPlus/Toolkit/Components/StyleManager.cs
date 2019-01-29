@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: StyleManager.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:25 AM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -232,7 +228,7 @@ namespace VisualPlus.Toolkit.Components
 
                 foreach (Form _forms in _formCollection)
                 {
-                    _controlsList.AddRange(_forms.Controls.Cast<Control>().Where(_control => ObjectManagement.HasMethod(_control, "UpdateTheme")));
+                    _controlsList.AddRange(_forms.Controls.Cast<Control>().Where(_control => _control.HasMethod(SettingConstants.ComponentUpdateMethodName)));
                 }
 
                 return _controlsList;
@@ -295,7 +291,7 @@ namespace VisualPlus.Toolkit.Components
 
                 foreach (Form _forms in _formCollection)
                 {
-                    _controlsList.AddRange(_forms.Controls.Cast<Control>().Where(_control => !ObjectManagement.HasMethod(_control, "UpdateTheme")));
+                    _controlsList.AddRange(_forms.Controls.Cast<Control>().Where(_control => !_control.HasMethod(SettingConstants.ComponentUpdateMethodName)));
                 }
 
                 return _controlsList;
@@ -451,7 +447,7 @@ namespace VisualPlus.Toolkit.Components
             {
                 foreach (Type registeredTypes in ControlManager.ThemeSupportedTypes())
                 {
-                    if (ObjectManagement.HasMethod(component, SettingConstants.ComponentUpdateMethodName))
+                    if (component.HasMethod(SettingConstants.ComponentUpdateMethodName))
                     {
                         switch (component)
                         {

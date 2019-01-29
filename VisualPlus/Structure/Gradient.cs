@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: Gradient.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -50,10 +46,9 @@ using System.Runtime.InteropServices;
 
 using VisualPlus.Constants;
 using VisualPlus.Delegates;
-using VisualPlus.Extensibility;
 using VisualPlus.Localization;
-using VisualPlus.Managers;
 using VisualPlus.TypeConverters;
+using VisualPlus.Utilities;
 
 #endregion
 
@@ -286,7 +281,7 @@ namespace VisualPlus.Structure
 
             foreach (float offset in customOffsets)
             {
-                if (ExceptionsHandler.ArgumentOutOfRangeException(new ValuePairRangeF(offset, 0.0F, 1.0F)))
+                if (Guard.IsOutOfRange(offset, 0.0F, 1.0F))
                 {
                 }
 
@@ -335,12 +330,12 @@ namespace VisualPlus.Structure
         /// <param name="rectangle">The rectangle.</param>
         private void InitializeGradient(float angle, Color[] colors, float[] offsets, Rectangle rectangle)
         {
-            if (colors.IsNullOrEmpty() || (colors.Length < 2))
+            if (Guard.IsNullOrEmpty(colors) || (colors.Length < 2))
             {
                 throw new ArgumentNullException(nameof(colors), @"You must specify at least 2 different colors.");
             }
 
-            if (offsets.IsNullOrEmpty() || (offsets.Length < 2))
+            if (Guard.IsNullOrEmpty(offsets) || (offsets.Length < 2))
             {
                 throw new ArgumentNullException(nameof(offsets), @"You must specify at least 2 offsets.");
             }

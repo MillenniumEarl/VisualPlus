@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: SetWindowPosFlags.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 06/01/2019 - 9:13 PM
-// Last Modified: 06/01/2019 - 9:14 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------

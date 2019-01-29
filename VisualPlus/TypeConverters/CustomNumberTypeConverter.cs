@@ -2,13 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: Extensions.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// Name: CustomNumberTypeConverter.cs
 // 
-// Created: 22/01/2019 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------

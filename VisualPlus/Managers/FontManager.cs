@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: FontManager.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -103,7 +99,7 @@ namespace VisualPlus.Managers
         {
             if (string.IsNullOrEmpty(fontName))
             {
-                throw new ArgumentNullException(ExceptionsMessages.IsNullOrEmpty(fontName));
+                throw new ArgumentNullException(ArgumentMessages.IsNullOrEmpty());
             }
 
             return InstalledFonts().Any(_fontFamily => _fontFamily.Name == fontName);

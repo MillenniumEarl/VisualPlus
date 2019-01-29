@@ -2,13 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: GlobalId.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// Name: KeysExtensions.cs
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:24 AM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -41,49 +37,32 @@
 
 #region Namespace
 
-using System.ComponentModel;
-using System.Diagnostics;
+using System;
+using System.Windows.Forms;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Extensibility
 {
-    /// <summary>Contains the global identifier for the object.</summary>
-    public class GlobalId
+    /// <summary>The collection of the <see cref="KeysExtensions" /> class.</summary>
+    public static class KeysExtensions
     {
-        #region Fields
+        #region Public Methods and Operators
 
-        private int _nextId = 1000;
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>Initializes a new instance of the <see cref="GlobalId" /> class.</summary>
-        [DebuggerStepThrough]
-        public GlobalId()
+        /// <summary>Converts the specified <see cref="Keys" /> codes and modifiers type to a <see cref="int" />.</summary>
+        /// <param name="key">Specified key codes and modifiers.</param>
+        /// <returns>The <see cref="int" />.</returns>
+        public static int GetKeyCode(this Keys key)
         {
-            Id = NextId;
+            return Convert.ToInt32(key);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        /// <summary>Gets the unique identifier of the object.</summary>
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int Id { get; }
-
-        /// <summary>Gets the next global identifier in sequence.</summary>
-        public int NextId
+        /// <summary>Converts the specified <see cref="int" /> key code to a <see cref="Keys" />.</summary>
+        /// <param name="keyCode">The value to convert to an enumeration member.</param>
+        /// <returns>The <see cref="Keys" />.</returns>
+        public static Keys ToKey(this int keyCode)
         {
-            [DebuggerStepThrough]
-            get
-            {
-                return _nextId++;
-            }
+            return (Keys)Enum.ToObject(typeof(Keys), keyCode);
         }
 
         #endregion

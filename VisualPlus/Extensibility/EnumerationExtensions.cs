@@ -2,13 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: EnumExtension.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// Name: EnumerationExtensions.cs
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -51,17 +47,48 @@ using System.Reflection;
 
 namespace VisualPlus.Extensibility
 {
-    /// <summary>The <see cref="Enum"/> extensions collection.</summary>
-    public static class EnumExtension
+    /// <summary>The collection of the <see cref="EnumerationExtensions" /> class.</summary>
+    public static class EnumerationExtensions
     {
         #region Public Methods and Operators
 
-        /// <summary>Returns the <see cref="Enum"/> member count.</summary>
-        /// <param name="enumerator">The enumerator.</param>
+        /// <summary>One conversion type to another collection type of arrays.</summary>
+        /// <typeparam name="T">Type parameter.</typeparam>
+        /// <typeparam name="TResult">The output type.</typeparam>
+        /// <param name="collection">The collection of items.</param>
+        /// <param name="converter">The conversion type.</param>
+        /// <returns>the <see cref="TResult{T}" />.</returns>
+        public static TResult[] ConvertAll<T, TResult>(this T[] collection, Func<T, TResult> converter)
+        {
+            int count = collection.Length;
+            var results = new TResult[count];
+
+            for (var i = 0; i < count; i++)
+            {
+                results[i] = converter(collection[i]);
+            }
+
+            return results;
+        }
+
+        /// <summary>Gets the total number of elements in all the dimensions of the <see cref="Array" />.</summary>
+        /// <param name="enumerator">The enumeration type.</param>
         /// <returns>The <see cref="int" />.</returns>
         public static int Count(this Enum enumerator)
         {
             return Enum.GetNames(enumerator.GetType()).Length;
+        }
+
+        /// <summary>For each iteration of the enumeration that invokes an action.</summary>
+        /// <typeparam name="T">Type parameter.</typeparam>
+        /// <param name="collection">The collection of items.</param>
+        /// <param name="action">The action to invoke each time.</param>
+        public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)
+        {
+            foreach (T item in collection)
+            {
+                action(item);
+            }
         }
 
         /// <summary>Returns the <see cref="Enum" /> attribute description.</summary>
@@ -69,15 +96,40 @@ namespace VisualPlus.Extensibility
         /// <returns>The <see cref="string" />.</returns>
         public static string GetDescription(this Enum enumerator)
         {
-            FieldInfo _fieldInfo = enumerator.GetType().GetField(enumerator.ToString());
+            // Variables
+            FieldInfo fieldInfo = enumerator.GetType().GetField(enumerator.ToString());
 
-            if (_fieldInfo == null)
+            // Safety check
+            if (fieldInfo == null)
             {
                 return enumerator.ToString();
             }
 
-            var _attributes = (DescriptionAttribute[])_fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
-            return _attributes.Length > 0 ? _attributes[0].Description : enumerator.ToString();
+            var descriptionAttributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            // Check if contains any description
+            if (descriptionAttributes.Length > 0)
+            {
+                return descriptionAttributes[0].Description;
+            }
+            else
+            {
+                return enumerator.ToString();
+            }
+        }
+
+        /// <summary>Retrieves an array of the values of the constants in a specified enumeration.</summary>
+        /// <param name="instance">The instance.</param>
+        /// <typeparam name="T">The object type.</typeparam>
+        /// <returns>The <see cref="object" />.</returns>
+        public static object GetEnumeratedObject<T>(this T instance) where T : class
+        {
+            if (!instance.IsEnum())
+            {
+                throw new ArgumentException($@"{nameof(T)} is not an enumerator type.");
+            }
+
+            return Enum.GetValues(typeof(T)).Cast<T>();
         }
 
         /// <summary>Returns the index value of the <see cref="Enum" />.</summary>
@@ -85,11 +137,11 @@ namespace VisualPlus.Extensibility
         /// <returns>The <see cref="int" />.</returns>
         public static int GetIndex(this Enum enumerator)
         {
-            Array _values = Enum.GetValues(enumerator.GetType());
-            return Array.IndexOf(_values, enumerator);
+            Array enumeratedArray = Enum.GetValues(enumerator.GetType());
+            return Array.IndexOf(enumeratedArray, enumerator);
         }
 
-        /// <summary>Gets the <see cref="Enum"/> index by the value.</summary>
+        /// <summary>Gets the <see cref="Enum" /> index by the value.</summary>
         /// <param name="enumerator">The enumerator.</param>
         /// <param name="value">Value to search.</param>
         /// <returns>The <see cref="int" />.</returns>
@@ -107,13 +159,12 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Gets the <see cref="Enum"/> value by the index.</summary>
+        /// <summary>Gets the <see cref="Enum" /> value by the index.</summary>
         /// <typeparam name="T">Type parameter.</typeparam>
         /// <param name="enumerator">The enumerator.</param>
         /// <param name="index">The index to search.</param>
         /// <returns>The <see cref="string" />.</returns>
-        public static string GetValueByIndex<T>(this Enum enumerator, int index)
-            where T : struct
+        public static string GetValueByIndex<T>(this Enum enumerator, int index) where T : struct
         {
             Type type = typeof(T);
             if (type.IsEnum && Enum.IsDefined(enumerator.GetType(), index))
@@ -126,12 +177,20 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Returns the <see cref="string"/> as an <see cref="Enum"/>.</summary>
+        /// <summary>Gets a value indicating whether the current <see cref="Type" /> represents an enumeration.</summary>
+        /// <param name="instance">The instance.</param>
+        /// <typeparam name="T">The object type.</typeparam>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static bool IsEnum<T>(this T instance)
+        {
+            return typeof(T).IsEnum;
+        }
+
+        /// <summary>Returns the <see cref="string" /> as an <see cref="Enum" />.</summary>
         /// <typeparam name="T">Type parameter.</typeparam>
         /// <param name="enumeratorString">The string.</param>
         /// <returns>The <see cref="Enum" />.</returns>
-        public static Enum ToEnum<T>(this string enumeratorString)
-            where T : struct
+        public static Enum ToEnum<T>(this string enumeratorString) where T : struct
         {
             Type type = typeof(T);
 
@@ -146,12 +205,11 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Converts the <see cref="Enum"/> to a <see cref="List{T}"/> type.</summary>
+        /// <summary>Converts the <see cref="Enum" /> to a <see cref="List{T}" /> type.</summary>
         /// <typeparam name="T">Type parameter.</typeparam>
         /// <param name="enumerator">The enumerator.</param>
         /// <returns>The <see cref="List{T}" />.</returns>
-        public static List<T> ToList<T>(this Enum enumerator)
-            where T : struct
+        public static List<T> ToList<T>(this Enum enumerator) where T : List<T>
         {
             Type type = typeof(T);
             return !type.IsEnum ? null : Enum.GetValues(type).Cast<T>().ToList();

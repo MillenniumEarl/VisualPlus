@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: ColorExtension.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -44,14 +40,13 @@
 using System;
 using System.Drawing;
 
-using VisualPlus.Managers;
-using VisualPlus.Structure;
+using VisualPlus.Utilities;
 
 #endregion
 
 namespace VisualPlus.Extensibility
 {
-    /// <summary>A collection of <see cref="Color" /> extensions.</summary>
+    /// <summary>The collection of the <see cref="ColorExtension" /> class.</summary>
     public static class ColorExtension
     {
         #region Public Methods and Operators
@@ -71,9 +66,9 @@ namespace VisualPlus.Extensibility
         public static Color MixColors(this Color[] colors)
         {
             // Variables
-            int red = default(int);
-            int green = default(int);
-            int blue = default(int);
+            int red = 0;
+            int green = 0;
+            int blue = 0;
 
             // Loop thru each color
             foreach (Color color in colors)
@@ -93,7 +88,7 @@ namespace VisualPlus.Extensibility
         public static Color SetTransparency(this Color color, int alpha = 255)
         {
             // Safety Check
-            if (ExceptionsHandler.ArgumentOutOfRangeException(new ValuePairRange(alpha, byte.MinValue, byte.MaxValue)))
+            if (Guard.IsOutOfRange(alpha, byte.MinValue, byte.MaxValue))
             {
                 throw new ArgumentOutOfRangeException("The " + nameof(alpha) + " value must be inside the range of (0-255).");
             }

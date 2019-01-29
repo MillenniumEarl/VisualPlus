@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: FormConstants.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -41,8 +37,11 @@
 
 namespace VisualPlus.Constants
 {
+    /// <summary>The collection of the <see cref="FormConstants" /> class.</summary>
     public class FormConstants
     {
+        #region Constants
+
         public const int DCX_CACHE = 0x00000002;
         public const int DCX_CLIPCHILDREN = 0x00000008;
         public const int DCX_CLIPSIBLINGS = 0x00000010;
@@ -56,14 +55,6 @@ namespace VisualPlus.Constants
 
         // GetDCEx Flags
         public const int DCX_WINDOW = 0x00000001;
-
-        public const uint WM_NCCALCSIZE = 0x83;
-        public const uint WM_NCHITTEST = 0x84;
-
-        // Window Messages
-        public const uint WM_NCPAINT = 0x85;
-
-        #region Constants
 
         public const int HT_CAPTION = 0x2;
         public const int HTBOTTOM = 0xF;
@@ -106,7 +97,13 @@ namespace VisualPlus.Constants
         public const int WM_LBUTTONDOWN = 0x0201;
         public const int WM_LBUTTONUP = 0x0202;
         public const int WM_MOUSEMOVE = 0x0200;
+
+        public const uint WM_NCCALCSIZE = 0x83;
+        public const uint WM_NCHITTEST = 0x84;
         public const int WM_NCLBUTTONDOWN = 0xA1;
+
+        // Window Messages
+        public const uint WM_NCPAINT = 0x85;
         public const int WM_RBUTTONDOWN = 0x0204;
         public const int WM_SYSCOMMAND = 0x0112;
         public const int WMSZ_BOTTOM = 0x6;

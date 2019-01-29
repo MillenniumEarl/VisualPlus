@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: ListExtension.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -47,6 +43,7 @@ using System.Collections;
 
 namespace VisualPlus.Extensibility
 {
+    /// <summary>The collection of the <see cref="ListExtension" /> class.</summary>
     public static class ListExtension
     {
         #region Public Methods and Operators
@@ -59,7 +56,7 @@ namespace VisualPlus.Extensibility
             return list.Count + 1;
         }
 
-        /// <summary>Determines if the list is <see cref="Empty"/>.</summary>
+        /// <summary>Determines if the list is <see cref="Empty" />.</summary>
         /// <param name="list">The list.</param>
         /// <returns>The <see cref="bool" />.</returns>
         public static bool IsEmpty(this IList list)

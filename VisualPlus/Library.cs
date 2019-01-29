@@ -2,13 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: VisualSeparatorDesigner.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
+// Name: Library.cs
 // 
-// Created: 17/01/2019 - 7:15 PM
-// Last Modified: 23/01/2019 - 12:02 AM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------

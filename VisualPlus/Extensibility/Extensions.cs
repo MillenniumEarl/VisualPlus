@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: Extensions.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -42,78 +38,255 @@
 #region Namespace
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
-using VisualPlus.Managers;
 
 #endregion
 
 namespace VisualPlus.Extensibility
 {
+    /// <summary>Represents the <see cref="Extensions" /> class.</summary>
     public static class Extensions
     {
         #region Public Methods and Operators
 
-        /// <summary>Gets a boolean determining whether the object holds any value or is empty/null.</summary>
-        /// <typeparam name="T">The type.</typeparam>
-        /// <param name="source">The source.</param>
+        /// <summary>Tries the <see cref="object" /> cast to the <see cref="T" />.</summary>
+        /// <typeparam name="T">The type of source.</typeparam>
+        /// <param name="source">The object source data.</param>
         /// <returns>The <see cref="bool" />.</returns>
-        public static bool AnyOrNotNull<T>(this IEnumerable<T> source)
+        public static T Cast<T>(this object source) where T : class
         {
-            return (source != null) && source.Any();
+            return source as T;
         }
 
-        /// <summary>Determines whether the object has the method.</summary>
-        /// <param name="source">The object source.</param>
-        /// <param name="methodName">The name of the method.</param>
+        ///// <summary>Returns the closest <see cref="T" /> from the <see cref="IEnumerable{T}" /> using the specified target.</summary>
+        ///// <typeparam name="T">The type.</typeparam>
+        ///// <typeparam name="TKey">The key type.</typeparam>
+        ///// <param name="collection">The source of the collection.</param>
+        ///// <param name="keySelection">The key selector.</param>
+        ///// <param name="target">The target key.</param>
+        ///// <returns>The <see cref="T" />.</returns>
+        // [Obsolete("Broke it.")]
+        // public static T Closest<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> keySelection, TKey target) where TKey : IComparable<TKey>
+        // {
+        // try
+        // {
+        // if (Guard.IsNull<T>(collection))
+        // {
+        // return default(T);
+        // }
+        // else
+        // {
+        // return collection.Where(x => target.CompareTo(keySelection(x)) <= 0).OrderBy(keySelection).FirstOrDefault();
+        // }
+        // }
+        // catch (Exception e)
+        // {
+        // Console.WriteLine(e);
+        // throw;
+        // }
+
+        // }
+
+        ///// <summary>Retrieves the number closest from the value collection.</summary>
+        ///// <typeparam name="T">The target type.</typeparam>
+        ///// <param name="target">The target value to compare with.</param>
+        ///// <param name="collection">The collection to search.</param>
+        ///// <returns>The <see cref="int" />.</returns>
+        // public static T FindClosestValue<T>(this T target, IEnumerable<T> collection) where T : IComparable<T>
+        // {
+        // if (Guard.IsNull<T>(target))
+        // {
+        // return target;
+        // }
+        // else
+        // {
+        // return collection.Closest(keyIndexer => keyIndexer, target);
+        // }
+        // }
+
+        /// <summary>
+        ///     Returns an <see cref="Array" /> of the custom <see cref="Attribute" />/s from the <see cref="MemberInfo" /> by
+        ///     <see cref="Type" />.
+        /// </summary>
+        /// <typeparam name="TAttribute">The attribute type.</typeparam>
+        /// <param name="instance">The member info.</param>
         /// <returns>The <see cref="bool" />.</returns>
-        public static bool HasMethod(this object source, string methodName)
+        public static TAttribute[] GetAttributes<TAttribute>(this MemberInfo instance) where TAttribute : Attribute
         {
-            return ObjectManagement.HasMethod(source, methodName);
+            return (TAttribute[])instance.GetCustomAttributes(typeof(TAttribute), true);
         }
 
-        /// <summary>Check if the value is in range.</summary>
+        /// <summary>
+        ///     Returns an <see cref="Array" /> of custom <see cref="Attribute" />/s defined on this member, identified by
+        ///     type, or an empty array if there are no custom attributes of that type.
+        /// </summary>
+        /// <typeparam name="T">The type parameter.</typeparam>
+        /// <param name="attributeProvider">The attribute Provider.</param>
+        /// <param name="inherit">
+        ///     Indicates whether one or more instance of <see cref="Attribute" /> type is defined on this
+        ///     member..
+        /// </param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static T[] GetAttributes<T>(this ICustomAttributeProvider attributeProvider, bool inherit) where T : class
+        {
+            return (T[])attributeProvider.GetCustomAttributes(typeof(T), inherit);
+        }
+
+        /// <summary>Indicates whether the <see cref="Assembly" /> contains the specified <see cref="Attribute" /> type.</summary>
+        /// <typeparam name="T">The type parameter.</typeparam>
+        /// <param name="assembly">The assembly.</param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static T[] GetAttributes<T>(this Assembly assembly) where T : class
+        {
+            return GetAttributes<T>(assembly, false);
+        }
+
+        /// <summary>Indicates whether the <see cref="Type" /> contains the specified <see cref="Attribute" /> type.</summary>
+        /// <typeparam name="T">The type parameter.</typeparam>
+        /// <param name="type">The type.</param>
+        /// <param name="inherit">
+        ///     Indicates whether one or more instance of <see cref="Attribute" /> type is defined on this
+        ///     member.
+        /// </param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static T[] GetAttributes<T>(this Type type, bool inherit) where T : class
+        {
+            return GetAttributes<T>((ICustomAttributeProvider)type, inherit);
+        }
+
+        /// <summary>Returns the get value using the string.</summary>
+        /// <typeparam name="T">The value type.</typeparam>
+        /// <param name="value">The data value.</param>
+        /// <returns>The <see cref="string" />.</returns>
+        public static T GetValue<T>(string value) where T : struct
+        {
+            T result;
+            Enum.TryParse(value, true, out result);
+            return result;
+        }
+
+        /// <summary>Indicates whether the <see cref="Type" /> is a <see cref="DateTime" />.</summary>
+        /// <param name="type">The type to represent.</param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static bool IsDateTime(this Type type)
+        {
+            return (type != null) && (type == typeof(DateTime));
+        }
+
+        /// <summary>Indicates whether the <see cref="Type" /> is a <see cref="decimal" />.</summary>
+        /// <param name="type">The type to represent.</param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static bool IsDecimal(this Type type)
+        {
+            return (type != null) && (type == typeof(decimal));
+        }
+
+        /// <summary>Indicates whether the <see cref="Type" /> is a floating-point.</summary>
+        /// <param name="type">The type to represent.</param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static bool IsFloatingPoint(this Type type)
+        {
+            return (type != null) && ((type == typeof(double)) || (type == typeof(float)));
+        }
+
+        /// <summary>Indicates whether the <see cref="Type" /> is an integer.</summary>
+        /// <param name="type">The type to represent.</param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static bool IsInteger(this Type type)
+        {
+            return (type != null) &&
+                   (IsUnsignedInteger(type) ||
+                    (type == typeof(byte)) ||
+                    (type == typeof(sbyte)) ||
+                    (type == typeof(int)) ||
+                    (type == typeof(short)) ||
+                    (type == typeof(long)));
+        }
+
+        /// <summary>Indicates whether the <see cref="Type" /> is intrinsic.</summary>
+        /// <param name="type">The type to represent.</param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static bool IsIntrinsic(this Type type)
+        {
+            return IsInteger(type) ||
+                   IsDecimal(type) ||
+                   IsFloatingPoint(type) ||
+                   IsString(type) ||
+                   IsDateTime(type);
+        }
+
+        /// <summary>Indicates whether the <see cref="Type" /> is a <see cref="string" />.</summary>
+        /// <param name="type">The type to represent.</param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static bool IsString(this Type type)
+        {
+            return (type != null) && (type == typeof(string));
+        }
+
+        /// <summary>Indicates whether the <see cref="Type" /> is an unsigned integer.</summary>
+        /// <param name="type">The type to represent.</param>
+        /// <returns>The <see cref="bool" />.</returns>
+        public static bool IsUnsignedInteger(this Type type)
+        {
+            return (type != null) &&
+                   ((type == typeof(uint)) ||
+                    (type == typeof(ushort)) ||
+                    (type == typeof(ulong)));
+        }
+
+        /// <summary>Limits the number exclusively to its range.</summary>
         /// <param name="value">The value.</param>
-        /// <param name="minimum">The minimum value.</param>
-        /// <param name="maximum">The maximum value.</param>
-        /// <returns>The <see cref="bool" />.</returns>
-        public static bool IsInRange(this int value, int minimum, int maximum)
-        {
-            return (value >= minimum) && (value <= maximum);
-        }
-
-        /// <summary>Indicates whether the specified <see cref="Array" /> is null or an empty <see cref="Array" />.</summary>
-        /// <param name="array">The array.</param>
-        /// <returns>The <see cref="bool" />.</returns>
-        public static bool IsNullOrEmpty(this Array array)
-        {
-            return (array == null) || (array.Length == 0);
-        }
-
-        /// <summary>Limits the number exclusively to only what is in range.</summary>
-        /// <param name="value">The value.</param>
-        /// <param name="inclusiveMinimum">The minimum.</param>
-        /// <param name="inclusiveMaximum">The maximum.</param>
+        /// <param name="minimum">The minimum.</param>
+        /// <param name="maximum">The maximum.</param>
         /// <returns>The <see cref="int" />.</returns>
-        public static int LimitToRange(this int value, int inclusiveMinimum, int inclusiveMaximum)
+        public static int LimitToRange(this int value, int minimum, int maximum)
         {
-            if (value < inclusiveMinimum)
+            if (value < minimum)
             {
-                return inclusiveMinimum;
+                return minimum;
             }
 
-            if (value > inclusiveMaximum)
+            if (value > maximum)
             {
-                return inclusiveMaximum;
+                return maximum;
             }
 
             return value;
         }
 
-        /// <summary>Scroll down the panel.</summary>
+        ///// <summary>Rounds the value data type to be nearest inside it's range values.</summary>
+        ///// <typeparam name="T">The value type.</typeparam>
+        ///// <param name="value">The value data.</param>
+        ///// <param name="minimum">The minimum.</param>
+        ///// <param name="maximum">The maximum.</param>
+        ///// <returns>The <see cref="T" />.</returns>
+        // [Obsolete("Broke it.")]
+        // public static T RoundToNearestValue<T>(this T value, T minimum, T maximum) where T : struct, IComparable<T>
+        // {
+
+        // // Create the range array
+        // var range = new T[2];
+        // range[0] = minimum;
+        // range[1] = maximum;
+
+        // var r = MathManager.FindClosestValue(value, range);
+
+        // return value.FindClosestValue(range);
+
+        // }
+
+        ///// <summary>Rounds the value data type to be nearest inside it's range values.</summary>
+        ///// <typeparam name="T">The value type.</typeparam>
+        ///// <param name="range">The value data.</param>
+        ///// <returns>The <see cref="T" />.</returns>
+        // public static T RoundToNearestValue<T>(this Range<T> range) where T : struct, IComparable<T>
+        // {
+        // return range.Value.FindClosestValue(range.ToRange);
+        // }
+
+        /// <summary>Scroll down the <see cref="Panel" />.</summary>
         /// <param name="panel">The panel.</param>
         /// <param name="position">The position.</param>
         public static void ScrollDown(this Panel panel, int position)
@@ -125,7 +298,7 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Scroll to the bottom of the panel.</summary>
+        /// <summary>Scroll to the bottom of the <see cref="Panel" />.</summary>
         /// <param name="panel">The panel.</param>
         public static void ScrollToBottom(this Panel panel)
         {
@@ -136,7 +309,7 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Scroll up the panel.</summary>
+        /// <summary>Scroll up the <see cref="Panel" />.</summary>
         /// <param name="panel">The panel.</param>
         /// <param name="position">The position.</param>
         public static void ScrollUp(this Panel panel, int position)
@@ -148,7 +321,7 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Returns the size of the structure.</summary>
+        /// <summary>Returns the size of an unmanaged <see cref="struct" /> in bytes.</summary>
         /// <typeparam name="T">The type.</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>The <see cref="uint" />.</returns>

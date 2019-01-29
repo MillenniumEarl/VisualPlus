@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: Shape.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -41,10 +37,13 @@
 
 #region Namespace
 
+using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
+using VisualPlus.Attributes;
 using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Enumerators;
@@ -57,12 +56,15 @@ using VisualPlus.TypeConverters;
 
 namespace VisualPlus.Structure
 {
+    /// <summary>The <see cref="Shape" /> class.</summary>
     [TypeConverter(typeof(VisualSettingsTypeConverter))]
     [ToolboxItem(false)]
     [DesignerCategory("code")]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     [ComVisible(true)]
-    [Description("The shape.")]
+    [DebuggerDisplay(DefaultConstants.DefaultDebuggerDisplay)]
+    [Serializable]
+    [Test("Move class to a structure.", Labels = new[] { Labels.Planned, Labels.Refactoring })]
     public class Shape
     {
         #region Fields
@@ -197,7 +199,18 @@ namespace VisualPlus.Structure
                     return;
                 }
 
-                _rounding = (int)ExceptionsInvoker.ArgumentOutOfRangeException(new ValuePairRange(value, SettingConstants.MinimumRounding, SettingConstants.MaximumRounding), true);
+                var range = new Range<int>(value, SettingConstants.MinimumRounding, SettingConstants.MaximumRounding);
+
+                // TODO: Improve handling of value rounding.
+                if (false)
+                {
+                    _rounding = MathManager.RoundToNearestValue(range.Value, range.Minimum, range.Maximum);
+                }
+                else
+                {
+                    _rounding = range.Value;
+                }
+
                 RoundingChanged?.Invoke();
             }
         }
@@ -219,7 +232,18 @@ namespace VisualPlus.Structure
                     return;
                 }
 
-                _thickness = (int)ExceptionsInvoker.ArgumentOutOfRangeException(new ValuePairRange(value, SettingConstants.MinimumBorderSize, SettingConstants.MaximumBorderSize), true);
+                var range = new Range<int>(value, SettingConstants.MinimumBorderSize, SettingConstants.MaximumBorderSize);
+
+                // TODO: Improve handling of value rounding.
+                if (false)
+                {
+                    _thickness = MathManager.RoundToNearestValue(range.Value, range.Minimum, range.Maximum);
+                }
+                else
+                {
+                    _thickness = range.Value;
+                }
+
                 ThicknessChanged?.Invoke();
             }
         }

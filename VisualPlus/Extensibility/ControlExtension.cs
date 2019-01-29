@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: ControlExtension.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:23 AM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -49,11 +45,12 @@ using VisualPlus.Managers;
 
 namespace VisualPlus.Extensibility
 {
+    /// <summary>The collection of the <see cref="ControlExtension" /> class.</summary>
     public static class ControlExtension
     {
         #region Public Methods and Operators
 
-        /// <summary>Centers the control inside the parent control.</summary>
+        /// <summary>Centers the <see cref="Control" /> inside the parent <see cref="Control" />.</summary>
         /// <param name="control">The control to center.</param>
         /// <param name="centerX">Center X coordinate.</param>
         /// <param name="centerY">Center Y coordinate.</param>
@@ -64,7 +61,7 @@ namespace VisualPlus.Extensibility
             return control;
         }
 
-        /// <summary>Centers the control inside the parent control.</summary>
+        /// <summary>Centers the <see cref="Control" /> inside the parent <see cref="Control" />.</summary>
         /// <param name="control">The control to center.</param>
         /// <returns>The <see cref="Control" />.</returns>
         public static Control ToCenter(this Control control)

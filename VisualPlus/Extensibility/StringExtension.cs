@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: StringExtension.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -53,11 +49,12 @@ using System.Windows.Forms;
 
 namespace VisualPlus.Extensibility
 {
+    /// <summary>The collection of the <see cref="StringExtension" /> class.</summary>
     public static class StringExtension
     {
         #region Public Methods and Operators
 
-        /// <summary>The text between the <see cref="string"/>/s.</summary>
+        /// <summary>The text between the <see cref="string" />/s.</summary>
         /// <param name="text">The text.</param>
         /// <param name="first">The first.</param>
         /// <param name="last">The last.</param>
@@ -103,7 +100,7 @@ namespace VisualPlus.Extensibility
             return text.IndexOf(value, comparison) >= 0;
         }
 
-        /// <summary>Converts the <see cref="string"/> HTML to a <see cref="Color"/>.</summary>
+        /// <summary>Converts the <see cref="string" /> HTML to a <see cref="Color" />.</summary>
         /// <param name="withoutHash">The HTML color. (Don't include hash '#')</param>
         /// <returns>The <see cref="Color" />.</returns>
         public static Color FromHtml(this string withoutHash)
@@ -126,12 +123,12 @@ namespace VisualPlus.Extensibility
         }
 
         /// <summary>Determines whether the <see cref="string" /> is a number.</summary>
-        /// <param name="text">The text.</param>
+        /// <param name="instance">The <see cref="string" /> instance.</param>
         /// <returns>The <see cref="string" />.</returns>
-        public static bool IsNumber(this string text)
+        public static bool IsNumber(this string instance)
         {
             int _number;
-            return int.TryParse(text, out _number);
+            return int.TryParse(instance, out _number);
         }
 
         /// <summary>Moves the <see cref="string" /> left.</summary>
@@ -148,7 +145,7 @@ namespace VisualPlus.Extensibility
             return length < text.Length ? text.Substring(0, length) : text;
         }
 
-        /// <summary>The amount of lines in the <see cref="string"/>.</summary>
+        /// <summary>The amount of lines in the <see cref="string" />.</summary>
         /// <param name="text">The text.</param>
         /// <returns>The <see cref="int" />.</returns>
         public static int LineCount(this string text)
@@ -166,7 +163,7 @@ namespace VisualPlus.Extensibility
             return text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
         }
 
-        /// <summary>Provides the <see cref="Size"/>, in pixels, of the specified text when drawn with the specified font.</summary>
+        /// <summary>Provides the <see cref="Size" />, in pixels, of the specified text when drawn with the specified font.</summary>
         /// <param name="text">The text to measure.</param>
         /// <param name="font">The font to apply to the measured text.</param>
         /// <returns>The <see cref="Size" />.</returns>

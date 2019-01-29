@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: UnitTestManager.cs
-// UnitTests - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -61,7 +57,8 @@ using VisualPlus.Toolkit.Dialogs;
 
 namespace UnitTests.Forms
 {
-    /// <summary>The test manager.</summary>
+    /// <summary>Represents the <see cref="UnitTestManager" /> class.</summary>
+    /// <remarks>Assists with management of unit tests.</remarks>
     public partial class UnitTestManager : VisualForm
     {
         #region Fields
@@ -234,7 +231,7 @@ namespace UnitTests.Forms
         private string GenerateTestStatistics()
         {
             StringBuilder stats = new StringBuilder();
-            stats.AppendLine($@"Test Index: {visualListBoxTests.SelectedIndex}");
+            stats.AppendLine($@"Test Index: {visualListBoxTests.SelectedIndex + 1}");
             stats.AppendLine($@"Total Tests: {visualListBoxTests.Items.Count}");
             return stats.ToString();
         }
@@ -260,11 +257,11 @@ namespace UnitTests.Forms
             visualLabelTestsStats.Text = GenerateTestStatistics();
         }
 
-        /// <summary>Loads the flagged test attributes data.</summary>
+        /// <summary>Loads the flagged <see cref="Test" /> data <see cref="Attribute" />/s.</summary>
         private void LoadFlaggedTests()
         {
-            lvFlaggedTests.Columns.Add(null, "Name", 50);
-            lvFlaggedTests.Columns.Add(null, "Namespace", 80);
+            lvFlaggedTests.Columns.Add("Name", "Name", 50);
+            lvFlaggedTests.Columns.Add("Namespace", "Namespace", 80);
 
             lvFlaggedTests.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 

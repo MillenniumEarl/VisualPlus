@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: ConsoleEx.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 02/01/2019 - 1:24 AM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -49,12 +45,14 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
+using VisualPlus.Attributes;
 using VisualPlus.Enumerators;
 
 #endregion
 
 namespace VisualPlus.Structure
 {
+    [Test("Move to .Debugging folder, Use a witch instead of multiple constructors.")]
     public static class ConsoleEx
     {
         #region Public Methods and Operators

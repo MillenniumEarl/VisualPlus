@@ -51,7 +51,10 @@
   <ItemGroup>
     <Compile Include="ActionList\VisualInputFieldActionList.cs" />
     <Compile Include="ActionList\VisualIPBoxActionList.cs" />
+    <Compile Include="Attributes\InvalidValue.cs" />
+    <Compile Include="Attributes\Todo.cs" />
     <Compile Include="Attributes\Test.cs" />
+    <Compile Include="Attributes\VisualAttribute.cs" />
     <Compile Include="Collections\CollectionsEditor\VisualListViewSubItemCollectionEditor.cs" />
     <Compile Include="Collections\CollectionsEditor\VisualListViewItemCollectionEditor.cs" />
     <Compile Include="Collections\ControlCollection\ReadOnlyControlCollection.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="Collections\CollectionsEditor\VisualTabPageCollectionEditor.cs" />
     <Compile Include="Constants\ClipboardConstants.cs" />
     <Compile Include="Constants\ControlBoxConstants.cs" />
+    <Compile Include="Constants\DefaultConstants.cs" />
     <Compile Include="Constants\FormConstants.cs" />
     <Compile Include="Constants\SettingConstants.cs" />
     <Compile Include="Delegates\ClipboardDelegate.cs" />
@@ -75,6 +79,7 @@
     <Compile Include="Designer\VisualControlBoxDesigner.cs" />
     <Compile Include="Designer\VisualListViewDesigner.cs" />
     <Compile Include="Designer\VisualScrollBarDesigner.cs" />
+    <Compile Include="Enumerators\Labels.cs" />
     <Compile Include="Enumerators\Relation.cs" />
     <Compile Include="Enumerators\ColumnStates.cs" />
     <Compile Include="Enumerators\GridTypes.cs" />
@@ -103,13 +108,28 @@
     <Compile Include="Events\ToggleEventArgs.cs" />
     <Compile Include="Extensibility\ColorExtension.cs" />
     <Compile Include="Extensibility\ControlExtension.cs" />
+    <Compile Include="Localization\DebuggerText.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DebuggerText.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\GlobalText.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalText.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Debugging\DebuggerDisplayFormat.cs" />
+    <Compile Include="Utilities\Debugging\VisualDebuggerDisplay.cs" />
+    <Compile Include="Utilities\Guard.cs" />
+    <Compile Include="Extensibility\KeysExtensions.cs" />
+    <Compile Include="Extensibility\ReflectionExtensions.cs" />
+    <Compile Include="TypeConverters\RectConverter.cs" />
     <Compile Include="TypeConverters\CustomNumberTypeConverter.cs" />
     <Compile Include="Extensibility\ImageExtensions.cs" />
     <Compile Include="Extensibility\ListExtension.cs" />
     <Compile Include="Extensibility\StringExtension.cs" />
     <Compile Include="Extensibility\XmlExtension.cs" />
     <Compile Include="Interfaces\IValuePairRange.cs" />
-    <Compile Include="Managers\ExceptionsHandler.cs" />
     <Compile Include="Interfaces\IToolTip.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Localization\EventCategory.cs" />
@@ -123,7 +143,6 @@
     <Compile Include="Managers\DateTimeManager.cs" />
     <Compile Include="Managers\ElementsManager.cs" />
     <Compile Include="Managers\MouseManager.cs" />
-    <Compile Include="Managers\ObjectManagement.cs" />
     <Compile Include="Managers\ReflectionManager.cs" />
     <Compile Include="Renders\VisualControlBoxRenderer.cs" />
     <Compile Include="Renders\VisualElementRenderer.cs" />
@@ -133,7 +152,7 @@
     <Compile Include="Renders\VisualTileRenderer.cs" />
     <Compile Include="Renders\VisualWatermarkRenderer.cs" />
     <Compile Include="Structure\ConsoleEx.cs" />
-    <Compile Include="Localization\ExceptionsMessages.cs" />
+    <Compile Include="Localization\ArgumentMessages.cs" />
     <Compile Include="Managers\FontManager.cs" />
     <Compile Include="Managers\FormManager.cs" />
     <Compile Include="Managers\ImageManager.cs" />
@@ -165,8 +184,7 @@
     <Compile Include="Renders\VisualControlRenderer.cs" />
     <Compile Include="Structure\NCCALCSIZE_PARAMS.cs" />
     <Compile Include="Structure\TipInfo.cs" />
-    <Compile Include="Structure\ValuePairRangeF.cs" />
-    <Compile Include="Structure\ValuePairRange.cs" />
+    <Compile Include="Structure\Range.cs" />
     <Compile Include="Structure\WINDOWPOS.cs" />
     <Compile Include="Toolkit\Controls\Editors\VisualIPBox.cs" />
     <Compile Include="Toolkit\Controls\Navigation\VisualSuperTabControl.cs" />
@@ -197,7 +215,6 @@
     </Compile>
     <Compile Include="Toolkit\VisualBase\ControlBoxButton.cs" />
     <Compile Include="Enumerators\DebugOutput.cs" />
-    <Compile Include="Structure\GlobalId.cs" />
     <Compile Include="Structure\ColorPalette.cs" />
     <Compile Include="Toolkit\VisualBase\BorderEdge.cs" />
     <Compile Include="Structure\RECT.cs" />
@@ -283,7 +300,7 @@
     <Compile Include="Toolkit\Components\ProgressDialog.cs" />
     <Compile Include="Enumerators\ShapeTypes.cs" />
     <Compile Include="Extensibility\BitmapExtension.cs" />
-    <Compile Include="Extensibility\EnumExtension.cs" />
+    <Compile Include="Extensibility\EnumerationExtensions.cs" />
     <Compile Include="Extensibility\GraphicsPathExtension.cs" />
     <Compile Include="Extensibility\PointExtension.cs" />
     <Compile Include="Extensibility\RectangleExtension.cs" />
@@ -351,10 +368,18 @@
     <Compile Include="Managers\ControlManager.cs" />
     <Compile Include="Structure\CheckStyle.cs" />
     <Compile Include="TypeConverters\VisualColorConverter.cs" />
+    <EmbeddedResource Include="Localization\DebuggerText.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DebuggerText.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\GlobalText.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalText.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Toolkit\Components\VisualDrag.cs">
       <SubType>Component</SubType>
     </EmbeddedResource>
-    <Compile Include="Managers\ExceptionsInvoker.cs" />
+    <Compile Include="Managers\ExceptionInvoker.cs" />
     <Compile Include="Managers\ColorManager.cs" />
     <Compile Include="Extensibility\Extensions.cs" />
     <Compile Include="Structure\Gradient.cs" />
@@ -501,6 +526,7 @@
     <Content Include="Toolkit\Controls\Layout\VisualTile.bmp" />
     <Content Include="Toolkit\Controls\Editors\VisualDateTimePicker.bmp" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

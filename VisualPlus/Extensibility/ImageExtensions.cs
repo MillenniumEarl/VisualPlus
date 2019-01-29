@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: ImageExtensions.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -50,11 +46,12 @@ using System.IO;
 
 namespace VisualPlus.Extensibility
 {
+    /// <summary>The collection of the <see cref="ImageExtensions" /> class.</summary>
     public static class ImageExtensions
     {
         #region Public Methods and Operators
 
-        /// <summary>Creates a Base64 string value from the image.</summary>
+        /// <summary>Creates a Base64 string value from the <see cref="Image" />.</summary>
         /// <param name="image">The image.</param>
         /// <returns>The <see cref="string" />.</returns>
         public static string ToBase64(this Image image)
@@ -67,7 +64,7 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Creates a <see cref="Pen"/> from the <see cref="Image"/>.</summary>
+        /// <summary>Creates a <see cref="Pen" /> from the <see cref="Image" />.</summary>
         /// <param name="image">The image.</param>
         /// <param name="width">The width.</param>
         /// <param name="startCap">The start cap.</param>
@@ -81,7 +78,7 @@ namespace VisualPlus.Extensibility
             }
         }
 
-        /// <summary>Creates a <see cref="TextureBrush"/> from the <see cref="Image"/>.</summary>
+        /// <summary>Creates a <see cref="TextureBrush" /> from the <see cref="Image" />.</summary>
         /// <param name="image">The image.</param>
         /// <returns>The <see cref="TextureBrush" />.</returns>
         public static TextureBrush ToTextureBrush(this Image image)
@@ -89,7 +86,7 @@ namespace VisualPlus.Extensibility
             return new TextureBrush(image);
         }
 
-        /// <summary>Creates a <see cref="TextureBrush"/> from the <see cref="Image"/>.</summary>
+        /// <summary>Creates a <see cref="TextureBrush" /> from the <see cref="Image" />.</summary>
         /// <param name="image">The image.</param>
         /// <param name="rectangle">The rectangle boundaries.</param>
         /// <returns>The <see cref="TextureBrush" />.</returns>

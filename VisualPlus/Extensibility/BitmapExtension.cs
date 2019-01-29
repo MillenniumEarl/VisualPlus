@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: BitmapExtension.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -47,7 +43,7 @@ using System.Drawing;
 
 namespace VisualPlus.Extensibility
 {
-    /// <summary>The <see cref="Bitmap" /> extensions collection.</summary>
+    /// <summary>The collection of the <see cref="BitmapExtension" /> class.</summary>
     public static class BitmapExtension
     {
         #region Public Methods and Operators

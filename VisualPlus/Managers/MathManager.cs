@@ -3,12 +3,8 @@
 // -----------------------------------------------------------------------------------------------------------
 // 
 // Name: MathManager.cs
-// VisualPlus - The VisualPlus Framework (VPF) for WinForms .NET development.
 // 
-// Created: 10/12/2018 - 11:45 PM
-// Last Modified: 22/01/2019 - 11:55 PM
-// 
-// Copyright (c) 2016-2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -49,7 +45,8 @@ using System.Linq;
 
 namespace VisualPlus.Managers
 {
-    /// <summary>The class for managing mathematical equations.</summary>
+    /// <summary>Represents the <see cref="MathManager" /> class.</summary>
+    /// <remarks>Assists with managing mathematical equations.</remarks>
     public sealed class MathManager
     {
         #region Public Methods and Operators
@@ -65,7 +62,7 @@ namespace VisualPlus.Managers
         /// <summary>Retrieves the number closest from the value collection.</summary>
         /// <param name="value">The initial value to compare with.</param>
         /// <param name="valueCollection">The value collection to search.</param>
-        /// <returns>The <see cref="int" />.</returns>
+        /// <returns>The <see cref="double" />.</returns>
         public static double FindClosestValue(double value, double[] valueCollection)
         {
             return valueCollection.Aggregate((x, y) => Math.Abs(x - value) < Math.Abs(y - value) ? x : y);
@@ -75,6 +72,15 @@ namespace VisualPlus.Managers
         /// <param name="value">The initial value to compare with.</param>
         /// <param name="valueCollection">The value collection to search.</param>
         /// <returns>The <see cref="int" />.</returns>
+        public static int FindClosestValue(int value, int[] valueCollection)
+        {
+            return valueCollection.Aggregate((x, y) => Math.Abs(x - value) < Math.Abs(y - value) ? x : y);
+        }
+
+        /// <summary>Retrieves the number closest from the value collection.</summary>
+        /// <param name="value">The initial value to compare with.</param>
+        /// <param name="valueCollection">The value collection to search.</param>
+        /// <returns>The <see cref="long" />.</returns>
         public static long FindClosestValue(long value, long[] valueCollection)
         {
             return valueCollection.Aggregate((x, y) => Math.Abs(x - value) < Math.Abs(y - value) ? x : y);
@@ -131,6 +137,51 @@ namespace VisualPlus.Managers
         public static float RadianToDegree(float angle)
         {
             return (float)(angle * (180.0 / Math.PI));
+        }
+
+        /// <summary>Rounds the value data type to be nearest inside it's range values.</summary>
+        /// <param name="value">The value data.</param>
+        /// <param name="minimum">The minimum.</param>
+        /// <param name="maximum">The maximum.</param>
+        /// <returns>The <see cref="long" />.</returns>
+        public static long RoundToNearestValue(long value, long minimum, long maximum)
+        {
+            // Create the range array
+            var range = new long[2];
+            range[0] = minimum;
+            range[1] = maximum;
+
+            return FindClosestValue(value, range);
+        }
+
+        /// <summary>Rounds the value data type to be nearest inside it's range values.</summary>
+        /// <param name="value">The value data.</param>
+        /// <param name="minimum">The minimum.</param>
+        /// <param name="maximum">The maximum.</param>
+        /// <returns>The <see cref="long" />.</returns>
+        public static double RoundToNearestValue(double value, double minimum, double maximum)
+        {
+            // Create the range array
+            var range = new double[2];
+            range[0] = minimum;
+            range[1] = maximum;
+
+            return FindClosestValue(value, range);
+        }
+
+        /// <summary>Rounds the value data type to be nearest inside it's range values.</summary>
+        /// <param name="value">The value data.</param>
+        /// <param name="minimum">The minimum.</param>
+        /// <param name="maximum">The maximum.</param>
+        /// <returns>The <see cref="int" />.</returns>
+        public static int RoundToNearestValue(int value, int minimum, int maximum)
+        {
+            // Create the range array
+            var range = new int[2];
+            range[0] = minimum;
+            range[1] = maximum;
+
+            return FindClosestValue(value, range);
         }
 
         #endregion

@@ -44,7 +44,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-using VisualPlus.Structure;
 using VisualPlus.Toolkit.VisualBase;
 using VisualPlus.Utilities.Debugging;
 

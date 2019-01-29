@@ -107,6 +107,7 @@ namespace VisualPlus.Constants
         public static readonly Size HatchSize = new Size(2, 2);
         public static readonly string TemplatesFolder = Environment.GetFolderPath(Environment.SpecialFolder.Templates) + @"\VisualPlus Themes\";
         public static readonly string TemplatesFilePath = TemplatesFolder + @"DefaultTheme.xml";
+
         public static TextRenderingHint TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
         #endregion

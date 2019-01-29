@@ -40,8 +40,8 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
+using VisualPlus.Models;
 using VisualPlus.Renders;
-using VisualPlus.Structure;
 
 #endregion
 

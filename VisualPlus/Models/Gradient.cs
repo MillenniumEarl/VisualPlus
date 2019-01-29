@@ -48,11 +48,11 @@ using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Localization;
 using VisualPlus.TypeConverters;
-using VisualPlus.Utilities;
+using VisualPlus.Utilities.Debugging;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     [TypeConverter(typeof(VisualSettingsTypeConverter))]
     [ToolboxItem(false)]

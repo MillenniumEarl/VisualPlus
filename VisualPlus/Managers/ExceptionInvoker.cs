@@ -46,8 +46,8 @@ using System.Runtime.InteropServices;
 
 using VisualPlus.Attributes;
 using VisualPlus.Localization;
-using VisualPlus.Structure;
-using VisualPlus.Utilities;
+using VisualPlus.Models;
+using VisualPlus.Utilities.Debugging;
 
 #endregion
 

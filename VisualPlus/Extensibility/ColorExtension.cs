@@ -40,7 +40,7 @@
 using System;
 using System.Drawing;
 
-using VisualPlus.Utilities;
+using VisualPlus.Utilities.Debugging;
 
 #endregion
 

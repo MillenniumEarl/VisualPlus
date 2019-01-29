@@ -54,7 +54,7 @@ using VisualPlus.TypeConverters;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     /// <summary>The <see cref="Shape" /> class.</summary>
     [TypeConverter(typeof(VisualSettingsTypeConverter))]

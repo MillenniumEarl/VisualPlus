@@ -56,7 +56,7 @@ using VisualPlus.Events;
 using VisualPlus.Extensibility;
 using VisualPlus.Interfaces;
 using VisualPlus.Managers;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 using VisualPlus.TypeConverters;
 using VisualPlus.UITypeEditors;
 using VisualPlus.Utilities.Debugging;

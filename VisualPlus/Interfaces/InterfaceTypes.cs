@@ -40,7 +40,7 @@
 using System.Drawing;
 
 using VisualPlus.Enumerators;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Components;
 using VisualPlus.Toolkit.Controls.DataManagement;

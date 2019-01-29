@@ -50,8 +50,8 @@ using VisualPlus.Events;
 using VisualPlus.Interfaces;
 using VisualPlus.Localization;
 using VisualPlus.Managers;
+using VisualPlus.Models;
 using VisualPlus.Renders;
-using VisualPlus.Structure;
 using VisualPlus.Toolkit.VisualBase;
 using VisualPlus.Utilities.Debugging;
 

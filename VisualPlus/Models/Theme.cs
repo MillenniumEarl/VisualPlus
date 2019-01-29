@@ -52,7 +52,7 @@ using VisualPlus.Utilities.Debugging;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     [ComVisible(true)]

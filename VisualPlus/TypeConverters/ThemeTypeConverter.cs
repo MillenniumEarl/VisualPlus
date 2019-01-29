@@ -41,7 +41,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-using VisualPlus.Structure;
+using VisualPlus.Models;
 
 #endregion
 

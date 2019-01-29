@@ -50,7 +50,7 @@ using VisualPlus.TypeConverters;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     [TypeConverter(typeof(VisualSettingsTypeConverter))]
     public class TextStyle : ITextColor

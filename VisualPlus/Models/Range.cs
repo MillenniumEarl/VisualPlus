@@ -47,7 +47,7 @@ using VisualPlus.Constants;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     /// <summary>The <see cref="Range{T}" /> struct.</summary>
     /// <typeparam name="T">Type of the argument to check, it must be an<see cref="IComparable" /> type.</typeparam>

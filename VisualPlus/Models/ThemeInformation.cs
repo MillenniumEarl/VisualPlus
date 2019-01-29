@@ -41,7 +41,7 @@ using System.ComponentModel;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     public class ThemeInformation
     {

@@ -48,7 +48,7 @@ using System.Windows.Forms;
 using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 using VisualPlus.TypeConverters;
 
 #endregion

@@ -49,7 +49,7 @@ using VisualPlus;
 using VisualPlus.Constants;
 using VisualPlus.Events;
 using VisualPlus.Managers;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 using VisualPlus.Toolkit.Dialogs;
 
 using VisualThemeBuilder.Controls;

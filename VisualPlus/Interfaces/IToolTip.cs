@@ -40,7 +40,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using VisualPlus.Structure;
+using VisualPlus.Models;
 using VisualPlus.Toolkit.Components;
 
 #endregion

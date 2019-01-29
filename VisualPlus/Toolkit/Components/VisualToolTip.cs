@@ -50,7 +50,7 @@ using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Interfaces;
 using VisualPlus.Localization;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 using VisualPlus.TypeConverters;
 
 #endregion

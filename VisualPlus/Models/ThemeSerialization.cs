@@ -56,7 +56,7 @@ using VisualPlus.Utilities.Debugging;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     public class ThemeSerialization
     {

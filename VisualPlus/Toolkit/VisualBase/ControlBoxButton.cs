@@ -48,8 +48,8 @@ using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
 using VisualPlus.Managers;
+using VisualPlus.Models;
 using VisualPlus.Properties;
-using VisualPlus.Structure;
 using VisualPlus.TypeConverters;
 using VisualPlus.Utilities.Debugging;
 

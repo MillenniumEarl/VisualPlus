@@ -47,7 +47,7 @@ using VisualPlus.UITypeEditors;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     /// <summary>The supported theme colors.</summary>
     public class ColorPalette

@@ -39,7 +39,7 @@
 
 using System.Drawing;
 
-using VisualPlus.Structure;
+using VisualPlus.Models;
 
 #endregion
 

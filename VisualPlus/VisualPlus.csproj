@@ -182,8 +182,8 @@
     <Compile Include="Renders\VisualToggleRenderer.cs" />
     <Compile Include="Renders\VisualControlRenderer.cs" />
     <Compile Include="Structure\NCCALCSIZE_PARAMS.cs" />
-    <Compile Include="Structure\TipInfo.cs" />
-    <Compile Include="Structure\Range.cs" />
+    <Compile Include="Models\TipInfo.cs" />
+    <Compile Include="Models\Range.cs" />
     <Compile Include="Structure\WINDOWPOS.cs" />
     <Compile Include="Toolkit\Controls\Editors\VisualIPBox.cs" />
     <Compile Include="Toolkit\Controls\Navigation\VisualSuperTabControl.cs" />
@@ -214,20 +214,20 @@
     </Compile>
     <Compile Include="Toolkit\VisualBase\ControlBoxButton.cs" />
     <Compile Include="Enumerators\DebugOutput.cs" />
-    <Compile Include="Structure\ColorPalette.cs" />
+    <Compile Include="Models\ColorPalette.cs" />
     <Compile Include="Toolkit\VisualBase\BorderEdge.cs" />
     <Compile Include="Structure\RECT.cs" />
-    <Compile Include="Structure\ThemeInformation.cs" />
-    <Compile Include="Structure\HoverColorState.cs" />
-    <Compile Include="Structure\ControlColorState.cs" />
-    <Compile Include="Structure\ColorState.cs" />
-    <Compile Include="Structure\Hatch.cs" />
-    <Compile Include="Structure\TextStyle.cs" />
+    <Compile Include="Models\ThemeInformation.cs" />
+    <Compile Include="Models\HoverColorState.cs" />
+    <Compile Include="Models\ControlColorState.cs" />
+    <Compile Include="Models\ColorState.cs" />
+    <Compile Include="Models\Hatch.cs" />
+    <Compile Include="Models\TextStyle.cs" />
     <Compile Include="ActionList\VisualRichBoxActionList.cs" />
     <Compile Include="ActionList\VisualTextBoxActionList.cs" />
     <Compile Include="ActionList\VisuaListBoxActionList.cs" />
-    <Compile Include="Structure\Theme.cs" />
-    <Compile Include="Structure\ThemeSerialization.cs" />
+    <Compile Include="Models\Theme.cs" />
+    <Compile Include="Models\ThemeSerialization.cs" />
     <Compile Include="Toolkit\Child\VisualTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -263,7 +263,7 @@
     <Compile Include="Enumerators\SortTypes.cs" />
     <Compile Include="Toolkit\Controls\DataManagement\VisualListView.cs" />
     <Compile Include="Toolkit\Child\VisualListViewColumn.cs" />
-    <Compile Include="Structure\LVMergeSort.cs" />
+    <Compile Include="Models\LVMergeSort.cs" />
     <Compile Include="Collections\CollectionsBase\VisualListViewSubItemCollection.cs" />
     <Compile Include="Collections\CollectionsBase\VisualListViewItemCollection.cs" />
     <Compile Include="Toolkit\VisualBase\VisualDialog.cs">
@@ -277,7 +277,7 @@
     <Compile Include="TypeConverters\VisualListViewItemConverter.cs" />
     <Compile Include="Toolkit\Child\VisualListViewSubItem.cs" />
     <Compile Include="Toolkit\Child\VisualListViewItem.cs" />
-    <Compile Include="Structure\LVQuickSort.cs" />
+    <Compile Include="Models\LVQuickSort.cs" />
     <Compile Include="Toolkit\VisualBase\ManagedHScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -303,8 +303,8 @@
     <Compile Include="Extensibility\GraphicsPathExtension.cs" />
     <Compile Include="Extensibility\PointExtension.cs" />
     <Compile Include="Extensibility\RectangleExtension.cs" />
-    <Compile Include="Structure\Border.cs" />
-    <Compile Include="Structure\Shape.cs" />
+    <Compile Include="Models\Border.cs" />
+    <Compile Include="Models\Shape.cs" />
     <Compile Include="Delegates\BorderDelegate.cs" />
     <Compile Include="Delegates\ControlExpandableDelegate.cs" />
     <Compile Include="Delegates\GradientDelegate.cs" />
@@ -365,7 +365,7 @@
     <Compile Include="Enumerators\Alignment.cs" />
     <Compile Include="Interfaces\InterfaceTypes.cs" />
     <Compile Include="Managers\ControlManager.cs" />
-    <Compile Include="Structure\CheckStyle.cs" />
+    <Compile Include="Models\CheckStyle.cs" />
     <Compile Include="TypeConverters\VisualColorConverter.cs" />
     <EmbeddedResource Include="Localization\DebuggerText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -381,12 +381,12 @@
     <Compile Include="Managers\ExceptionInvoker.cs" />
     <Compile Include="Managers\ColorManager.cs" />
     <Compile Include="Extensibility\Extensions.cs" />
-    <Compile Include="Structure\Gradient.cs" />
+    <Compile Include="Models\Gradient.cs" />
     <Compile Include="Managers\VFXManager.cs" />
     <Compile Include="Managers\MathManager.cs" />
     <Compile Include="Enumerators\Themes.cs" />
-    <Compile Include="Structure\VisualBitmap.cs" />
-    <Compile Include="Structure\Watermark.cs" />
+    <Compile Include="Models\VisualBitmap.cs" />
+    <Compile Include="Models\Watermark.cs" />
     <Compile Include="Enumerators\Animation.cs" />
     <Compile Include="Toolkit\Controls\Interactivity\VisualComboBox.cs">
       <SubType>Component</SubType>

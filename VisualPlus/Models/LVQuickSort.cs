@@ -2,7 +2,7 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: LVMergeSort.cs
+// Name: LVQuickSort.cs
 // 
 // Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -46,9 +46,9 @@ using VisualPlus.Toolkit.Child;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
-    public class LVMergeSort
+    public class LVQuickSort
     {
         #region Fields
 
@@ -61,9 +61,12 @@ namespace VisualPlus.Structure
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="LVMergeSort" /> class.</summary>
-        public LVMergeSort()
+        /// <summary>Initializes a new instance of the <see cref="LVQuickSort" /> class.</summary>
+        public LVQuickSort()
         {
+            _numericCompare = false;
+            _stopRequested = false;
+            _sortColumn = 0;
             _sortDirection = SortDirections.Descending;
         }
 
@@ -71,7 +74,7 @@ namespace VisualPlus.Structure
 
         #region Public Properties
 
-        /// <summary>Compare only numeric values in items.  Warning, this can end up slowing down routine quite a bit.</summary>
+        /// <summary>Compare only numeric values in items. Warning - This can end up slowing down process.</summary>
         public bool NumericCompare
         {
             get
@@ -113,7 +116,7 @@ namespace VisualPlus.Structure
             }
         }
 
-        /// <summary>Stop this sort before it finishes.</summary>
+        /// <summary>Stop the sort before it finishes.</summary>
         public bool StopRequested
         {
             get
@@ -131,60 +134,111 @@ namespace VisualPlus.Structure
 
         #region Public Methods and Operators
 
-        /// <summary>The sort.</summary>
+        /// <summary>The list-view insertion sort.</summary>
         /// <param name="items">The items.</param>
-        /// <param name="low_0">The low.</param>
-        /// <param name="high_0">The high.</param>
-        public void Sort(VisualListViewItemCollection items, int low_0, int high_0)
+        /// <param name="low0">The low.</param>
+        /// <param name="high0">The high.</param>
+        public void LVInsertionSort(VisualListViewItemCollection items, int low0, int high0)
         {
-            int lo = low_0;
-            int hi = high_0;
-            if (lo >= hi)
+            int w;
+            VisualListViewItem _tempItem;
+
+            for (int x = low0; x <= high0; x++)
             {
-                return;
+                _tempItem = items[x];
+                w = x;
+
+                while ((w > low0) && CompareItems(items[w - 1], _tempItem, CompareDirection.GreaterThan))
+                {
+                    items[w] = items[w - 1];
+                    w--;
+                }
+
+                items[w] = _tempItem;
             }
+        }
 
-            int mid = (lo + hi) / 2;
+        /// <summary>Quick sort the items collection.</summary>
+        /// <param name="items">The items.</param>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        public void QuickSort(VisualListViewItemCollection items, int left, int right)
+        {
+            int w;
+            int x;
 
-            Sort(items, lo, mid);
-            Sort(items, mid + 1, hi);
+            VisualListViewItem _tempItem;
+            int med = 4;
 
-            int end_lo = mid;
-            int start_hi = mid + 1;
-            while ((lo <= end_lo) && (start_hi <= hi))
+            if (right - left > med)
             {
-                if (StopRequested)
+                w = (right + left) / 2;
+
+                if (CompareItems(items[left], items[w], CompareDirection.GreaterThan))
                 {
-                    return;
+                    Swap(items, left, w);
                 }
 
-                if (CompareItems(items[lo], items[start_hi], CompareDirection.LessThan))
+                if (CompareItems(items[left], items[right], CompareDirection.GreaterThan))
                 {
-                    lo++;
+                    Swap(items, left, right);
                 }
-                else
+
+                if (CompareItems(items[w], items[right], CompareDirection.GreaterThan))
                 {
-                    VisualListViewItem visualListViewItem = items[start_hi];
-                    for (int k = start_hi - 1; k >= lo; k--)
+                    Swap(items, w, right);
+                }
+
+                x = right - 1;
+                Swap(items, w, x);
+                w = left;
+                _tempItem = items[x];
+
+                while (true)
+                {
+                    while (CompareItems(items[++w], _tempItem, CompareDirection.LessThan))
                     {
-                        items[k + 1] = items[k];
                     }
 
-                    items[lo] = visualListViewItem;
-                    lo++;
-                    end_lo++;
-                    start_hi++;
+                    while (CompareItems(items[--x], _tempItem, CompareDirection.GreaterThan))
+                    {
+                    }
+
+                    if (x < w)
+                    {
+                        break;
+                    }
+
+                    Swap(items, w, x);
+
+                    if (_stopRequested)
+                    {
+                        return;
+                    }
                 }
+
+                Swap(items, w, right - 1);
+
+                QuickSort(items, left, x);
+                QuickSort(items, w + 1, right);
             }
+        }
+
+        /// <summary>Sort the items collection.</summary>
+        /// <param name="items">The items.</param>
+        public void Sort(VisualListViewItemCollection items)
+        {
+            QuickSort(items, 0, items.Count - 1);
+            LVInsertionSort(items, 0, items.Count - 1);
         }
 
         #endregion
 
         #region Methods
 
-        /// <summary>Compare items using the compare direction.</summary>
-        /// <param name="item1">The item 1.</param>
-        /// <param name="item2">The item 2.</param>
+        /// <summary>Compare items.</summary>
+        /// <param name="item1">Item 1.</param>
+        /// <param name="item2">Item 2.</param>
         /// <param name="direction">The direction.</param>
         /// <returns>The <see cref="bool" />.</returns>
         private bool CompareItems(VisualListViewItem item1, VisualListViewItem item2, CompareDirection direction)
@@ -196,12 +250,12 @@ namespace VisualPlus.Structure
                 dir = true;
             }
 
-            if (_sortDirection == SortDirections.Ascending)
+            if (SortDirection == SortDirections.Ascending)
             {
-                dir = !dir; // flip it
+                dir = !dir;
             }
 
-            if (!_numericCompare)
+            if (!NumericCompare)
             {
                 if (dir)
                 {
@@ -228,13 +282,24 @@ namespace VisualPlus.Structure
                         return n1 > n2;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    // no numeric value (bad bad)
-                    Debug.WriteLine(ex.ToString());
+                    Debug.WriteLine(e.ToString());
                     return false;
                 }
             }
+        }
+
+        /// <summary>Swap items.</summary>
+        /// <param name="items">The items.</param>
+        /// <param name="x">The x.</param>
+        /// <param name="w">The w.</param>
+        private void Swap(VisualListViewItemCollection items, int x, int w)
+        {
+            VisualListViewItem _tempItem;
+            _tempItem = items[x];
+            items[x] = items[x];
+            items[w] = _tempItem;
         }
 
         #endregion

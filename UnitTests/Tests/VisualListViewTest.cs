@@ -44,7 +44,6 @@ using System.Windows.Forms;
 
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
-using VisualPlus.Structure;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Controls.DataVisualization;
 using VisualPlus.Toolkit.Dialogs;

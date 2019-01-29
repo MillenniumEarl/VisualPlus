@@ -46,7 +46,7 @@ using System.Xml.Linq;
 
 using VisualPlus.Constants;
 using VisualPlus.Extensibility;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 using VisualPlus.Utilities.Debugging;
 
 #endregion

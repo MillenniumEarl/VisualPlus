@@ -1,8 +1,8 @@
-﻿#region License
+#region License
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: ColorState.cs
+// Name: ControlColorState.cs
 // 
 // Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -51,40 +51,45 @@ using VisualPlus.TypeConverters;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     [TypeConverter(typeof(VisualSettingsTypeConverter))]
     [ToolboxItem(false)]
     [DesignerCategory("code")]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     [ComVisible(true)]
-    [Description("The color states of a component.")]
+    [Description("The control color state of a component.")]
     [Category(PropertyCategory.Appearance)]
-    public class ColorState
+    public class ControlColorState : HoverColorState
     {
         #region Fields
 
-        private Color _disabled;
-        private Color _enabled;
+        private Color _pressed;
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>Initializes a new instance of the <see cref="ColorState" /> class.</summary>
-        /// <param name="disabled">The disabled color.</param>
-        /// <param name="enabled">The normal color.</param>
-        public ColorState(Color disabled, Color enabled)
+        /// <summary>Initializes a new instance of the <see cref="ControlColorState" /> class.</summary>
+        /// <param name="disabled">The disabled color</param>
+        /// <param name="enabled">The enabled color.</param>
+        /// <param name="hover">The hover color.</param>
+        /// <param name="pressed">The pressed color.</param>
+        public ControlColorState(Color disabled, Color enabled, Color hover, Color pressed)
         {
-            _disabled = disabled;
-            _enabled = enabled;
+            Disabled = disabled;
+            Enabled = enabled;
+            Hover = hover;
+            _pressed = pressed;
         }
 
-        /// <summary>Initializes a new instance of the <see cref="ColorState" /> class.</summary>
-        public ColorState()
+        /// <summary>Initializes a new instance of the <see cref="ControlColorState" /> class.</summary>
+        public ControlColorState()
         {
-            _disabled = Color.Empty;
-            _enabled = Color.Empty;
+            Disabled = Color.Empty;
+            Enabled = Color.Empty;
+            Hover = Color.Empty;
+            _pressed = Color.Empty;
         }
 
         #endregion
@@ -93,57 +98,36 @@ namespace VisualPlus.Structure
 
         [Category(EventCategory.PropertyChanged)]
         [Description(EventDescription.PropertyEventChanged)]
-        public event BackColorStateChangedEventHandler DisabledColorChanged;
-
-        [Category(EventCategory.PropertyChanged)]
-        [Description(EventDescription.PropertyEventChanged)]
-        public event BackColorStateChangedEventHandler NormalColorChanged;
+        public event BackColorStateChangedEventHandler PressedColorChanged;
 
         #endregion
 
         #region Public Properties
 
-        [NotifyParentProperty(true)]
-        [RefreshProperties(RefreshProperties.Repaint)]
-        [Description(PropertyDescription.Color)]
-        public Color Disabled
-        {
-            get
-            {
-                return _disabled;
-            }
-
-            set
-            {
-                _disabled = value;
-                OnDisabledColorChanged(new ColorEventArgs(_disabled));
-            }
-        }
-
-        [NotifyParentProperty(true)]
-        [RefreshProperties(RefreshProperties.Repaint)]
-        [Description(PropertyDescription.Color)]
-        public Color Enabled
-        {
-            get
-            {
-                return _enabled;
-            }
-
-            set
-            {
-                _enabled = value;
-                OnDisabledColorChanged(new ColorEventArgs(_enabled));
-            }
-        }
-
-        /// <summary>Gets a value indicating whether this <see cref="ColorState" /> is empty.</summary>
+        /// <summary>Gets a value indicating whether this <see cref="ControlColorState" /> is empty.</summary>
         [Browsable(false)]
-        public bool IsEmpty
+        public new bool IsEmpty
         {
             get
             {
-                return _disabled.IsEmpty && _enabled.IsEmpty;
+                return Hover.IsEmpty && _pressed.IsEmpty && Disabled.IsEmpty && Enabled.IsEmpty;
+            }
+        }
+
+        [NotifyParentProperty(true)]
+        [RefreshProperties(RefreshProperties.Repaint)]
+        [Description(PropertyDescription.Color)]
+        public Color Pressed
+        {
+            get
+            {
+                return _pressed;
+            }
+
+            set
+            {
+                _pressed = value;
+                OnDisabledColorChanged(new ColorEventArgs(_pressed));
             }
         }
 
@@ -152,13 +136,11 @@ namespace VisualPlus.Structure
         #region Public Methods and Operators
 
         /// <summary>Get the control back color state.</summary>
-        /// <param name="colorState">The color State.</param>
+        /// <param name="controlColorState">The control color state.</param>
         /// <param name="enabled">The enabled toggle.</param>
         /// <param name="mouseState">The mouse state.</param>
-        /// <returns>
-        ///     <see cref="Color" />
-        /// </returns>
-        public static Color BackColorState(ColorState colorState, bool enabled, MouseStates mouseState)
+        /// <returns>The <see cref="Color" />.</returns>
+        public static Color BackColorState(ControlColorState controlColorState, bool enabled, MouseStates mouseState)
         {
             Color _color;
 
@@ -168,19 +150,19 @@ namespace VisualPlus.Structure
                 {
                     case MouseStates.Normal:
                         {
-                            _color = colorState.Enabled;
+                            _color = controlColorState.Enabled;
                             break;
                         }
 
                     case MouseStates.Hover:
                         {
-                            _color = colorState.Enabled;
+                            _color = controlColorState.Hover;
                             break;
                         }
 
                     case MouseStates.Pressed:
                         {
-                            _color = colorState.Enabled;
+                            _color = controlColorState.Pressed;
                             break;
                         }
 
@@ -192,7 +174,7 @@ namespace VisualPlus.Structure
             }
             else
             {
-                _color = colorState.Disabled;
+                _color = controlColorState.Disabled;
             }
 
             return _color;
@@ -212,8 +194,12 @@ namespace VisualPlus.Structure
             {
                 _stringBuilder.Append("Disabled=");
                 _stringBuilder.Append(Disabled);
+                _stringBuilder.Append("Hover=");
+                _stringBuilder.Append(Hover);
                 _stringBuilder.Append("Normal=");
                 _stringBuilder.Append(Enabled);
+                _stringBuilder.Append("Pressed=");
+                _stringBuilder.Append(Pressed);
             }
 
             _stringBuilder.Append("]");
@@ -225,14 +211,9 @@ namespace VisualPlus.Structure
 
         #region Methods
 
-        protected virtual void OnDisabledColorChanged(ColorEventArgs e)
+        protected virtual void OnPressedColorChanged(ColorEventArgs e)
         {
-            DisabledColorChanged?.Invoke(e);
-        }
-
-        protected virtual void OnNormalColorChanged(ColorEventArgs e)
-        {
-            NormalColorChanged?.Invoke(e);
+            PressedColorChanged?.Invoke(e);
         }
 
         #endregion

@@ -43,11 +43,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-using VisualPlus.Structure;
+using VisualPlus.Models;
 
 #endregion
 
-namespace VisualPlus.Utilities
+namespace VisualPlus.Utilities.Debugging
 {
     /// <summary>Represents the <see cref="Guard" /> class.</summary>
     /// <remarks>Assists with validating data before an <see cref="Exception" />.</remarks>

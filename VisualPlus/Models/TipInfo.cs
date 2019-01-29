@@ -44,7 +44,7 @@ using VisualPlus.Toolkit.Components;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     public class TipInfo
     {

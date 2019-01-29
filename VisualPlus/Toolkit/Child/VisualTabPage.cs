@@ -47,7 +47,7 @@ using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 using VisualPlus.TypeConverters;
 
 #endregion

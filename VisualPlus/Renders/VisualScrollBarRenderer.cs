@@ -44,8 +44,8 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 using VisualPlus.Enumerators;
+using VisualPlus.Models;
 using VisualPlus.Properties;
-using VisualPlus.Structure;
 
 #endregion
 

@@ -49,6 +49,7 @@ using System.Windows.Forms.VisualStyles;
 using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 using VisualPlus.Managers;
+using VisualPlus.Models;
 using VisualPlus.Native;
 using VisualPlus.Structure;
 using VisualPlus.Toolkit.Child;

@@ -50,7 +50,7 @@ using VisualPlus.TypeConverters;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     [Description("The check style structure.")]
     [TypeConverter(typeof(VisualSettingsTypeConverter))]

@@ -42,7 +42,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 
-using VisualPlus.Structure;
+using VisualPlus.Models;
 
 #endregion
 

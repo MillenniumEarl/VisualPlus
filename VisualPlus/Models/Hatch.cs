@@ -48,7 +48,7 @@ using VisualPlus.TypeConverters;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     [TypeConverter(typeof(VisualSettingsTypeConverter))]
     [ToolboxItem(false)]

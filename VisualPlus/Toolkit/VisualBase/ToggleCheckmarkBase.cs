@@ -53,8 +53,8 @@ using VisualPlus.Extensibility;
 using VisualPlus.Interfaces;
 using VisualPlus.Localization;
 using VisualPlus.Managers;
+using VisualPlus.Models;
 using VisualPlus.Renders;
-using VisualPlus.Structure;
 using VisualPlus.TypeConverters;
 
 #endregion

@@ -48,7 +48,7 @@ using VisualPlus.Designer;
 using VisualPlus.Events;
 using VisualPlus.Interfaces;
 using VisualPlus.Localization;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 using VisualPlus.Toolkit.VisualBase;
 using VisualPlus.Utilities.Debugging;
 

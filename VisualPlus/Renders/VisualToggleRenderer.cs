@@ -44,7 +44,7 @@ using System.Drawing.Drawing2D;
 using VisualPlus.Enumerators;
 using VisualPlus.Extensibility;
 using VisualPlus.Managers;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 
 #endregion
 

@@ -43,7 +43,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 
 using VisualPlus.Enumerators;
-using VisualPlus.Structure;
+using VisualPlus.Models;
 
 #endregion
 

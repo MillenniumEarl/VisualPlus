@@ -47,7 +47,7 @@ using VisualPlus.TypeConverters;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Models
 {
     [Description("The VisualBitmap")]
     [TypeConverter(typeof(VisualSettingsTypeConverter))]

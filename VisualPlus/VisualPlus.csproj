@@ -119,7 +119,7 @@
     </Compile>
     <Compile Include="Utilities\Debugging\DebuggerDisplayFormat.cs" />
     <Compile Include="Utilities\Debugging\VisualDebuggerDisplay.cs" />
-    <Compile Include="Utilities\Guard.cs" />
+    <Compile Include="Utilities\Debugging\Guard.cs" />
     <Compile Include="Extensibility\KeysExtensions.cs" />
     <Compile Include="Extensibility\ReflectionExtensions.cs" />
     <Compile Include="TypeConverters\RectConverter.cs" />
@@ -150,7 +150,7 @@
     <Compile Include="Renders\VisualTextRenderer.cs" />
     <Compile Include="Renders\VisualTileRenderer.cs" />
     <Compile Include="Renders\VisualWatermarkRenderer.cs" />
-    <Compile Include="Structure\ConsoleEx.cs" />
+    <Compile Include="Utilities\Debugging\ConsoleEx.cs" />
     <Compile Include="Localization\ArgumentMessages.cs" />
     <Compile Include="Managers\FontManager.cs" />
     <Compile Include="Managers\FormManager.cs" />

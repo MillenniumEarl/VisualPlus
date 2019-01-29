@@ -51,6 +51,7 @@ using VisualPlus.Managers;
 using VisualPlus.Properties;
 using VisualPlus.Structure;
 using VisualPlus.TypeConverters;
+using VisualPlus.Utilities.Debugging;
 
 #endregion
 

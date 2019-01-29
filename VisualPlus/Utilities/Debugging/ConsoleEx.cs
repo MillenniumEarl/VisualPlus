@@ -45,15 +45,13 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-using VisualPlus.Attributes;
 using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 
 #endregion
 
-namespace VisualPlus.Structure
+namespace VisualPlus.Utilities.Debugging
 {
-    [Test("Move to .Debugging folder, Use a witch instead of multiple constructors.")]
     public static class ConsoleEx
     {
         #region Public Methods and Operators

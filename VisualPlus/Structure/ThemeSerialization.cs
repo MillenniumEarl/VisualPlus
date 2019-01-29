@@ -52,6 +52,7 @@ using VisualPlus.Enumerators;
 using VisualPlus.Extensibility;
 using VisualPlus.Localization;
 using VisualPlus.Managers;
+using VisualPlus.Utilities.Debugging;
 
 #endregion
 

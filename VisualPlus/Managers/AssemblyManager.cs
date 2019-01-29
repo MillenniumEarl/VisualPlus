@@ -43,6 +43,7 @@ using System.Reflection;
 
 using VisualPlus.Localization;
 using VisualPlus.Structure;
+using VisualPlus.Utilities.Debugging;
 
 #endregion
 

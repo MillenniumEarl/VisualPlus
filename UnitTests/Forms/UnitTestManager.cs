@@ -49,9 +49,9 @@ using VisualPlus;
 using VisualPlus.Attributes;
 using VisualPlus.Events;
 using VisualPlus.Managers;
-using VisualPlus.Structure;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Dialogs;
+using VisualPlus.Utilities.Debugging;
 
 #endregion
 

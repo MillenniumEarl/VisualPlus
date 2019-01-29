@@ -48,6 +48,7 @@ using VisualPlus.Structure;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Controls.DataVisualization;
 using VisualPlus.Toolkit.Dialogs;
+using VisualPlus.Utilities.Debugging;
 
 #endregion
 

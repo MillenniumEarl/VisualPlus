@@ -45,7 +45,7 @@ using VisualPlus.Toolkit.Dialogs;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     public sealed class FormManager
     {

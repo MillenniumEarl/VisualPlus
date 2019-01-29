@@ -48,9 +48,9 @@ using System.Windows.Forms;
 using VisualPlus;
 using VisualPlus.Constants;
 using VisualPlus.Events;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.Toolkit.Dialogs;
+using VisualPlus.Utilities;
 
 using VisualThemeBuilder.Controls;
 

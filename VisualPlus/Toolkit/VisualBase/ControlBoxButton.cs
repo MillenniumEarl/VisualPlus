@@ -47,10 +47,10 @@ using System.Windows.Forms;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.Properties;
 using VisualPlus.TypeConverters;
+using VisualPlus.Utilities;
 using VisualPlus.Utilities.Debugging;
 
 #endregion

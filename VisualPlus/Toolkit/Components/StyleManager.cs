@@ -55,10 +55,10 @@ using VisualPlus.Enumerators;
 using VisualPlus.Events;
 using VisualPlus.Extensibility;
 using VisualPlus.Interfaces;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.TypeConverters;
 using VisualPlus.UITypeEditors;
+using VisualPlus.Utilities;
 using VisualPlus.Utilities.Debugging;
 
 #endregion

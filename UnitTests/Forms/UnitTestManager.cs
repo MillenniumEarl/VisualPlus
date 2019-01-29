@@ -48,9 +48,9 @@ using UnitTests.Tests;
 using VisualPlus;
 using VisualPlus.Attributes;
 using VisualPlus.Events;
-using VisualPlus.Managers;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Dialogs;
+using VisualPlus.Utilities;
 using VisualPlus.Utilities.Debugging;
 
 #endregion

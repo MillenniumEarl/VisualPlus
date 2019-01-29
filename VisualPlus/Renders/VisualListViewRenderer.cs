@@ -48,13 +48,13 @@ using System.Windows.Forms.VisualStyles;
 
 using VisualPlus.Constants;
 using VisualPlus.Enumerators;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.Native;
 using VisualPlus.Structure;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Controls.DataManagement;
 using VisualPlus.Toolkit.VisualBase;
+using VisualPlus.Utilities;
 
 using ContentAlignment = System.Drawing.ContentAlignment;
 

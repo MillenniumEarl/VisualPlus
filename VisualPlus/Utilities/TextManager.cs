@@ -45,7 +45,7 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     /// <summary>The <see cref="TextManager" />.</summary>
     public sealed class TextManager

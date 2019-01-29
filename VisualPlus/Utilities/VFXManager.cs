@@ -47,7 +47,7 @@ using VisualPlus.Enumerators;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     [Description("The VFX manager.")]
     public class VFXManager

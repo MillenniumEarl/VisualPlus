@@ -43,7 +43,7 @@ using VisualPlus.Enumerators;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     public class DateTimeManager
     {

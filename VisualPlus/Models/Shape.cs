@@ -49,8 +49,8 @@ using VisualPlus.Delegates;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
 using VisualPlus.Localization;
-using VisualPlus.Managers;
 using VisualPlus.TypeConverters;
+using VisualPlus.Utilities;
 
 #endregion
 

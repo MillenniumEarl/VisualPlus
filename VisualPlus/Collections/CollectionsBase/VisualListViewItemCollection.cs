@@ -49,9 +49,9 @@ using VisualPlus.Enumerators;
 using VisualPlus.Events;
 using VisualPlus.Extensibility;
 using VisualPlus.Localization;
-using VisualPlus.Managers;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Controls.DataManagement;
+using VisualPlus.Utilities;
 
 #endregion
 

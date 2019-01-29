@@ -42,7 +42,7 @@ using System.Drawing.Drawing2D;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     public sealed class BrushManager
     {

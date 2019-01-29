@@ -49,7 +49,6 @@ using VisualPlus.Delegates;
 using VisualPlus.Events;
 using VisualPlus.Extensibility;
 using VisualPlus.Interfaces;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Controls.DataManagement;
@@ -57,6 +56,7 @@ using VisualPlus.Toolkit.Controls.DataVisualization;
 using VisualPlus.Toolkit.Controls.Editors;
 using VisualPlus.Toolkit.Controls.Interactivity;
 using VisualPlus.Toolkit.Dialogs;
+using VisualPlus.Utilities;
 
 #endregion
 

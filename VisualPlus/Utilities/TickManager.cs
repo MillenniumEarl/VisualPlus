@@ -45,7 +45,7 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     [Description("The tick manager.")]
     public sealed class TickManager

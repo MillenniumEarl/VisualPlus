@@ -48,7 +48,7 @@ using VisualPlus.Native;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     [Description("The color manager.")]
     public sealed class ColorManager

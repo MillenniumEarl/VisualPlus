@@ -39,7 +39,7 @@
 
 using System.Windows.Forms;
 
-using VisualPlus.Managers;
+using VisualPlus.Utilities;
 
 #endregion
 

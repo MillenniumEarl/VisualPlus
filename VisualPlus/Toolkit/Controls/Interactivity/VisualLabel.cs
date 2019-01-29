@@ -49,10 +49,10 @@ using VisualPlus.Designer;
 using VisualPlus.Events;
 using VisualPlus.Interfaces;
 using VisualPlus.Localization;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.Renders;
 using VisualPlus.Toolkit.VisualBase;
+using VisualPlus.Utilities;
 using VisualPlus.Utilities.Debugging;
 
 #endregion

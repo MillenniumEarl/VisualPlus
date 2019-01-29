@@ -43,7 +43,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using VisualPlus.Localization;
-using VisualPlus.Managers;
+using VisualPlus.Utilities;
 
 #endregion
 

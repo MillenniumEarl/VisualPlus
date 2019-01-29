@@ -52,10 +52,10 @@ using VisualPlus.Events;
 using VisualPlus.Extensibility;
 using VisualPlus.Interfaces;
 using VisualPlus.Localization;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.Renders;
 using VisualPlus.TypeConverters;
+using VisualPlus.Utilities;
 
 #endregion
 

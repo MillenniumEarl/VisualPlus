@@ -50,7 +50,7 @@ using VisualPlus.Localization;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     public sealed class FontManager
     {

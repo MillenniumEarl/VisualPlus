@@ -51,7 +51,7 @@ using VisualPlus.Utilities.Debugging;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     public class XMLManager
     {

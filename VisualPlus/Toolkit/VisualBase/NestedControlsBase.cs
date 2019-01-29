@@ -44,9 +44,9 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using VisualPlus.Enumerators;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.TypeConverters;
+using VisualPlus.Utilities;
 
 #endregion
 

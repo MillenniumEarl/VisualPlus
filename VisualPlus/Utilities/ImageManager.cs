@@ -47,7 +47,7 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     [Description("The image manager.")]
     public sealed class ImageManager

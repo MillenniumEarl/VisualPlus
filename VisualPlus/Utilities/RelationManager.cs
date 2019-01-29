@@ -45,7 +45,7 @@ using VisualPlus.Enumerators;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     public sealed class RelationManager
     {

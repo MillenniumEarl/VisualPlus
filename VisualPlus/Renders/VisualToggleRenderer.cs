@@ -43,8 +43,8 @@ using System.Drawing.Drawing2D;
 
 using VisualPlus.Enumerators;
 using VisualPlus.Extensibility;
-using VisualPlus.Managers;
 using VisualPlus.Models;
+using VisualPlus.Utilities;
 
 #endregion
 

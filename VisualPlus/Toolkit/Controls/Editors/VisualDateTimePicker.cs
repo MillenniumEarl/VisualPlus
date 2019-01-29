@@ -52,11 +52,11 @@ using VisualPlus.Enumerators;
 using VisualPlus.Events;
 using VisualPlus.Interfaces;
 using VisualPlus.Localization;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.Renders;
 using VisualPlus.Toolkit.Components;
 using VisualPlus.TypeConverters;
+using VisualPlus.Utilities;
 using VisualPlus.Utilities.Debugging;
 
 #endregion

@@ -43,7 +43,7 @@ using System.Linq;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     /// <summary>Represents the <see cref="MathManager" /> class.</summary>
     /// <remarks>Assists with managing mathematical equations.</remarks>

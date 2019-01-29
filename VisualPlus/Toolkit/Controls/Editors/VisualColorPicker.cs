@@ -50,12 +50,12 @@ using System.Windows.Forms;
 using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
-using VisualPlus.Managers;
 using VisualPlus.Models;
 using VisualPlus.Renders;
 using VisualPlus.Toolkit.Components;
 using VisualPlus.Toolkit.VisualBase;
 using VisualPlus.TypeConverters;
+using VisualPlus.Utilities;
 
 #endregion
 

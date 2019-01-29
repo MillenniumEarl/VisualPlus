@@ -136,13 +136,13 @@
     <Compile Include="Localization\GlobalStrings.cs" />
     <Compile Include="Localization\PropertyCategory.cs" />
     <Compile Include="Localization\PropertyDescription.cs" />
-    <Compile Include="Managers\AssemblyManager.cs" />
-    <Compile Include="Managers\BrushManager.cs" />
+    <Compile Include="Utilities\AssemblyManager.cs" />
+    <Compile Include="Utilities\BrushManager.cs" />
     <Compile Include="Enumerators\DateTimeComparer.cs" />
-    <Compile Include="Managers\DateTimeManager.cs" />
-    <Compile Include="Managers\ElementsManager.cs" />
-    <Compile Include="Managers\MouseManager.cs" />
-    <Compile Include="Managers\ReflectionManager.cs" />
+    <Compile Include="Utilities\DateTimeManager.cs" />
+    <Compile Include="Utilities\ElementsManager.cs" />
+    <Compile Include="Utilities\MouseManager.cs" />
+    <Compile Include="Utilities\ReflectionManager.cs" />
     <Compile Include="Renders\VisualControlBoxRenderer.cs" />
     <Compile Include="Renders\VisualElementRenderer.cs" />
     <Compile Include="Renders\VisualImageRenderer.cs" />
@@ -152,17 +152,17 @@
     <Compile Include="Renders\VisualWatermarkRenderer.cs" />
     <Compile Include="Utilities\Debugging\ConsoleEx.cs" />
     <Compile Include="Localization\ArgumentMessages.cs" />
-    <Compile Include="Managers\FontManager.cs" />
-    <Compile Include="Managers\FormManager.cs" />
-    <Compile Include="Managers\ImageManager.cs" />
+    <Compile Include="Utilities\FontManager.cs" />
+    <Compile Include="Utilities\FormManager.cs" />
+    <Compile Include="Utilities\ImageManager.cs" />
     <Compile Include="Structure\MenuItemInfo.cs" />
     <Compile Include="Structure\MonitorManager.cs" />
-    <Compile Include="Managers\RelationManager.cs" />
-    <Compile Include="Managers\ResourcesManager.cs" />
-    <Compile Include="Managers\TextManager.cs" />
-    <Compile Include="Managers\TickManager.cs" />
+    <Compile Include="Utilities\RelationManager.cs" />
+    <Compile Include="Utilities\ResourcesManager.cs" />
+    <Compile Include="Utilities\TextManager.cs" />
+    <Compile Include="Utilities\TickManager.cs" />
     <Compile Include="Constants\ListViewConstants.cs" />
-    <Compile Include="Managers\XMLManager.cs" />
+    <Compile Include="Utilities\XMLManager.cs" />
     <Compile Include="Native\dwmapi.cs" />
     <Compile Include="Native\gdi32.cs" />
     <Compile Include="Native\shlwapi.cs" />
@@ -364,7 +364,7 @@
     </Compile>
     <Compile Include="Enumerators\Alignment.cs" />
     <Compile Include="Interfaces\InterfaceTypes.cs" />
-    <Compile Include="Managers\ControlManager.cs" />
+    <Compile Include="Utilities\ControlManager.cs" />
     <Compile Include="Models\CheckStyle.cs" />
     <Compile Include="TypeConverters\VisualColorConverter.cs" />
     <EmbeddedResource Include="Localization\DebuggerText.resx">
@@ -378,12 +378,12 @@
     <EmbeddedResource Include="Toolkit\Components\VisualDrag.cs">
       <SubType>Component</SubType>
     </EmbeddedResource>
-    <Compile Include="Managers\ExceptionInvoker.cs" />
-    <Compile Include="Managers\ColorManager.cs" />
+    <Compile Include="Utilities\ExceptionInvoker.cs" />
+    <Compile Include="Utilities\ColorManager.cs" />
     <Compile Include="Extensibility\Extensions.cs" />
     <Compile Include="Models\Gradient.cs" />
-    <Compile Include="Managers\VFXManager.cs" />
-    <Compile Include="Managers\MathManager.cs" />
+    <Compile Include="Utilities\VFXManager.cs" />
+    <Compile Include="Utilities\MathManager.cs" />
     <Compile Include="Enumerators\Themes.cs" />
     <Compile Include="Models\VisualBitmap.cs" />
     <Compile Include="Models\Watermark.cs" />
@@ -408,7 +408,7 @@
     <Compile Include="Toolkit\Controls\Interactivity\VisualTrackBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Managers\GraphicsManager.cs" />
+    <Compile Include="Utilities\GraphicsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Toolkit\Controls\Interactivity\VisualKnob.cs">
       <SubType>UserControl</SubType>

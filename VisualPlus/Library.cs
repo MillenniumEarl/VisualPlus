@@ -43,7 +43,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-using VisualPlus.Managers;
+using VisualPlus.Utilities;
 
 #endregion
 

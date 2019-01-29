@@ -49,7 +49,7 @@ using VisualPlus.Toolkit.Controls.DataVisualization;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     [Description("The graphics manager.")]
     public sealed class GraphicsManager

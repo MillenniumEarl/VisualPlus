@@ -52,7 +52,7 @@ using VisualPlus.Toolkit.Dialogs;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     [Description("The control manager.")]
     public sealed class ControlManager

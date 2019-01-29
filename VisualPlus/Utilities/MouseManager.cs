@@ -41,7 +41,7 @@ using System.Drawing;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     public sealed class MouseManager
     {

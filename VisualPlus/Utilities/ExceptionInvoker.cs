@@ -51,7 +51,7 @@ using VisualPlus.Utilities.Debugging;
 
 #endregion
 
-namespace VisualPlus.Managers
+namespace VisualPlus.Utilities
 {
     /// <summary>The <see cref="ExceptionInvoker" />.</summary>
     [ComVisible(true)]

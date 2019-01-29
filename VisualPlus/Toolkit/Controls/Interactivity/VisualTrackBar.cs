@@ -45,6 +45,7 @@ using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
@@ -131,7 +132,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                 true);
 
             UpdateStyles();
-            _styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            _styleManager = new StyleManager(DefaultConstants.DefaultStyle);
             _trackerRectangle = Rectangle.Empty;
             _hatch = new Hatch();
             _orientation = Orientation.Horizontal;
@@ -144,10 +145,10 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             _barTickSpacing = 8;
             _fillingValue = 25;
             _mouseStartPos = -1;
-            _progressVisible = Settings.DefaultValue.TextVisible;
-            _textRendererHint = Settings.DefaultValue.TextRenderingHint;
+            _progressVisible = DefaultConstants.TextVisible;
+            _textRendererHint = DefaultConstants.TextRenderingHint;
             _tickHeight = 4;
-            _valueTicksVisible = Settings.DefaultValue.TextVisible;
+            _valueTicksVisible = DefaultConstants.TextVisible;
 
             BackColor = Color.Transparent;
             DoubleBuffered = true;
@@ -159,7 +160,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             _trackBarBorder = new Border();
             _trackerBorder = new Border();
 
-            _textRendererHint = Settings.DefaultValue.TextRenderingHint;
+            _textRendererHint = DefaultConstants.TextRenderingHint;
 
             UpdateTheme(_styleManager.Theme);
         }
@@ -346,7 +347,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
         }
 
-        [DefaultValue(Settings.DefaultValue.TextVisible)]
+        [DefaultValue(DefaultConstants.TextVisible)]
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Visible)]
         public bool LineTicksVisible
@@ -731,7 +732,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
         }
 
-        [DefaultValue(Settings.DefaultValue.TextVisible)]
+        [DefaultValue(DefaultConstants.TextVisible)]
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Visible)]
         public bool ValueTicksVisible

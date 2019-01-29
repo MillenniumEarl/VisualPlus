@@ -216,7 +216,7 @@ namespace VisualPlus.Structure
 
             try
             {
-                string rawThemeResource = ResourcesManager.ReadResource(Assembly.GetExecutingAssembly().Location, $"{SettingConstants.ThemeResourceLocation}{themes.ToString()}.xml");
+                string rawThemeResource = ResourcesManager.ReadResource(Assembly.GetExecutingAssembly().Location, $"{DefaultConstants.ThemeResourceLocation}{themes.ToString()}.xml");
                 XDocument resourceDocumentTheme = XDocument.Parse(rawThemeResource);
                 _theme = Deserialize(resourceDocumentTheme);
             }

@@ -43,6 +43,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Events;
 using VisualPlus.Interfaces;
@@ -70,7 +71,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         {
             Size = new Size(125, 23);
 
-            Border = new Border { Rounding = Settings.DefaultValue.Rounding.BoxRounding };
+            Border = new Border { Rounding = DefaultConstants.Rounding.BoxRounding };
 
             CheckStyle = new CheckStyle(ClientRectangle) { Style = CheckStyle.CheckType.Checkmark };
 

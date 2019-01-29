@@ -143,7 +143,7 @@ namespace VisualPlus.Toolkit.Dialogs
                     { FormConstants.HTBOTTOMRIGHT, FormConstants.WMSZ_BOTTOMRIGHT }
                 };
 
-            _styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            _styleManager = new StyleManager(DefaultConstants.DefaultStyle);
 
             _border = new Border { Thickness = 3, Type = ShapeTypes.Rectangle };
 

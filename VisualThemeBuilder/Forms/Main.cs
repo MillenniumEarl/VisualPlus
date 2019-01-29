@@ -83,7 +83,7 @@ namespace VisualThemeBuilder.Forms
 
             componentViewer = new ComponentViewer { BackColor = componentPanel.BackColor, Dock = DockStyle.Fill };
 
-            theme = new Theme(Settings.DefaultValue.DefaultStyle);
+            theme = new Theme(DefaultConstants.DefaultStyle);
             LoadTheme(theme);
 
             tbName.Text = "UnnamedTheme";
@@ -173,7 +173,7 @@ namespace VisualThemeBuilder.Forms
         {
             tbPath.Text = string.Empty;
 
-            Theme newTheme = new Theme(Settings.DefaultValue.DefaultStyle) { Information = { Author = "Unknown", Name = "UnnamedTheme" } };
+            Theme newTheme = new Theme(DefaultConstants.DefaultStyle) { Information = { Author = "Unknown", Name = "UnnamedTheme" } };
 
             LoadTheme(newTheme);
             saved = false;
@@ -226,7 +226,7 @@ namespace VisualThemeBuilder.Forms
         /// <param name="e">The event args.</param>
         private void OpenTemplatesDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = SettingConstants.TemplatesFolder;
+            string path = DefaultConstants.TemplatesFolder;
 
             if (path.Length <= 0)
             {

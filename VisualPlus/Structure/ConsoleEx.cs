@@ -46,6 +46,7 @@ using System.Reflection;
 using System.Text;
 
 using VisualPlus.Attributes;
+using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 
 #endregion
@@ -265,7 +266,7 @@ namespace VisualPlus.Structure
             string _folderName = Assembly.GetExecutingAssembly().GetName().Name + "-Logs";
             string _executingAssembly = Assembly.GetExecutingAssembly().Location;
             string _directory = Path.GetDirectoryName(_executingAssembly);
-            string _fileName = Settings.DebugLogFile;
+            string _fileName = DefaultConstants.DebugLogFile;
             string _folderDirectory = _directory + @"\" + _folderName + @"\";
             string _output = _folderDirectory + _fileName;
 

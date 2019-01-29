@@ -44,6 +44,7 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
@@ -88,7 +89,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         public VisualButton()
         {
             Size = new Size(140, 45);
-            _animation = Settings.DefaultValue.Animation;
+            _animation = DefaultConstants.Animation;
             _border = new Border();
             _backColorState = new ControlColorState();
             dialogResult = DialogResult.None;
@@ -108,7 +109,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
         #region Public Properties
 
-        [DefaultValue(Settings.DefaultValue.Animation)]
+        [DefaultValue(DefaultConstants.Animation)]
         [Category(PropertyCategory.Behavior)]
         [Description(PropertyDescription.Animation)]
         public bool Animation

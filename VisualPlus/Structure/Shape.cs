@@ -82,9 +82,9 @@ namespace VisualPlus.Structure
         /// <summary>Initializes a new instance of the <see cref="Shape" /> class.</summary>
         public Shape()
         {
-            Theme theme = new Theme(Settings.DefaultValue.DefaultStyle);
+            Theme theme = new Theme(DefaultConstants.DefaultStyle);
             Color color = theme.ColorPalette.BorderNormal;
-            ConstructShape(ShapeTypes.Rounded, color, Settings.DefaultValue.Rounding.Default, Settings.DefaultValue.BorderThickness, true);
+            ConstructShape(ShapeTypes.Rounded, color, DefaultConstants.Rounding.Default, DefaultConstants.BorderThickness, true);
         }
 
         /// <summary>Initializes a new instance of the <see cref="Shape" /> class.</summary>
@@ -199,7 +199,7 @@ namespace VisualPlus.Structure
                     return;
                 }
 
-                var range = new Range<int>(value, SettingConstants.MinimumRounding, SettingConstants.MaximumRounding);
+                var range = new Range<int>(value, DefaultConstants.MinimumRounding, DefaultConstants.MaximumRounding);
 
                 // TODO: Improve handling of value rounding.
                 if (false)
@@ -232,7 +232,7 @@ namespace VisualPlus.Structure
                     return;
                 }
 
-                var range = new Range<int>(value, SettingConstants.MinimumBorderSize, SettingConstants.MaximumBorderSize);
+                var range = new Range<int>(value, DefaultConstants.MinimumBorderSize, DefaultConstants.MaximumBorderSize);
 
                 // TODO: Improve handling of value rounding.
                 if (false)

@@ -44,6 +44,7 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
@@ -102,9 +103,9 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             _trueTextToggle = "Yes";
             _falseTextToggle = "No";
 
-            _border = new Border { Rounding = Settings.DefaultValue.Rounding.ToggleBorder };
+            _border = new Border { Rounding = DefaultConstants.Rounding.ToggleBorder };
 
-            _buttonBorder = new Border { Rounding = Settings.DefaultValue.Rounding.ToggleButton };
+            _buttonBorder = new Border { Rounding = DefaultConstants.Rounding.ToggleButton };
 
             UpdateTheme(ThemeManager.Theme);
         }

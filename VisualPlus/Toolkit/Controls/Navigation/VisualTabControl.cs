@@ -47,6 +47,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 using VisualPlus.Collections.CollectionsEditor;
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
@@ -104,7 +105,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
 
             UpdateStyles();
 
-            _styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            _styleManager = new StyleManager(DefaultConstants.DefaultStyle);
 
             _border = new Border { Type = ShapeTypes.Rectangle };
 
@@ -117,7 +118,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
             _itemSize = new Size(100, 25);
             _tabMenu = Color.FromArgb(55, 61, 73);
             _tabSelector = _styleManager.Theme.ColorPalette.ControlEnabled;
-            _textRendererHint = Settings.DefaultValue.TextRenderingHint;
+            _textRendererHint = DefaultConstants.TextRenderingHint;
 
             _separatorSpacing = 2;
             _separatorThickness = 2F;

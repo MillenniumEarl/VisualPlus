@@ -43,6 +43,7 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
@@ -223,9 +224,9 @@ namespace VisualPlus.Toolkit.VisualBase
             ResizeRedraw = true;
 
             _mouseState = MouseStates.Normal;
-            _themeManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            _themeManager = new StyleManager(DefaultConstants.DefaultStyle);
 
-            Theme theme = new Theme(Settings.DefaultValue.DefaultStyle);
+            Theme theme = new Theme(DefaultConstants.DefaultStyle);
 
             ControlColorState controlState = new ControlColorState { Disabled = theme.ColorPalette.TextDisabled, Enabled = theme.ColorPalette.TextEnabled, Hover = theme.ColorPalette.TextHover, Pressed = theme.ColorPalette.TextPressed };
 

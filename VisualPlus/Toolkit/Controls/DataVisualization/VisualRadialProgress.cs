@@ -44,6 +44,7 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Events;
 using VisualPlus.Interfaces;
@@ -264,7 +265,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
             }
         }
 
-        [DefaultValue(Settings.DefaultValue.ProgressSize)]
+        [DefaultValue(DefaultConstants.ProgressSize)]
         [Category(PropertyCategory.Layout)]
         [Description(PropertyDescription.Size)]
         public float ProgressSize

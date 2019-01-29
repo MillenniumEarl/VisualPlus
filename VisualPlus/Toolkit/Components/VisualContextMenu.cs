@@ -45,6 +45,7 @@ using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
 using VisualPlus.Structure;
@@ -66,7 +67,7 @@ namespace VisualPlus.Toolkit.Components
     {
         #region Static Fields
 
-        private static bool _arrowVisible = Settings.DefaultValue.TextVisible;
+        private static bool _arrowVisible = DefaultConstants.TextVisible;
         private static Color _backgroundColor;
         private static Color _selectedItemBackColor;
         private static Color _textHoverColor;
@@ -92,7 +93,7 @@ namespace VisualPlus.Toolkit.Components
         /// <summary>Initializes a new instance of the<see cref="VisualContextMenu" /> class.</summary>
         public VisualContextMenu()
         {
-            styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            styleManager = new StyleManager(DefaultConstants.DefaultStyle);
 
             Renderer = new VisualToolStripRender();
             ConfigureStyleManager();
@@ -146,7 +147,7 @@ namespace VisualPlus.Toolkit.Components
             }
         }
 
-        [DefaultValue(Settings.DefaultValue.BorderVisible)]
+        [DefaultValue(DefaultConstants.BorderVisible)]
         [Category(PropertyCategory.Behavior)]
         [Description(PropertyDescription.Visible)]
         public bool ArrowVisible

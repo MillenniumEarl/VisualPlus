@@ -46,6 +46,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Events;
 using VisualPlus.Interfaces;
@@ -93,7 +94,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
             _border = new Border();
 
-            ThemeManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            ThemeManager = new StyleManager(DefaultConstants.DefaultStyle);
             _backColorState = new ColorState { Enabled = ThemeManager.Theme.ColorPalette.ControlEnabled };
 
             _richTextBox = new RichTextBox

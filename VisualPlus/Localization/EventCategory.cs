@@ -46,17 +46,17 @@ namespace VisualPlus.Localization
     public sealed class EventCategory
     {
 #if DEBUG
-        public const string Action = SettingConstants.DefaultCategoryText;
-        public const string Appearance = SettingConstants.DefaultCategoryText;
-        public const string Behavior = SettingConstants.DefaultCategoryText;
-        public const string Data = SettingConstants.DefaultCategoryText;
-        public const string DragDrop = SettingConstants.DefaultCategoryText;
-        public const string Focus = SettingConstants.DefaultCategoryText;
-        public const string Key = SettingConstants.DefaultCategoryText;
-        public const string Layout = SettingConstants.DefaultCategoryText;
-        public const string Misc = SettingConstants.DefaultCategoryText;
-        public const string Mouse = SettingConstants.DefaultCategoryText;
-        public const string PropertyChanged = SettingConstants.DefaultCategoryText;
+        public const string Action = DefaultConstants.DefaultCategoryText;
+        public const string Appearance = DefaultConstants.DefaultCategoryText;
+        public const string Behavior = DefaultConstants.DefaultCategoryText;
+        public const string Data = DefaultConstants.DefaultCategoryText;
+        public const string DragDrop = DefaultConstants.DefaultCategoryText;
+        public const string Focus = DefaultConstants.DefaultCategoryText;
+        public const string Key = DefaultConstants.DefaultCategoryText;
+        public const string Layout = DefaultConstants.DefaultCategoryText;
+        public const string Misc = DefaultConstants.DefaultCategoryText;
+        public const string Mouse = DefaultConstants.DefaultCategoryText;
+        public const string PropertyChanged = DefaultConstants.DefaultCategoryText;
 #else
             public const string Action = "Action";
             public const string Appearance = "Appearance";

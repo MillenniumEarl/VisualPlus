@@ -47,6 +47,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
 using VisualPlus.Managers;
@@ -114,7 +115,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
         public VisualColorPicker()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.Selectable | ControlStyles.StandardClick | ControlStyles.StandardDoubleClick | ControlStyles.SupportsTransparentBackColor, true);
-            styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            styleManager = new StyleManager(DefaultConstants.DefaultStyle);
             _buttonColor = styleManager.Theme.ColorPalette.Enabled;
             _pickType = PickerType.Rectangle;
             Color = Color.Black;

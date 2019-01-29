@@ -42,6 +42,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 
+using VisualPlus.Constants;
 using VisualPlus.Localization;
 using VisualPlus.TypeConverters;
 
@@ -72,11 +73,11 @@ namespace VisualPlus.Structure
         /// <summary>Initializes a new instance of the <see cref="Hatch" /> class.</summary>
         public Hatch()
         {
-            Theme theme = new Theme(Settings.DefaultValue.DefaultStyle);
+            Theme theme = new Theme(DefaultConstants.DefaultStyle);
 
-            _visible = Settings.DefaultValue.HatchVisible;
-            _size = Settings.DefaultValue.HatchSize;
-            _style = Settings.DefaultValue.HatchStyle;
+            _visible = DefaultConstants.HatchVisible;
+            _size = DefaultConstants.HatchSize;
+            _style = DefaultConstants.HatchStyle;
             _backColor = theme.ColorPalette.HatchBackColor;
             _foreColor = Color.FromArgb(40, theme.ColorPalette.HatchForeColor);
         }

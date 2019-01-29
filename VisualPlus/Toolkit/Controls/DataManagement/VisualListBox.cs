@@ -45,6 +45,7 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Events;
 using VisualPlus.Interfaces;
@@ -99,7 +100,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
 
             _border = new Border();
 
-            ThemeManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            ThemeManager = new StyleManager(DefaultConstants.DefaultStyle);
 
             _colorState = new ColorState { Enabled = ThemeManager.Theme.ColorPalette.ControlEnabled };
 

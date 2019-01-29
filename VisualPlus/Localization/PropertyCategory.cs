@@ -46,14 +46,14 @@ namespace VisualPlus.Localization
     public sealed class PropertyCategory
     {
 #if DEBUG
-        public const string Accessibility = SettingConstants.DefaultCategoryText;
-        public const string Appearance = SettingConstants.DefaultCategoryText;
-        public const string Behavior = SettingConstants.DefaultCategoryText;
-        public const string Data = SettingConstants.DefaultCategoryText;
-        public const string Design = SettingConstants.DefaultCategoryText;
-        public const string Focus = SettingConstants.DefaultCategoryText;
-        public const string Layout = SettingConstants.DefaultCategoryText;
-        public const string WindowStyle = SettingConstants.DefaultCategoryText;
+        public const string Accessibility = DefaultConstants.DefaultCategoryText;
+        public const string Appearance = DefaultConstants.DefaultCategoryText;
+        public const string Behavior = DefaultConstants.DefaultCategoryText;
+        public const string Data = DefaultConstants.DefaultCategoryText;
+        public const string Design = DefaultConstants.DefaultCategoryText;
+        public const string Focus = DefaultConstants.DefaultCategoryText;
+        public const string Layout = DefaultConstants.DefaultCategoryText;
+        public const string WindowStyle = DefaultConstants.DefaultCategoryText;
 
 #else
             public const string Accessibility = "Accessibility";

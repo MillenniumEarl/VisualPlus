@@ -42,6 +42,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 
+using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
 using VisualPlus.Renders;
@@ -76,7 +77,7 @@ namespace VisualPlus.Structure
         /// <param name="boundary">The boundary.</param>
         public CheckStyle(Rectangle boundary)
         {
-            Theme theme = new Theme(Settings.DefaultValue.DefaultStyle);
+            Theme theme = new Theme(DefaultConstants.DefaultStyle);
 
             _color = theme.ColorPalette.Progress;
 
@@ -87,8 +88,8 @@ namespace VisualPlus.Structure
             _characterFont = SystemFonts.DefaultFont;
             _checkType = CheckType.Character;
 
-            _shapeRounding = Settings.DefaultValue.Rounding.BoxRounding;
-            _shapeType = Settings.DefaultValue.BorderType;
+            _shapeRounding = DefaultConstants.Rounding.BoxRounding;
+            _shapeType = DefaultConstants.BorderType;
             _thickness = 2.0F;
 
             Bitmap _bitmap = new Bitmap(Image.FromStream(new MemoryStream(Convert.FromBase64String(VisualToggleRenderer.GetBase64CheckImage()))));

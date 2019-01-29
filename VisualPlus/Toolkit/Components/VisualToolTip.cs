@@ -46,6 +46,7 @@ using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Interfaces;
 using VisualPlus.Localization;
@@ -103,7 +104,7 @@ namespace VisualPlus.Toolkit.Components
         {
             try
             {
-                StyleManager styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+                StyleManager styleManager = new StyleManager(DefaultConstants.DefaultStyle);
 
                 _toolTipTexts = new Hashtable();
                 _iconPoint = new Point(0, 0);
@@ -117,7 +118,7 @@ namespace VisualPlus.Toolkit.Components
                 _tipInfo = new TipInfo { Caption = "Title", Text = "Enter your custom text here." };
 
                 _spacing = 2;
-                _textRendererHint = Settings.DefaultValue.TextRenderingHint;
+                _textRendererHint = DefaultConstants.TextRenderingHint;
                 _background = styleManager.Theme.ColorPalette.Enabled;
                 _font = SystemFonts.DefaultFont;
                 _autoSize = true;

@@ -44,6 +44,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
 using VisualPlus.Managers;
@@ -116,7 +117,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                 ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.ResizeRedraw | ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor,
                 true);
 
-            StyleManager styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            StyleManager styleManager = new StyleManager(DefaultConstants.DefaultStyle);
 
             _pointerColor = styleManager.Theme.ColorPalette.Progress;
 

@@ -70,8 +70,8 @@ namespace VisualPlus.UITypeEditors
             OpenFileDialog openFileDialog = new OpenFileDialog
                 {
                     FileName = string.Empty,
-                    Filter = SettingConstants.ThemeExtensionSupportedFileFilter,
-                    InitialDirectory = SettingConstants.TemplatesFolder,
+                    Filter = DefaultConstants.ThemeExtensionSupportedFileFilter,
+                    InitialDirectory = DefaultConstants.TemplatesFolder,
                     Multiselect = false,
                     Title = @"Browse for theme..."
                 };

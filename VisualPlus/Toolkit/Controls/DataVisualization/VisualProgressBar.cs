@@ -44,6 +44,7 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Events;
 using VisualPlus.Localization;
@@ -219,7 +220,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
             }
         }
 
-        [DefaultValue(Settings.DefaultValue.TextVisible)]
+        [DefaultValue(DefaultConstants.TextVisible)]
         [Category(PropertyCategory.Appearance)]
         [Description(PropertyDescription.Visible)]
         public bool PercentageVisible

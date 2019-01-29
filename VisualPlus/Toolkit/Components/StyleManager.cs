@@ -146,13 +146,13 @@ namespace VisualPlus.Toolkit.Components
 
                 if (_customThemePath == null)
                 {
-                    string _themePath = SettingConstants.TemplatesFilePath;
+                    string _themePath = DefaultConstants.TemplatesFilePath;
                     _customThemePath = _themePath;
                 }
 
                 _formCollection = new List<Form>();
 
-                _themeType = Settings.DefaultValue.DefaultStyle;
+                _themeType = DefaultConstants.DefaultStyle;
                 _theme = new Theme(_themeType);
             }
             catch (Exception e)
@@ -228,7 +228,7 @@ namespace VisualPlus.Toolkit.Components
 
                 foreach (Form _forms in _formCollection)
                 {
-                    _controlsList.AddRange(_forms.Controls.Cast<Control>().Where(_control => _control.HasMethod(SettingConstants.ComponentUpdateMethodName)));
+                    _controlsList.AddRange(_forms.Controls.Cast<Control>().Where(_control => _control.HasMethod(DefaultConstants.ComponentUpdateMethodName)));
                 }
 
                 return _controlsList;
@@ -291,7 +291,7 @@ namespace VisualPlus.Toolkit.Components
 
                 foreach (Form _forms in _formCollection)
                 {
-                    _controlsList.AddRange(_forms.Controls.Cast<Control>().Where(_control => !_control.HasMethod(SettingConstants.ComponentUpdateMethodName)));
+                    _controlsList.AddRange(_forms.Controls.Cast<Control>().Where(_control => !_control.HasMethod(DefaultConstants.ComponentUpdateMethodName)));
                 }
 
                 return _controlsList;
@@ -306,7 +306,7 @@ namespace VisualPlus.Toolkit.Components
         /// <param name="force">Forcefully overwrite any default theme with a new one.</param>
         public static void GenerateDefaultThemeFile(bool force = false)
         {
-            string _defaultThemePath = SettingConstants.TemplatesFilePath;
+            string _defaultThemePath = DefaultConstants.TemplatesFilePath;
 
             if (force)
             {
@@ -341,7 +341,7 @@ namespace VisualPlus.Toolkit.Components
         /// <summary>Opens the templates directory in the windows explorer.</summary>
         public static void OpenTemplatesDirectory()
         {
-            Process.Start(SettingConstants.TemplatesFolder);
+            Process.Start(DefaultConstants.TemplatesFolder);
         }
 
         /// <summary>Adds a form to the collection to manage.</summary>
@@ -447,7 +447,7 @@ namespace VisualPlus.Toolkit.Components
             {
                 foreach (Type registeredTypes in ControlManager.ThemeSupportedTypes())
                 {
-                    if (component.HasMethod(SettingConstants.ComponentUpdateMethodName))
+                    if (component.HasMethod(DefaultConstants.ComponentUpdateMethodName))
                     {
                         switch (component)
                         {
@@ -510,13 +510,13 @@ namespace VisualPlus.Toolkit.Components
         private static void CreateDefaultThemeFile()
         {
             Theme _defaultTheme = new Theme(Themes.Visual);
-            string _defaultThemePath = SettingConstants.TemplatesFilePath;
+            string _defaultThemePath = DefaultConstants.TemplatesFilePath;
 
             string _text = _defaultTheme.RawTheme;
 
-            if (!Directory.Exists(SettingConstants.TemplatesFolder))
+            if (!Directory.Exists(DefaultConstants.TemplatesFolder))
             {
-                Directory.CreateDirectory(SettingConstants.TemplatesFolder);
+                Directory.CreateDirectory(DefaultConstants.TemplatesFolder);
             }
 
             File.WriteAllText(_defaultThemePath, _text);

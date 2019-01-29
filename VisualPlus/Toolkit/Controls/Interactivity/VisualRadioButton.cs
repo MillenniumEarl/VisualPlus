@@ -43,6 +43,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Events;
 using VisualPlus.Interfaces;
@@ -71,9 +72,9 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             Cursor = Cursors.Hand;
             Size = new Size(125, 23);
 
-            Border = new Border { Rounding = Settings.DefaultValue.Rounding.RoundedRectangle };
+            Border = new Border { Rounding = DefaultConstants.Rounding.RoundedRectangle };
 
-            CheckStyle = new CheckStyle(ClientRectangle) { Style = CheckStyle.CheckType.Shape, ShapeRounding = Settings.DefaultValue.Rounding.Default, Bounds = new Rectangle(new Point(), new Size(8, 8)) };
+            CheckStyle = new CheckStyle(ClientRectangle) { Style = CheckStyle.CheckType.Shape, ShapeRounding = DefaultConstants.Rounding.Default, Bounds = new Rectangle(new Point(), new Size(8, 8)) };
 
             UpdateTheme(ThemeManager.Theme);
         }

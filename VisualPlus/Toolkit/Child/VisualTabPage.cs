@@ -43,6 +43,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
 using VisualPlus.Localization;
@@ -94,7 +95,7 @@ namespace VisualPlus.Toolkit.Child
             _textLineAlignment = StringAlignment.Center;
             _textAlignment = StringAlignment.Center;
 
-            Theme theme = new Theme(Settings.DefaultValue.DefaultStyle);
+            Theme theme = new Theme(DefaultConstants.DefaultStyle);
 
             BackColor = theme.ColorPalette.ControlEnabled;
             ForeColor = Color.FromArgb(174, 181, 187);

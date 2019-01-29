@@ -259,11 +259,11 @@ namespace VisualPlus.Managers
         {
             if ((name == "Name") && string.IsNullOrEmpty(value))
             {
-                value = SettingConstants.ThemeName;
+                value = DefaultConstants.ThemeName;
             }
             else if ((name == "Author") && string.IsNullOrEmpty(value))
             {
-                value = SettingConstants.ThemeAuthor;
+                value = DefaultConstants.ThemeAuthor;
             }
 
             return value;

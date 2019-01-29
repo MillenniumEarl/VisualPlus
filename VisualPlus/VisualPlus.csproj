@@ -65,7 +65,6 @@
     <Compile Include="Constants\ControlBoxConstants.cs" />
     <Compile Include="Constants\DefaultConstants.cs" />
     <Compile Include="Constants\FormConstants.cs" />
-    <Compile Include="Constants\SettingConstants.cs" />
     <Compile Include="Delegates\ClipboardDelegate.cs" />
     <Compile Include="Delegates\ControlBoxDelegate.cs" />
     <Compile Include="Delegates\StyleManagerDelegate.cs" />
@@ -388,7 +387,6 @@
     <Compile Include="Enumerators\Themes.cs" />
     <Compile Include="Structure\VisualBitmap.cs" />
     <Compile Include="Structure\Watermark.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="Enumerators\Animation.cs" />
     <Compile Include="Toolkit\Controls\Interactivity\VisualComboBox.cs">
       <SubType>Component</SubType>

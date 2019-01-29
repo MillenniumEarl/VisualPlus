@@ -40,6 +40,7 @@
 using System.ComponentModel;
 using System.Drawing;
 
+using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Localization;
 using VisualPlus.TypeConverters;
@@ -68,15 +69,15 @@ namespace VisualPlus.Structure
         /// <summary>Initializes a new instance of the <see cref="Watermark" /> class.</summary>
         public Watermark()
         {
-            Theme theme = new Theme(Settings.DefaultValue.DefaultStyle);
+            Theme theme = new Theme(DefaultConstants.DefaultStyle);
 
             active = theme.ColorPalette.WatermarkActive;
             inactive = theme.ColorPalette.WatermarkInactive;
 
             font = SystemFonts.DefaultFont;
 
-            text = Settings.DefaultValue.WatermarkText;
-            visible = Settings.DefaultValue.WatermarkVisible;
+            text = DefaultConstants.WatermarkText;
+            visible = DefaultConstants.WatermarkVisible;
 
             brush = new SolidBrush(inactive);
         }

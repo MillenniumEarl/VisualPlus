@@ -44,6 +44,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using VisualPlus;
+using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Events;
 using VisualPlus.Extensibility;
@@ -96,7 +97,7 @@ namespace VisualThemeBuilder.Controls
             component = null;
             componentNamespace = string.Empty;
             componentType = null;
-            theme = new Theme(Settings.DefaultValue.DefaultStyle);
+            theme = new Theme(DefaultConstants.DefaultStyle);
         }
 
         #endregion

@@ -45,6 +45,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
+using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
@@ -100,7 +101,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
 
             _border = new Border();
             _mouseState = MouseStates.Normal;
-            _themeManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            _themeManager = new StyleManager(DefaultConstants.DefaultStyle);
 
             _image = null;
             _dropDownImage = null;

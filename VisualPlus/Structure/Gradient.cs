@@ -269,14 +269,14 @@ namespace VisualPlus.Structure
         /// <returns>The <see cref="float" />.</returns>
         public static float[] SortPositions(float[] customOffsets)
         {
-            if (!customOffsets.Contains(SettingConstants.StartPoint))
+            if (!customOffsets.Contains(DefaultConstants.StartPoint))
             {
-                throw new ArgumentNullException(nameof(customOffsets), @"A start position of " + SettingConstants.StartPoint + @".0F doesn't exist.");
+                throw new ArgumentNullException(nameof(customOffsets), @"A start position of " + DefaultConstants.StartPoint + @".0F doesn't exist.");
             }
 
-            if (!customOffsets.Contains(SettingConstants.EndPoint))
+            if (!customOffsets.Contains(DefaultConstants.EndPoint))
             {
-                throw new ArgumentNullException(nameof(customOffsets), @"A end position of " + SettingConstants.EndPoint + @".0F doesn't exist.");
+                throw new ArgumentNullException(nameof(customOffsets), @"A end position of " + DefaultConstants.EndPoint + @".0F doesn't exist.");
             }
 
             foreach (float offset in customOffsets)

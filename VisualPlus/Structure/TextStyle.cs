@@ -42,6 +42,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 
+using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 using VisualPlus.Interfaces;
 using VisualPlus.Localization;
@@ -81,7 +82,7 @@ namespace VisualPlus.Structure
         public TextStyle()
         {
             textColorState = new ControlColorState();
-            textRenderingHint = Settings.DefaultValue.TextRenderingHint;
+            textRenderingHint = DefaultConstants.TextRenderingHint;
             textAlignment = StringAlignment.Center;
             textLineAlignment = StringAlignment.Center;
         }

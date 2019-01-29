@@ -314,7 +314,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                     return;
                 }
 
-                var range = new Range<int>(value, SettingConstants.MinimumAlpha, SettingConstants.MaximumAlpha);
+                var range = new Range<int>(value, DefaultConstants.MinimumAlpha, DefaultConstants.MaximumAlpha);
 
                 // TODO: Improve handling of value rounding.
                 if (true)

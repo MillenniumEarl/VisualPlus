@@ -46,6 +46,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
@@ -115,7 +116,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             SetStyle((ControlStyles)139286, true);
             SetStyle(ControlStyles.Selectable, false);
 
-            _styleManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            _styleManager = new StyleManager(DefaultConstants.DefaultStyle);
             _textImageRelation = TextImageRelation.ImageBeforeText;
             _textAlignment = StringAlignment.Center;
             _textLineAlignment = StringAlignment.Center;
@@ -123,7 +124,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             _imageVisible = false;
             _buttonWidth = 30;
             _buttonStyle = ButtonStyles.Arrow;
-            _buttonVisible = Settings.DefaultValue.TextVisible;
+            _buttonVisible = DefaultConstants.TextVisible;
             _watermark = new Watermark();
             _mouseState = MouseStates.Normal;
             _textStyle = new TextStyle();
@@ -140,7 +141,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             // BackColor = SystemColors.Control;
             _border = new Border();
 
-            _textRendererHint = Settings.DefaultValue.TextRenderingHint;
+            _textRendererHint = DefaultConstants.TextRenderingHint;
 
             Controls.Add(_borderEdge);
             UpdateTheme(_styleManager.Theme);
@@ -260,7 +261,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
         }
 
-        [DefaultValue(Settings.DefaultValue.TextVisible)]
+        [DefaultValue(DefaultConstants.TextVisible)]
         [Category(PropertyCategory.Behavior)]
         [Description(PropertyDescription.Visible)]
         public bool ButtonVisible
@@ -460,7 +461,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
         }
 
-        [DefaultValue(Settings.DefaultValue.TextVisible)]
+        [DefaultValue(DefaultConstants.TextVisible)]
         [Category(PropertyCategory.Behavior)]
         [Description(PropertyDescription.Visible)]
         public bool SeparatorVisible

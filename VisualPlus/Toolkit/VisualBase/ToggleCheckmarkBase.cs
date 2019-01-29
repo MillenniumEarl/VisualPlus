@@ -46,6 +46,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
 using VisualPlus.Extensibility;
@@ -87,7 +88,7 @@ namespace VisualPlus.Toolkit.VisualBase
         {
             _boxSpacing = 2;
             _box = new Rectangle(0, 0, 14, 14);
-            _animation = Settings.DefaultValue.Animation;
+            _animation = DefaultConstants.Animation;
             _checkStyle = new CheckStyle(ClientRectangle);
             _border = new Border();
             _colorState = new ControlColorState();
@@ -98,7 +99,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #region Public Properties
 
-        [DefaultValue(Settings.DefaultValue.Animation)]
+        [DefaultValue(DefaultConstants.Animation)]
         [Category(PropertyCategory.Behavior)]
         [Description(PropertyDescription.Animation)]
         public bool Animation

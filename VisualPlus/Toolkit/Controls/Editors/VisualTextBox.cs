@@ -45,6 +45,7 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Designer;
 using VisualPlus.Enumerators;
@@ -119,7 +120,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
             _textWidth = GetTextBoxWidth();
             _border = new Border();
 
-            ThemeManager = new StyleManager(Settings.DefaultValue.DefaultStyle);
+            ThemeManager = new StyleManager(DefaultConstants.DefaultStyle);
 
             _backColorState = new ColorState { Enabled = ThemeManager.Theme.ColorPalette.ControlEnabled };
 

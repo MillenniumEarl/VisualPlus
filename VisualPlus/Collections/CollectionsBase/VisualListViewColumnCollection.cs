@@ -44,6 +44,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+using VisualPlus.Constants;
 using VisualPlus.Delegates;
 using VisualPlus.Enumerators;
 using VisualPlus.Events;
@@ -169,7 +170,7 @@ namespace VisualPlus.Collections.CollectionsBase
                 {
                     Name = nameof(VisualListViewColumn) + List.GetNextID(),
                     Text = text,
-                    Width = Settings.DefaultValue.ColumnWidth,
+                    Width = DefaultConstants.ColumnWidth,
                     State = ColumnStates.None,
                     TextAlignment = ContentAlignment.MiddleLeft,
                     ListView = _listView
@@ -189,7 +190,7 @@ namespace VisualPlus.Collections.CollectionsBase
                 {
                     Name = key,
                     Text = text,
-                    Width = Settings.DefaultValue.ColumnWidth,
+                    Width = DefaultConstants.ColumnWidth,
                     State = ColumnStates.None,
                     TextAlignment = ContentAlignment.MiddleLeft,
                     ListView = _listView
@@ -445,7 +446,7 @@ namespace VisualPlus.Collections.CollectionsBase
                 {
                     Name = nameof(VisualListViewColumn) + List.GetNextID(),
                     Text = text,
-                    Width = Settings.DefaultValue.ColumnWidth,
+                    Width = DefaultConstants.ColumnWidth,
                     State = ColumnStates.None,
                     TextAlignment = ContentAlignment.MiddleLeft,
                     ListView = _listView
@@ -509,7 +510,7 @@ namespace VisualPlus.Collections.CollectionsBase
                 {
                     Name = key,
                     Text = text,
-                    Width = Settings.DefaultValue.ColumnWidth,
+                    Width = DefaultConstants.ColumnWidth,
                     State = ColumnStates.None,
                     TextAlignment = ContentAlignment.MiddleLeft,
                     ListView = _listView

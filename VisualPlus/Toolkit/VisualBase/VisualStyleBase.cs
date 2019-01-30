@@ -195,6 +195,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         /// <summary>Invokes the mouse state changed event.</summary>
         /// <param name="e">The event args.</param>
+        /// <exception cref="Exception">A delegate callback throws an exception.</exception>
         protected virtual void OnMouseStateChanged(MouseStateEventArgs e)
         {
             Invalidate();
@@ -203,6 +204,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         /// <summary>Invokes the text style changed event.</summary>
         /// <param name="e">The event args.</param>
+        /// <exception cref="Exception">A delegate callback throws an exception.</exception>
         protected virtual void OnTextStyleChanged(EventArgs e)
         {
             Invalidate();
@@ -211,6 +213,7 @@ namespace VisualPlus.Toolkit.VisualBase
 
         /// <summary>Invokes the theme changed event.</summary>
         /// <param name="e">The event args.</param>
+        /// <exception cref="Exception">A delegate callback throws an exception.</exception>
         protected virtual void OnThemeChanged(ThemeEventArgs e)
         {
             Invalidate();

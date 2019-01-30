@@ -253,17 +253,17 @@ namespace VisualPlus.Renders
                 if (column.State == ColumnStates.None)
                 {
                     // Normal.
-                    uxtheme.DrawThemeBackground(theme, hDC, 1, 1, ref _columnRect, ref _clipRect);
+                    Uxtheme.DrawThemeBackground(theme, hDC, 1, 1, ref _columnRect, ref _clipRect);
                 }
                 else if (column.State == ColumnStates.Pressed)
                 {
                     // Pressed
-                    uxtheme.DrawThemeBackground(theme, hDC, 1, 3, ref _columnRect, ref _clipRect);
+                    Uxtheme.DrawThemeBackground(theme, hDC, 1, 3, ref _columnRect, ref _clipRect);
                 }
                 else if (column.State == ColumnStates.Hover)
                 {
                     // Hover
-                    uxtheme.DrawThemeBackground(theme, hDC, 1, 2, ref _columnRect, ref _clipRect);
+                    Uxtheme.DrawThemeBackground(theme, hDC, 1, 2, ref _columnRect, ref _clipRect);
                 }
 
                 graphicsColumn.ReleaseHdc(hDC);

@@ -644,14 +644,14 @@ namespace VisualPlus.Toolkit.Controls.Layout
         /// <summary>Prevents the drawing of the control until <see cref="EndUpdate" /> is called.</summary>
         public void BeginUpdate()
         {
-            user32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(false), new IntPtr(0));
+            User32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(false), new IntPtr(0));
             _inUpdate = true;
         }
 
         /// <summary>Ends the updating process and the control can draw itself again.</summary>
         public void EndUpdate()
         {
-            user32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(true), new IntPtr(0));
+            User32.SendMessage(Handle, WM_SETREDRAW, Convert.ToInt32(true), new IntPtr(0));
             _inUpdate = false;
             ConfigureScrollBar();
             Refresh();

@@ -2,9 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: user32.cs
+// Name: User32.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2018 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -48,9 +48,21 @@ using VisualPlus.Structure;
 
 namespace VisualPlus.Native
 {
+    /// <summary>Represents the <see cref="User32" /> class.</summary>
+    /// <remarks>For the assistance of accessing unmanaged method calls.</remarks>
     [SuppressUnmanagedCodeSecurity]
-    public static class user32
+    public static class User32
     {
+        #region Constants
+
+        /// <summary>
+        ///     The name of the DLL that contains the unmanaged method. This can include an assembly display name, if the DLL is
+        ///     included in an assembly.
+        /// </summary>
+        private const string DllName = "user32.dll";
+
+        #endregion
+
         #region Public Methods and Operators
 
         /// <summary>
@@ -133,7 +145,7 @@ namespace VisualPlus.Native
         ///     function before it returns.
         /// </param>
         /// <returns>The <see cref="IntPtr" /> window handle.</returns>
-        [DllImport("user32.dll", SetLastError = true)]
+        [DllImport(DllName, SetLastError = true)]
         public static extern IntPtr CreateWindowEx(int dwExStyle, string lpClassName, string lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, int hWndParent, int hMenu, int hInstance, int lpParam);
 
         /// <summary>
@@ -147,7 +159,7 @@ namespace VisualPlus.Native
         ///     If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get
         ///     extended error information, call GetLastError.
         /// </returns>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(DllName, CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern int DestroyWindow(IntPtr hwnd);
 
         /// <summary>
@@ -156,13 +168,13 @@ namespace VisualPlus.Native
         /// </summary>
         /// <param name="hWnd">A handle to the window whose menu bar is to be redrawn.</param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
-        [DllImport("user32.dll")]
+        [DllImport(DllName)]
         public static extern bool DrawMenuBar(IntPtr hWnd);
 
         /// <summary>Retrieves the position of the mouse cursor, in screen coordinates.</summary>
         /// <param name="lpPoint">A pointer to a POINT structure that receives the screen coordinates of the cursor.</param>
         /// <returns>Returns nonzero if successful or zero otherwise. To get extended error information, call GetLastError.</returns>
-        [DllImport("user32.dll", SetLastError = true)]
+        [DllImport(DllName, SetLastError = true)]
         public static extern bool GetCursorPos(ref Point lpPoint);
 
         /// <summary>
@@ -183,7 +195,7 @@ namespace VisualPlus.Native
         ///     The handle of the device context for the specified window indicates success. NULL indicates failure. An
         ///     invalid value for the hWnd parameter causes the function to fail.
         /// </returns>
-        [DllImport("user32.dll", ExactSpelling = true)]
+        [DllImport(DllName, ExactSpelling = true)]
         public static extern IntPtr GetDCEx(IntPtr hWnd, IntPtr hrgnClip, int flags);
 
         /// <summary>The GetMonitorInfo function retrieves information about a display monitor.</summary>
@@ -193,7 +205,7 @@ namespace VisualPlus.Native
         ///     display monitor.
         /// </param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [DllImport(DllName, CharSet = CharSet.Auto)]
         public static extern bool GetMonitorInfo(HandleRef hMonitor, [In] [Out] MonitorManager lpmi);
 
         /// <summary>
@@ -211,7 +223,7 @@ namespace VisualPlus.Native
         ///     the function copies the specified parameters to the appropriate members of the structure.
         /// </param>
         /// <returns>If the function retrieved any values, the return value is nonzero.</returns>
-        [DllImport("user32.dll", SetLastError = true)]
+        [DllImport(DllName, SetLastError = true)]
         public static extern int GetScrollInfo(IntPtr hwnd, int nBar, ref ScrollInfo lpsi);
 
         /// <summary>
@@ -229,7 +241,7 @@ namespace VisualPlus.Native
         ///     If the bRevert parameter is FALSE, the return value is a handle to a copy of the window menu. If the bRevert
         ///     parameter is TRUE, the return value is NULL.
         /// </returns>
-        [DllImport("user32.dll")]
+        [DllImport(DllName)]
         public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 
         /// <summary>
@@ -245,7 +257,7 @@ namespace VisualPlus.Native
         ///     If the function succeeds, the return value is a handle to a device context for the specified window. If the
         ///     function fails, the return value is NULL, indicating an error or an invalid hWnd parameter.
         /// </returns>
-        [DllImport("user32.dll", ExactSpelling = true)]
+        [DllImport(DllName, ExactSpelling = true)]
         public static extern IntPtr GetWindowDC(IntPtr hWnd);
 
         /// <summary>
@@ -258,7 +270,7 @@ namespace VisualPlus.Native
         ///     upper-left and lower-right corners of the window.
         /// </param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
-        [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
+        [DllImport(DllName, ExactSpelling = true, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
@@ -281,7 +293,7 @@ namespace VisualPlus.Native
         ///     parameter includes the MF_BITMAP, MF_OWNERDRAW, or MF_STRING flag, as follows.
         /// </param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [DllImport(DllName, CharSet = CharSet.Auto)]
         public static extern bool InsertMenu(IntPtr hMenu, uint uPosition, uint uFlags, uint uIDNewItem, string lpNewItem);
 
         /// <summary>Inserts a new menu item at the specified position in a menu.</summary>
@@ -296,7 +308,7 @@ namespace VisualPlus.Native
         /// </param>
         /// <param name="lpmi">A pointer to a MENUITEMINFO structure that contains information about the new menu item.</param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [DllImport(DllName, CharSet = CharSet.Auto)]
         public static extern bool InsertMenuItem(IntPtr hmenu, uint item, bool fByPosition, [In] ref MenuItemInfo lpmi);
 
         /// <summary>
@@ -309,7 +321,7 @@ namespace VisualPlus.Native
         ///     If the window intersects one or more display monitor rectangles, the return value is an HMONITOR handle to the
         ///     display monitor that has the largest area of intersection with the window.
         /// </returns>
-        [DllImport("user32.dll")]
+        [DllImport(DllName)]
         public static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
 
         /// <summary>
@@ -318,7 +330,7 @@ namespace VisualPlus.Native
         ///     a mouse button is clicked while the cursor hot spot is in the window of another thread.
         /// </summary>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
-        [DllImport("user32.dll")]
+        [DllImport(DllName)]
         public static extern bool ReleaseCapture();
 
         /// <summary>
@@ -334,7 +346,7 @@ namespace VisualPlus.Native
         /// <param name="wParam">Additional w message-specific information.</param>
         /// <param name="lParam">Additional l message-specific information.</param>
         /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport(DllName, SetLastError = true, CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
 
         /// <summary>
@@ -356,7 +368,7 @@ namespace VisualPlus.Native
         ///     values.
         /// </param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
-        [DllImport("User32.dll", SetLastError = true)]
+        [DllImport(DllName, SetLastError = true)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
 
         /// <summary>
@@ -386,7 +398,7 @@ namespace VisualPlus.Native
         ///     item that the user selected. If the user cancels the menu without making a selection, or if an error occurs, the
         ///     return value is zero.
         /// </returns>
-        [DllImport("user32.dll")]
+        [DllImport(DllName)]
         public static extern int TrackPopupMenuEx(IntPtr hmenu, uint fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
 
         /// <summary>Retrieves a handle to the window that contains the specified point.</summary>
@@ -396,7 +408,7 @@ namespace VisualPlus.Native
         ///     the return value is NULL. If the point is over a static text control, the return value is a handle to the window
         ///     under the static text control.
         /// </returns>
-        [DllImport("user32.dll")]
+        [DllImport(DllName)]
         public static extern IntPtr WindowFromPoint(Point point);
 
         #endregion

@@ -2,9 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: gdi32.cs
+// Name: Gdi32.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2018 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -45,9 +45,21 @@ using System.Security;
 
 namespace VisualPlus.Native
 {
+    /// <summary>Represents the <see cref="Gdi32" /> class.</summary>
+    /// <remarks>For the assistance of accessing unmanaged method calls.</remarks>
     [SuppressUnmanagedCodeSecurity]
-    public static class gdi32
+    public static class Gdi32
     {
+        #region Constants
+
+        /// <summary>
+        ///     The name of the DLL that contains the unmanaged method. This can include an assembly display name, if the DLL is
+        ///     included in an assembly.
+        /// </summary>
+        private const string DllName = "gdi32.dll";
+
+        #endregion
+
         #region Public Methods and Operators
 
         /// <summary>
@@ -67,7 +79,7 @@ namespace VisualPlus.Native
         ///     combined with the color data for the destination rectangle to achieve the final color.
         /// </param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
-        [DllImport("gdi32.dll", EntryPoint = "BitBlt", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+        [DllImport(DllName, EntryPoint = "BitBlt", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
         public static extern int BitBlt(IntPtr hDC, int x, int y, int nWidth, int nHeight, IntPtr hSrcDC, int xSrc, int ySrc, int dwRop);
 
         /// <summary>The CreateRoundRectRgn function creates a rectangular region with rounded corners.</summary>
@@ -78,7 +90,7 @@ namespace VisualPlus.Native
         /// <param name="w">Specifies the width of the ellipse used to create the rounded corners in device units.</param>
         /// <param name="h">Specifies the height of the ellipse used to create the rounded corners in device units.</param>
         /// <returns>If the function succeeds, the return value is the handle to the region.</returns>
-        [DllImport("gdi32.dll")]
+        [DllImport(DllName)]
         public static extern IntPtr CreateRoundRectRgn(int x1, int y1, int x2, int y2, int w, int h);
 
         #endregion

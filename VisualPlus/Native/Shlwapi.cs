@@ -2,9 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: shlwapi.cs
+// Name: Shlwapi.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2018 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -46,9 +46,21 @@ using System.Text;
 
 namespace VisualPlus.Native
 {
+    /// <summary>Represents the <see cref="Shlwapi" /> class.</summary>
+    /// <remarks>For the assistance of accessing unmanaged method calls.</remarks>
     [SuppressUnmanagedCodeSecurity]
-    public static class shlwapi
+    public static class Shlwapi
     {
+        #region Constants
+
+        /// <summary>
+        ///     The name of the DLL that contains the unmanaged method. This can include an assembly display name, if the DLL is
+        ///     included in an assembly.
+        /// </summary>
+        private const string DllName = "shlwapi.dll";
+
+        #endregion
+
         #region Public Methods and Operators
 
         /// <summary>Truncates a path to fit within a certain number of characters by replacing path components with ellipses.</summary>
@@ -62,7 +74,7 @@ namespace VisualPlus.Native
         ///     Returns TRUE if the path was successfully compacted to the specified width. Returns FALSE on failure, or if
         ///     the base portion of the path would not fit the specified width.
         /// </returns>
-        [DllImport("shlwapi.dll", CharSet = CharSet.Auto)]
+        [DllImport(DllName, CharSet = CharSet.Auto)]
         public static extern bool PathCompactPath(IntPtr hDc, [In] [Out] StringBuilder pszPath, int dx);
 
         #endregion

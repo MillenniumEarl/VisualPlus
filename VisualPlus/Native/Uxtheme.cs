@@ -2,9 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: uxtheme.cs
+// Name: Uxtheme.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2018 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -47,14 +47,26 @@ using VisualPlus.Structure;
 
 namespace VisualPlus.Native
 {
+    /// <summary>Represents the <see cref="Uxtheme" /> class.</summary>
+    /// <remarks>For the assistance of accessing unmanaged method calls.</remarks>
     [SuppressUnmanagedCodeSecurity]
-    public static class uxtheme
+    public static class Uxtheme
     {
+        #region Constants
+
+        /// <summary>
+        ///     The name of the DLL that contains the unmanaged method. This can include an assembly display name, if the DLL is
+        ///     included in an assembly.
+        /// </summary>
+        private const string DllName = "uxtheme.dll";
+
+        #endregion
+
         #region Public Methods and Operators
 
         /// <summary>Closes the theme data handle.</summary>
         /// <param name="hTheme">Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME.</param>
-        [DllImport("uxtheme.dll", ExactSpelling = true)]
+        [DllImport(DllName, ExactSpelling = true)]
         public static extern void CloseThemeData(IntPtr hTheme);
 
         /// <summary>Draws the border and fill defined by the visual style for the specified control part.</summary>
@@ -70,7 +82,7 @@ namespace VisualPlus.Native
         ///     Pointer to a RECT structure that contains a clipping rectangle. This parameter may be set to
         ///     NULL.
         /// </param>
-        [DllImport("uxtheme.dll", ExactSpelling = true)]
+        [DllImport(DllName, ExactSpelling = true)]
         public static extern void DrawThemeBackground(IntPtr hTheme, IntPtr hdc, int iPartId, int iStateId, ref RECT pRect, ref RECT pClipRect);
 
         /// <summary>Draws one or more edges defined by the visual style of a rectangle.</summary>
@@ -88,7 +100,7 @@ namespace VisualPlus.Native
         ///     Pointer to a RECT structure that contains, in logical coordinates, the rectangle that
         ///     receives the interior rectangle, if uFlags is set to BF_ADJUST. This parameter may be set to NULL.
         /// </param>
-        [DllImport("uxtheme.dll", ExactSpelling = true)]
+        [DllImport(DllName, ExactSpelling = true)]
         public static extern void DrawThemeEdge(IntPtr hTheme, IntPtr hdc, int iPartId, int iStateId, ref RECT pDestRect, uint uEdge, uint uFlags, ref RECT pContentRect);
 
         /// <summary>Draws an image from an image list with the icon effect defined by the visual style.</summary>
@@ -102,7 +114,7 @@ namespace VisualPlus.Native
         /// </param>
         /// <param name="himl">Handle to an image list that contains the image to draw.</param>
         /// <param name="iImageIndex">Value of type int that specifies the index of the image to draw.</param>
-        [DllImport("uxtheme.dll", ExactSpelling = true)]
+        [DllImport(DllName, ExactSpelling = true)]
         public static extern void DrawThemeIcon(IntPtr hTheme, IntPtr hdc, int iPartId, int iStateId, ref RECT pRect, IntPtr himl, int iImageIndex);
 
         /// <summary>Draws the part of a parent control that is covered by a partially-transparent or alpha-blended child control.</summary>
@@ -112,7 +124,7 @@ namespace VisualPlus.Native
         ///     The area to be drawn. The rectangle is in the child window's coordinates. If this parameter is
         ///     NULL, the area to be drawn includes the entire area occupied by the child control.
         /// </param>
-        [DllImport("uxtheme.dll", ExactSpelling = true)]
+        [DllImport(DllName, ExactSpelling = true)]
         public static extern void DrawThemeParentBackground(IntPtr hwnd, IntPtr hdc, ref RECT pRect);
 
         /// <summary>Draws text using the color and font defined by the visual style.</summary>
@@ -137,12 +149,12 @@ namespace VisualPlus.Native
         ///     Pointer to a RECT structure that contains the rectangle, in logical coordinates, in which the text
         ///     is to be drawn. It is recommended to use pExtentRect from GetThemeTextExtent to retrieve the correct coordinates.
         /// </param>
-        [DllImport("uxtheme.dll")]
+        [DllImport(DllName)]
         public static extern void DrawThemeText(IntPtr hTheme, IntPtr hdc, int iPartId, int iStateId, [MarshalAs(UnmanagedType.LPTStr)] string pszText, int cchText, uint dwTextFlags, uint dwTextFlags2, ref RECT pRect);
 
         /// <summary>Tests if a visual style for the current application is active.</summary>
         /// <returns>Returns one of the following values if true or false.</returns>
-        [DllImport("uxtheme.dll", ExactSpelling = true)]
+        [DllImport(DllName, ExactSpelling = true)]
         public static extern int IsThemeActive();
 
         /// <summary>Opens the theme data for a window and its associated class.</summary>
@@ -152,7 +164,7 @@ namespace VisualPlus.Native
         ///     OpenThemeData tries to match each class, one at a time, to a class data section in the active theme. If a
         ///     match is found, an associated HTHEME handle is returned. If no match is found NULL is returned.
         /// </returns>
-        [DllImport("uxtheme.dll", ExactSpelling = true, CharSet = CharSet.Unicode)]
+        [DllImport(DllName, ExactSpelling = true, CharSet = CharSet.Unicode)]
         public static extern IntPtr OpenThemeData(IntPtr hwnd, [MarshalAs(UnmanagedType.LPTStr)] string pszClassList);
 
         /// <summary>Causes a window to use a different set of visual style information than its class normally uses.</summary>
@@ -166,7 +178,7 @@ namespace VisualPlus.Native
         ///     of the actual list passed by the window's class. If this parameter is NULL, the ID list from the calling class is
         ///     used.
         /// </param>
-        [DllImport("uxtheme.dll", PreserveSig = false, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Unicode)]
+        [DllImport(DllName, PreserveSig = false, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Unicode)]
         public static extern void SetWindowTheme(IntPtr hwnd, string pszSubAppName, string pszSubIdList);
 
         #endregion

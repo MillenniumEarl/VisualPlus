@@ -2123,7 +2123,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
         {
             if (_theme != IntPtr.Zero)
             {
-                uxtheme.CloseThemeData(_theme);
+                Uxtheme.CloseThemeData(_theme);
             }
 
             if (disposing)
@@ -2586,9 +2586,9 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             // IntPtr hTheme = IntPtr.Zero;
             try
             {
-                if ((uxtheme.IsThemeActive() == 1) && (_theme == IntPtr.Zero))
+                if ((Uxtheme.IsThemeActive() == 1) && (_theme == IntPtr.Zero))
                 {
-                    _theme = uxtheme.OpenThemeData(_theme, "HEADER");
+                    _theme = Uxtheme.OpenThemeData(_theme, "HEADER");
 
                     return true;
                 }

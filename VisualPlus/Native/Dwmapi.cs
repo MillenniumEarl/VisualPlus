@@ -2,9 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: dwmapi.cs
+// Name: Dwmapi.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2018 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -44,9 +44,21 @@ using System.Security;
 
 namespace VisualPlus.Native
 {
+    /// <summary>Represents the <see cref="Dwmapi" /> class.</summary>
+    /// <remarks>For the assistance of accessing unmanaged method calls.</remarks>
     [SuppressUnmanagedCodeSecurity]
-    public static class dwmapi
+    public static class Dwmapi
     {
+        #region Constants
+
+        /// <summary>
+        ///     The name of the DLL that contains the unmanaged method. This can include an assembly display name, if the DLL is
+        ///     included in an assembly.
+        /// </summary>
+        private const string DllName = "dwmapi.dll";
+
+        #endregion
+
         #region Public Methods and Operators
 
         /// <summary>
@@ -58,7 +70,7 @@ namespace VisualPlus.Native
         ///     A pointer to a value that, when this function returns successfully, receives TRUE if DWM
         ///     composition is enabled; otherwise, FALSE.
         /// </param>
-        [DllImport("dwmapi.dll", CharSet = CharSet.Auto)]
+        [DllImport(DllName, CharSet = CharSet.Auto)]
         public static extern void DwmIsCompositionEnabled(out bool enabled);
 
         #endregion

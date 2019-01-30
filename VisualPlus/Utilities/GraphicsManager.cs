@@ -370,7 +370,7 @@ namespace VisualPlus.Utilities
             {
                 // Ask the desktop window manager is composition is currently enabled
                 bool compositionEnabled;
-                dwmapi.DwmIsCompositionEnabled(out compositionEnabled);
+                Dwmapi.DwmIsCompositionEnabled(out compositionEnabled);
                 return compositionEnabled;
             }
         }
@@ -399,7 +399,7 @@ namespace VisualPlus.Utilities
         {
             try
             {
-                control.Region = Region.FromHrgn(gdi32.CreateRoundRectRgn(0, 0, control.Width, control.Height, rounding, rounding));
+                control.Region = Region.FromHrgn(Gdi32.CreateRoundRectRgn(0, 0, control.Width, control.Height, rounding, rounding));
             }
             catch (Exception e)
             {
@@ -416,7 +416,7 @@ namespace VisualPlus.Utilities
             try
             {
                 form.FormBorderStyle = FormBorderStyle.None;
-                form.Region = Region.FromHrgn(gdi32.CreateRoundRectRgn(0, 0, form.Width, form.Height, rounding, rounding));
+                form.Region = Region.FromHrgn(Gdi32.CreateRoundRectRgn(0, 0, form.Width, form.Height, rounding, rounding));
             }
             catch (Exception e)
             {

@@ -148,8 +148,8 @@ namespace VisualPlus
             }
         }
 
-        /// <summary>Returns the <c>Project URL</c> of the <see cref="VisualPlus " /> framework.</summary>
-        public static string ProjectURL
+        /// <summary>Returns the <c>Website</c> of the <see cref="VisualPlus " /> framework.</summary>
+        public static string Website
         {
             get
             {

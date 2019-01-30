@@ -244,7 +244,7 @@ namespace UnitTests.Forms
 
             if (dialogResult == DialogResult.Yes)
             {
-                Process.Start(Library.ProjectURL);
+                Process.Start(Library.Website);
             }
         }
 

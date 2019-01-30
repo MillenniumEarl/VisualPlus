@@ -51,7 +51,7 @@ namespace VisualPlus.Toolkit.VisualBase
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     [ComVisible(true)]
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public class VisualControlBase : Control, ICloneable
+    public abstract class VisualControlBase : Control, ICloneable
     {
         #region Public Methods and Operators
 

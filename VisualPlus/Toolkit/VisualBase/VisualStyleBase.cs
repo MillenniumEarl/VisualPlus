@@ -4,7 +4,7 @@
 // 
 // Name: VisualStyleBase.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2018 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ namespace VisualPlus.Toolkit.VisualBase
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     [ComVisible(true)]
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public class VisualStyleBase : VisualControlBase, IThemeManager
+    public abstract class VisualStyleBase : VisualControlBase, IThemeManager
     {
         #region Fields
 
@@ -75,7 +75,7 @@ namespace VisualPlus.Toolkit.VisualBase
         #region Constructors and Destructors
 
         /// <summary>Initializes a new instance of the <see cref="VisualStyleBase" /> class.</summary>
-        public VisualStyleBase()
+        protected VisualStyleBase()
         {
             // Allow transparent BackColor.
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
@@ -87,7 +87,7 @@ namespace VisualPlus.Toolkit.VisualBase
             SetStyle(ControlStyles.ResizeRedraw, true);
 
             UpdateStyles();
-            Initialize();
+            InitializeComponent();
         }
 
         #endregion
@@ -217,8 +217,8 @@ namespace VisualPlus.Toolkit.VisualBase
             ThemeChanged?.Invoke(e);
         }
 
-        /// <summary>Initialize the base.</summary>
-        private void Initialize()
+        /// <summary>Initializes a new instance of the <see cref="VisualStyleBase" /> class.</summary>
+        private void InitializeComponent()
         {
             DoubleBuffered = true;
             ResizeRedraw = true;

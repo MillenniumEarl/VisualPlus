@@ -46,7 +46,7 @@ using VisualPlus.Enumerators;
 
 namespace VisualPlus.Structure
 {
-    /// <summary>The WINDOWPOS structure contains information about the size and position of a window.</summary>
+    /// <summary>The structure contains information about the size and position of a window.</summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct WINDOWPOS
     {

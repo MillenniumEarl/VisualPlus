@@ -765,7 +765,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
                 {
                     if (!MultiLine)
                     {
-                        string text = TextManager.RemoveLineBreaks(value);
+                        string text = StringUtil.RemoveLineBreaks(value);
                         value = text;
                     }
 
@@ -1322,7 +1322,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
             _borderButton.Location = new Point(_buttonRectangle.X, _border.Thickness);
             _borderButton.Size = new Size(1, Height - _border.Thickness - 1);
 
-            Size textSize = TextManager.MeasureText(_buttontext, _buttonFont, graphics);
+            Size textSize = StringUtil.MeasureText(_buttontext, _buttonFont, graphics);
             graphics.SetClip(buttonPath);
             graphics.DrawString(_buttontext, Font, new SolidBrush(ForeColor), new PointF(_buttonRectangle.X + _buttonIndent, (Height / 2) - (textSize.Height / 2)));
             graphics.ResetClip();
@@ -1375,11 +1375,11 @@ namespace VisualPlus.Toolkit.Controls.Editors
         {
             if (_textBox.TextLength > 0)
             {
-                return TextManager.MeasureTextRenderer(Text, Font).Height;
+                return StringUtil.MeasureTextRenderer(Text, Font).Height;
             }
             else
             {
-                return TextManager.MeasureTextRenderer("Hello World.", Font).Height;
+                return StringUtil.MeasureTextRenderer("Hello World.", Font).Height;
             }
         }
 

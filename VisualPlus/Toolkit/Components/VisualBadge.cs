@@ -470,7 +470,7 @@ namespace VisualPlus.Toolkit.Components
         /// <param name="e">The event args.</param>
         private void OnLabel_Paint(object sender, PaintEventArgs e)
         {
-            Size _textSize = TextManager.MeasureText(Text, Font, e.Graphics);
+            Size _textSize = StringUtil.MeasureText(Text, Font, e.Graphics);
             VisualBadgeRenderer.DrawBadge(e.Graphics, new Rectangle(new Point(0, 0), new Size(_label.Width - 1, _label.Height - 1)), Background, Text, Font, ForeColor, Shape, new Point((_label.Width / 2) - (_textSize.Width / 2), (_label.Height / 2) - (_textSize.Height / 2)));
         }
 

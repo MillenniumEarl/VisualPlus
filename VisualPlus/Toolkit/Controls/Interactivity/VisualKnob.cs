@@ -878,7 +878,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             if (_valueVisible)
             {
                 string value = _value.ToString("0");
-                Size textAreaSize = TextManager.MeasureText(value, Font, e.Graphics);
+                Size textAreaSize = StringUtil.MeasureText(value, Font, e.Graphics);
                 graphics.DrawString(value, Font, new SolidBrush(ForeColor), (Width / 2) - (textAreaSize.Width / 2), (Height / 2) - (textAreaSize.Height / 2));
             }
         }

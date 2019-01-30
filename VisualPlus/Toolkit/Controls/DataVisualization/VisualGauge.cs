@@ -243,7 +243,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
         {
             base.OnPaint(e);
 
-            _progressTextSize = TextManager.MeasureText(_labelProgress.Text + @"%", Font, e.Graphics);
+            _progressTextSize = StringUtil.MeasureText(_labelProgress.Text + @"%", Font, e.Graphics);
             _labelProgress.Location = new Point((Width / 2) - (_progressTextSize.Width / 2), Height - _progressTextSize.Height - 30);
 
             Graphics _graphics = e.Graphics;

@@ -121,7 +121,7 @@ namespace VisualPlus.Renders
         /// <param name="enabled">The state to draw the check mark in.</param>
         public static void DrawCheckMark(Graphics graphics, CheckStyle checkStyle, Rectangle rectangle, bool enabled)
         {
-            Size _characterSize = TextManager.MeasureText(checkStyle.Character.ToString(), checkStyle.Font, graphics);
+            Size _characterSize = StringUtil.MeasureText(checkStyle.Character.ToString(), checkStyle.Font, graphics);
 
             int _styleCount = checkStyle.Style.Count();
             var _defaultLocations = new Point[_styleCount];

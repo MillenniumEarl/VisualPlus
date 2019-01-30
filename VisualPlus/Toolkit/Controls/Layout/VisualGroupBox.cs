@@ -314,7 +314,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
                 graphics.SmoothingMode = SmoothingMode.HighQuality;
                 graphics.CompositingQuality = CompositingQuality.GammaCorrected;
 
-                Size textArea = TextManager.MeasureText(Text, Font, graphics);
+                Size textArea = StringUtil.MeasureText(Text, Font, graphics);
                 Rectangle group = ConfigureStyleBox(textArea);
                 Rectangle title = ConfigureStyleTitleBox(textArea);
 

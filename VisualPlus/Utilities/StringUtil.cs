@@ -2,9 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: TextManager.cs
+// Name: StringUtil.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2019 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -38,23 +38,27 @@
 #region Namespace
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 #endregion
 
 namespace VisualPlus.Utilities
 {
-    /// <summary>The <see cref="TextManager" />.</summary>
-    public sealed class TextManager
+    /// <summary>Represents the <see cref="StringUtil" /> class.</summary>
+    /// <remarks>Assists with with various ways to manipulate strings.</remarks>
+    public static class StringUtil
     {
         #region Public Methods and Operators
 
         /// <summary>Convert the content alignment to string alignment.</summary>
         /// <param name="alignment">The content alignment.</param>
         /// <param name="orientation">The string alignment to convert to.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Out of range orientation.</exception>
         /// <returns>The <see cref="StringAlignment" />.</returns>
         public static StringAlignment ConvertContentAlignmentToStringAlignment(ContentAlignment alignment, Orientation orientation)
         {
@@ -139,6 +143,27 @@ namespace VisualPlus.Utilities
             }
 
             return _stringAlignment;
+        }
+
+        /// <summary>
+        ///     Gets the separator string that should be used to separate numbers in a list when
+        ///     converting a list of numbers to a string.
+        /// </summary>
+        /// <param name="formatProvider">
+        ///     an optional format provider, which is typically a
+        ///     CultureInfo object. If null, then the current thread's CurrentCulture is used.
+        /// </param>
+        /// <returns>The number list separator that should be used</returns>
+        /// <remarks>
+        ///     In cultures where the decimal separator is ".", then the list separator is probably ",".
+        ///     If the decimal separator is ",", then the list separator is probably ";".
+        ///     This separator is equivalent to the Windows 7 setting in Control Panel ->
+        ///     Region and Language -> Formats -> Additional settings -> Numbers -> List separator.
+        /// </remarks>
+        public static string GetNumberListSeparator(IFormatProvider formatProvider)
+        {
+            CultureInfo info = formatProvider as CultureInfo ?? Thread.CurrentThread.CurrentCulture;
+            return info.TextInfo.ListSeparator;
         }
 
         /// <summary>Measures the specified multi-line string when draw with the specified font.</summary>
@@ -227,6 +252,44 @@ namespace VisualPlus.Utilities
         public static StringFormat SetStringFormat(StringAlignment horizontalAlignment = StringAlignment.Center, StringAlignment verticalAlignment = StringAlignment.Center)
         {
             return new StringFormat { Alignment = horizontalAlignment, LineAlignment = verticalAlignment };
+        }
+
+        /// <summary>
+        ///     Splits the given string into a list of substrings, while outputting the splitting
+        ///     delimiters (each in its own string) as well. It's just like String.Split() except
+        ///     the delimiters are preserved. No empty strings are output.
+        /// </summary>
+        /// <param name="s">String to parse. Can be null or empty.</param>
+        /// <param name="delimiters">The delimiting characters. Can be an empty array.</param>
+        /// <returns>The <see cref="List{T}" />.</returns>
+        public static IList<string> SplitAndKeepDelimiters(string s, params char[] delimiters)
+        {
+            var parts = new List<string>();
+            if (!string.IsNullOrEmpty(s))
+            {
+                int iFirst = 0;
+                do
+                {
+                    int iLast = s.IndexOfAny(delimiters, iFirst);
+                    if (iLast < 0)
+                    {
+                        // No delimiters were found. Add the rest and stop.
+                        parts.Add(s.Substring(iFirst, s.Length - iFirst));
+                        break;
+                    }
+
+                    if (iLast > iFirst)
+                    {
+                        parts.Add(s.Substring(iFirst, iLast - iFirst)); // part before the delimiter
+                    }
+
+                    parts.Add(new string(s[iLast], 1)); // the delimiter
+                    iFirst = iLast + 1;
+                }
+                while (iFirst < s.Length);
+            }
+
+            return parts;
         }
 
         /// <summary>Truncate a string, including multi-line strings.</summary>

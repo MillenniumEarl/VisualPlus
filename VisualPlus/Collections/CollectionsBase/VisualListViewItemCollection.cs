@@ -617,7 +617,7 @@ namespace VisualPlus.Collections.CollectionsBase
 
             for (var i = 0; i < listViewItems.Count; i++)
             {
-                if (TextManager.SafeCompareStrings(listViewItems[i].Name, key, true))
+                if (StringUtil.SafeCompareStrings(listViewItems[i].Name, key, true))
                 {
                     foundItems.Add(listViewItems[i]);
                 }
@@ -628,7 +628,7 @@ namespace VisualPlus.Collections.CollectionsBase
                         // Start from 1, as we've already compare subitems[0].
                         for (var j = 1; j < listViewItems[i].SubItems.Count; j++)
                         {
-                            if (TextManager.SafeCompareStrings(listViewItems[i].SubItems[j].Name, key, true))
+                            if (StringUtil.SafeCompareStrings(listViewItems[i].SubItems[j].Name, key, true))
                             {
                                 foundItems.Add(listViewItems[i]);
                                 break;

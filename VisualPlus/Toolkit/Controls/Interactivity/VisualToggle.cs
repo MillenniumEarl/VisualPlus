@@ -475,7 +475,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
             else
             {
-                Size textSize = TextManager.MeasureText(_textProcessor, Font, graphics);
+                Size textSize = StringUtil.MeasureText(_textProcessor, Font, graphics);
                 textBoxRectangle = new Rectangle(Width - (textSize.Width / 2) - (XOn * 2), 0, Width - 1, Height - 1);
             }
 

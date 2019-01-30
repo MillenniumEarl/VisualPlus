@@ -463,7 +463,7 @@ namespace VisualPlus.Collections.CollectionsBase
             // Step 1 - Check the last cached item.
             if (List.IsValidIndex(_lastAccessedIndex))
             {
-                if (TextManager.SafeCompareStrings(this[_lastAccessedIndex].Name, key, true))
+                if (StringUtil.SafeCompareStrings(this[_lastAccessedIndex].Name, key, true))
                 {
                     return _lastAccessedIndex;
                 }
@@ -472,7 +472,7 @@ namespace VisualPlus.Collections.CollectionsBase
             // Step 2 - Search for the item.
             for (var i = 0; i < List.Count; i++)
             {
-                if (TextManager.SafeCompareStrings(this[i].Name, key, true))
+                if (StringUtil.SafeCompareStrings(this[i].Name, key, true))
                 {
                     _lastAccessedIndex = i;
                     return i;

@@ -1266,7 +1266,7 @@ namespace VisualPlus.Toolkit.Dialogs
         {
             try
             {
-                Size _textSize = TextManager.MeasureText(Text, Font, graphics);
+                Size _textSize = StringUtil.MeasureText(Text, Font, graphics);
                 Point _titleLocation = new Point(0, _textPaddingTop);
 
                 switch (_titleAlignment)

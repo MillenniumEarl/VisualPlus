@@ -4,7 +4,7 @@
 // 
 // Name: BrushManager.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2019 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------

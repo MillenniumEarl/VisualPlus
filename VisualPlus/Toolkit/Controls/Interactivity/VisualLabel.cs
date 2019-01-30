@@ -415,7 +415,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
 
             if (_reflection && (_orientation == Orientation.Vertical))
             {
-                textBoxRectangle = new Rectangle(TextManager.MeasureText(Text, Font, graphics).Height, 0, ClientRectangle.Width, ClientRectangle.Height);
+                textBoxRectangle = new Rectangle(StringUtil.MeasureText(Text, Font, graphics).Height, 0, ClientRectangle.Width, ClientRectangle.Height);
             }
             else
             {

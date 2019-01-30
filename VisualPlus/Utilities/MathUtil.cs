@@ -129,6 +129,24 @@ namespace VisualPlus.Utilities
             return true;
         }
 
+        /// <summary>
+        ///     Determine if two numbers are close in value
+        /// </summary>
+        /// <param name="left">First number</param>
+        /// <param name="right">Second number</param>
+        /// <returns>True iff the first number is close in value to the second</returns>
+        public static bool AreClose(double left, double right)
+        {
+            if (left == right)
+            {
+                return true;
+            }
+
+            double a = (Math.Abs(left) + Math.Abs(right) + 10.0) * 2.2204460492503131E-16;
+            double b = left - right;
+            return (-a < b) && (a > b);
+        }
+
         /// <summary>Clamps arbitrary IComparable value to range [min, max].</summary>
         /// <typeparam name="T">Type of value or object being clamped</typeparam>
         /// <param name="value">Number to clamp</param>
@@ -256,6 +274,24 @@ namespace VisualPlus.Utilities
         public static float Interp(float value, float min, float max)
         {
             return min + (value * (max - min));
+        }
+
+        /// <summary>Determine if one number is greater than another.</summary>
+        /// <param name="left">First number</param>
+        /// <param name="right">Second number</param>
+        /// <returns>True if the first number is greater than the second, false otherwise</returns>
+        public static bool IsGreaterThan(double left, double right)
+        {
+            return (left > right) && !AreClose(left, right);
+        }
+
+        /// <summary>Determine if one number is less than or close to another.</summary>
+        /// <param name="left">First number</param>
+        /// <param name="right">Second number</param>
+        /// <returns>True if the first number is less than or close to the second, false otherwise</returns>
+        public static bool IsLessThanOrClose(double left, double right)
+        {
+            return (left < right) || AreClose(left, right);
         }
 
         /// <summary>Return maximum of two values.</summary>

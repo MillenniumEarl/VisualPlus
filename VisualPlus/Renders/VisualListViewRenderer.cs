@@ -144,7 +144,7 @@ namespace VisualPlus.Renders
             // int _interiorHeight = rectangle.Height - (cellPaddingSize * 2);
 
             // Convert property editor friendly alignment to an alignment we can use for strings
-            StringFormat _stringFormat = new StringFormat { Alignment = TextManager.ConvertContentAlignmentToStringAlignment(alignment, Orientation.Horizontal), LineAlignment = TextManager.ConvertContentAlignmentToStringAlignment(alignment, Orientation.Vertical) };
+            StringFormat _stringFormat = new StringFormat { Alignment = StringUtil.ConvertContentAlignmentToStringAlignment(alignment, Orientation.Horizontal), LineAlignment = StringUtil.ConvertContentAlignmentToStringAlignment(alignment, Orientation.Vertical) };
             SizeF _measuredSize;
             if (listView.HeaderWordWrap)
             {
@@ -160,7 +160,7 @@ namespace VisualPlus.Renders
                 if (_measuredSize.Width > _interiorWidth)
                 {
                     // Don't truncate if we are doing word wrap
-                    cellText = TextManager.TruncateString(cellText, font, _interiorWidth, graphics);
+                    cellText = StringUtil.TruncateString(cellText, font, _interiorWidth, graphics);
                 }
             }
 

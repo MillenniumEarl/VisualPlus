@@ -511,7 +511,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
         {
             string _value = _textVisible ? Text : Value.ToString(string.Empty);
 
-            Size _textSize = TextManager.MeasureText(_textVisible ? Text : Value.ToString("0"), Font, graphics);
+            Size _textSize = StringUtil.MeasureText(_textVisible ? Text : Value.ToString("0"), Font, graphics);
             Point _textPoint = new Point((Width / 2) - (_textSize.Width / 2), (Height / 2) - (_textSize.Height / 2));
             StringFormat _stringFormat = new StringFormat(RightToLeft == RightToLeft.Yes ? StringFormatFlags.DirectionRightToLeft : 0) { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Near };
 

@@ -570,7 +570,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
 
             StringFormat _tabStringFormat = new StringFormat { Alignment = tabPage.TextAlignment, LineAlignment = tabPage.TextLineAlignment };
 
-            Size _textSize = TextManager.MeasureText(tabPage.Text, tabPage.Font, graphics);
+            Size _textSize = StringUtil.MeasureText(tabPage.Text, tabPage.Font, graphics);
             Color _foreColor = selected ? tabPage.TextSelected : tabPage.ForeColor;
 
             switch (tabPage.TextImageRelation)

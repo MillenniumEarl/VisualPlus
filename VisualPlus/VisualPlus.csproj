@@ -164,7 +164,7 @@
     <Compile Include="Structure\MONITORINFO.cs" />
     <Compile Include="Utilities\RelationManager.cs" />
     <Compile Include="Utilities\ResourcesManager.cs" />
-    <Compile Include="Utilities\TextManager.cs" />
+    <Compile Include="Utilities\StringUtil.cs" />
     <Compile Include="Utilities\TickManager.cs" />
     <Compile Include="Constants\ListViewConstants.cs" />
     <Compile Include="Utilities\XMLManager.cs" />

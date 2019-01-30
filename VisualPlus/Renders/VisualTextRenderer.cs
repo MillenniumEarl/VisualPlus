@@ -145,7 +145,7 @@ namespace VisualPlus.Renders
         /// <param name="offset">The location offset.</param>
         public static void RenderTextCentered(Graphics graphics, Rectangle clientRectangle, string text, Font font, Color color, Point offset = new Point())
         {
-            Size _stringSize = TextManager.MeasureText(text, font, graphics);
+            Size _stringSize = StringUtil.MeasureText(text, font, graphics);
             Point _location = new Point(((clientRectangle.Width / 2) - (_stringSize.Width / 2)) + offset.X, ((clientRectangle.Height / 2) - (_stringSize.Height / 2)) + offset.Y);
 
             graphics.DrawString(text, font, new SolidBrush(color), _location);
@@ -224,17 +224,17 @@ namespace VisualPlus.Renders
             {
                 case Orientation.Horizontal:
                     {
-                        imageGraphics.TranslateTransform(0, TextManager.MeasureText(text, font, graphics).Height);
+                        imageGraphics.TranslateTransform(0, StringUtil.MeasureText(text, font, graphics).Height);
                         imageGraphics.ScaleTransform(1, -1);
 
-                        reflectionLocation = new Point(0, offset.Y - (TextManager.MeasureText(text, font, graphics).Height / 2) - spacing);
+                        reflectionLocation = new Point(0, offset.Y - (StringUtil.MeasureText(text, font, graphics).Height / 2) - spacing);
                         break;
                     }
 
                 case Orientation.Vertical:
                     {
                         imageGraphics.ScaleTransform(-1, 1);
-                        reflectionLocation = new Point((offset.X - (TextManager.MeasureText(text, font, graphics).Width / 2)) + spacing, 0);
+                        reflectionLocation = new Point((offset.X - (StringUtil.MeasureText(text, font, graphics).Width / 2)) + spacing, 0);
                         break;
                     }
 

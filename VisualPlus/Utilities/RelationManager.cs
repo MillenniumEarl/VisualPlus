@@ -4,7 +4,7 @@
 // 
 // Name: RelationManager.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2019 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ namespace VisualPlus.Utilities
         {
             Point imageLocation;
             Point textLocation;
-            Size textSize = TextManager.MeasureText(text, font, graphics);
+            Size textSize = StringUtil.MeasureText(text, font, graphics);
 
             switch (textImageRelation)
             {

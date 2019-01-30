@@ -112,24 +112,27 @@ namespace VisualPlus.Toolkit.VisualBase
         #region Methods
 
         /// <summary>Occurs when the clipboard copy event fires.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnClipboardCopy(ClipboardEventArgs e)
+        protected virtual void OnClipboardCopy(object sender, ClipboardEventArgs e)
         {
-            ClipboardCopy?.Invoke(this, e);
+            ClipboardCopy?.Invoke(sender, e);
         }
 
         /// <summary>Occurs when the clipboard cut event fires.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnClipboardCut(ClipboardEventArgs e)
+        protected virtual void OnClipboardCut(object sender, ClipboardEventArgs e)
         {
-            ClipboardCut?.Invoke(this, e);
+            ClipboardCut?.Invoke(sender, e);
         }
 
         /// <summary>Occurs when the clipboard paste event fires.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnClipboardPaste(ClipboardEventArgs e)
+        protected virtual void OnClipboardPaste(object sender, ClipboardEventArgs e)
         {
-            ClipboardPaste?.Invoke(this, e);
+            ClipboardPaste?.Invoke(sender, e);
         }
 
         protected override void OnKeyPress(KeyPressEventArgs e)
@@ -161,15 +164,15 @@ namespace VisualPlus.Toolkit.VisualBase
         {
             if (m.Msg == ClipboardConstants.WM_CUT)
             {
-                OnClipboardCut(new ClipboardEventArgs(Clipboard.GetText()));
+                OnClipboardCut(this, new ClipboardEventArgs(Clipboard.GetText()));
             }
             else if (m.Msg == ClipboardConstants.WM_COPY)
             {
-                OnClipboardCopy(new ClipboardEventArgs(Clipboard.GetText()));
+                OnClipboardCopy(this, new ClipboardEventArgs(Clipboard.GetText()));
             }
             else if (m.Msg == ClipboardConstants.WM_PASTE)
             {
-                OnClipboardPaste(new ClipboardEventArgs(Clipboard.GetText()));
+                OnClipboardPaste(this, new ClipboardEventArgs(Clipboard.GetText()));
             }
 
             base.WndProc(ref m);

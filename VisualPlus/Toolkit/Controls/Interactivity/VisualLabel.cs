@@ -320,7 +320,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                 // TODO: Improve handling of value rounding.
                 if (true)
                 {
-                    shadowOpacity = MathManager.RoundToNearestValue(range.Value, range.Minimum, range.Maximum);
+                    shadowOpacity = MathUtil.RoundToNearestValue(range.Value, range.Minimum, range.Maximum);
                 }
                 else
                 {

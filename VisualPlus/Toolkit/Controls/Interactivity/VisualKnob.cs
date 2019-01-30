@@ -968,8 +968,8 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             float tx;
             float ty;
 
-            float incr = MathManager.DegreeToRadians((_endAngle - _startAngle) / ((_scaleDivisions - 1) * (_scaleSubDivisions + 1)));
-            float currentAngle = MathManager.DegreeToRadians(_startAngle);
+            float incr = MathUtil.DegreeToRadians((_endAngle - _startAngle) / ((_scaleDivisions - 1) * (_scaleSubDivisions + 1)));
+            float currentAngle = MathUtil.DegreeToRadians(_startAngle);
 
             float radius = _knobRectangle.Width / 2;
             float rulerValue = _minimum;
@@ -1096,8 +1096,8 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             float w = KnobTopSize.Width;
 
             // TODO: Adjust
-            float incr = MathManager.DegreeToRadians((_startAngle - _endAngle) / ((_buttonDivisions - 1) * (_scaleSubDivisions + 1)));
-            float currentAngle = MathManager.DegreeToRadians(0);
+            float incr = MathUtil.DegreeToRadians((_startAngle - _endAngle) / ((_buttonDivisions - 1) * (_scaleSubDivisions + 1)));
+            float currentAngle = MathUtil.DegreeToRadians(0);
 
             float radius = KnobTickSize.Width / 2;
 
@@ -1208,7 +1208,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             float radius = _knobRectangle.Width / 2;
 
             float degree = (_deltaAngle * Value) / (_maximum - _minimum);
-            degree = MathManager.DegreeToRadians(degree + _startAngle);
+            degree = MathUtil.DegreeToRadians(degree + _startAngle);
 
             Point Pos = new Point(0, 0);
 
@@ -1233,7 +1233,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             float radius = _knobRectangle.Width / 2;
 
             float degree = (_deltaAngle * Value) / (_maximum - _minimum);
-            degree = MathManager.DegreeToRadians(degree + _startAngle);
+            degree = MathUtil.DegreeToRadians(degree + _startAngle);
 
             Point Pos = new Point(0, 0) { X = (int)(cx + ((radius - (KnobDistance * _drawRatio)) * Math.Cos(degree))), Y = (int)(cy + ((radius - (KnobDistance * _drawRatio)) * Math.Sin(degree))) };
 

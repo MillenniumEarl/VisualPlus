@@ -257,8 +257,8 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
             Pen _penProgress = new Pen(_progress, _thickness);
 
             _graphics.DrawArc(_penBackground, _rectangle, 180F, 180F);
-            _graphics.DrawArc(_penProgress, _rectangle, 180F, MathManager.GetHalfRadianAngle(Value));
-
+            _graphics.DrawArc(_penProgress, _rectangle, 180F, MathUtil.GetHalfRadianAngle(Value));
+            
             _labelProgress.Text = Value + @"%";
         }
 

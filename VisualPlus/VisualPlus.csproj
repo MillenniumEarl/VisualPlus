@@ -383,7 +383,7 @@
     <Compile Include="Extensibility\Extensions.cs" />
     <Compile Include="Models\Gradient.cs" />
     <Compile Include="Utilities\VFXManager.cs" />
-    <Compile Include="Utilities\MathManager.cs" />
+    <Compile Include="Utilities\MathUtil.cs" />
     <Compile Include="Enumerators\Themes.cs" />
     <Compile Include="Models\VisualBitmap.cs" />
     <Compile Include="Models\Watermark.cs" />

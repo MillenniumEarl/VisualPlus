@@ -204,7 +204,7 @@ namespace VisualPlus.Models
                 // TODO: Improve handling of value rounding.
                 if (false)
                 {
-                    _rounding = MathManager.RoundToNearestValue(range.Value, range.Minimum, range.Maximum);
+                    _rounding = MathUtil.RoundToNearestValue(range.Value, range.Minimum, range.Maximum);
                 }
                 else
                 {
@@ -237,7 +237,7 @@ namespace VisualPlus.Models
                 // TODO: Improve handling of value rounding.
                 if (false)
                 {
-                    _thickness = MathManager.RoundToNearestValue(range.Value, range.Minimum, range.Maximum);
+                    _thickness = MathUtil.RoundToNearestValue(range.Value, range.Minimum, range.Maximum);
                 }
                 else
                 {

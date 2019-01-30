@@ -45,9 +45,9 @@ using System.Linq;
 
 namespace VisualPlus.Utilities
 {
-    /// <summary>Represents the <see cref="MathManager" /> class.</summary>
-    /// <remarks>Assists with managing mathematical equations.</remarks>
-    public sealed class MathManager
+    /// <summary>Represents the <see cref="MathUtil" /> class.</summary>
+    /// <remarks>Assists with calculating mathematical equations.</remarks>
+    public sealed class MathUtil
     {
         #region Public Methods and Operators
 

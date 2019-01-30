@@ -333,7 +333,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
                 }
 
                 _mouseState = value;
-                OnMouseStateChanged(new MouseStateEventArgs(_mouseState));
+                OnMouseStateChanged(this, new MouseStateEventArgs(_mouseState));
             }
         }
 
@@ -447,7 +447,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
             }
 
             Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
+            OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
         #endregion
@@ -540,11 +540,12 @@ namespace VisualPlus.Toolkit.Controls.Editors
         }
 
         /// <summary>Invokes the mouse state changed event.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnMouseStateChanged(MouseStateEventArgs e)
+        protected virtual void OnMouseStateChanged(object sender, MouseStateEventArgs e)
         {
             Invalidate();
-            MouseStateChanged?.Invoke(e);
+            MouseStateChanged?.Invoke(sender, e);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
@@ -618,10 +619,11 @@ namespace VisualPlus.Toolkit.Controls.Editors
         }
 
         /// <summary>Invokes the theme changed event.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnThemeChanged(ThemeEventArgs e)
+        protected virtual void OnThemeChanged(object sender, ThemeEventArgs e)
         {
-            ThemeChanged?.Invoke(e);
+            ThemeChanged?.Invoke(sender, e);
             Invalidate();
         }
 

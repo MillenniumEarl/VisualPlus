@@ -1049,7 +1049,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
             }
 
             Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
+            OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
         #endregion

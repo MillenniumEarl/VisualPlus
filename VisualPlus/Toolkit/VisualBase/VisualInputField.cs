@@ -60,7 +60,7 @@ namespace VisualPlus.Toolkit.VisualBase
     [Description("The Visual Input Field")]
     [Designer(typeof(VisualInputFieldDesigner))]
     [ToolboxBitmap(typeof(VisualInputField), "VisualInputField.bmp")]
-    [ToolboxItem(true)]
+    [ToolboxItem(false)]
     public class VisualInputField : TextBox
     {
         #region Fields

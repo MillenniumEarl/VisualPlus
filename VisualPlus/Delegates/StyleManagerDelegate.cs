@@ -43,5 +43,5 @@ using VisualPlus.Events;
 
 namespace VisualPlus.Delegates
 {
-    public delegate void ThemeChangedEventHandler(ThemeEventArgs e);
+    public delegate void ThemeChangedEventHandler(object source, ThemeEventArgs e);
 }

@@ -386,7 +386,7 @@ namespace VisualPlus.Toolkit.Components
         public void ReadTheme(string path)
         {
             _theme = new Theme(path);
-            OnThemeChanged(new ThemeEventArgs(_theme));
+            OnThemeChanged(this, new ThemeEventArgs(_theme));
         }
 
         /// <summary>Saves the theme to a file path.</summary>
@@ -437,7 +437,7 @@ namespace VisualPlus.Toolkit.Components
                 }
             }
 
-            OnThemeChanged(new ThemeEventArgs(_theme));
+            OnThemeChanged(this, new ThemeEventArgs(_theme));
         }
 
         /// <summary>Update the components theme.</summary>
@@ -501,10 +501,11 @@ namespace VisualPlus.Toolkit.Components
         #region Methods
 
         /// <summary>The theme changed event.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnThemeChanged(ThemeEventArgs e)
+        protected virtual void OnThemeChanged(object sender, ThemeEventArgs e)
         {
-            ThemeChanged?.Invoke(e);
+            ThemeChanged?.Invoke(sender, e);
         }
 
         /// <summary>Creates the default theme file.</summary>

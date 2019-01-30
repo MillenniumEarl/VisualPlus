@@ -164,7 +164,7 @@ namespace VisualThemeBuilder.Controls
             set
             {
                 theme = value;
-                OnThemeChanged(new ThemeEventArgs(theme));
+                OnThemeChanged(this, new ThemeEventArgs(theme));
             }
         }
 
@@ -192,11 +192,12 @@ namespace VisualThemeBuilder.Controls
         }
 
         /// <summary>Occurs when the theme changed.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnThemeChanged(ThemeEventArgs e)
+        protected virtual void OnThemeChanged(object sender, ThemeEventArgs e)
         {
             ApplyTheme();
-            ThemeChanged?.Invoke(e);
+            ThemeChanged?.Invoke(sender, e);
         }
 
         /// <summary>Applies the theme to the <see cref="Component" />.</summary>

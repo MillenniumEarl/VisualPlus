@@ -650,7 +650,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
             }
 
             Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
+            OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
         /// <summary>Write to output the message with the specified settings.</summary>

@@ -870,7 +870,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
 
             Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
+            OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
         #endregion
@@ -1106,10 +1106,11 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         }
 
         /// <summary>Invokes the theme changed event.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnThemeChanged(ThemeEventArgs e)
+        protected virtual void OnThemeChanged(object sender, ThemeEventArgs e)
         {
-            ThemeChanged?.Invoke(e);
+            ThemeChanged?.Invoke(sender, e);
             Invalidate();
         }
 

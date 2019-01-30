@@ -108,7 +108,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
 
             Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
+            OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
         #endregion

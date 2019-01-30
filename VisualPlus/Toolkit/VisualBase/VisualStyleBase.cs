@@ -128,7 +128,7 @@ namespace VisualPlus.Toolkit.VisualBase
                 }
 
                 _mouseState = value;
-                OnMouseStateChanged(new MouseStateEventArgs(_mouseState));
+                OnMouseStateChanged(this, new MouseStateEventArgs(_mouseState));
             }
         }
 
@@ -154,7 +154,7 @@ namespace VisualPlus.Toolkit.VisualBase
                 }
 
                 _textStyle = value;
-                OnTextStyleChanged(new EventArgs());
+                OnTextStyleChanged(this, new EventArgs());
             }
         }
 
@@ -194,30 +194,33 @@ namespace VisualPlus.Toolkit.VisualBase
         #region Methods
 
         /// <summary>Invokes the mouse state changed event.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
         /// <exception cref="Exception">A delegate callback throws an exception.</exception>
-        protected virtual void OnMouseStateChanged(MouseStateEventArgs e)
+        protected virtual void OnMouseStateChanged(object sender, MouseStateEventArgs e)
         {
             Invalidate();
-            MouseStateChanged?.Invoke(e);
+            MouseStateChanged?.Invoke(sender, e);
         }
 
         /// <summary>Invokes the text style changed event.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
         /// <exception cref="Exception">A delegate callback throws an exception.</exception>
-        protected virtual void OnTextStyleChanged(EventArgs e)
+        protected virtual void OnTextStyleChanged(object sender, EventArgs e)
         {
             Invalidate();
-            TextStyleChanged?.Invoke(this, e);
+            TextStyleChanged?.Invoke(sender, e);
         }
 
         /// <summary>Invokes the theme changed event.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
         /// <exception cref="Exception">A delegate callback throws an exception.</exception>
-        protected virtual void OnThemeChanged(ThemeEventArgs e)
+        protected virtual void OnThemeChanged(object sender, ThemeEventArgs e)
         {
             Invalidate();
-            ThemeChanged?.Invoke(e);
+            ThemeChanged?.Invoke(sender, e);
         }
 
         /// <summary>Initializes a new instance of the <see cref="VisualStyleBase" /> class.</summary>

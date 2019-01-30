@@ -50,7 +50,7 @@ namespace VisualPlus.Delegates
 
     public delegate void ForeColorDisabledChangedEventHandler(ColorEventArgs e);
 
-    public delegate void MouseStateChangedEventHandler(MouseStateEventArgs e);
+    public delegate void MouseStateChangedEventHandler(object source, MouseStateEventArgs e);
 
     public delegate void TextRenderingChangedEventHandler(TextRenderingEventArgs e);
 

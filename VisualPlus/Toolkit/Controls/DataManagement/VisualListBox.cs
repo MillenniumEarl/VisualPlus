@@ -822,7 +822,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             }
 
             Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
+            OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
         #endregion

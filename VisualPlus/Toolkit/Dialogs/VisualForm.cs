@@ -895,7 +895,7 @@ namespace VisualPlus.Toolkit.Dialogs
                 ConsoleEx.WriteDebug(e);
             }
 
-            OnThemeChanged(new ThemeEventArgs(theme));
+            OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
         #endregion
@@ -1100,11 +1100,12 @@ namespace VisualPlus.Toolkit.Dialogs
         }
 
         /// <summary>Invokes the theme changed event.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnThemeChanged(ThemeEventArgs e)
+        protected virtual void OnThemeChanged(object sender, ThemeEventArgs e)
         {
             Invalidate();
-            ThemeChanged?.Invoke(e);
+            ThemeChanged?.Invoke(sender, e);
         }
 
         protected override void WndProc(ref Message m)

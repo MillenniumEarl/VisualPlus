@@ -280,7 +280,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
             }
 
             Invalidate();
-            OnThemeChanged(new ThemeEventArgs(theme));
+            OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
         #endregion

@@ -2,9 +2,9 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: ScrollInfo.cs
+// Name: SCROLLINFO.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2018 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -35,19 +35,67 @@
 
 #endregion
 
+#region Namespace
+
+using System;
+using System.Runtime.InteropServices;
+
+#endregion
+
 namespace VisualPlus.Structure
 {
-    public struct ScrollInfo
+    /// <summary>The structure contains information about the scrollbar.</summary>
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SCROLLINFO
     {
         #region Fields
 
+        /// <summary>Specifies the size, in bytes, of this structure. The caller must set this to sizeof(SCROLLINFO).</summary>
         public int cbSize;
+
+        /// <summary>Specifies the scroll bar parameters to set or retrieve.</summary>
         public int fMask;
+
+        /// <summary>Specifies the maximum scrolling position.</summary>
         public int nMax;
+
+        /// <summary>Specifies the minimum scrolling position.</summary>
         public int nMin;
+
+        /// <summary>
+        ///     Specifies the page size, in device units. A scroll bar uses this value to determine the appropriate size of
+        ///     the proportional scroll box.
+        /// </summary>
         public int nPage;
+
+        /// <summary>Specifies the position of the scroll box.</summary>
         public int nPos;
+
+        /// <summary>Specifies the immediate position of a scroll box that the user is dragging.</summary>
         public int nTrackPos;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>Initializes a new instance of the <see cref="SCROLLINFO" /> struct.</summary>
+        /// <param name="mask">The mask.</param>
+        /// <param name="min">The minimum.</param>
+        /// <param name="max">The maximum.</param>
+        /// <param name="page">The page.</param>
+        /// <param name="pos">The position.</param>
+        /// <param name="trackPosition">The track position.</param>
+        public SCROLLINFO(int mask, int min, int max, int page, int pos, int trackPosition)
+        {
+            fMask = mask;
+            nMin = min;
+            nMax = max;
+            nPage = page;
+            nPos = pos;
+            nTrackPos = trackPosition;
+            cbSize = Marshal.SizeOf(typeof(SCROLLINFO));
+        }
 
         #endregion
     }

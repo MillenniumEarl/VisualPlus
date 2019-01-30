@@ -206,7 +206,7 @@ namespace VisualPlus.Native
         /// </param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
         [DllImport(DllName, CharSet = CharSet.Auto)]
-        public static extern bool GetMonitorInfo(HandleRef hMonitor, [In] [Out] MonitorManager lpmi);
+        public static extern bool GetMonitorInfo(HandleRef hMonitor, [In] [Out] MONITORINFO lpmi);
 
         /// <summary>
         ///     The GetScrollInfo function retrieves the parameters of a scroll bar, including the minimum and maximum
@@ -224,7 +224,7 @@ namespace VisualPlus.Native
         /// </param>
         /// <returns>If the function retrieved any values, the return value is nonzero.</returns>
         [DllImport(DllName, SetLastError = true)]
-        public static extern int GetScrollInfo(IntPtr hwnd, int nBar, ref ScrollInfo lpsi);
+        public static extern int GetScrollInfo(IntPtr hwnd, int nBar, ref SCROLLINFO lpsi);
 
         /// <summary>
         ///     Enables the application to access the window menu (also known as the system menu or the control menu) for
@@ -309,7 +309,7 @@ namespace VisualPlus.Native
         /// <param name="lpmi">A pointer to a MENUITEMINFO structure that contains information about the new menu item.</param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
         [DllImport(DllName, CharSet = CharSet.Auto)]
-        public static extern bool InsertMenuItem(IntPtr hmenu, uint item, bool fByPosition, [In] ref MenuItemInfo lpmi);
+        public static extern bool InsertMenuItem(IntPtr hmenu, uint item, bool fByPosition, [In] ref MENUITEMINFO lpmi);
 
         /// <summary>
         ///     The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of

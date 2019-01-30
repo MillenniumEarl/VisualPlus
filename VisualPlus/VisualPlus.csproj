@@ -121,6 +121,8 @@
     <Compile Include="Native\Gdi32.cs" />
     <Compile Include="Native\Shlwapi.cs" />
     <Compile Include="Native\Uxtheme.cs" />
+    <Compile Include="Structure\MENUITEMINFO.cs" />
+    <Compile Include="Structure\SCROLLINFO.cs" />
     <Compile Include="Utilities\Debugging\DebuggerDisplayFormat.cs" />
     <Compile Include="Utilities\Debugging\VisualDebuggerDisplay.cs" />
     <Compile Include="Utilities\Debugging\Guard.cs" />
@@ -159,8 +161,7 @@
     <Compile Include="Utilities\FontManager.cs" />
     <Compile Include="Utilities\FormManager.cs" />
     <Compile Include="Utilities\ImageManager.cs" />
-    <Compile Include="Structure\MenuItemInfo.cs" />
-    <Compile Include="Structure\MonitorManager.cs" />
+    <Compile Include="Structure\MONITORINFO.cs" />
     <Compile Include="Utilities\RelationManager.cs" />
     <Compile Include="Utilities\ResourcesManager.cs" />
     <Compile Include="Utilities\TextManager.cs" />
@@ -284,7 +285,6 @@
     <Compile Include="Toolkit\VisualBase\ManagedVScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Structure\ScrollInfo.cs" />
     <Compile Include="Toolkit\Controls\DataVisualization\VisualGauge.cs" />
     <Compile Include="Toolkit\Controls\DataVisualization\VisualProgressStepper.cs" />
     <Compile Include="Toolkit\Controls\Interactivity\VisualRangeBar.cs" />

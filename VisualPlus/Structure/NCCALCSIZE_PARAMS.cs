@@ -4,7 +4,7 @@
 // 
 // Name: NCCALCSIZE_PARAMS.cs
 // 
-// Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
+// Copyright (c) 2019 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
 // 
 // -----------------------------------------------------------------------------------------------------------
@@ -37,22 +37,27 @@
 
 #region Namespace
 
+using System;
 using System.Runtime.InteropServices;
 
 #endregion
 
 namespace VisualPlus.Structure
 {
-    /// <summary>
-    ///     The NCCALCSIZE_PARAMS structure contains information that an application can use while processing the
-    ///     WM_NCCALCSIZE message to calculate the size, position, and valid contents of the client area of a window.
-    /// </summary>
+    /// <summary>The structure contains information about the scrollbar.</summary>
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
     public struct NCCALCSIZE_PARAMS
     {
         #region Fields
 
+        /// <summary>
+        ///     A pointer to a WINDOWPOS structure that contains the size and position values specified in the operation that
+        ///     moved or resized the window.
+        /// </summary>
         public WINDOWPOS lppos;
 
+        /// <summary>An array of rectangles.</summary>
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
         public RECT[] rgrc;
 

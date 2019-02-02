@@ -41,6 +41,7 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Text;
 
 using VisualPlus.Structure;
 
@@ -64,6 +65,16 @@ namespace VisualPlus.Native
         #endregion
 
         #region Public Methods and Operators
+
+        /// <summary>The ClientToScreen function converts the client-area coordinates of a specified point to screen coordinates.</summary>
+        /// <param name="hWnd">A handle to the window whose client area is used for the conversion.</param>
+        /// <param name="lpPoint">
+        ///     A pointer to a <see cref="Point" /> structure that contains the client coordinates to be
+        ///     converted. The new screen coordinates are copied into this structure if the function succeeds.
+        /// </param>
+        /// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.</returns>
+        [DllImport(DllName, SetLastError = true)]
+        public static extern bool ClientToScreen(IntPtr hWnd, ref Point lpPoint);
 
         /// <summary>
         ///     The CreateWindowEx function creates an overlapped, pop-up, or child window with an extended window style;
@@ -171,6 +182,52 @@ namespace VisualPlus.Native
         [DllImport(DllName)]
         public static extern bool DrawMenuBar(IntPtr hWnd);
 
+        /// <summary>
+        ///     This function retrieves the handle to the top-level window whose class name and window name match the
+        ///     specified strings. This function does not search child windows.
+        /// </summary>
+        /// <param name="lpClassName">
+        ///     Long pointer to a null-terminated string that specifies the class name or is an atom that identifies the class-name
+        ///     string. If this parameter is an atom, it must be a global atom created by a previous call to the GlobalAddAtom
+        ///     function. The atom, a 16-bit value, must be placed in the low-order word of lpClassName; the high-order word must
+        ///     be zero.
+        /// </param>
+        /// <param name="lpWindowName">
+        ///     Long pointer to a null-terminated string that specifies the window name (the window's
+        ///     title). If this parameter is NULL, all window names match.
+        /// </param>
+        /// <returns>
+        ///     A handle to the window that has the specified class name and window name indicates success. NULL indicates
+        ///     failure. To get extended error information, call GetLastError.
+        /// </returns>
+        [DllImport(DllName, CharSet = CharSet.Auto)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        /// <summary>Retrieves the name of the class to which the specified window belongs.</summary>
+        /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
+        /// <param name="lpClassName">The class name string.</param>
+        /// <param name="nMaxCount">The length.</param>
+        /// <returns>
+        ///     If the function succeeds, the return value is the number of characters copied to the buffer, not including the
+        ///     terminating null character.
+        /// </returns>
+        [DllImport(DllName, SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
+        /// <summary>
+        ///     Retrieves the coordinates of a window's client area. The client coordinates specify the upper-left and
+        ///     lower-right corners of the client area. Because client coordinates are relative to the upper-left corner of a
+        ///     window's client area, the coordinates of the upper-left corner are (0,0).
+        /// </summary>
+        /// <param name="hWnd">A handle to the window whose client coordinates are to be retrieved.</param>
+        /// <param name="lpRect">
+        ///     A pointer to a RECT structure that receives the client coordinates. The left and top members are
+        ///     zero. The right and bottom members contain the width and height of the window.
+        /// </param>
+        /// <returns>If the function succeeds, the return value is nonzero.</returns>
+        [DllImport(DllName, SetLastError = true)]
+        public static extern bool GetClientRect(IntPtr hWnd, ref RECT lpRect);
+
         /// <summary>Retrieves the position of the mouse cursor, in screen coordinates.</summary>
         /// <param name="lpPoint">A pointer to a POINT structure that receives the screen coordinates of the cursor.</param>
         /// <returns>Returns nonzero if successful or zero otherwise. To get extended error information, call GetLastError.</returns>
@@ -261,6 +318,24 @@ namespace VisualPlus.Native
         public static extern IntPtr GetWindowDC(IntPtr hWnd);
 
         /// <summary>
+        ///     This function retrieves information about the specified window. GetWindowLong also retrieves the 32-bit (long)
+        ///     value at the specified offset into the extra window memory of a window.
+        /// </summary>
+        /// <param name="hWnd">Handle to the window and, indirectly, the class to which the window belongs.</param>
+        /// <param name="nIndex">
+        ///     Specifies the zero-based offset to the value to be retrieved. Valid values are in the range zero
+        ///     through the number of bytes of extra window memory, minus four; for example, if you specified 12 or more bytes of
+        ///     extra memory, a value of 8 would be an index to the third 32-bit integer. To retrieve any other value, specify one
+        ///     of the following values.
+        /// </param>
+        /// <returns>
+        ///     The requested 32-bit value indicates success. Zero indicates failure. To get extended error information, call
+        ///     GetLastError.
+        /// </returns>
+        [DllImport(DllName, EntryPoint = "GetWindowLong")]
+        public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        /// <summary>
         ///     Retrieves the dimensions of the bounding rectangle of the specified window. The dimensions are given in screen
         ///     coordinates that are relative to the upper-left corner of the screen.
         /// </summary>
@@ -273,6 +348,25 @@ namespace VisualPlus.Native
         [DllImport(DllName, ExactSpelling = true, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        /// <summary>
+        ///     This function copies the text of the specified window's title bar — if it has one — into a buffer. If the
+        ///     specified window is a control, the text of the control is copied. A remote application interface (RAPI) version of
+        ///     this function exists, and it is called CeGetWindowText (RAPI).
+        /// </summary>
+        /// <param name="hWnd">[in] Handle to the window or control containing the text.</param>
+        /// <param name="lpString">[out] Long pointer to the buffer that will receive the text.</param>
+        /// <param name="nMaxCount">
+        ///     [in] Specifies the maximum number of characters to copy to the buffer, including the NULL
+        ///     character. If the text exceeds this limit, it is truncated.
+        /// </param>
+        /// <returns>
+        ///     The length, in characters, of the copied string, not including the terminating null character, indicates
+        ///     success. Zero indicates that the window has no title bar or text, if the title bar is empty, or if the window or
+        ///     control handle is invalid. To get extended error information, call GetLastError.
+        /// </returns>
+        [DllImport(DllName, CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern int GetWindowText(IntPtr hWnd, [Out] StringBuilder lpString, int nMaxCount);
 
         /// <summary>Inserts a new menu item into a menu, moving other items down the menu.</summary>
         /// <param name="hMenu">A handle to the menu to be changed.</param>
@@ -324,6 +418,26 @@ namespace VisualPlus.Native
         [DllImport(DllName)]
         public static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
 
+        /// <summary>Defines a system-wide hot key.</summary>
+        /// <param name="hWnd">
+        ///     A handle to the window that will receive WM_HOTKEY messages generated by the hot key. If this
+        ///     parameter is NULL, WM_HOTKEY messages are posted to the message queue of the calling thread and must be processed
+        ///     in the message loop.
+        /// </param>
+        /// <param name="id">
+        ///     The identifier of the hot key. If the hWnd parameter is NULL, then the hot key is associated with the
+        ///     current thread rather than with a particular window. If a hot key already exists with the same hWnd and id
+        ///     parameters, see Remarks for the action taken.
+        /// </param>
+        /// <param name="fsModifiers">
+        ///     The keys that must be pressed in combination with the key specified by the uVirtKey parameter
+        ///     in order to generate the WM_HOTKEY message. The fsModifiers parameter can be a combination of the following values.
+        /// </param>
+        /// <param name="vk">The virtual-key code of the hot key. See Virtual Key Codes.</param>
+        /// <returns>If the function succeeds, the return value is nonzero.</returns>
+        [DllImport(DllName, CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
+
         /// <summary>
         ///     Releases the mouse capture from a window in the current thread and restores normal mouse input processing. A
         ///     window that has captured the mouse receives all mouse input, regardless of the position of the cursor, except when
@@ -348,6 +462,21 @@ namespace VisualPlus.Native
         /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
         [DllImport(DllName, SetLastError = true, CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
+
+        /// <summary>
+        ///     Changes an attribute of the specified window. The function also sets the 32-bit (long) value at the specified
+        ///     offset into the extra window memory.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
+        /// <param name="nIndex">
+        ///     The zero-based offset to the value to be set. Valid values are in the range zero through the
+        ///     number of bytes of extra window memory, minus the size of an integer. To set any other value, specify one of the
+        ///     following values.
+        /// </param>
+        /// <param name="dwNewLong">The replacement value.</param>
+        /// <returns>If the function succeeds, the return value is the previous value of the specified 32-bit integer.</returns>
+        [DllImport(DllName)]
+        public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         /// <summary>
         ///     Changes the size, position, and Z order of a child, pop-up, or top-level window. These windows are ordered
@@ -400,6 +529,17 @@ namespace VisualPlus.Native
         /// </returns>
         [DllImport(DllName)]
         public static extern int TrackPopupMenuEx(IntPtr hmenu, uint fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
+
+        /// <summary>Frees a hot key previously registered by the calling thread.</summary>
+        /// <param name="hWnd">
+        ///     A handle to the window associated with the hot key to be freed. This parameter should be NULL if the
+        ///     hot key is not associated with a window.
+        /// </param>
+        /// <param name="id">The identifier of the hot key to be freed.</param>
+        /// <returns>If the function succeeds, the return value is nonzero.</returns>
+        [DllImport(DllName, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         /// <summary>Retrieves a handle to the window that contains the specified point.</summary>
         /// <param name="point">The point to be checked.</param>

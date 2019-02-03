@@ -52,7 +52,7 @@ namespace VisualPlus.Extensibility
         /// <summary>Converts the specified <see cref="Keys" /> codes and modifiers type to a <see cref="int" />.</summary>
         /// <param name="key">Specified key codes and modifiers.</param>
         /// <returns>The <see cref="int" />.</returns>
-        public static int GetKeyCode(this Keys key)
+        public static int ToKeyCode(this Keys key)
         {
             return Convert.ToInt32(key);
         }
@@ -60,7 +60,7 @@ namespace VisualPlus.Extensibility
         /// <summary>Converts the specified <see cref="int" /> key code to a <see cref="Keys" />.</summary>
         /// <param name="keyCode">The value to convert to an enumeration member.</param>
         /// <returns>The <see cref="Keys" />.</returns>
-        public static Keys ToKey(this int keyCode)
+        public static Keys ToKeys(this int keyCode)
         {
             return (Keys)Enum.ToObject(typeof(Keys), keyCode);
         }

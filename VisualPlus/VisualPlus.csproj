@@ -148,6 +148,7 @@
     <Compile Include="Utilities\DateTimeManager.cs" />
     <Compile Include="Utilities\ElementsManager.cs" />
     <Compile Include="Utilities\MouseManager.cs" />
+    <Compile Include="Utilities\ObjectUtil.cs" />
     <Compile Include="Utilities\ReflectionManager.cs" />
     <Compile Include="Renders\VisualControlBoxRenderer.cs" />
     <Compile Include="Renders\VisualElementRenderer.cs" />

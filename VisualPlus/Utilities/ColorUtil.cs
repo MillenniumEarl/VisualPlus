@@ -366,7 +366,7 @@ namespace VisualPlus.Utilities
             return _tintedColor;
         }
 
-        /// <summary>Retrieves the <see cref="KnownColor" /> names to list.</summary>
+        /// <summary>Returns the <see cref="KnownColor" /> enumerator names to <see cref="List{T}"/>.</summary>
         /// <returns>The <see cref="List{T}" />.</returns>
         public static List<string> ToKnownColorList()
         {

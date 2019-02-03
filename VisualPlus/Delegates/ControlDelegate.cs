@@ -46,7 +46,7 @@ using VisualPlus.Toolkit.Child;
 
 namespace VisualPlus.Delegates
 {
-    public delegate void ElementClickedEventHandler(EventArgs e);
+    public delegate void ElementClickedEventHandler(object source, EventArgs e);
 
     public delegate void ForeColorDisabledChangedEventHandler(ColorEventArgs e);
 

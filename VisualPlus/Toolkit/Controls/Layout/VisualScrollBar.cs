@@ -704,14 +704,14 @@ namespace VisualPlus.Toolkit.Controls.Layout
             ContextMenuStrip = _contextMenu;
         }
 
-        protected virtual void OnButtonBottomClicked(EventArgs e)
+        protected virtual void OnButtonBottomClicked(object sender, EventArgs e)
         {
-            ButtonBottomClicked?.Invoke(e);
+            ButtonBottomClicked?.Invoke(sender, e);
         }
 
-        protected virtual void OnButtonTopClicked(EventArgs e)
+        protected virtual void OnButtonTopClicked(object sender, EventArgs e)
         {
-            ButtonTopClicked?.Invoke(e);
+            ButtonTopClicked?.Invoke(sender, e);
         }
 
         protected override void OnEnabledChanged(EventArgs e)
@@ -752,7 +752,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
                     _thumbPosition = _orientation == Orientation.Vertical ? _mouseLocation.Y - _thumbRectangle.Y : _mouseLocation.X - _thumbRectangle.X;
                     _thumbState = MouseStates.Pressed;
                     Invalidate(_thumbRectangle);
-                    OnThumbClicked(EventArgs.Empty);
+                    OnThumbClicked(this, EventArgs.Empty);
                 }
                 else if (_topArrowRectangle.Contains(_mouseLocation))
                 {
@@ -760,7 +760,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
                     _buttonTopState = MouseStates.Pressed;
                     Invalidate(_topArrowRectangle);
                     ProgressThumb(true);
-                    OnButtonTopClicked(EventArgs.Empty);
+                    OnButtonTopClicked(this, EventArgs.Empty);
                 }
                 else if (_bottomArrowRectangle.Contains(_mouseLocation))
                 {
@@ -768,7 +768,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
                     _buttonBottomState = MouseStates.Pressed;
                     Invalidate(_bottomArrowRectangle);
                     ProgressThumb(true);
-                    OnButtonBottomClicked(EventArgs.Empty);
+                    OnButtonBottomClicked(this, EventArgs.Empty);
                 }
                 else
                 {
@@ -1004,9 +1004,9 @@ namespace VisualPlus.Toolkit.Controls.Layout
             ConfigureScrollBar();
         }
 
-        protected virtual void OnThumbClicked(EventArgs e)
+        protected virtual void OnThumbClicked(object sender, EventArgs e)
         {
-            ThumbClicked?.Invoke(e);
+            ThumbClicked?.Invoke(sender, e);
         }
 
         protected override bool ProcessDialogKey(Keys keyData)

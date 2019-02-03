@@ -36,7 +36,6 @@
 #region Namespace
 
 using System;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -75,7 +74,7 @@ namespace VisualPlus.Utilities
 
         /// <summary>Retrieves the window's client area using the specified window handle.</summary>
         /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
-        /// <returns>The <see cref="Rectangle" />.</returns>
+        /// <returns>The <see cref="RECT" />.</returns>
         public static RECT GetWindowRectangle(IntPtr hWnd)
         {
             RECT windowDimensions;

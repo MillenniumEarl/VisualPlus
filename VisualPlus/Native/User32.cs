@@ -226,7 +226,7 @@ namespace VisualPlus.Native
         /// </param>
         /// <returns>If the function succeeds, the return value is nonzero.</returns>
         [DllImport(DllName, SetLastError = true)]
-        public static extern bool GetClientRect(IntPtr hWnd, ref RECT lpRect);
+        public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
 
         /// <summary>Retrieves the position of the mouse cursor, in screen coordinates.</summary>
         /// <param name="lpPoint">A pointer to a POINT structure that receives the screen coordinates of the cursor.</param>

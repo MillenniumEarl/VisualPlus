@@ -78,8 +78,8 @@ namespace VisualPlus.Utilities
         /// <returns>The <see cref="Rectangle" />.</returns>
         public static RECT GetWindowRectangle(IntPtr hWnd)
         {
-            RECT windowDimensions = default(RECT);
-            User32.GetClientRect(hWnd, ref windowDimensions);
+            RECT windowDimensions;
+            User32.GetClientRect(hWnd, out windowDimensions);
             return windowDimensions;
         }
 

@@ -95,7 +95,7 @@ namespace VisualPlus.Toolkit.VisualBase
                     // Generate events
                     if (checkedChanged)
                     {
-                        OnToggleChanged(new ToggleEventArgs(Toggle));
+                        OnToggleChanged(this, new ToggleEventArgs(Toggle));
                     }
 
                     OnCheckStateChanged(EventArgs.Empty);
@@ -166,9 +166,9 @@ namespace VisualPlus.Toolkit.VisualBase
             base.OnClick(e);
         }
 
-        protected override void OnToggleChanged(ToggleEventArgs e)
+        protected override void OnToggleChanged(object sender, ToggleEventArgs e)
         {
-            base.OnToggleChanged(e);
+            base.OnToggleChanged(sender, e);
             _checkState = Checked ? CheckState.Checked : CheckState.Unchecked;
             OnCheckStateChanged(EventArgs.Empty);
             Invalidate();

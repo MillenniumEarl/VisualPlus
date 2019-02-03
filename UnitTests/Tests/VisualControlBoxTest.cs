@@ -60,28 +60,28 @@ namespace UnitTests.Tests
 
         #region Methods
 
-        private void TClose_ToggleChanged(ToggleEventArgs e)
+        private void TClose_ToggleChanged(object sender, ToggleEventArgs e)
         {
             // CloseBox = e.State;
             ControlBox.CloseButton.Visible = e.State;
         }
 
-        private void TControlBox_ToggleChanged(ToggleEventArgs e)
+        private void TControlBox_ToggleChanged(object sender, ToggleEventArgs e)
         {
             ControlBox.Visible = e.State;
         }
 
-        private void THelp_ToggleChanged(ToggleEventArgs e)
+        private void THelp_ToggleChanged(object sender, ToggleEventArgs e)
         {
             HelpButton = e.State;
         }
 
-        private void TMaximize_ToggleChanged_1(ToggleEventArgs e)
+        private void TMaximize_ToggleChanged_1(object sender, ToggleEventArgs e)
         {
             MaximizeBox = e.State;
         }
 
-        private void TMinimize_ToggleChanged(ToggleEventArgs e)
+        private void TMinimize_ToggleChanged(object sender, ToggleEventArgs e)
         {
             MinimizeBox = e.State;
         }

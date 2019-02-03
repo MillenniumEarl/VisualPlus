@@ -274,7 +274,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             {
                 Toggle = value;
                 Invalidate();
-                OnToggleChanged(new ToggleEventArgs(Toggle));
+                OnToggleChanged(this, new ToggleEventArgs(Toggle));
             }
         }
 

@@ -112,8 +112,9 @@ namespace VisualPlus.Toolkit.Dialogs
         }
 
         /// <summary>Occurs when the numeric up/down for ARGB had a value changed.</summary>
+        /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        private void NumericUpDownARGB_ValueChanged(ValueChangedEventArgs e)
+        private void NumericUpDownARGB_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             int alpha = Convert.ToInt32(nudAlpha.Value);
             int red = Convert.ToInt32(nudRed.Value);

@@ -67,9 +67,9 @@ namespace VisualPlus.Toolkit.VisualBase
             base.OnClick(e);
         }
 
-        protected override void OnToggleChanged(ToggleEventArgs e)
+        protected override void OnToggleChanged(object sender, ToggleEventArgs e)
         {
-            base.OnToggleChanged(e);
+            base.OnToggleChanged(sender, e);
             AutoUpdateOthers();
             Invalidate();
         }

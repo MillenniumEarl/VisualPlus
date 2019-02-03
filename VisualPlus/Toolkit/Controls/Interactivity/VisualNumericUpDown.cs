@@ -271,7 +271,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                 if (_value > _maximumValue)
                 {
                     _value = _maximumValue;
-                    OnValueChanged(new ValueChangedEventArgs(_value));
+                    OnValueChanged(this, new ValueChangedEventArgs(_value));
                 }
 
                 Invalidate();
@@ -296,7 +296,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                 if (_value < _minimumValue)
                 {
                     _value = MinimumValue;
-                    OnValueChanged(new ValueChangedEventArgs(_value));
+                    OnValueChanged(this, new ValueChangedEventArgs(_value));
                 }
 
                 Invalidate();
@@ -349,7 +349,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                 if ((value <= _maximumValue) & (value >= _minimumValue))
                 {
                     _value = value;
-                    OnValueChanged(new ValueChangedEventArgs(_value));
+                    OnValueChanged(this, new ValueChangedEventArgs(_value));
                 }
 
                 Invalidate();
@@ -365,7 +365,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         public void Decrement(int value)
         {
             _value -= value;
-            OnValueChanged(new ValueChangedEventArgs(_value));
+            OnValueChanged(this, new ValueChangedEventArgs(_value));
             Invalidate();
         }
 
@@ -374,7 +374,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         public void Increment(int value)
         {
             _value += value;
-            OnValueChanged(new ValueChangedEventArgs(_value));
+            OnValueChanged(this, new ValueChangedEventArgs(_value));
             Invalidate();
         }
 
@@ -426,13 +426,13 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                     if (_keyboardNum)
                     {
                         _value = long.Parse(_value + e.KeyChar.ToString());
-                        OnValueChanged(new ValueChangedEventArgs(_value));
+                        OnValueChanged(this, new ValueChangedEventArgs(_value));
                     }
 
                     if (_value > _maximumValue)
                     {
                         _value = _maximumValue;
-                        OnValueChanged(new ValueChangedEventArgs(_value));
+                        OnValueChanged(this, new ValueChangedEventArgs(_value));
                     }
                 }
                 catch (Exception)
@@ -459,7 +459,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                     }
 
                     _value = Convert.ToInt32(temporaryValue);
-                    OnValueChanged(new ValueChangedEventArgs(_value));
+                    OnValueChanged(this, new ValueChangedEventArgs(_value));
                 }
 
                 Invalidate();
@@ -486,7 +486,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                                     if (Value + 1 <= _maximumValue)
                                     {
                                         _value++;
-                                        OnValueChanged(new ValueChangedEventArgs(_value));
+                                        OnValueChanged(this, new ValueChangedEventArgs(_value));
                                     }
                                 }
                                 else if ((_yValue > Height / 2) && (_yValue < Height))
@@ -494,7 +494,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                                     if (Value - 1 >= _minimumValue)
                                     {
                                         _value--;
-                                        OnValueChanged(new ValueChangedEventArgs(_value));
+                                        OnValueChanged(this, new ValueChangedEventArgs(_value));
                                     }
                                 }
                             }
@@ -518,7 +518,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                                     if (Value + 1 <= _maximumValue)
                                     {
                                         _value++;
-                                        OnValueChanged(new ValueChangedEventArgs(_value));
+                                        OnValueChanged(this, new ValueChangedEventArgs(_value));
                                     }
                                 }
                                 else if ((_xValue > _buttonRectangle.X + (_buttonRectangle.Width / 2)) && (_xValue < Width))
@@ -526,7 +526,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                                     if (Value - 1 >= _minimumValue)
                                     {
                                         _value--;
-                                        OnValueChanged(new ValueChangedEventArgs(_value));
+                                        OnValueChanged(this, new ValueChangedEventArgs(_value));
                                     }
                                 }
                             }
@@ -593,7 +593,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                     if (Value + 1 <= _maximumValue)
                     {
                         _value++;
-                        OnValueChanged(new ValueChangedEventArgs(_value));
+                        OnValueChanged(this, new ValueChangedEventArgs(_value));
                     }
 
                     Invalidate();
@@ -603,7 +603,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                     if (Value - 1 >= _minimumValue)
                     {
                         _value--;
-                        OnValueChanged(new ValueChangedEventArgs(_value));
+                        OnValueChanged(this, new ValueChangedEventArgs(_value));
                     }
 
                     Invalidate();
@@ -682,9 +682,9 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             VisualBorderRenderer.DrawBorderStyle(e.Graphics, _border, ControlGraphicsPath, MouseState);
         }
 
-        protected virtual void OnValueChanged(ValueChangedEventArgs e)
+        protected virtual void OnValueChanged(object sender, ValueChangedEventArgs e)
         {
-            ValueChanged?.Invoke(e);
+            ValueChanged?.Invoke(sender, e);
         }
 
         /// <summary>Draws the text on the graphics.</summary>

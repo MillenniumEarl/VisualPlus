@@ -73,9 +73,12 @@ namespace VisualPlus.Toolkit.VisualBase
 
         #region Methods
 
-        protected virtual void OnToggleChanged(ToggleEventArgs e)
+        /// <summary>Occurs when the ToggleChanged event fires.</summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The event args.</param>
+        protected virtual void OnToggleChanged(object sender, ToggleEventArgs e)
         {
-            ToggleChanged?.Invoke(e);
+            ToggleChanged?.Invoke(sender, e);
         }
 
         #endregion

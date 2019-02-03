@@ -213,7 +213,7 @@ namespace VisualPlus.Toolkit.VisualBase
                     Toggle = value;
 
                     // Generate events
-                    OnToggleChanged(new ToggleEventArgs(Toggle));
+                    OnToggleChanged(this, new ToggleEventArgs(Toggle));
 
                     // Repaint
                     Invalidate();

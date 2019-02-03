@@ -56,11 +56,11 @@ namespace VisualPlus.Delegates
 
     public delegate void BackgroundChangedEventHandler(ColorEventArgs e);
 
-    public delegate void ToggleChangedEventHandler(ToggleEventArgs e);
+    public delegate void ToggleChangedEventHandler(object source, ToggleEventArgs e);
 
     public delegate void BackColorStateChangedEventHandler(ColorEventArgs e);
 
-    public delegate void ValueChangedEventHandler(ValueChangedEventArgs e);
+    public delegate void ValueChangedEventHandler(object source, ValueChangedEventArgs e);
 
     public delegate void ListViewChangedEventHandler(object source, ListViewChangedEventArgs e);
 

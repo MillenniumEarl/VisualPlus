@@ -160,7 +160,7 @@ namespace UnitTests.Tests
             lResult.Text = $@"Dialog Result: {result}";
         }
 
-        private void TImage_ToggleChanged(ToggleEventArgs e)
+        private void TImage_ToggleChanged(object sender, ToggleEventArgs e)
         {
             if (e.State)
             {

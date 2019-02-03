@@ -36,10 +36,12 @@
 #region Namespace
 
 using System;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
 using VisualPlus.Native;
+using VisualPlus.Structure;
 
 #endregion
 
@@ -69,6 +71,16 @@ namespace VisualPlus.Utilities
             {
                 return defaultName;
             }
+        }
+
+        /// <summary>Retrieves the window's client area using the specified window handle.</summary>
+        /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
+        /// <returns>The <see cref="Rectangle" />.</returns>
+        public static Rectangle GetWindowRectangle(IntPtr hWnd)
+        {
+            RECT windowDimensions = default(RECT);
+            User32.GetClientRect(hWnd, ref windowDimensions);
+            return windowDimensions;
         }
 
         #endregion

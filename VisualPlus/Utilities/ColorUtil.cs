@@ -6,32 +6,30 @@
 // 
 // Copyright (c) 2019 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
-// 
-// -----------------------------------------------------------------------------------------------------------
+//  
+// -------------------------------------------------------------------------------------------------------------
 // 
 // GNU General Public License v3.0 (GPL-3.0)
-// 
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-// EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+//  
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+//  
+// This program is free software: you can redistribute it and/or modify it under the terms of the GNU
+// General Public License as published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//  
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+// See the GNU General Public License for more details.
 // 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with this program. 
+// If not, see <http://www.gnu.org/licenses/>.
 //  
 // This file is subject to the terms and conditions defined in the file 
 // 'LICENSE.md', which should be in the root directory of the source code package.
 // 
-// -----------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
 
 #endregion
 
@@ -182,29 +180,6 @@ namespace VisualPlus.Utilities
         public static Color InsertColor(Color baseColor, Color insertColor)
         {
             return Color.FromArgb((baseColor.R + insertColor.R) / 2, (baseColor.G + insertColor.G) / 2, (baseColor.B + insertColor.B) / 2);
-        }
-
-        /// <summary>Retrieves the colors to list.</summary>
-        /// <returns>The <see cref="List{T}" />.</returns>
-        public static List<string> LoadColorNames()
-        {
-            // Variable
-            var list = new List<string>();
-
-            // Load color properties
-            var properties = typeof(Color).GetProperties();
-
-            // Loop thru each property info
-            foreach (PropertyInfo propertyInfo in properties)
-            {
-                // Check if color property equals
-                if (propertyInfo.PropertyType.FullName == "System.Drawing.Color")
-                {
-                    list.Add(propertyInfo.Name);
-                }
-            }
-
-            return list;
         }
 
         /// <summary>Creates an opacity mix color.</summary>
@@ -389,6 +364,29 @@ namespace VisualPlus.Utilities
             }
 
             return _tintedColor;
+        }
+
+        /// <summary>Retrieves the <see cref="KnownColor" /> names to list.</summary>
+        /// <returns>The <see cref="List{T}" />.</returns>
+        public static List<string> ToKnownColorList()
+        {
+            // Variable
+            var list = new List<string>();
+
+            // Load color properties
+            var properties = typeof(Color).GetProperties();
+
+            // Loop thru each property info
+            foreach (PropertyInfo propertyInfo in properties)
+            {
+                // Check if color property equals
+                if (propertyInfo.PropertyType.FullName == "System.Drawing.Color")
+                {
+                    list.Add(propertyInfo.Name);
+                }
+            }
+
+            return list;
         }
 
         /// <summary>Retrieves the transition color between two other colors.</summary>

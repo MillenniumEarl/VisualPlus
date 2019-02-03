@@ -46,7 +46,7 @@ using VisualPlus.Utilities.Debugging;
 
 namespace VisualPlus.Extensibility
 {
-    /// <summary>The collection of the <see cref="ColorExtension" /> class.</summary>
+    /// <summary>Represents the <see cref="ColorExtension" /> class.</summary>
     public static class ColorExtension
     {
         #region Public Methods and Operators

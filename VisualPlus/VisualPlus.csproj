@@ -379,7 +379,7 @@
       <SubType>Component</SubType>
     </EmbeddedResource>
     <Compile Include="Utilities\ExceptionInvoker.cs" />
-    <Compile Include="Utilities\ColorManager.cs" />
+    <Compile Include="Utilities\ColorUtil.cs" />
     <Compile Include="Extensibility\Extensions.cs" />
     <Compile Include="Models\Gradient.cs" />
     <Compile Include="Utilities\VFXManager.cs" />

@@ -2,7 +2,7 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// Name: ColorManager.cs
+// Name: ColorUtil.cs
 // 
 // Copyright (c) 2019 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -38,10 +38,11 @@
 #region Namespace
 
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
+using System.Reflection;
 
 using VisualPlus.Enumerators;
 using VisualPlus.Native;
@@ -50,8 +51,9 @@ using VisualPlus.Native;
 
 namespace VisualPlus.Utilities
 {
-    [Description("The color manager.")]
-    public sealed class ColorManager
+    /// <summary>Represents the <see cref="ColorUtil" /> class.</summary>
+    /// <remarks>Assists with the management of <see cref="Color" /> struct.</remarks>
+    public sealed class ColorUtil
     {
         #region Public Methods and Operators
 
@@ -127,9 +129,9 @@ namespace VisualPlus.Utilities
         {
             // Correct Red element
             int r = red;
-            if (r > 255)
+            if (r > byte.MaxValue)
             {
-                r = 255;
+                r = byte.MaxValue;
             }
 
             if (r < 0)
@@ -139,9 +141,9 @@ namespace VisualPlus.Utilities
 
             // Correct Green element
             int g = green;
-            if (g > 255)
+            if (g > byte.MaxValue)
             {
-                g = 255;
+                g = byte.MaxValue;
             }
 
             if (g < 0)
@@ -151,9 +153,9 @@ namespace VisualPlus.Utilities
 
             // Correct Blue Element
             int b = blue;
-            if (b > 255)
+            if (b > byte.MaxValue)
             {
-                b = 255;
+                b = byte.MaxValue;
             }
 
             if (b < 0)
@@ -180,6 +182,29 @@ namespace VisualPlus.Utilities
         public static Color InsertColor(Color baseColor, Color insertColor)
         {
             return Color.FromArgb((baseColor.R + insertColor.R) / 2, (baseColor.G + insertColor.G) / 2, (baseColor.B + insertColor.B) / 2);
+        }
+
+        /// <summary>Retrieves the colors to list.</summary>
+        /// <returns>The <see cref="List{T}" />.</returns>
+        public static List<string> LoadColorNames()
+        {
+            // Variable
+            var list = new List<string>();
+
+            // Load color properties
+            var properties = typeof(Color).GetProperties();
+
+            // Loop thru each property info
+            foreach (PropertyInfo propertyInfo in properties)
+            {
+                // Check if color property equals
+                if (propertyInfo.PropertyType.FullName == "System.Drawing.Color")
+                {
+                    list.Add(propertyInfo.Name);
+                }
+            }
+
+            return list;
         }
 
         /// <summary>Creates an opacity mix color.</summary>
@@ -226,7 +251,7 @@ namespace VisualPlus.Utilities
         public static Color RandomColor()
         {
             Random _random = new Random();
-            return Color.FromArgb(_random.Next(256), _random.Next(256), _random.Next(256));
+            return Color.FromArgb(_random.Next(byte.MaxValue), _random.Next(byte.MaxValue), _random.Next(byte.MaxValue));
         }
 
         /// <summary>Creates a soft light mix color.</summary>
@@ -334,21 +359,21 @@ namespace VisualPlus.Utilities
 
                 case Brightness.Lighter:
                     {
-                        _r = 255;
-                        _g = 255;
-                        _b = 255;
+                        _r = byte.MaxValue;
+                        _g = byte.MaxValue;
+                        _b = byte.MaxValue;
 
-                        if (color.R + data < 255)
+                        if (color.R + data < byte.MaxValue)
                         {
                             _r = (byte)(color.R + data);
                         }
 
-                        if (color.G + data < 255)
+                        if (color.G + data < byte.MaxValue)
                         {
                             _g = (byte)(color.G + data);
                         }
 
-                        if (color.B + data < 255)
+                        if (color.B + data < byte.MaxValue)
                         {
                             _b = (byte)(color.B + data);
                         }
@@ -380,7 +405,7 @@ namespace VisualPlus.Utilities
                     int _red = int.Parse(Math.Round(beginColor.R + ((endColor.R - beginColor.R) * value * 0.01), 0).ToString(CultureInfo.CurrentCulture));
                     int _green = int.Parse(Math.Round(beginColor.G + ((endColor.G - beginColor.G) * value * 0.01), 0).ToString(CultureInfo.CurrentCulture));
                     int _blue = int.Parse(Math.Round(beginColor.B + ((endColor.B - beginColor.B) * value * 0.01), 0).ToString(CultureInfo.CurrentCulture));
-                    return Color.FromArgb(255, _red, _green, _blue);
+                    return Color.FromArgb(byte.MaxValue, _red, _green, _blue);
                 }
                 catch (Exception)
                 {
@@ -411,9 +436,9 @@ namespace VisualPlus.Utilities
                 result = 0.0;
             }
 
-            if (result > 255)
+            if (result > byte.MaxValue)
             {
-                result = 255;
+                result = byte.MaxValue;
             }
 
             return result;
@@ -425,15 +450,15 @@ namespace VisualPlus.Utilities
         /// <returns>The <see cref="int" />.</returns>
         private static int OverlayMath(int baseValue, int alpha)
         {
-            double _baseOverlay = (double)baseValue / 255;
-            double _alphaOverlay = (double)alpha / 255;
+            double _baseOverlay = (double)baseValue / byte.MaxValue;
+            double _alphaOverlay = (double)alpha / byte.MaxValue;
             if (_baseOverlay < 0.5)
             {
-                return (int)(2 * _baseOverlay * _alphaOverlay * 255);
+                return (int)(2 * _baseOverlay * _alphaOverlay * byte.MaxValue);
             }
             else
             {
-                return (int)((1 - (2 * (1 - _baseOverlay) * (1 - _alphaOverlay))) * 255);
+                return (int)((1 - (2 * (1 - _baseOverlay) * (1 - _alphaOverlay))) * byte.MaxValue);
             }
         }
 
@@ -443,15 +468,15 @@ namespace VisualPlus.Utilities
         /// <returns>The <see cref="int" />.</returns>
         private static int SoftLightMath(int baseValue, int alpha)
         {
-            float _softLightBase = (float)baseValue / 255;
-            float _softLightAlpha = (float)alpha / 255;
+            float _softLightBase = (float)baseValue / byte.MaxValue;
+            float _softLightAlpha = (float)alpha / byte.MaxValue;
             if (_softLightAlpha < 0.5)
             {
-                return (int)(((2 * _softLightBase * _softLightAlpha) + (Math.Pow(_softLightBase, 2) * (1 - (2 * _softLightAlpha)))) * 255);
+                return (int)(((2 * _softLightBase * _softLightAlpha) + (Math.Pow(_softLightBase, 2) * (1 - (2 * _softLightAlpha)))) * byte.MaxValue);
             }
             else
             {
-                return (int)(((Math.Sqrt(_softLightBase) * ((2 * _softLightAlpha) - 1)) + (2 * _softLightBase * (1 - _softLightAlpha))) * 255);
+                return (int)(((Math.Sqrt(_softLightBase) * ((2 * _softLightAlpha) - 1)) + (2 * _softLightBase * (1 - _softLightAlpha))) * byte.MaxValue);
             }
         }
 

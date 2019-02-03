@@ -870,7 +870,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
             if (_pickType == PickerType.Rectangle)
             {
                 LockUpdates = true;
-                Color = ColorManager.CursorPointerColor();
+                Color = ColorUtil.CursorPointerColor();
                 LockUpdates = false;
             }
             else

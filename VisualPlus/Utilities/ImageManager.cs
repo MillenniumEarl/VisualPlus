@@ -82,11 +82,11 @@ namespace VisualPlus.Utilities
 
             for (var i = 0; i < _bitmap.Width; i++)
             {
-                Color _xColor = ColorManager.TransitionColor(int.Parse(Math.Round((i / (double)_bitmap.Width) * 100.0, 0).ToString(CultureInfo.CurrentCulture)), topLeft, topRight);
+                Color _xColor = ColorUtil.TransitionColor(int.Parse(Math.Round((i / (double)_bitmap.Width) * 100.0, 0).ToString(CultureInfo.CurrentCulture)), topLeft, topRight);
                 for (var j = 0; j < _bitmap.Height; j++)
                 {
-                    Color _yColor = ColorManager.TransitionColor(int.Parse(Math.Round((j / (double)_bitmap.Height) * 100.0, 0).ToString(CultureInfo.CurrentCulture)), bottomLeft, bottomRight);
-                    _bitmap.SetPixel(i, j, ColorManager.InsertColor(_xColor, _yColor));
+                    Color _yColor = ColorUtil.TransitionColor(int.Parse(Math.Round((j / (double)_bitmap.Height) * 100.0, 0).ToString(CultureInfo.CurrentCulture)), bottomLeft, bottomRight);
+                    _bitmap.SetPixel(i, j, ColorUtil.InsertColor(_xColor, _yColor));
                 }
             }
 

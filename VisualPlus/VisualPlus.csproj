@@ -216,7 +216,7 @@
       <DependentUpon>VisualColorDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Toolkit\VisualBase\ControlBoxButton.cs" />
-    <Compile Include="Enumerators\DebugOutput.cs" />
+    <Compile Include="Enumerators\LogLevel.cs" />
     <Compile Include="Models\ColorPalette.cs" />
     <Compile Include="Toolkit\VisualBase\BorderEdge.cs" />
     <Compile Include="Structure\RECT.cs" />

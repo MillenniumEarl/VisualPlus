@@ -37,18 +37,19 @@
 
 namespace VisualPlus.Enumerators
 {
-    public enum DebugOutput
+    /// <summary>The <see cref="LogLevel"/> enum.</summary>
+    public enum LogLevel
     {
-        /// <summary>The console.</summary>
+        /// <summary>The console output.</summary>
         Console = 0,
 
-        /// <summary>The file.</summary>
+        /// <summary>The file output.</summary>
         File = 1,
 
-        /// <summary>The trace listener.</summary>
-        TraceListener = 2,
+        /// <summary>The trace listener output.</summary>
+        Trace = 2,
 
-        /// <summary>To all.</summary>
+        /// <summary>To all outputs.</summary>
         All = 3
     }
 }

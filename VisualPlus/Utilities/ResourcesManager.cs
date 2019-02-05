@@ -86,11 +86,11 @@ namespace VisualPlus.Utilities
             {
                 // Value cannot be null.Parameter name: stream'
                 // The embedded resource cannot be found. Set type to 'Embedded Resource'.
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             return null;

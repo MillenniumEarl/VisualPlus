@@ -236,12 +236,12 @@ namespace VisualPlus.Models
                 }
                 else
                 {
-                    ConsoleEx.WriteDebug(new FileNotFoundException(ArgumentMessages.FileNotFound(filePath)));
+                    Logger.WriteDebug(new FileNotFoundException(ArgumentMessages.FileNotFound(filePath)));
                 }
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
         }
 
@@ -296,7 +296,7 @@ namespace VisualPlus.Models
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
         }
 

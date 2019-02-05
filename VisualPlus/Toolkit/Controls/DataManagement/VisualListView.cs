@@ -2106,7 +2106,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             Invalidate();
@@ -2765,7 +2765,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
 
         private void OnMouseDownFromSubItem(object sender, MouseEventArgs e)
         {
-            ConsoleEx.WriteDebug("OnMouseDown::SubItem");
+            Logger.WriteDebug("OnMouseDown::SubItem");
 
             Point _clientPoint = PointToClient(new Point(MousePosition.X, MousePosition.Y));
             e = new MouseEventArgs(e.Button, e.Clicks, _clientPoint.X, _clientPoint.Y, e.Delta);

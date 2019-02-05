@@ -35,9 +35,12 @@
 
 #endregion
 
-namespace VisualPlus.Enumerators
+using System;
+
+namespace VisualPlus.Utilities.Debugging
 {
     /// <summary>The <see cref="LogLevel"/> enum.</summary>
+    [Flags]
     public enum LogLevel
     {
         /// <summary>The console output.</summary>

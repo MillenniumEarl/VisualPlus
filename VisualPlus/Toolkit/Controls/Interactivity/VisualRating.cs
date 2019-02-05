@@ -468,7 +468,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             Invalidate();

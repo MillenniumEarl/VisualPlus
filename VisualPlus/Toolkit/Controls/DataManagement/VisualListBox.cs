@@ -818,7 +818,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             Invalidate();

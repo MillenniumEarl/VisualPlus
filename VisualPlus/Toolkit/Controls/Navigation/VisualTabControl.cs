@@ -650,7 +650,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
                 }
                 catch (Exception e)
                 {
-                    ConsoleEx.WriteDebug(e);
+                    Logger.WriteDebug(e);
                 }
             }
         }
@@ -812,7 +812,7 @@ namespace VisualPlus.Toolkit.Controls.Navigation
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
         }
 

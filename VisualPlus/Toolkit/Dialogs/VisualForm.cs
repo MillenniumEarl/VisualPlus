@@ -892,7 +892,7 @@ namespace VisualPlus.Toolkit.Dialogs
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             OnThemeChanged(this, new ThemeEventArgs(theme));
@@ -1049,7 +1049,7 @@ namespace VisualPlus.Toolkit.Dialogs
             }
             catch (Exception exception)
             {
-                ConsoleEx.WriteDebug(exception);
+                Logger.WriteDebug(exception);
             }
         }
 
@@ -1308,7 +1308,7 @@ namespace VisualPlus.Toolkit.Dialogs
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
         }
 

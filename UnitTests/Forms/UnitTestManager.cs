@@ -188,7 +188,7 @@ namespace UnitTests.Forms
 
                         if (inputDialog.ShowDialog() == DialogResult.OK)
                         {
-                            ConsoleEx.WriteDebug(inputDialog.InputResult);
+                            Logger.WriteDebug(inputDialog.InputResult);
                         }
 
                         break;
@@ -206,7 +206,7 @@ namespace UnitTests.Forms
 
                         if (colorDialog.ShowDialog() == DialogResult.OK)
                         {
-                            ConsoleEx.WriteDebug(colorDialog.Color);
+                            Logger.WriteDebug(colorDialog.Color);
                         }
 
                         break;

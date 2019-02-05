@@ -646,7 +646,7 @@ namespace VisualPlus.Toolkit.Controls.Editors
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             Invalidate();

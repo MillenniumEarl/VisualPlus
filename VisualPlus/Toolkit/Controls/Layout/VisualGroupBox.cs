@@ -293,7 +293,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             Invalidate();
@@ -365,7 +365,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
             }
             catch (Exception exception)
             {
-                ConsoleEx.WriteDebug(exception);
+                Logger.WriteDebug(exception);
             }
         }
 

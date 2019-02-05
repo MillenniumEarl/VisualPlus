@@ -123,6 +123,7 @@
     <Compile Include="Native\Uxtheme.cs" />
     <Compile Include="Structure\MENUITEMINFO.cs" />
     <Compile Include="Structure\SCROLLINFO.cs" />
+    <Compile Include="Utilities\Debugging\LogFormat.cs" />
     <Compile Include="Utilities\Debugging\DebuggerDisplayFormat.cs" />
     <Compile Include="Utilities\Debugging\VisualDebuggerDisplay.cs" />
     <Compile Include="Utilities\Debugging\Guard.cs" />
@@ -158,7 +159,7 @@
     <Compile Include="Renders\VisualTextRenderer.cs" />
     <Compile Include="Renders\VisualTileRenderer.cs" />
     <Compile Include="Renders\VisualWatermarkRenderer.cs" />
-    <Compile Include="Utilities\Debugging\ConsoleEx.cs" />
+    <Compile Include="Utilities\Debugging\Logger.cs" />
     <Compile Include="Localization\ArgumentMessages.cs" />
     <Compile Include="Utilities\FontManager.cs" />
     <Compile Include="Utilities\FormManager.cs" />
@@ -216,7 +217,7 @@
       <DependentUpon>VisualColorDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Toolkit\VisualBase\ControlBoxButton.cs" />
-    <Compile Include="Enumerators\LogLevel.cs" />
+    <Compile Include="Utilities\Debugging\LogLevel.cs" />
     <Compile Include="Models\ColorPalette.cs" />
     <Compile Include="Toolkit\VisualBase\BorderEdge.cs" />
     <Compile Include="Structure\RECT.cs" />

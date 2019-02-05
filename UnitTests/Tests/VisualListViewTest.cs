@@ -164,7 +164,7 @@ namespace UnitTests.Tests
             _selectedIndex.AppendLine(Environment.NewLine);
             _selectedIndex.AppendLine($"Cell: Text: {_rowSub}, - Checked: {_cellChecked}");
 
-            ConsoleEx.WriteDebug(_selectedIndex.ToString());
+            Logger.WriteDebug(_selectedIndex.ToString());
         }
 
         private void VisualListViewTest_Load(object sender, EventArgs e)

@@ -2,7 +2,7 @@
 
 // -----------------------------------------------------------------------------------------------------------
 // 
-// File: ConsoleEx.cs
+// File: Logger.cs
 // 
 // Copyright (c) 2019 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
@@ -44,15 +44,14 @@ using System.Reflection;
 using System.Text;
 
 using VisualPlus.Constants;
-using VisualPlus.Enumerators;
 
 #endregion
 
 namespace VisualPlus.Utilities.Debugging
 {
-    /// <summary>Represents the <see cref="ConsoleEx" /> class.</summary>
-    /// <remarks>Assists with writing debug logs.</remarks>
-    public static class ConsoleEx
+    /// <summary>Represents the <see cref="Logger" /> class.</summary>
+    /// <remarks>Assists with writing logs.</remarks>
+    public static class Logger
     {
         #region Public Methods and Operators
 
@@ -197,21 +196,6 @@ namespace VisualPlus.Utilities.Debugging
         public static void WriteDebug(Exception exception, LogLevel output = LogLevel.Trace)
         {
             WriteLog(Generate(exception), false, output);
-        }
-
-        /// <summary>
-        ///     Writes a formatted message followed by a line terminator to the trace listeners in the
-        ///     <see cref="P:System.Diagnostics.Debug.Listeners" /> collection.
-        /// </summary>
-        /// <param name="format">
-        ///     A composite format string (see Remarks) that contains text intermixed with zero or more format
-        ///     items, which correspond to objects in the <paramref name="args" /> array.
-        /// </param>
-        /// <param name="args">An object array that contains zero or more objects to format. </param>
-        [Conditional("DEBUG")]
-        public static void WriteLine(string format, params object[] args)
-        {
-            // TraceInternal.WriteLine(string.Format((IFormatProvider)CultureInfo.InvariantCulture, format, args));
         }
 
         /// <summary>Write the debug text to console.</summary>

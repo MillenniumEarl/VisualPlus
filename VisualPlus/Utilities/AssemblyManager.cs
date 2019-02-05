@@ -59,12 +59,12 @@ namespace VisualPlus.Utilities
         {
             if (string.IsNullOrEmpty(filePath))
             {
-                ConsoleEx.WriteDebug(new NoNullAllowedException(ArgumentMessages.IsNullOrEmpty()));
+                Logger.WriteDebug(new NoNullAllowedException(ArgumentMessages.IsNullOrEmpty()));
             }
 
             if (!File.Exists(filePath))
             {
-                ConsoleEx.WriteDebug(new NoNullAllowedException(ArgumentMessages.FileNotFound(filePath)));
+                Logger.WriteDebug(new NoNullAllowedException(ArgumentMessages.FileNotFound(filePath)));
             }
 
             return Assembly.LoadFile(filePath);

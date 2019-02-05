@@ -145,7 +145,7 @@ namespace VisualPlus.Utilities
                 element = null;
 
                 // Node not found logging to trace listener.
-                ConsoleEx.WriteDebug($@"Unable to read the xml node. Path: {elementPath}");
+                Logger.WriteDebug($@"Unable to read the xml node. Path: {elementPath}");
             }
 
             return element;

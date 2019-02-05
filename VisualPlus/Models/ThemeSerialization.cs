@@ -201,7 +201,7 @@ namespace VisualPlus.Models
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             Theme theme = new Theme(themeInformation, colorPalette);
@@ -223,7 +223,7 @@ namespace VisualPlus.Models
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             return _theme;
@@ -253,7 +253,7 @@ namespace VisualPlus.Models
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             return _theme;

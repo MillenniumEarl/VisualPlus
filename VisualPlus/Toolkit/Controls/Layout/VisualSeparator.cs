@@ -202,7 +202,7 @@ namespace VisualPlus.Toolkit.Controls.Layout
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
 
             Invalidate();

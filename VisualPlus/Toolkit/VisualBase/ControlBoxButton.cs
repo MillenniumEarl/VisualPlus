@@ -285,7 +285,7 @@ namespace VisualPlus.Toolkit.VisualBase
             }
             catch (Exception exception)
             {
-                ConsoleEx.WriteDebug(exception);
+                Logger.WriteDebug(exception);
             }
         }
 

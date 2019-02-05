@@ -158,7 +158,7 @@ namespace VisualPlus.Toolkit.Components
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteDebug(e);
+                Logger.WriteDebug(e);
             }
         }
 

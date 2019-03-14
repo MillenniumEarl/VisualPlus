@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <VisualPlus>
-    <Version>0.4.1.6</Version>
+    <ReleaseStage>Beta</ReleaseStage>
+    <Version>0.4.1.7</Version>
     <Url>https://github.com/DarkByte7/VisualPlus/releases/latest</Url>
 </VisualPlus>

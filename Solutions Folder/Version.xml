@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <VisualPlus>
-    <ChangeLogUrl>https://github.com/DarkByte7/VisualPlus/releases/latest</ChangeLogUrl>
+    <ChangeLog>https://github.com/DarkByte7/VisualPlus/releases/latest</ChangeLog>
     <LastUpdated>15/03/2019</LastUpdated>
     <ReleaseStage>Beta</ReleaseStage>
     <Tag>Visit the website for the change log.</Tag>

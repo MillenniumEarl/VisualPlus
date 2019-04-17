@@ -1,6 +1,6 @@
 ## Contributing
 ### Before Submitting an Issue
-First, please do a search in [open issues](https://github.com/DarkByte7/VisualPlus/issues) to see if the issue or feature request has already been filed. Use this [query](https://github.com/DarkByte7/VisualPlus/issues?q=is:open+is:issue+label:feature-request+sort:reactions-B1-desc) to search for the most popular feature requests.
+First, please do a search for [open issues](https://github.com/DarkByte7/VisualPlus/issues) to see if the issue or feature request has already been filed. Use this [query](https://github.com/DarkByte7/VisualPlus/issues?q=is:open+is:issue+label:feature-request+sort:reactions-B1-desc) to search for the most popular feature requests.
 
 If you find your issue already exists, make relevant comments and add your [reaction](https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments). Use a reaction in place of a "+1" comment.
 

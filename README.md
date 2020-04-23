@@ -4,6 +4,12 @@
 
 <h1  align="center">VisualPlus</h1>
 
+! NOTICE !
+
+[A LETTER FROM THE DEVELOPER.](https://github.com/DarkByte7/VisualPlus/blob/master/NOTICE.md)
+
+! NOTICE !
+
 <p align="center">
 <a href="https://www.nuget.org/packages/VisualPlus/"><img alt="NuGet" src="https://img.shields.io/nuget/v/VisualPlus.svg?style=flat"></a> <a href="https://github.com/DarkByte7/VisualPlus/issues/"><img alt="Issues" src="https://img.shields.io/github/issues/DarkByte7/VisualPlus.svg?style=flat"></a> <a href="https://github.com/DarkByte7/VisualPlus/releases/"><img alt="Downloads" src="https://img.shields.io/github/downloads/DarkByte7/VisualPlus/total.svg?style=flat"></a>
         <a href="https://github.com/DarkByte7/VisualPlus/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/DarkByte7/VisualPlus.svg?style=flat"></a>

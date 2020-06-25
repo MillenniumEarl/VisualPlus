@@ -1,39 +1,39 @@
 #region License
 
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // Name: VFXManager.cs
-// 
+//
 // Copyright (c) 2019 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // GNU General Public License v3.0 (GPL-3.0)
-// 
+//
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
 // EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//  
-// This file is subject to the terms and conditions defined in the file 
+//
+// This file is subject to the terms and conditions defined in the file
 // 'LICENSE.md', which should be in the root directory of the source code package.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
 
-#endregion
+#endregion License
 
 #region Namespace
 
@@ -45,7 +45,7 @@ using System.Windows.Forms;
 
 using VisualPlus.Enumerators;
 
-#endregion
+#endregion Namespace
 
 namespace VisualPlus.Utilities
 {
@@ -57,7 +57,7 @@ namespace VisualPlus.Utilities
         private const double MaxValue = 1.00;
         private const double MinValue = 0.00;
 
-        #endregion
+        #endregion Constants
 
         #region Fields
 
@@ -67,7 +67,7 @@ namespace VisualPlus.Utilities
         private readonly List<double> _effectsProgression;
         private readonly List<Point> _effectsSources;
 
-        #endregion
+        #endregion Fields
 
         #region Constructors and Destructors
 
@@ -99,7 +99,7 @@ namespace VisualPlus.Utilities
             _animationTimer.Tick += AnimationTimerOnTick;
         }
 
-        #endregion
+        #endregion Constructors and Destructors
 
         #region Delegates
 
@@ -107,7 +107,7 @@ namespace VisualPlus.Utilities
 
         public delegate void AnimationProgress(object sender);
 
-        #endregion
+        #endregion Delegates
 
         #region Public Events
 
@@ -115,7 +115,7 @@ namespace VisualPlus.Utilities
 
         public event AnimationProgress OnAnimationProgress;
 
-        #endregion
+        #endregion Public Events
 
         #region Public Properties
 
@@ -129,7 +129,7 @@ namespace VisualPlus.Utilities
 
         public bool Singular { get; set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods and Operators
 
@@ -214,12 +214,16 @@ namespace VisualPlus.Utilities
             {
                 case EffectType.Linear:
                     return AnimationLinear.CalculateProgress(_effectsProgression[index]);
+
                 case EffectType.EaseInOut:
                     return AnimationEaseInOut.CalculateProgress(_effectsProgression[index]);
+
                 case EffectType.EaseOut:
                     return AnimationEaseOut.CalculateProgress(_effectsProgression[index]);
+
                 case EffectType.CustomQuadratic:
                     return AnimationCustomQuadratic.CalculateProgress(_effectsProgression[index]);
+
                 default:
                     throw new NotImplementedException("The given EffectType is not implemented");
             }
@@ -336,11 +340,13 @@ namespace VisualPlus.Utilities
                         case AnimationDirection.In:
                             _effectsProgression.Add(MinValue);
                             break;
+
                         case AnimationDirection.InOutRepeatingOut:
                         case AnimationDirection.InOutOut:
                         case AnimationDirection.Out:
                             _effectsProgression.Add(MaxValue);
                             break;
+
                         default:
                             throw new Exception("Invalid AnimationDirection");
                     }
@@ -368,17 +374,19 @@ namespace VisualPlus.Utilities
                 case AnimationDirection.In:
                     IncrementProgress(index);
                     break;
+
                 case AnimationDirection.InOutRepeatingOut:
                 case AnimationDirection.InOutOut:
                 case AnimationDirection.Out:
                     DecrementProgress(index);
                     break;
+
                 default:
                     throw new Exception("No AnimationDirection has been set");
             }
         }
 
-        #endregion
+        #endregion Public Methods and Operators
 
         #region Methods
 
@@ -515,7 +523,7 @@ namespace VisualPlus.Utilities
             }
         }
 
-        #endregion
+        #endregion Methods
     }
 
     public class AnimationLinear
@@ -527,7 +535,7 @@ namespace VisualPlus.Utilities
             return progress;
         }
 
-        #endregion
+        #endregion Public Methods and Operators
     }
 
     public class AnimationEaseInOut
@@ -537,7 +545,7 @@ namespace VisualPlus.Utilities
         public static double Pi = Math.PI;
         public static double PiHalf = Math.PI / 2;
 
-        #endregion
+        #endregion Static Fields
 
         #region Public Methods and Operators
 
@@ -546,7 +554,7 @@ namespace VisualPlus.Utilities
             return EaseInOut(progress);
         }
 
-        #endregion
+        #endregion Public Methods and Operators
 
         #region Methods
 
@@ -555,7 +563,7 @@ namespace VisualPlus.Utilities
             return s - Math.Sin((s * 2 * Pi) / (2 * Pi));
         }
 
-        #endregion
+        #endregion Methods
     }
 
     public class AnimationEaseOut
@@ -567,7 +575,7 @@ namespace VisualPlus.Utilities
             return -1 * progress * (progress - 2);
         }
 
-        #endregion
+        #endregion Public Methods and Operators
     }
 
     public class AnimationCustomQuadratic
@@ -580,6 +588,6 @@ namespace VisualPlus.Utilities
             return 1 - Math.Cos(((Math.Max(progress, Boost) - Boost) * Math.PI) / (2 - (2 * Boost)));
         }
 
-        #endregion
+        #endregion Public Methods and Operators
     }
 }

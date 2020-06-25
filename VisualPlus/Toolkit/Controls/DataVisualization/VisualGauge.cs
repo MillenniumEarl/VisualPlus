@@ -1,39 +1,39 @@
 ﻿#region License
 
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // Name: VisualGauge.cs
-// 
+//
 // Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // GNU General Public License v3.0 (GPL-3.0)
-// 
+//
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
 // EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//  
-// This file is subject to the terms and conditions defined in the file 
+//
+// This file is subject to the terms and conditions defined in the file
 // 'LICENSE.md', which should be in the root directory of the source code package.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
 
-#endregion
+#endregion License
 
 #region Namespace
 
@@ -52,7 +52,7 @@ using VisualPlus.TypeConverters;
 using VisualPlus.Utilities;
 using VisualPlus.Utilities.Debugging;
 
-#endregion
+#endregion Namespace
 
 namespace VisualPlus.Toolkit.Controls.DataVisualization
 {
@@ -73,7 +73,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
         private Size _progressTextSize;
         private int _thickness;
 
-        #endregion
+        #endregion Fields
 
         #region Constructors and Destructors
 
@@ -95,7 +95,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
             UpdateTheme(ThemeManager.Theme);
         }
 
-        #endregion
+        #endregion Constructors and Destructors
 
         #region Public Properties
 
@@ -210,7 +210,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
             }
         }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods and Operators
 
@@ -235,7 +235,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
             OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
-        #endregion
+        #endregion Public Methods and Operators
 
         #region Methods
 
@@ -258,7 +258,7 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
 
             _graphics.DrawArc(_penBackground, _rectangle, 180F, 180F);
             _graphics.DrawArc(_penProgress, _rectangle, 180F, MathUtil.GetHalfRadianAngle(Value));
-            
+
             _labelProgress.Text = Value + @"%";
         }
 
@@ -274,45 +274,45 @@ namespace VisualPlus.Toolkit.Controls.DataVisualization
         private void ConstructDisplay()
         {
             _labelProgress = new Label
-                {
-                    AutoSize = true,
-                    Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                    Location = new Point(83, 34),
-                    Margin = new Padding(6, 0, 6, 0),
-                    Name = "visualLabelProgress",
-                    Size = new Size(22, 24),
-                    TabIndex = 1,
-                    Text = @"0",
-                    BackColor = Color.Transparent
-                };
+            {
+                AutoSize = true,
+                Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                Location = new Point(83, 34),
+                Margin = new Padding(6, 0, 6, 0),
+                Name = "visualLabelProgress",
+                Size = new Size(22, 24),
+                TabIndex = 1,
+                Text = @"0",
+                BackColor = Color.Transparent
+            };
 
             _labelMinimum = new Label
-                {
-                    AutoSize = true,
-                    Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                    Location = new Point(26, 86),
-                    Margin = new Padding(6, 0, 6, 0),
-                    Name = "visualLabelMinimum",
-                    Size = new Size(15, 17),
-                    TabIndex = 2,
-                    Text = @"0",
-                    BackColor = Color.Transparent
-                };
+            {
+                AutoSize = true,
+                Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                Location = new Point(26, 86),
+                Margin = new Padding(6, 0, 6, 0),
+                Name = "visualLabelMinimum",
+                Size = new Size(15, 17),
+                TabIndex = 2,
+                Text = @"0",
+                BackColor = Color.Transparent
+            };
 
             _labelMaximum = new Label
-                {
-                    AutoSize = true,
-                    Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                    Location = new Point(145, 86),
-                    Margin = new Padding(6, 0, 6, 0),
-                    Name = "visualLabelMaximum",
-                    Size = new Size(29, 17),
-                    TabIndex = 3,
-                    Text = @"100",
-                    BackColor = Color.Transparent
-                };
+            {
+                AutoSize = true,
+                Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                Location = new Point(145, 86),
+                Margin = new Padding(6, 0, 6, 0),
+                Name = "visualLabelMaximum",
+                Size = new Size(29, 17),
+                TabIndex = 3,
+                Text = @"100",
+                BackColor = Color.Transparent
+            };
         }
 
-        #endregion
+        #endregion Methods
     }
 }

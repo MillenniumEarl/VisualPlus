@@ -1,39 +1,39 @@
 #region License
 
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // Name: InterfaceTypes.cs
-// 
+//
 // Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // GNU General Public License v3.0 (GPL-3.0)
-// 
+//
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
 // EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//  
-// This file is subject to the terms and conditions defined in the file 
+//
+// This file is subject to the terms and conditions defined in the file
 // 'LICENSE.md', which should be in the root directory of the source code package.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
 
-#endregion
+#endregion License
 
 #region Namespace
 
@@ -45,7 +45,7 @@ using VisualPlus.Toolkit.Child;
 using VisualPlus.Toolkit.Components;
 using VisualPlus.Toolkit.Controls.DataManagement;
 
-#endregion
+#endregion Namespace
 
 namespace VisualPlus.Interfaces
 {
@@ -60,7 +60,7 @@ namespace VisualPlus.Interfaces
 
         VisualListViewSubItem SubItem { get; set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods and Operators
 
@@ -78,7 +78,7 @@ namespace VisualPlus.Interfaces
         /// <summary>Unload the control.</summary>
         void LVEmbeddedControlUnload();
 
-        #endregion
+        #endregion Public Methods and Operators
     }
 
     /// <summary>The IThemeManager.</summary>
@@ -89,7 +89,7 @@ namespace VisualPlus.Interfaces
         /// <summary>The style manager.</summary>
         StyleManager ThemeManager { get; set; }
 
-        #endregion
+        #endregion Public Properties
     }
 
     /// <summary>The ITheme supported control.</summary>
@@ -101,7 +101,7 @@ namespace VisualPlus.Interfaces
         /// <param name="theme">The theme to update with.</param>
         void UpdateTheme(Theme theme);
 
-        #endregion
+        #endregion Public Methods and Operators
     }
 
     public interface IInputMethods
@@ -140,7 +140,7 @@ namespace VisualPlus.Interfaces
 
         void Undo();
 
-        #endregion
+        #endregion Public Methods and Operators
     }
 
     public interface IAnimationSupport
@@ -150,7 +150,7 @@ namespace VisualPlus.Interfaces
         /// <summary>Gets or sets the animation state.</summary>
         bool Animation { get; set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods and Operators
 
@@ -163,7 +163,7 @@ namespace VisualPlus.Interfaces
         /// <param name="graphics">The specified graphics to draw on.</param>
         void DrawAnimation(Graphics graphics);
 
-        #endregion
+        #endregion Public Methods and Operators
     }
 
     /// <summary>The ITextColor.</summary>
@@ -183,6 +183,6 @@ namespace VisualPlus.Interfaces
         /// <summary>Gets or sets the Pressed state <see cref="Color" />.</summary>
         Color Pressed { get; set; }
 
-        #endregion
+        #endregion Public Properties
     }
 }

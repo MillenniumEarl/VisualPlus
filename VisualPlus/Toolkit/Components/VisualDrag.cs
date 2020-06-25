@@ -12,21 +12,17 @@
     using VisualPlus.Localization;
     using VisualPlus.Localization.Descriptions;
 
-    #endregion
+    #endregion Namespace
 
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(VisualDrag), "VisualDrag.bmp")]
     [Description("The VisualDrag component enables controls to be draggable.")]
     public class VisualDrag : Component, ICloneable
     {
-     
-
         private Control _control;
         private Cursor _cursorMove;
         private DragDirection _direction;
         private Point _lastPosition;
-
-   
 
         /// <summary>Initializes a new instance of the <see cref="VisualDrag" /> class.</summary>
         /// <param name="container">The container.</param>
@@ -105,8 +101,6 @@
             /// <summary>No directions.</summary>
             None
         }
-
-   
 
         [NotifyParentProperty(true)]
         [RefreshProperties(RefreshProperties.Repaint)]
@@ -196,8 +190,6 @@
         [Description(PropertyDescription.IsDragging)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public bool IsDragging { get; private set; }
-
-    
 
         /// <summary>Hooks the drag events to the control.</summary>
         public void AttachEvents()
@@ -311,7 +303,5 @@
                 _control.Cursor = Cursors.Default;
             }
         }
-
-       
     }
 }

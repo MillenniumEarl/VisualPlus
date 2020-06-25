@@ -1,39 +1,39 @@
 ﻿#region License
 
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // Name: InvalidValue.cs
-// 
+//
 // Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // GNU General Public License v3.0 (GPL-3.0)
-// 
+//
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
 // EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//  
-// This file is subject to the terms and conditions defined in the file 
+//
+// This file is subject to the terms and conditions defined in the file
 // 'LICENSE.md', which should be in the root directory of the source code package.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
 
-#endregion
+#endregion License
 
 #region Namespace
 
@@ -45,7 +45,7 @@ using VisualPlus.Constants;
 using VisualPlus.Extensibility;
 using VisualPlus.Utilities.Debugging;
 
-#endregion
+#endregion Namespace
 
 namespace VisualPlus.Attributes
 {
@@ -65,7 +65,7 @@ namespace VisualPlus.Attributes
         /// </summary>
         public static readonly InvalidValue Default = new InvalidValue();
 
-        #endregion
+        #endregion Static Fields
 
         #region Constructors and Destructors
 
@@ -117,7 +117,7 @@ namespace VisualPlus.Attributes
         {
         }
 
-        #endregion
+        #endregion Constructors and Destructors
 
         #region Enums
 
@@ -140,7 +140,7 @@ namespace VisualPlus.Attributes
             Under = 4
         }
 
-        #endregion
+        #endregion Enums
 
         #region Public Properties
 
@@ -210,7 +210,7 @@ namespace VisualPlus.Attributes
         /// <summary>Gets/sets the value that will be used to determine if the property value is valid.</summary>
         public virtual object TriggerValue { get; protected set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods and Operators
 
@@ -348,7 +348,7 @@ namespace VisualPlus.Attributes
             }
         }
 
-        #endregion
+        #endregion Public Methods and Operators
 
         #region Methods
 
@@ -495,6 +495,6 @@ namespace VisualPlus.Attributes
             return parseDateTime;
         }
 
-        #endregion
+        #endregion Methods
     }
 }

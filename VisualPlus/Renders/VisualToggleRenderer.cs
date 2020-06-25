@@ -1,39 +1,39 @@
 ﻿#region License
 
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // Name: VisualToggleRenderer.cs
-// 
+//
 // Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // GNU General Public License v3.0 (GPL-3.0)
-// 
+//
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
 // EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//  
-// This file is subject to the terms and conditions defined in the file 
+//
+// This file is subject to the terms and conditions defined in the file
 // 'LICENSE.md', which should be in the root directory of the source code package.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
 
-#endregion
+#endregion License
 
 #region Namespace
 
@@ -46,7 +46,7 @@ using VisualPlus.Extensibility;
 using VisualPlus.Models;
 using VisualPlus.Utilities;
 
-#endregion
+#endregion Namespace
 
 namespace VisualPlus.Renders
 {
@@ -203,6 +203,7 @@ namespace VisualPlus.Renders
                     }
 
                     break;
+
                 default:
                     {
                         throw new ArgumentOutOfRangeException();
@@ -216,6 +217,6 @@ namespace VisualPlus.Renders
                 "iVBORw0KGgoAAAANSUhEUgAAABMAAAAQCAYAAAD0xERiAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEySURBVDhPY/hPRUBdw/79+/efVHz77bf/X37+wRAn2bDff/7+91l+83/YmtsYBpJs2ITjz/8rTbrwP2Dlrf9XXn5FkSPJsD13P/y3nHsVbNjyy28w5Ik27NWXX//TNt8DG1S19zFWNRiGvfzy8//ccy9RxEB4wvFnYIMMZl7+//brLwx5EEYx7MP33/9dF18Ha1py8RVcHBR7mlMvgsVXX8X0Hgwz/P379z8yLtz5AKxJdcpFcBj9+v3nf/CqW2Cx5E13UdSiYwzDvv36/d9/BUSzzvRL/0t2PQSzQd57+vEHilp0jGEYCJ9+8hnuGhiee+4Vhjp0jNUwEN566/1/m/mQZJC/48H/zz9+YVWHjHEaBsKgwAZ59eH771jl0TFew0D48osvWMWxYYKGEY///gcAqiuA6kEmfEMAAAAASUVORK5CYII=";
         }
 
-        #endregion
+        #endregion Public Methods and Operators
     }
 }

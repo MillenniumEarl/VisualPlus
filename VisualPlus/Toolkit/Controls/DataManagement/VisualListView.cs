@@ -1,39 +1,39 @@
 ﻿#region License
 
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // Name: VisualListView.cs
-// 
+//
 // Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // GNU General Public License v3.0 (GPL-3.0)
-// 
+//
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
 // EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//  
-// This file is subject to the terms and conditions defined in the file 
+//
+// This file is subject to the terms and conditions defined in the file
 // 'LICENSE.md', which should be in the root directory of the source code package.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
 
-#endregion
+#endregion License
 
 #region Namespace
 
@@ -67,7 +67,7 @@ using VisualPlus.Toolkit.VisualBase;
 using VisualPlus.TypeConverters;
 using VisualPlus.Utilities.Debugging;
 
-#endregion
+#endregion Namespace
 
 namespace VisualPlus.Toolkit.Controls.DataManagement
 {
@@ -150,7 +150,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
         private ManagedVScrollBar _verticalScrollBar;
         private int internalPadding;
 
-        #endregion
+        #endregion Fields
 
         #region Constructors and Destructors
 
@@ -233,31 +233,31 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             _border = new Border { Type = ShapeTypes.Rectangle };
 
             _horizontalScrollBar = new ManagedHScrollBar
-                {
-                    Anchor = AnchorStyles.None,
-                    CausesValidation = false,
-                    Location = new Point(24, 0),
-                    MHeight = 16,
-                    MWidth = 120,
-                    Name = "hPanelScrollBar",
-                    Size = new Size(120, 16),
-                    Parent = this
-                };
+            {
+                Anchor = AnchorStyles.None,
+                CausesValidation = false,
+                Location = new Point(24, 0),
+                MHeight = 16,
+                MWidth = 120,
+                Name = "hPanelScrollBar",
+                Size = new Size(120, 16),
+                Parent = this
+            };
             _horizontalScrollBar.Scroll += OnScroll;
             _horizontalScrollBar.Scroll += HorizontalPanelScrollBar_Scroll;
             Controls.Add(_horizontalScrollBar);
 
             _verticalScrollBar = new ManagedVScrollBar
-                {
-                    Anchor = AnchorStyles.None,
-                    CausesValidation = false,
-                    Location = new Point(0, 12),
-                    MHeight = 120,
-                    MWidth = 16,
-                    Name = "vPanelScrollBar",
-                    Size = new Size(16, 120),
-                    Parent = this
-                };
+            {
+                Anchor = AnchorStyles.None,
+                CausesValidation = false,
+                Location = new Point(0, 12),
+                MHeight = 120,
+                MWidth = 16,
+                Name = "vPanelScrollBar",
+                Size = new Size(16, 120),
+                Parent = this
+            };
             _verticalScrollBar.Scroll += OnScroll;
             _verticalScrollBar.Scroll += VerticalPanelScrollBar_Scroll;
             Controls.Add(_verticalScrollBar);
@@ -273,7 +273,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             ResumeLayout(false);
         }
 
-        #endregion
+        #endregion Constructors and Destructors
 
         #region Delegates
 
@@ -285,7 +285,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
         [Description(EventDescription.PropertyEventChanged)]
         public delegate void HoverEventDelegate(object source, ListViewHoverEventArgs e);
 
-        #endregion
+        #endregion Delegates
 
         #region Public Events
 
@@ -355,7 +355,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
         [Description(EventDescription.PropertyEventChanged)]
         public event ClickedEventHandler SelectedIndexChanged;
 
-        #endregion
+        #endregion Public Events
 
         #region Public Properties
 
@@ -1581,7 +1581,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             }
         }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods and Operators
 
@@ -2113,7 +2113,7 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
-        #endregion
+        #endregion Public Methods and Operators
 
         #region Methods
 
@@ -2991,6 +2991,6 @@ namespace VisualPlus.Toolkit.Controls.DataManagement
             Parent.Invalidate(true);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

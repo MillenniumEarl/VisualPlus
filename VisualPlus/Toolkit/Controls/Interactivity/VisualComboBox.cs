@@ -1,39 +1,39 @@
 ﻿#region License
 
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // Name: VisualComboBox.cs
-// 
+//
 // Copyright (c) 2016 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // GNU General Public License v3.0 (GPL-3.0)
-// 
+//
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
 // EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//  
-// This file is subject to the terms and conditions defined in the file 
+//
+// This file is subject to the terms and conditions defined in the file
 // 'LICENSE.md', which should be in the root directory of the source code package.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
 
-#endregion
+#endregion License
 
 #region Namespace
 
@@ -59,7 +59,7 @@ using VisualPlus.Toolkit.Dialogs;
 using VisualPlus.Toolkit.VisualBase;
 using VisualPlus.TypeConverters;
 
-#endregion
+#endregion Namespace
 
 namespace VisualPlus.Toolkit.Controls.Interactivity
 {
@@ -101,7 +101,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         private TextStyle _textStyle;
         private Watermark _watermark;
 
-        #endregion
+        #endregion Fields
 
         #region Constructors and Destructors
 
@@ -147,7 +147,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             UpdateTheme(_styleManager.Theme);
         }
 
-        #endregion
+        #endregion Constructors and Destructors
 
         #region Public Events
 
@@ -155,7 +155,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
         [Description("Occours when the theme of the control has changed.")]
         public event ThemeChangedEventHandler ThemeChanged;
 
-        #endregion
+        #endregion Public Events
 
         #region Enums
 
@@ -171,7 +171,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             Image
         }
 
-        #endregion
+        #endregion Enums
 
         #region Public Properties
 
@@ -611,7 +611,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             }
         }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods and Operators
 
@@ -646,7 +646,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             OnThemeChanged(this, new ThemeEventArgs(theme));
         }
 
-        #endregion
+        #endregion Public Methods and Operators
 
         #region Methods
 
@@ -675,7 +675,7 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
                 e.Graphics.DrawString(GetItemText(Items[e.Index]), Font, new SolidBrush(_menuTextColor), new Rectangle(_location, new Size(DropDownWidth, ItemHeight)), _stringFormat);
             }
 
-            // Draw rectangle over the item selected 
+            // Draw rectangle over the item selected
             // e.DrawFocusRectangle();
         }
 
@@ -884,6 +884,6 @@ namespace VisualPlus.Toolkit.Controls.Interactivity
             VisualWatermarkRenderer.RenderWatermark(graphics, rectangle, _stringFormat, _watermark);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

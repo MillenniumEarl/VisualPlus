@@ -48,7 +48,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="VisualPlus">
-      <HintPath>..\VisualPlus\bin\Debug\VisualPlus.dll</HintPath>
+      <HintPath>..\VisualPlus\bin\Release\VisualPlus.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

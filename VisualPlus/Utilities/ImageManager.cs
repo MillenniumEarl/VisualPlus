@@ -1,39 +1,39 @@
 ﻿#region License
 
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // Name: ImageManager.cs
-// 
+//
 // Copyright (c) 2019 - 2019 VisualPlus <https://darkbyte7.github.io/VisualPlus/>
 // All Rights Reserved.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
-// 
+//
 // GNU General Public License v3.0 (GPL-3.0)
-// 
+//
 // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
 // EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//  
-// This file is subject to the terms and conditions defined in the file 
+//
+// This file is subject to the terms and conditions defined in the file
 // 'LICENSE.md', which should be in the root directory of the source code package.
-// 
+//
 // -----------------------------------------------------------------------------------------------------------
 
-#endregion
+#endregion License
 
 #region Namespace
 
@@ -45,7 +45,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
-#endregion
+#endregion Namespace
 
 namespace VisualPlus.Utilities
 {
@@ -145,25 +145,25 @@ namespace VisualPlus.Utilities
         {
             try
             {
-                // create a Bitmap the size of the image provided  
+                // create a Bitmap the size of the image provided
                 Bitmap bmp = new Bitmap(image.Width, image.Height);
 
-                // create a graphics object from the image  
+                // create a graphics object from the image
                 using (Graphics gfx = Graphics.FromImage(bmp))
                 {
-                    // create a color matrix object  
+                    // create a color matrix object
                     ColorMatrix matrix = new ColorMatrix();
 
-                    // set the opacity  
+                    // set the opacity
                     matrix.Matrix33 = opacity;
 
-                    // create image attributes  
+                    // create image attributes
                     ImageAttributes attributes = new ImageAttributes();
 
-                    // set the color(opacity) of the image  
+                    // set the color(opacity) of the image
                     attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-                    // now draw the image  
+                    // now draw the image
                     gfx.DrawImage(image, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
                 }
 
@@ -176,6 +176,6 @@ namespace VisualPlus.Utilities
             }
         }
 
-        #endregion
+        #endregion Public Methods and Operators
     }
 }
